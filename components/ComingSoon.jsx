@@ -16,7 +16,7 @@ export default function ComingSoon() {
               Hey ! It&#39;s David 😊
             </span>
           </div>
-          <h1 className="text-5xl lg:text-7xl xl:text-6xl text-gray-200 tracking-wider font-bold font-serif mt-12 text-center">
+          <h1 className="text-5xl lg:text-7xl xl:text-6xl text-white tracking-wider font-bold font-serif mt-12 text-center">
           My Portfolio is coming Soon
           </h1>
         </div>
