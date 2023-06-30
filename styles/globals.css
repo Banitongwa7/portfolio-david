@@ -1,3 +1,194 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* font-family: 'Josefin Sans', sans-serif; */
+  font-family: "Poppins", sans-serif;
+  max-height: 100vh;
+  background-color: #eaebed;
+}
+
+/*nav */
+header {
+  padding: 1.7rem 1rem;
+  backdrop-filter: blur(10px);
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  max-width: 80%;
+  margin: auto;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.logo a {
+  color: #113d6b;
+  text-decoration: none;
+}
+
+nav a {
+  color: #113d6b;
+  text-decoration: none;
+  font-size: 0.97rem;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  padding: 1rem;
+  padding: 0.4rem 1rem;
+}
+
+nav a.active,
+nav a:hover {
+  background-color: #113d6b;
+  color: #fff;
+  border-radius: 1rem;
+  transition: all.3s ease-in-out;
+}
+
+#click {
+  display: none;
+}
+
+.menu {
+  display: none;
+}
+
+/* Nav */
+
+section {
+  margin: 2rem 8.5rem;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 5% repeat(2, 1fr);
+  column-gap: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5rem auto;
+}
+
+.main h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.main p {
+  margin-top: 1rem;
+  font-size: 0.98rem;
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  margin-top: 1.7rem;
+}
+
+.social a {
+  color: #113d6b;
+  font-size: 1rem;
+  border: 1.6px solid #113d6b;
+  border-radius: 50%;
+  padding: 0.35rem;
+  text-align: center;
+  width: 60%;
+}
+
+.social a:hover {
+  color: #fff;
+  background-color: #113d6b;
+  transition: all 0.3s ease-in-out;
+}
+
+.main h1 span:nth-child(1) {
+  font-size: 1.5rem;
+}
+.button button {
+  background-color: transparent;
+  border: 1px solid #113d6b;
+  border-radius: 0.4rem;
+  margin-top: 2rem;
+  cursor: pointer;
+  padding: 0.8rem 1.2rem;
+}
+.button button:hover {
+  background-color: #113d6b;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  transform: scale(0.91);
+}
+.images {
+  background-image: url("/shapeOval.png");
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 400px;
+  height: 350px;
+}
+@media only screen and (max-width: 1024px) {
+  section {
+    margin: 2rem 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 95%;
+  }
+  header {
+    max-width: 100%;
+  }
+  section {
+    margin: 0rem 1.5rem;
+  }
+  .images {
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .menu {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #113d6b;
+  }
+
+  header {
+    padding: 0.7rem 1rem;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  nav {
+    position: absolute;
+    display: grid;
+    top: 75px;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    left: -100%;
+  }
+
+  #click:checked ~ nav {
+    left: 0%;
+    transition: all 0.3s ease;
+  }
+
+  section {
+    margin: 1rem 1.5rem;
+  }
+  .main {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
