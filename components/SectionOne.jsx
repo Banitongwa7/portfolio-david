@@ -13,7 +13,7 @@ export default function SectionOne() {
                 <a href="#"><i className="bi bi-linkedin"></i></a>
             </div>
             <div className="detail">
-                <h1><span>Hi, It's Me</span> <br /> I'm <span style={{color:'#113D6B'}}>David</span></h1>
+                <h1><span>Hi, It&#39;s Me</span> <br /> I&#39;m <span style={{color:'#113D6B'}}>David</span></h1>
                 <p>Lorem Ipsum is simply dummy text of the printing <br /> and typesetting industry. </p>
                 <div className="button">
                     <button>Download CV</button>
