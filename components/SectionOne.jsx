@@ -20,7 +20,7 @@ export default function SectionOne() {
                 </div>
             </div>
             <div className="images">
-                <Image src="https://www.robohead.net/wp-content/uploads/2020/04/Project-Management-Software-Online.png" priority={true} alt="my picture" width={360} height={800} className='ml-10 mt-[-21px]' />
+                <Image src="/profile.png" priority={true} alt="my picture" width={450} height={800} className='ml-10 mt-[-21px]' />
             </div>
         </div>
     </section>

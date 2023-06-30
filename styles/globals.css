@@ -130,8 +130,8 @@ section {
 .images {
   background-image: url("/shapeOval.png");
   background-repeat: no-repeat;
-  background-position: 10px;
-  background-size: 400px;
+  background-position: 25px -10px;
+  background-size: 410px;
   height: 350px;
 }
 @media only screen and (max-width: 1024px) {
