@@ -138,7 +138,7 @@ export default function ComingSoon() {
               </span>
             </div>
             <h1 className="text-5xl lg:text-7xl xl:text-6xl text-white tracking-wider font-bold font-serif mt-12 text-center">
-              My Portfolio is coming Soon
+              My Portfolio is coming soon
             </h1>
           </div>
         </div>
