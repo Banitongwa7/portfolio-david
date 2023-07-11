@@ -25,7 +25,6 @@ header {
   background-color: transparent;
   display: flex;
   justify-content: space-between;
-  max-width: 80%;
   margin: auto;
   align-items: center;
 }

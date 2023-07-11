@@ -32,13 +32,13 @@ export default function SectionOne() {
               },
               onHover: {
                 enable: true,
-                mode: "repulse",
+                mode: "attract",
               },
               resize: true,
             },
             modes: {
               push: {
-                quantity: 4,
+                quantity: 1,
               },
               repulse: {
                 distance: 200,
@@ -46,56 +46,19 @@ export default function SectionOne() {
               },
             },
           },
-          interactivity: {
-            events: {
-                onhover: {
-                    enable: true,
-                    mode: ["grab"]
-                },
-                onclick: {
-                    enable: false,
-                    mode: "bubble"
-                },
-                resize: true
-            },
-            modes: {
-                grab: {
-                    distance: 400,
-                    line_linked: {
-                        opacity: 1
-                    }
-                },
-                bubble: {
-                    distance: 400,
-                    size: 40,
-                    duration: 2,
-                    opacity: 8,
-                    speed: 3
-                },
-                repulse: {
-                    distance: 200
-                },
-                push: {
-                    particles_nb: 4
-                },
-                remove: {
-                    particles_nb: 2
-                }
-            }
-        },
           particles: {
             color: {
-              value: "#5387a6",
+              value: "#0568ff",
             },
             links: {
               color: "#ffffff",
               distance: 150,
-              enable: true,
+              enable: false,
               opacity: 0.5,
               width: 1,
             },
             collisions: {
-              enable: true,
+              enable: false,
             },
             move: {
               direction: "none",
@@ -104,13 +67,13 @@ export default function SectionOne() {
                 default: "bounce",
               },
               random: false,
-              speed: 1,
+              speed: 0.5,
               straight: false,
             },
             number: {
               density: {
                 enable: true,
-                area: 800,
+                area: 20000,
               },
               value: 80,
             },
@@ -118,10 +81,10 @@ export default function SectionOne() {
               value: 0.5,
             },
             shape: {
-              type: "circle",
+              type: "square",
             },
             size: {
-              value: { min: 1, max: 3 },
+              value: { min: 1, max: 90 },
             },
           },
           detectRetina: true,

@@ -5,7 +5,7 @@ export default function Navbar() {
 
 
   return (
-    <header>
+    <header className='w-full px-[10%]'>
         <div className="logo">
             <a href="#">David.</a>
         </div>
