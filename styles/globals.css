@@ -14,8 +14,6 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  max-height: 100vh;
-  background-color: #eaebed;
 }
 
 /*nav */
@@ -65,19 +63,12 @@ nav a:hover {
   display: none;
 }
 
-/* Nav */
-
-section {
-  margin: 2rem 8.5rem;
-}
-
 .main {
   display: grid;
   grid-template-columns: 5% repeat(2, 1fr);
   column-gap: 1.5rem;
   justify-content: space-between;
   align-items: center;
-  margin: 5rem auto;
 }
 
 .main h1 {
@@ -137,11 +128,6 @@ section {
   background-size: 410px;
   height: 350px;
 }
-@media only screen and (max-width: 1024px) {
-  section {
-    margin: 2rem 2.5rem;
-  }
-}
 
 @media only screen and (max-width: 768px) {
   html {
@@ -188,9 +174,6 @@ section {
     transition: all 0.3s ease;
   }
 
-  section {
-    margin: 1rem 1.5rem;
-  }
   .main {
     grid-template-columns: repeat(1, 1fr);
   }

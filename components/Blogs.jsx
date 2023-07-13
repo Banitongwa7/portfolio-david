@@ -4,6 +4,6 @@ export default function Blogs() {
 
 
   return (
-    <div>Blogs</div>
+    <div className='h-screen bg-white'>Blogs</div>
   )
 }

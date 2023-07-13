@@ -4,6 +4,6 @@ export default function Footer() {
 
     
   return (
-    <div>Footer</div>
+    <div className='h-screen bg-sky-950 text-white'>Footer</div>
   )
 }

@@ -4,6 +4,6 @@ export default function Skills() {
 
     
   return (
-    <div>Skills</div>
+    <div className='h-screen bg-slate-400'>Skills</div>
   )
 }

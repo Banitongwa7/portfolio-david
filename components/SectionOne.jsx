@@ -1,97 +1,94 @@
-import React, {useCallback} from "react";
+import React, { useCallback } from "react";
 import Image from "next/image";
 import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles"
+import { loadFull } from "tsparticles";
 
 export default function SectionOne() {
-    
-    const particlesInit = useCallback(async engine => {
-        await loadFull(engine);
-    }, []);
-    const particlesLoaded = useCallback(async container => {
-    }, []);
+  const particlesInit = useCallback(async (engine) => {
+    await loadFull(engine);
+  }, []);
+  const particlesLoaded = useCallback(async (container) => {}, []);
 
   return (
-    <>
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        options={{
-          background: {
-            color: {
-              value: "none",
+      <section className="h-screen w-full">
+        <Particles
+          id="tsparticles"
+          init={particlesInit}
+          loaded={particlesLoaded}
+          options={{
+            background: {
+              color: {
+                value: "none",
+              },
             },
-          },
-          fpsLimit: 120,
-          interactivity: {
-            events: {
-              onClick: {
+            fpsLimit: 120,
+            interactivity: {
+              events: {
+                onClick: {
+                  enable: true,
+                  mode: "push",
+                },
+                onHover: {
+                  enable: true,
+                  mode: "attract",
+                },
+                resize: true,
+              },
+              modes: {
+                push: {
+                  quantity: 1,
+                },
+                repulse: {
+                  distance: 200,
+                  duration: 0.4,
+                },
+              },
+            },
+            particles: {
+              color: {
+                value: "#0568ff",
+              },
+              links: {
+                color: "#ffffff",
+                distance: 150,
+                enable: false,
+                opacity: 0.5,
+                width: 1,
+              },
+              collisions: {
+                enable: false,
+              },
+              move: {
+                direction: "none",
                 enable: true,
-                mode: "push",
+                outModes: {
+                  default: "bounce",
+                },
+                random: false,
+                speed: 0.5,
+                straight: false,
               },
-              onHover: {
-                enable: true,
-                mode: "attract",
+              number: {
+                density: {
+                  enable: true,
+                  area: 20000,
+                },
+                value: 80,
               },
-              resize: true,
-            },
-            modes: {
-              push: {
-                quantity: 1,
+              opacity: {
+                value: 0.5,
               },
-              repulse: {
-                distance: 200,
-                duration: 0.4,
+              shape: {
+                type: "square",
+              },
+              size: {
+                value: { min: 1, max: 90 },
               },
             },
-          },
-          particles: {
-            color: {
-              value: "#0568ff",
-            },
-            links: {
-              color: "#ffffff",
-              distance: 150,
-              enable: false,
-              opacity: 0.5,
-              width: 1,
-            },
-            collisions: {
-              enable: false,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: false,
-              speed: 0.5,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-                area: 20000,
-              },
-              value: 80,
-            },
-            opacity: {
-              value: 0.5,
-            },
-            shape: {
-              type: "square",
-            },
-            size: {
-              value: { min: 1, max: 90 },
-            },
-          },
-          detectRetina: true,
-        }}
-      />
-      <section>
-        <div className="main">
+            detectRetina: true,
+          }}
+        />
+        <div className="main mx-auto w-[80%] mt-20">
           <div className="social">
             <a href="#">
               <i className="bi bi-github"></i>
@@ -128,6 +125,5 @@ export default function SectionOne() {
           </div>
         </div>
       </section>
-    </>
   );
 }
