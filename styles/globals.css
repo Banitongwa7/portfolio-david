@@ -16,52 +16,6 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/*nav */
-header {
-  padding: 1.7rem 1rem;
-  backdrop-filter: blur(10px);
-  background-color: transparent;
-  display: flex;
-  justify-content: space-between;
-  margin: auto;
-  align-items: center;
-}
-
-.logo {
-  font-size: 1.3rem;
-  font-weight: 800;
-}
-
-.logo a {
-  color: #113d6b;
-  text-decoration: none;
-}
-
-nav a {
-  color: #113d6b;
-  text-decoration: none;
-  font-size: 0.97rem;
-  font-weight: 600;
-  letter-spacing: 0.7px;
-  padding: 1rem;
-  padding: 0.4rem 1rem;
-}
-
-nav a.active,
-nav a:hover {
-  background-color: #113d6b;
-  color: #fff;
-  border-radius: 1rem;
-  transition: all.3s ease-in-out;
-}
-
-#click {
-  display: none;
-}
-
-.menu {
-  display: none;
-}
 
 .main {
   display: grid;
@@ -179,3 +133,7 @@ nav a:hover {
   }
 }
 
+
+.active{
+  @apply text-blue-500
+}

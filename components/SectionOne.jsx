@@ -10,7 +10,7 @@ export default function SectionOne() {
   const particlesLoaded = useCallback(async (container) => {}, []);
 
   return (
-      <section className="h-screen w-full">
+      <section className="h-screen w-full bg-gray-900">
         <Particles
           id="tsparticles"
           init={particlesInit}
@@ -88,7 +88,7 @@ export default function SectionOne() {
             detectRetina: true,
           }}
         />
-        <div className="main mx-auto w-[80%] mt-20">
+        <div className="main mx-auto w-[80%] pt-20">
           <div className="social">
             <a href="#">
               <i className="bi bi-github"></i>
@@ -100,7 +100,7 @@ export default function SectionOne() {
               <i className="bi bi-linkedin"></i>
             </a>
           </div>
-          <div className="detail">
+          <div className="detail text-white">
             <h1>
               <span>Hi, It&#39;s Me</span> <br /> I&#39;m{" "}
               <span style={{ color: "#113D6B" }}>David</span>
