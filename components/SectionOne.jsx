@@ -11,6 +11,7 @@ export default function SectionOne() {
 
   return (
       <section className="h-screen w-full bg-gray-900">
+        <div id="particles">
         <Particles
           id="tsparticles"
           init={particlesInit}
@@ -46,7 +47,7 @@ export default function SectionOne() {
             },
             particles: {
               color: {
-                value: "#0568ff",
+                value: "#43d3e9",
               },
               links: {
                 color: "#ffffff",
@@ -88,6 +89,7 @@ export default function SectionOne() {
             detectRetina: true,
           }}
         />
+        </div>
         <div className="main mx-auto w-[80%] pt-20">
           <div className="social">
             <a href="#">
@@ -103,7 +105,7 @@ export default function SectionOne() {
           <div className="detail text-white">
             <h1>
               <span>Hi, It&#39;s Me</span> <br /> I&#39;m{" "}
-              <span style={{ color: "#113D6B" }}>David</span>
+              <span style={{ color: "#43d3e9" }}>David</span>
             </h1>
             <p>
               Lorem Ipsum is simply dummy text of the printing <br /> and
