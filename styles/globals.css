@@ -7,17 +7,6 @@
   padding: 0;
 }
 
-#particles{
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  padding: 0;
-  margin: 0;
-  z-index: 0;
-}
-
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -36,9 +25,9 @@ body {
   font-weight: 600;
 }
 
-.main p {
+.main .type-animation {
   margin-top: 1rem;
-  font-size: 0.98rem;
+  font-size: 1.5rem;
 }
 
 .social {

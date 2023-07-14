@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import Image from "next/image";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
+import { TypeAnimation } from "react-type-animation";
 
 export default function SectionOne() {
   const particlesInit = useCallback(async (engine) => {
@@ -10,8 +11,8 @@ export default function SectionOne() {
   const particlesLoaded = useCallback(async (container) => {}, []);
 
   return (
-      <section className="h-screen w-full bg-gray-900">
-        <div id="particles">
+      <section className="h-screen w-full bg-gray-900 pt-10">
+        <div>
         <Particles
           id="tsparticles"
           init={particlesInit}
@@ -107,10 +108,22 @@ export default function SectionOne() {
               <span>Hi, It&#39;s Me</span> <br /> I&#39;m{" "}
               <span style={{ color: "#43d3e9" }}>David</span>
             </h1>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing <br /> and
-              typesetting industry.{" "}
-            </p>
+            <div className="type-animation">
+              I am
+              <TypeAnimation 
+              sequence={[
+                ' Full Stack Web Developer',
+                1000,
+                ' Microsoft Power Platform Consultant',
+                1000,
+                ' Software Engineer',
+                1000
+              ]}
+              speed={50}
+              style={{ color: "#dd3dc4" }}
+              repeat={Infinity}
+              />
+            </div>
             <div className="button">
               <button>Download CV</button>
             </div>
