@@ -49,9 +49,9 @@ export default function SectionOne() {
               src="/profile_picture.png"
               priority={true}
               alt="my picture"
-              width={2750}
-              height={2349}
-              className="object-cover mt-20 grayscale drop-shadow-lg"
+              width={3240}
+              height={5463}
+              className="object-cover mt-[66px] ml-20 grayscale drop-shadow-lg"
             />
           </div>
         </div>
