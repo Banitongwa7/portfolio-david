@@ -11,6 +11,10 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+#tsparticles {
+  position: absolute;
+  z-index: 1;
+}
 
 .main {
   display: grid;
