@@ -50,11 +50,11 @@ export default function Navbar() {
         </button>
         <div ref={toggle} onClick={handleMenu} className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-gray-800 md:bg-gray-900 border-gray-700">
-          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent active">Home</a></li>
-          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent">Project</a></li>
-          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent">Skills</a></li>
-          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent">About</a></li>
-          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent">Contact</a></li>
+          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-[#43d3e9] hover:bg-gray-700 hover:text-white md:hover:bg-transparent active">Home</a></li>
+          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-[#43d3e9] hover:bg-gray-700 hover:text-white md:hover:bg-transparent">Project</a></li>
+          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-[#43d3e9] hover:bg-gray-700 hover:text-white md:hover:bg-transparent">Skills</a></li>
+          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-[#43d3e9] hover:bg-gray-700 hover:text-white md:hover:bg-transparent">About</a></li>
+          <li><a href="#" className="block py-2 pl-3 pr-4 rounded md:border-0 md:p-0 text-white md:hover:text-[#43d3e9] hover:bg-gray-700 hover:text-white md:hover:bg-transparent">Contact</a></li>
           </ul>
         </div>
       </div>

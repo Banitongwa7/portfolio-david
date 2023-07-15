@@ -44,11 +44,11 @@ body {
   padding: 0.35rem;
   text-align: center;
   width: 60%;
-  transition: 2s;
-  -webkit-transition: 2s;
-  -moz-transition: 2s;
-  -ms-transition: 2s;
-  -o-transition: 2s;
+  transition: .8s;
+  -webkit-transition: .8s;
+  -moz-transition: .8s;
+  -ms-transition: .8s;
+  -o-transition: .8s;
 }
 
 .social a:hover {
@@ -88,57 +88,25 @@ body {
   width: auto;
 }
 
+
 @media only screen and (max-width: 768px) {
-  html {
-    font-size: 95%;
-  }
-  header {
-    max-width: 100%;
-  }
-  section {
-    margin: 0rem 1.5rem;
-  }
-  .images {
-    background-position: center;
-    background-size: cover;
-  }
+
 }
 
 @media only screen and (max-width: 480px) {
-  .menu {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #113d6b;
-  }
-
-  header {
-    padding: 0.7rem 1rem;
-    align-items: center;
-    max-width: 100%;
-  }
-
-  nav {
-    position: absolute;
-    display: grid;
-    top: 75px;
-    width: 100%;
-    text-align: center;
-    background-color: #fff;
-    left: -100%;
-  }
-
-  #click:checked ~ nav {
-    left: 0%;
-    transition: all 0.3s ease;
-  }
-
-  .main {
-    grid-template-columns: repeat(1, 1fr);
-  }
+  
 }
 
 
 .active{
-  @apply text-blue-500
+  @apply text-[#43d3e9]
+}
+
+
+#navbar-default a:hover {
+  transition: .5s;
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
 }
