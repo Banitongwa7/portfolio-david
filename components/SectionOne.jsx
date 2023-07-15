@@ -7,7 +7,7 @@ export default function SectionOne() {
 
   return (
       <section className="h-screen w-full bg-gray-900 pt-10">
-        <div className="main w-[80%] pt-20 absolute z-10 mx-auto left-0 right-0">
+        <div className="main w-[80%] mx-auto">
           <div className="social">
             <a href="#">
               <i className="bi bi-github"></i>
@@ -46,12 +46,12 @@ export default function SectionOne() {
           </div>
           <div className="images">
             <Image
-              src="/profile.png"
+              src="/profile_picture.png"
               priority={true}
               alt="my picture"
-              width={450}
-              height={800}
-              className="ml-10 mt-[-21px]"
+              width={2750}
+              height={2349}
+              className="object-cover mt-20 grayscale drop-shadow-lg"
             />
           </div>
         </div>
