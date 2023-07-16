@@ -11,22 +11,19 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.main {
-  display: grid;
-  grid-template-columns: 5% repeat(2, 1fr);
-  column-gap: 1.5rem;
-  justify-content: space-between;
-  align-items: center;
+@media only screen and (min-width: 768px) {
+  .main {
+    display: grid;
+    grid-template-columns: 5% repeat(2, 1fr);
+    column-gap: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .main h1 {
   font-size: 2.5rem;
   font-weight: 600;
-}
-
-.main .type-animation {
-  margin-top: 1rem;
-  font-size: 1.5rem;
 }
 
 .social {
@@ -43,7 +40,8 @@ body {
   border-radius: 50%;
   padding: 0.35rem;
   text-align: center;
-  width: 60%;
+  width: 40px;
+  height: 40px;
   transition: .8s;
   -webkit-transition: .8s;
   -moz-transition: .8s;
@@ -79,22 +77,19 @@ body {
   background-image: url("/blob.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
-  height: auto;
+  background-size: contain;
 }
 
 .images img {
-  height: 645px;
+  position: relative;
+  height: 640px;
+  transform: scale(1.01);
   width: auto;
-}
-
-
-@media only screen and (max-width: 768px) {
-
-}
-
-@media only screen and (max-width: 480px) {
-  
+  bottom: 0;
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
 }
 
 

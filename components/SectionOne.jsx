@@ -6,9 +6,9 @@ export default function SectionOne() {
 
 
   return (
-      <section className="h-screen w-full bg-gray-900 pt-10">
-        <div className="main w-[80%] mx-auto">
-          <div className="social">
+      <section className="md:max-h-screen md:max-w-full bg-gray-900 pt-10">
+        <div className="main w-full md:w-[80%] mx-auto flex flex-col md:flex-none md:flex-row">
+          <div className="social mx-auto pt-10 pb-10 md:pt-0 md:pb-0">
             <a href="#">
               <i className="bi bi-github"></i>
             </a>
@@ -19,14 +19,14 @@ export default function SectionOne() {
               <i className="bi bi-linkedin"></i>
             </a>
           </div>
-          <div className="detail text-white">
+          <div className="text-white ml-10 md:ml-0">
             <h1>
               <span>Hi, It&#39;s Me</span> <br /> I&#39;m{" "}
               <span style={{ color: "#43d3e9" }}>David</span>
             </h1>
-            <div className="type-animation">
+            <div className="mt-[1rem] md:text-xl">
               I am
-              <TypeAnimation 
+              <TypeAnimation
               sequence={[
                 ' Full Stack Web Developer',
                 1000,
@@ -38,6 +38,7 @@ export default function SectionOne() {
               speed={50}
               style={{ color: "#dd3dc4" }}
               repeat={Infinity}
+              className="md:font-medium"
               />
             </div>
             <div className="button">
