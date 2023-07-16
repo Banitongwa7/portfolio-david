@@ -1,12 +1,19 @@
 import React from 'react'
+import Title from './parts/Title'
 
 export default function Awards() {
 
 
     
   return (
-    <div className='h-screen'>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae vero tenetur ipsam nobis et nulla inventore excepturi, quia officia quo dignissimos sit consectetur libero perferendis consequatur esse ad perspiciatis eum?
+    <div className='h-screen pt-10'>
+    <Title 
+      title="Awards"
+      description="Discover all my awards during my academic and professional career"
+    />
+    <div className='container'>
+    <p>Les parcours</p>
+    </div>
     </div>
   )
 }

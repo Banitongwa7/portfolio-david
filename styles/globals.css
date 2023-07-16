@@ -113,3 +113,9 @@ footer a:hover {
   -ms-transition: .5s;
   -o-transition: .5s;
 }
+
+.title{
+  background: -webkit-linear-gradient(60deg, rgba(58,219,234,1) 47%, rgba(220,61,195,1) 52%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
