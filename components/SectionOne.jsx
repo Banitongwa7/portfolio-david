@@ -18,6 +18,9 @@ export default function SectionOne() {
             <a href="#">
               <i className="bi bi-linkedin"></i>
             </a>
+            <a href="#">
+              <i className="bi bi-behance"></i>
+            </a>
           </div>
           <div className="text-white ml-10 md:ml-0">
             <h1>
