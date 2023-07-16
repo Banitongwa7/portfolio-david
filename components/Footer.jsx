@@ -1,4 +1,5 @@
 import React from "react";
+import links from "@/utils/Links";
 
 export default function Footer() {
   return (
@@ -47,19 +48,19 @@ export default function Footer() {
           </div>
         </nav>
         <div className="flex justify-center mt-8 md:space-x-9 space-x-6">
-          <a href="#" className="text-gray-400 hover:text-[#43d3e9]">
+          <a href={links.github} className="text-gray-400 hover:text-[#43d3e9]">
             <span className="sr-only">GitHub</span>
             <i className="bi bi-github text-[20px]"></i>
           </a>
-          <a href="#" className="text-gray-400 hover:text-[#43d3e9]">
+          <a href={links.twitter} className="text-gray-400 hover:text-[#43d3e9]">
             <span className="sr-only">Twitter</span>
             <i className="bi bi-twitter text-[20px]"></i>
           </a>
-          <a href="#" className="text-gray-400 hover:text-[#43d3e9]">
+          <a href={links.linkedin} className="text-gray-400 hover:text-[#43d3e9]">
             <span className="sr-only">Linkedin</span>
             <i className="bi bi-linkedin text-[20px]"></i>
           </a>
-          <a href="#" className="text-gray-400 hover:text-[#43d3e9]">
+          <a href={links.behance} className="text-gray-400 hover:text-[#43d3e9]">
             <span className="sr-only">Behance</span>
             <i className="bi bi-behance text-[20px]"></i>
           </a>

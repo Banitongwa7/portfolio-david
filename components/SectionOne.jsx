@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
+import links from "@/utils/Links";
 
 export default function SectionOne() {
 
@@ -9,16 +10,16 @@ export default function SectionOne() {
       <section className="md:max-h-screen md:max-w-full bg-gray-900 pt-10">
         <div className="main w-full md:w-[80%] mx-auto flex flex-col md:flex-none md:flex-row">
           <div className="social mx-auto pt-10 pb-10 md:pt-0 md:pb-0">
-            <a href="#">
+            <a href={links.github}>
               <i className="bi bi-github"></i>
             </a>
-            <a href="#">
+            <a href={links.twitter}>
               <i className="bi bi-twitter"></i>
             </a>
-            <a href="#">
+            <a href={links.linkedin}>
               <i className="bi bi-linkedin"></i>
             </a>
-            <a href="#">
+            <a href={links.behance}>
               <i className="bi bi-behance"></i>
             </a>
           </div>
