@@ -4,10 +4,10 @@ import { TypeAnimation } from "react-type-animation";
 import links from "@/utils/Links";
 
 export default function SectionOne() {
+  /*
 
 
-  return (
-      <section className="md:max-h-screen md:max-w-full bg-gray-900 pt-10">
+<section className="md:max-h-screen md:max-w-full bg-gray-900 pt-10">
         <div className="main w-full md:w-[80%] mx-auto flex flex-col md:flex-none md:flex-row">
           <div className="social mx-auto pt-10 pb-10 md:pt-0 md:pb-0">
             <a href={links.github}>
@@ -61,5 +61,96 @@ export default function SectionOne() {
           </div>
         </div>
       </section>
+  
+  */
+
+  return (
+    <section id="home-section" className="hero">
+      <div className="home-slider  owl-carousel">
+        <div className="slider-item ">
+          <div className="overlay"></div>
+          <div className="container">
+            <div
+              className="row d-md-flex no-gutters slider-text align-items-end justify-content-end"
+              data-scrollax-parent="true"
+            >
+              <div
+                className="one-third js-fullheight order-md-last img"
+                style={{
+                  backgroundImage: "url(/profile_picture.png)",
+                  
+                }}
+              >
+                <div className="overlay"></div>
+              </div>
+              <div
+                className="one-forth d-flex  align-items-center ftco-animate"
+                data-scrollax=" properties: { translateY: '70%' }"
+              >
+                <div className="text">
+                  <span className="subheading">Hello!</span>
+                  <h1 className="mb-4 mt-3">
+                    I&#39;m <span>Clark Thompson</span>
+                  </h1>
+                  <h2 className="mb-4">A Freelance Web Designer</h2>
+                  <p>
+                    <a href="#" className="btn btn-primary py-3 px-4">
+                      Hire me
+                    </a>{" "}
+                    <a
+                      href="#"
+                      className="btn btn-white btn-outline-white py-3 px-4"
+                    >
+                      My works
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="slider-item">
+          <div className="overlay"></div>
+          <div className="container">
+            <div
+              className="row d-flex no-gutters slider-text align-items-end justify-content-end"
+              data-scrollax-parent="true"
+            >
+              <div
+                className="one-third js-fullheight order-md-last img"
+                style={{
+                  backgroundImage: "url(/profile_picture.png)",
+                }}
+              >
+                <div className="overlay"></div>
+              </div>
+              <div
+                className="one-forth d-flex align-items-center ftco-animate"
+                data-scrollax=" properties: { translateY: '70%' }"
+              >
+                <div className="text">
+                  <span className="subheading">Hello!</span>
+                  <h1 className="mb-4 mt-3">
+                    I&#39;m a <span>web designer</span> based in London
+                  </h1>
+                  <p>
+                    <a href="#" className="btn btn-primary py-3 px-4">
+                      Hire me
+                    </a>{" "}
+                    <a
+                      href="#"
+                      className="btn btn-white btn-outline-white py-3 px-4"
+                    >
+                      My works
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
