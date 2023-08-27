@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         <meta name="description" content={metadata.description} />
         <link rel="icon" href="favicon.ico" />
       </Head>
-      <div className={inter.className}>{children}</div>
+      <div className={inter.className} data-spy="scroll" data-target=".site-navbar-target" data-offset="300">{children}</div>
     </>
   );
 }
