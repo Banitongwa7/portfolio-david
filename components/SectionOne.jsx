@@ -77,7 +77,6 @@ export default function SectionOne() {
                   backgroundImage: `url(${profile.src})`,
                   width: "100%",
                   height: "100%",
-                  
                 }}
               >
                 <div className="overlay"></div>
