@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useRef, useEffect } from "react";
 import { FaLinkedin, FaGithub, FaSquareXTwitter } from "react-icons/fa6";
-import SocialLinks from "@/data/SocialLinks";
+import AllLinks from "@/data/AllLinks";
 
 
 export default function NavBar() {
@@ -79,7 +79,7 @@ export default function NavBar() {
       </nav>
       <div className="w-3/12 flex justify-end social-link">
         <Link
-          href={SocialLinks.linkedin}
+          href={AllLinks.linkedin}
           className="p-4 text-[20px] hover:text-green-500 duration-200"
           target="_blank"
           rel="noreferrer"
@@ -88,7 +88,7 @@ export default function NavBar() {
         </Link>
 
         <Link
-          href={SocialLinks.github}
+          href={AllLinks.github}
           className="p-4 text-[20px] hover:text-green-500 duration-200"
           target="_blank"
           rel="noreferrer"
@@ -97,7 +97,7 @@ export default function NavBar() {
         </Link>
 
         <Link
-          href={SocialLinks.twitter}
+          href={AllLinks.twitter}
           className="p-4 text-[20px] hover:text-green-500 duration-200"
           target="_blank"
           rel="noreferrer"
