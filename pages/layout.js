@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
         <title>Portfolio | David</title>
         <meta name="title" content={metadata.title} />
         <meta name="description" content={metadata.description} />
-        <link rel="icon" href="profile.png" />
+        <link rel="icon" href="icon.png" />
       </Head>
       <div className={inter.className}>{children}</div>
     </>

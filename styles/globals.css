@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#tsparticles{
-  position: absolute;
-
+#navbar-custom li.active {
+  @apply border-b-2 border-green-500 border-opacity-100;
 }
