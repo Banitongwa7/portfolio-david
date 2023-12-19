@@ -12,6 +12,7 @@
   border: 2px solid #bbbbbb;
   z-index: 99;
   pointer-events: none;
+  mix-blend-mode: difference;
 }
 
 #center-point {
@@ -29,4 +30,8 @@
 
 #navbar-custom li.active {
   @apply border-b-2 border-green-500 border-opacity-100;
+}
+
+body {
+  @apply bg-[#f8f8f8];
 }
