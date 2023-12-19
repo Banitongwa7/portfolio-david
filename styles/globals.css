@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+#mouse-pointer {
+  position: fixed;
+  left: -50px;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border: 2px solid #bbbbbb;
+  z-index: 99;
+  pointer-events: none;
+}
+
+#center-point {
+  display: block;
+  width: 6px;
+  height: 6px;
+  background-color: rgb(101, 101, 101);
+  border-radius: 6px;
+  position: fixed;
+  top: calc(50% - 3px);
+  left: calc(50% - 3px);
+  transition: transform 100ms linear;
+  z-index: -99;
+}
+
 #navbar-custom li.active {
   @apply border-b-2 border-green-500 border-opacity-100;
 }
