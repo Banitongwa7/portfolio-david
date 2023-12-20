@@ -21,10 +21,7 @@ export default function about() {
       <hr />
       <div>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          placeat maxime delectus quam magni officia quasi voluptatibus mollitia
-          quo. Dignissimos id voluptatem, tenetur quidem assumenda suscipit
-          beatae cupiditate deleniti libero!
+        Passionate and versatile Fullstack web developer, I create tailored solutions (websites, applications, etc.) that perfectly fit your needs. My skills include MERN Stack, NextJS, Python, and Microsoft Power Platform.
         </p>
       </div>
       <hr />
