@@ -5,7 +5,7 @@ import AllLinks from "@/data/AllLinks";
 
 export default function SectionOne() {
   return (
-    <section className="flex flex-col items-center justify-center gap-8 container mt-[100px]">
+    <section className="flex flex-col items-center justify-center gap-8 container my-[100px]">
       <div>
         <Image
           src="/david.jpg"
