@@ -10,6 +10,7 @@ export default function SectionOne() {
         <Image
           src="/david.jpg"
           alt="Picture of david"
+          priority={true}
           width={200}
           height={200}
           className="rounded-full h-[200px] w-[200px] object-cover"
