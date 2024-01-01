@@ -1,9 +1,124 @@
-import React from 'react'
+import React from "react";
+import { FaLocationDot } from "react-icons/fa6";
+import { IoMdCall, IoMdMail } from "react-icons/io";
 
 export default function contact() {
   return (
-    <section className='container w-full'>
-    <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">Contact</h2>
+    <section className="container w-full" id="contact">
+     <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
+        Contact
+      </h2>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-stretch justify-center">
+          <div className="grid md:grid-cols-2">
+            <div className="h-full pr-6">
+              <p className="mt-3 mb-12 text-lg text-gray-600 dark:text-slate-400">
+              Discuss a project or just want to say hi ? my inbox is open for all.
+              </p>
+              <ul className="mb-6 md:mb-0">
+                <li className="flex">
+                  <div className="flex h-10 w-10 items-center justify-center rounded">
+                    <FaLocationDot className="text-green-500 w-10 h-10"/>
+                  </div>
+                  <div className="ml-4 mb-4">
+                    <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900">
+                      Address
+                    </h3>
+                    <p className="text-gray-600 dark:text-slate-400">
+                      Tunis Tunisia
+                    </p>
+                  </div>
+                </li>
+                <li className="flex">
+                  <div className="flex h-10 w-10 items-center justify-center rounded">
+                    <IoMdCall className="h-10 w-10 text-green-500"/>
+                  </div>
+                  <div className="ml-4 mb-4">
+                    <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900">
+                      Phone
+                    </h3>
+                    <p className="text-gray-600 dark:text-slate-400">
+                      Mobile : +216 52 482 172 
+                    </p>
+                  </div>
+                </li>
+                <li className="flex">
+                  <div className="flex h-10 w-10 items-center justify-center rounded">
+                    <IoMdMail className="h-10 w-10 text-green-500"/>
+                  </div>
+                  <div className="ml-4 mb-4">
+                    <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900">
+                      Email
+                    </h3>
+                    <p className="text-gray-600 dark:text-slate-400">
+                      davidbanitongwa@outlook.com
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className="card h-fit max-w-6xl p-5 md:p-12" id="form">
+              <h2 className="mb-4 text-2xl font-bold">Get in touch</h2>
+              <form id="contactForm">
+                <div className="mb-6">
+                  <div className="mx-0 mb-1 sm:mb-4">
+                    <div className="mx-0 mb-1 sm:mb-4">
+                      <label
+                        for="name"
+                        className="pb-1 text-xs uppercase tracking-wider"
+                      ></label>
+                      <input
+                        type="text"
+                        id="name"
+                        autocomplete="given-name"
+                        placeholder="Your name"
+                        className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md sm:mb-0"
+                        name="name"
+                      />
+                    </div>
+                    <div className="mx-0 mb-1 sm:mb-4">
+                      <label
+                        for="email"
+                        className="pb-1 text-xs uppercase tracking-wider"
+                      ></label>
+                      <input
+                        type="email"
+                        id="email"
+                        autocomplete="email"
+                        placeholder="Your email address"
+                        className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md sm:mb-0"
+                        name="email"
+                      />
+                    </div>
+                  </div>
+                  <div className="mx-0 mb-1 sm:mb-4">
+                    <label
+                      for="textarea"
+                      className="pb-1 text-xs uppercase tracking-wider"
+                    ></label>
+                    <textarea
+                      id="textarea"
+                      name="textarea"
+                      cols="30"
+                      rows="5"
+                      placeholder="Write your message..."
+                      className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md sm:mb-0"
+                    ></textarea>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 font-xl rounded-md sm:mb-0"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-  )
+  );
 }

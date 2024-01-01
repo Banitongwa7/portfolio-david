@@ -17,16 +17,16 @@ export default function Home() {
         />
       </div>
       <div className="text-center space-y-4">
-        <h2 className="text-[40px] font-extrabold uppercase">
+        <h2 className="text-[30px] md:text-[40px] font-extrabold uppercase">
           David Banitongwa
         </h2>
-        <p className="text-[20px] font-light w-1/2 mx-auto pb-10">
+        <p className="text-[18px] md:text-[20px] font-light w-[80%] md:w-1/2 mx-auto pb-10">
           I am Software Engineer and Microsoft Power-Platform Developer. Feel
           free to contact me or check out my resume here.
         </p>
-        <div className="flex gap-10 items-center justify-center">
+        <div className="flex flex-col md:flex-row gap-10 items-center justify-center">
           <Link
-            href="#"
+            href="/contact"
             className="text-[18px] font-normal py-2 px-4 text-white rounded-md duration-200 bg-gray-900 hover:bg-gray-700 uppercase"
           >
             Contact Me
