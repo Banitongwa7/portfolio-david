@@ -39,18 +39,48 @@ body {
   @apply bg-[#f8f8f8];
 }
 
-ul#technical-skills-custom li {
+ul.skills-custom li {
   @apply bg-[#f8f8f8] shadow-lg p-4 rounded-md my-4 w-[50%];
 }
 
-ul#technical-skills-custom li svg {
+ul.skills-custom li svg {
   @apply w-[80px] h-[80px] mx-auto;
 }
 
-ul#technical-skills-custom li:hover {
+ul.skills-custom li:hover {
   @apply text-green-500 transition-colors duration-300 ease-in-out;
 }
 
-ul#technical-skills-custom li p {
+ul.skills-custom li p {
   @apply font-["Poppins"] pt-4;
+}
+
+ul.skills-custom li p.icon-language {
+  @apply text-2xl font-bold;
+  background: linear-gradient(45deg, #0fad63 0%, #0c0404 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+div#education-experience-custom .education ul::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.07);
+}
+
+div#education-experience-custom .education ul li::before {
+  content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    background: #fff;
+    border-radius: 100%;
+    border: solid 1px #CCC;
+    left: -9px;
+    top: 8px;
 }

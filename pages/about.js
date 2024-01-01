@@ -19,7 +19,7 @@ import { RiFlowChart } from "react-icons/ri";
 
 export default function about() {
   return (
-    <section className="container w-full">
+    <section className="container w-full pb-[100px]">
       <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
         About Me
       </h2>
@@ -88,7 +88,7 @@ export default function about() {
           <h3 className="text-[30px] font-mono text-center">
             Technical Skills
           </h3>
-          <ul id="technical-skills-custom" className="grid grid-cols-3 gap-5 justify-items-center text-center pt-[40px]">
+          <ul className="grid grid-cols-3 gap-5 justify-items-center text-center pt-[40px] skills-custom">
             <li>
               <AiOutlineHtml5 />
               <p>HTML 5</p>
@@ -150,28 +150,82 @@ export default function about() {
               <p>Automatization</p>
             </li>
           </ul>
-          <p className="font-mono text-[20px] text-[#6B7280] text-center mt-8">And more</p>
+          <p className="font-mono text-[20px] text-[#6B7280] text-center mt-8">
+            And more
+          </p>
         </div>
+
         <div>
           <h3 className="text-[30px] font-mono text-center">Language Skills</h3>
-          <ul className="pt-[40px] grid grid-cols-2">
+          <ul className="pt-[40px] grid grid-cols-2 justify-items-center text-center skills-custom">
             <li>
-            <p>English</p>
-              <p>Preintermediate</p>
+              <p className="icon-language">English</p>
+              <p>Preintermediate - A2</p>
             </li>
             <li>
-              <p>French</p>
-              <p>Advanced</p>
+              <p className="icon-language">French</p>
+              <p>Advanced - C1</p>
             </li>
             <li>
-              <p>Lingala</p>
-              <p>Advanced</p>
+              <p className="icon-language">Lingala</p>
+              <p>Advanced - C1</p>
             </li>
             <li>
-              <p>Swahili</p>
+              <p className="icon-language">Swahili</p>
               <p>Native</p>
             </li>
           </ul>
+        </div>
+      </div>
+
+      <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
+
+      <div id="education-experience-custom" className="grid grid-cols-2 w-[80%] mx-auto">
+        <div className="education space-y-8">
+          <h3 className="text-[30px] font-bold">Education</h3>
+          <ul className="relative space-y-14">
+            <li className="pl-8 relative">
+              <div className="flex items-center space-x-3">
+                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">2022 - 2024</div>
+                <div className="w-[70%]">
+                  Développement logiciel et système d&#39;information (Bac +5)
+                </div>
+              </div>
+            </li>
+
+            <li className="pl-8 relative">
+              <div className="flex items-center space-x-3">
+                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">2019 - 2022</div>
+                <div className="w-[70%]">
+                Génie logicielle et système d&#39;information (Bac +3)
+                </div>
+              </div>
+            </li>
+
+            <li className="pl-8 relative">
+              <div className="flex items-center space-x-3">
+                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">2018 - 2019</div>
+                <div className="w-[70%]">
+                Informatique de gestion (Bac + 1)
+                </div>
+              </div>
+            </li>
+
+            <li className="pl-8 relative">
+              <div className="flex items-center space-x-3">
+                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">2016 - 2018</div>
+                <div className="w-[70%]">
+                Médecine générale (Bac + 1)
+                </div>
+              </div>
+            </li>
+
+            
+          </ul>
+        </div>
+
+        <div className="experience">
+          <h3 className="text-[30px] font-bold">Experience</h3>
         </div>
       </div>
     </section>
