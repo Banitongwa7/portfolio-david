@@ -26,7 +26,7 @@ export default function about() {
       <div className="flex flex-col items-center justify-center gap-8">
         <div>
           <Image
-            src="/david.jpg"
+            src="/assets/david.jpg"
             alt="Picture of david"
             width={200}
             height={200}

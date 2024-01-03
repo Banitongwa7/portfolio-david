@@ -1,10 +1,43 @@
-import React from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdCall, IoMdMail } from "react-icons/io";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function contact() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(fullName === "" || email === "" || message === "") {
+      toast.warn("Please fill in all fields !");
+      return;
+    }
+
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ fullName, email, message }),
+    }).then((res) => {
+      if (res.ok) {
+        toast.success("Message sent successfully !");
+        setFullName("");
+        setEmail("");
+        setMessage("");
+      }else{
+        toast.error("Something went wrong !");
+      }
+    })
+  }
+
   return (
     <section className="container w-full" id="contact">
+      <ToastContainer />
      <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
         Contact
       </h2>
@@ -59,57 +92,64 @@ export default function contact() {
             </div>
             <div className="card h-fit max-w-6xl p-5 md:p-12" id="form">
               <h2 className="mb-4 text-2xl font-bold">Get in touch</h2>
-              <form id="contactForm">
+              <form id="contactForm" action="#" onSubmit={handleSubmit}>
                 <div className="mb-6">
                   <div className="mx-0 mb-1 sm:mb-4">
                     <div className="mx-0 mb-1 sm:mb-4">
                       <label
-                        for="name"
+                        htmlFor="name"
                         className="pb-1 text-xs uppercase tracking-wider"
                       ></label>
                       <input
                         type="text"
                         id="name"
-                        autocomplete="given-name"
-                        placeholder="Your name"
-                        className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md sm:mb-0"
+                        value={fullName}
+                        placeholder="Your full name"
+                        className="mb-2 w-full rounded-md border outline-green-400 border-gray-400 py-2 pl-2 pr-4 sm:mb-0"
                         name="name"
+                        onChange={(e) => setFullName(e.target.value)}
+                        required
                       />
                     </div>
                     <div className="mx-0 mb-1 sm:mb-4">
                       <label
-                        for="email"
+                        htmlFor="email"
                         className="pb-1 text-xs uppercase tracking-wider"
                       ></label>
                       <input
                         type="email"
                         id="email"
-                        autocomplete="email"
+                        value={email}
                         placeholder="Your email address"
-                        className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md sm:mb-0"
+                        className="mb-2 w-full rounded-md border outline-green-400 border-gray-400 py-2 pl-2 pr-4 sm:mb-0"
                         name="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                       />
                     </div>
                   </div>
                   <div className="mx-0 mb-1 sm:mb-4">
                     <label
-                      for="textarea"
+                      htmlFor="textarea"
                       className="pb-1 text-xs uppercase tracking-wider"
                     ></label>
                     <textarea
                       id="textarea"
                       name="textarea"
+                      value={message}
                       cols="30"
                       rows="5"
                       placeholder="Write your message..."
-                      className="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md sm:mb-0"
+                      className="mb-2 w-full rounded-md border outline-green-400 border-gray-400 py-2 pl-2 pr-4 sm:mb-0"
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
                     ></textarea>
                   </div>
                 </div>
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 font-xl rounded-md sm:mb-0"
+                    className="w-full bg-green-500 hover:bg-green-700 text-white px-6 py-3 font-xl rounded-md sm:mb-0"
                   >
                     Send Message
                   </button>
