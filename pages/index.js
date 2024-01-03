@@ -5,11 +5,6 @@ import AllLinks from "@/data/AllLinks";
 
 export default function Home() {
 
-  useEffect(() => {
-    Aos.init();
-    Aos.refresh();
-  }, []);
-
   return (
     <section className="flex flex-col items-center justify-center gap-8 container my-[100px]">
       <div>
