@@ -28,9 +28,9 @@ export default function blog({ allPostsData }) {
         Blog
       </h2>
       <div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none w-[80%] justify-items-center mx-auto">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none w-full md:w-[80%] justify-items-center mx-auto">
           {allPostsData.map((post, index) => (
-            <li key={index} className="border border-gray-200 p-6 rounded-md cursor-pointer  hover:shadow-lg transition-shadow duration-300" onClick={() => handleLink(post)}>
+            <li key={index} className="w-[80%] border border-gray-200 p-6 rounded-md cursor-pointer  hover:shadow-lg transition-shadow duration-300" onClick={() => handleLink(post)}>
               <div className="overflow-hidden rounded-md">
                 <Image
                   src={post.image}
