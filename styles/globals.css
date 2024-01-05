@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-
 #mouse-pointer {
   position: fixed;
   left: -50px;
@@ -66,7 +62,8 @@ ul.skills-custom li p.icon-language {
   background-clip: text;
 }
 
-div#education-experience-custom .education ul::before, div#education-experience-custom .experience ul::before {
+div#education-experience-custom .education ul::before,
+div#education-experience-custom .experience ul::before {
   content: "";
   position: absolute;
   width: 1px;
@@ -76,7 +73,8 @@ div#education-experience-custom .education ul::before, div#education-experience-
   background-color: rgba(0, 0, 0, 0.07);
 }
 
-div#education-experience-custom .education ul li::before, div#education-experience-custom .experience ul li::before {
+div#education-experience-custom .education ul li::before,
+div#education-experience-custom .experience ul li::before {
   content: "";
   position: absolute;
   height: 18px;
@@ -87,3 +85,48 @@ div#education-experience-custom .education ul li::before, div#education-experien
   left: -9px;
   top: 8px;
 }
+
+/* Loader on start  */
+
+#loader {
+  width: 44.8px;
+  height: 44.8px;
+  color: #554cb5;
+  position: relative;
+  background: radial-gradient(11.2px, currentColor 94%, #0000);
+}
+
+#loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(10.08px at bottom right, #0000 94%, currentColor)
+      top left,
+    radial-gradient(10.08px at bottom left, #0000 94%, currentColor) top right,
+    radial-gradient(10.08px at top right, #0000 94%, currentColor) bottom left,
+    radial-gradient(10.08px at top left, #0000 94%, currentColor) bottom right;
+  background-size: 22.4px 22.4px;
+  background-repeat: no-repeat;
+  animation: loader 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+  -webkit-animation: loader 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+
+@keyframes loader {
+  33% {
+    inset: -11.2px;
+    transform: rotate(0deg);
+  }
+
+  66% {
+    inset: -11.2px;
+    transform: rotate(90deg);
+  }
+
+  100% {
+    inset: 0;
+    transform: rotate(90deg);
+  }
+}
+
+/* ---------------------------------------  */
