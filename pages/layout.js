@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         <title>Portfolio | David</title>
         <meta name="title" content={metadata.title} />
         <meta name="description" content={metadata.description} />
-        <link rel="icon" href="/assets/icon.png" />
+        <link rel="icon" href="https://david-banitongwa.vercel.app/assets/icon.png" />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
