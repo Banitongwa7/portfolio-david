@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
+import { Analytics } from '@vercel/analytics/react';
 
 export default function RootLayout({ children }) {
   const metadata = {
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/assets/icon.png" />
       </Head>
       <div className={inter.className} data-spy="scroll" data-target=".site-navbar-target" data-offset="300">{children}</div>
+      <Analytics />
     </>
   );
 }
