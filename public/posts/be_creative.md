@@ -1,8 +1,8 @@
 ---
 title: 'Be creative'
-date: '2020-01-02'
+date: '2024-01-02'
 image: '/blog/post1.jpg'
-tags: [Next.js, Server-Side Rendering, Static Generation]
+tags: [Creativity, Open Source, Innovation, Creativity, Open Source, Innovation, Creativity, Open Source, Innovation]
 ---
 
 **Creativity is an essential skill for any developer. It allows you to find innovative solutions to problems, create unique user experiences, and stand out from the competition.**
