@@ -1,21 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { AiOutlineHtml5 } from "react-icons/ai";
-import { FaCss3Alt, FaNodeJs } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io5";
-import {
-  FaReact,
-  FaPython,
-  FaBootstrap,
-  FaGitAlt,
-  FaDatabase,
-} from "react-icons/fa6";
-import { TbBrandNextjs } from "react-icons/tb";
-import { BiLogoTailwindCss } from "react-icons/bi";
-import { DiLinux } from "react-icons/di";
-import { BsMicrosoft } from "react-icons/bs";
-import { MdOutlineDesignServices } from "react-icons/md";
-import { RiFlowChart } from "react-icons/ri";
+import Skills from "@/data/Skills";
 
 export default function about() {
   return (
@@ -89,66 +74,12 @@ export default function about() {
             Technical Skills
           </h3>
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-items-center text-center pt-[40px] skills-custom">
-            <li>
-              <AiOutlineHtml5 />
-              <p>HTML 5</p>
-            </li>
-            <li>
-              <FaCss3Alt />
-              <p>CSS 3</p>
-            </li>
-            <li>
-              <IoLogoJavascript />
-              <p>JavaScript</p>
-            </li>
-            <li>
-              <FaReact />
-              <p>React JS</p>
-            </li>
-            <li>
-              <TbBrandNextjs />
-              <p>Next JS</p>
-            </li>
-            <li>
-              <FaNodeJs />
-              <p>Node JS</p>
-            </li>
-            <li>
-              <FaPython />
-              <p>Python</p>
-            </li>
-            <li>
-              <BiLogoTailwindCss />
-              <p>Tailwind CSS</p>
-            </li>
-            <li>
-              <FaBootstrap />
-              <p>Bootstrap</p>
-            </li>
-            <li>
-              <FaGitAlt />
-              <p>Git</p>
-            </li>
-            <li>
-              <DiLinux />
-              <p>Linux</p>
-            </li>
-            <li>
-              <BsMicrosoft />
-              <p>Microsoft</p>
-            </li>
-            <li>
-              <FaDatabase />
-              <p>Database SQL & NoSQL</p>
-            </li>
-            <li>
-              <MdOutlineDesignServices />
-              <p>UI/UX Design</p>
-            </li>
-            <li>
-              <RiFlowChart />
-              <p>Automatization</p>
-            </li>
+            {Skills.map((skill, index) => (
+              <li key={index}>
+                {skill.icon}
+                <p>{skill.name}</p>
+              </li>
+            ))}
           </ul>
           <p className="font-mono text-[20px] text-[#6B7280] text-center mt-8">
             And more
