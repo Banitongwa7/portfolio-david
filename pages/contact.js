@@ -36,7 +36,7 @@ export default function contact() {
   }
 
   return (
-    <section className="container w-full" id="contact">
+    <section className="container w-full pb-[100px]" id="contact">
       <ToastContainer />
      <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
         Contact

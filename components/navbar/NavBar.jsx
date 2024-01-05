@@ -68,7 +68,7 @@ export default function NavBar() {
 
   return (
     <header>
-      <div className="header sticky top-0 flex items-center justify-between px-8 md:py-2 py-4">
+      <div className="header top-0 flex items-center justify-between px-8 md:py-2 py-4">
         <h1 className="w-3/12">
           <Link
             href="/"

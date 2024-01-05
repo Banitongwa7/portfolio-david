@@ -8,7 +8,7 @@ import { RxReader } from "react-icons/rx";
 
 export default function blog({ allPostsData }) {
   return (
-    <section className="container w-full">
+    <section className="container w-full pb-[100px]">
       <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
         Blog
       </h2>
