@@ -91,15 +91,15 @@ export default function about() {
           <ul className="pt-[40px] grid grid-cols-1 md:grid-cols-2 justify-items-center text-center skills-custom">
             <li>
               <p className="icon-language">English</p>
-              <p>Preintermediate - A2</p>
+              <p>Professional</p>
             </li>
             <li>
               <p className="icon-language">French</p>
-              <p>Advanced - C1</p>
+              <p>Native</p>
             </li>
             <li>
               <p className="icon-language">Lingala</p>
-              <p>Advanced - C1</p>
+              <p>Native</p>
             </li>
             <li>
               <p className="icon-language">Swahili</p>
