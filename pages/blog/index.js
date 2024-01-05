@@ -30,8 +30,8 @@ export default function blog({ allPostsData }) {
       <div>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none w-[80%] justify-items-center mx-auto">
           {allPostsData.map((post, index) => (
-            <li key={index} className="w-[80%] rounded-md cursor-pointer shadow-lg" onClick={() => handleLink(post)}>
-              <div className="overflow-hidden rounded-t-md">
+            <li key={index} className="w-[80%] border border-gray-200 p-6 rounded-md cursor-pointer  hover:shadow-lg transition-shadow duration-300" onClick={() => handleLink(post)}>
+              <div className="overflow-hidden rounded-md">
                 <Image
                   src={post.image}
                   alt="blog"
@@ -40,7 +40,7 @@ export default function blog({ allPostsData }) {
                   className="hover:scale-105 duration-300 object-cover w-[500px] h-[300px]"
                 />
               </div>
-              <div className="p-6">
+              <div className="pt-6">
                 <p className="text-[#6B7280] font-mono">{post.date}</p>
                 <hr className="my-[10px]"/>
                 <h3 className="text-[20px] font-medium truncate">{post.title}</h3>
