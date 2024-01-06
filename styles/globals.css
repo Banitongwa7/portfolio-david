@@ -30,6 +30,12 @@
   z-index: -99;
 }
 
+@media screen and (max-width: 768px) {
+  #center-point, #mouse-pointer {
+    display: none;
+  }
+}
+
 #navbar-custom li.active {
   @apply text-green-500;
 }

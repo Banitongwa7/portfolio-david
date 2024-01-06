@@ -120,7 +120,7 @@ export default function about() {
           <ul className="relative space-y-14">
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   2022 - 2024
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -137,7 +137,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   2019 - 2022
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -154,7 +154,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   2018 - 2019
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -171,7 +171,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   2016 - 2018
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -190,7 +190,7 @@ export default function about() {
           <ul className="relative space-y-14">
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   02/2023 - Now
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -204,7 +204,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   10/2022 - Now
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -220,7 +220,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   09 - 08/2023
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -234,7 +234,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   02 - 06/2022
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -248,7 +248,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   07 - 10/2021
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -262,7 +262,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   08 - 11/2020
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -278,7 +278,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   08 - 09/2019
                 </div>
                 <div className="w-[70%] space-y-2">
@@ -290,7 +290,7 @@ export default function about() {
 
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[15px] font-semibold rounded-full px-4 py-2">
+                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
                   08 - 09/2018
                 </div>
                 <div className="w-[70%] space-y-2">
