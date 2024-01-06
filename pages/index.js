@@ -6,8 +6,8 @@ import AllLinks from "@/data/AllLinks";
 export default function Home() {
 
   return (
+    <>
     <section className="flex flex-col items-center justify-center gap-8 container my-[100px]">
-    
       <div>
         <Image
           src="/assets/david.jpg"
@@ -45,5 +45,6 @@ export default function Home() {
         </div>
       </div>
     </section>
+    </>
   );
 }
