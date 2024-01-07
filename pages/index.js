@@ -26,21 +26,12 @@ export default function Home() {
           I am Software Engineer and Microsoft Power-Platform Developer. Feel
           free to contact me or check out my resume here.
         </p>
-        <div className="flex flex-col md:flex-row gap-10 items-center justify-center">
+        <div className="flex items-center justify-center">
           <Link
             href="/contact"
-            className="text-[18px] font-normal py-2 px-4 text-white rounded-md duration-200 bg-gray-900 hover:bg-gray-700 uppercase"
+            className="text-[18px] font-normal py-2 px-4 text-white hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-md rounded-full bg-gray-900 hover:bg-gray-700 uppercase"
           >
             Contact Me
-          </Link>
-
-          <Link
-            href={AllLinks.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[18px] font-normal py-2 px-4 text-white rounded-md duration-200 bg-gray-900 hover:bg-gray-700 uppercase"
-          >
-            See My Resume
           </Link>
         </div>
       </div>
