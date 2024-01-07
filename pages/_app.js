@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }) {
           <Footer />
         </>
       )}
+
       <AnimatedCursor
         innerSize={8}
         outerSize={35}
