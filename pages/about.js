@@ -39,37 +39,7 @@ export default function about() {
         </p>
       </div>
       <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
-
-      <div className="w-[80%] mx-auto grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="space-y-5">
-          <p>
-            <span className="font-bold">Email :</span>{" "}
-            <em>davidbanitongwa@outlook.com</em>
-          </p>
-          <p>
-            <span className="font-bold">Phone :</span> <em>+216 54 482 172</em>
-          </p>
-          <p>
-            <span className="font-bold">Location :</span>{" "}
-            <em>Tunis, Tunisia</em>
-          </p>
-        </div>
-
-        <div className="space-y-5">
-          <p>
-            <span className="font-bold">Nationality :</span> <em>Congolese</em>
-          </p>
-          <p>
-            <span className="font-bold">Degree :</span> <em>Master</em>
-          </p>
-          <p>
-            <span className="font-bold">Freelance :</span> <em>Available</em>
-          </p>
-        </div>
-      </div>
-      <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
       <div className="w-[80%] mx-auto space-y-5">
-        <div className="w-full">
           <h3 className="text-[30px] font-mono text-center">
             Technical Skills
           </h3>
@@ -86,7 +56,9 @@ export default function about() {
           </p>
         </div>
 
-        <div>
+        <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
+
+      <div className="w-[80%] mx-auto space-y-5">
           <h3 className="text-[30px] font-mono text-center">Language Skills</h3>
           <ul className="pt-[40px] grid grid-cols-1 md:grid-cols-2 justify-items-center text-center skills-custom">
             <li>
@@ -106,87 +78,16 @@ export default function about() {
               <p>Native</p>
             </li>
           </ul>
-        </div>
       </div>
 
       <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
 
       <div
         id="education-experience-custom"
-        className="grid grid-cols-1 md:grid-cols-2 gap-8 w-[80%] mx-auto"
+        className=" w-[80%] mx-auto"
       >
-        <div className="education space-y-16">
-          <h3 className="text-[30px] font-bold">Education</h3>
-          <ul className="relative space-y-14">
-            <li className="pl-8 relative">
-              <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  2022 - 2024
-                </div>
-                <div className="w-[70%] space-y-2">
-                  <p className="font-semibold">
-                    Développement logiciel et système d&#39;information (Bac +5)
-                  </p>
-                  <p className="text-[12px] font-mono">
-                    École Supérieure de Génie Informatique - ESGITECH à
-                    Tunis/Tunisie
-                  </p>
-                </div>
-              </div>
-            </li>
-
-            <li className="pl-8 relative">
-              <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  2019 - 2022
-                </div>
-                <div className="w-[70%] space-y-2">
-                  <p className="font-semibold">
-                    Génie logicielle et système d&#39;information (Bac +3)
-                  </p>
-                  <p className="text-[12px] font-mono">
-                    Université internationale privée de Tunis - UIT à
-                    Tunis/Tunisie
-                  </p>
-                </div>
-              </div>
-            </li>
-
-            <li className="pl-8 relative">
-              <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  2018 - 2019
-                </div>
-                <div className="w-[70%] space-y-2">
-                  <p className="font-semibold">
-                    Informatique de gestion (Bac + 1)
-                  </p>
-                  <p className="text-[12px] font-mono">
-                    Institut Spécialisé des Technologies Avancées et Management
-                    - ISTAM à Tunis/Tunisie
-                  </p>
-                </div>
-              </div>
-            </li>
-
-            <li className="pl-8 relative">
-              <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  2016 - 2018
-                </div>
-                <div className="w-[70%] space-y-2">
-                  <p className="font-semibold">Médecine générale (Bac + 1)</p>
-                  <p className="text-[12px] font-mono">
-                    Université de Kinshasa à Kinshasa/RDC
-                  </p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-
         <div className="experience space-y-16">
-          <h3 className="text-[30px] font-bold">Experience</h3>
+          <h3 className="text-[30px] font-mono text-center">Experience</h3>
           <ul className="relative space-y-14">
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
@@ -221,7 +122,7 @@ export default function about() {
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
                 <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  09 - 08/2023
+                  09/2022 - 08/2023
                 </div>
                 <div className="w-[70%] space-y-2">
                   <p className="font-semibold">
@@ -235,7 +136,7 @@ export default function about() {
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
                 <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  02 - 06/2022
+                  02/2022 - 06/2022
                 </div>
                 <div className="w-[70%] space-y-2">
                   <p className="font-semibold">
@@ -249,7 +150,7 @@ export default function about() {
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
                 <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  07 - 10/2021
+                  07/2021 - 10/2021
                 </div>
                 <div className="w-[70%] space-y-2">
                   <p className="font-semibold">Assistant Technique</p>
@@ -263,7 +164,7 @@ export default function about() {
             <li className="pl-8 relative">
               <div className="flex items-start space-x-3">
                 <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  08 - 11/2020
+                  08/2020 - 11/2020
                 </div>
                 <div className="w-[70%] space-y-2">
                   <p className="font-semibold">
@@ -276,33 +177,6 @@ export default function about() {
               </div>
             </li>
 
-            <li className="pl-8 relative">
-              <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  08 - 09/2019
-                </div>
-                <div className="w-[70%] space-y-2">
-                  <p className="font-semibold">Agent Call Center</p>
-                  <p className="text-[12px] font-mono">Alphacom call center</p>
-                </div>
-              </div>
-            </li>
-
-            <li className="pl-8 relative">
-              <div className="flex items-start space-x-3">
-                <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                  08 - 09/2018
-                </div>
-                <div className="w-[70%] space-y-2">
-                  <p className="font-semibold">
-                    Obstetrics Department - Intern
-                  </p>
-                  <p className="text-[12px] font-mono">
-                    Centre Hospitalier Laborne - RDC
-                  </p>
-                </div>
-              </div>
-            </li>
           </ul>
         </div>
       </div>
