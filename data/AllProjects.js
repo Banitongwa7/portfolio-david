@@ -1,7 +1,9 @@
 import Project1 from "../public/project/project1.png"
 import Project2 from "../public/project/project2.png"
-import { FaPython, FaJava } from "react-icons/fa6";
-import { SiStreamlit, SiOpenai } from "react-icons/si";
+import Project3 from "../public/project/project3.png"
+import { FaPython, FaJava, FaNodeJs } from "react-icons/fa6";
+import { SiStreamlit, SiOpenai, SiExpress, SiTailwindcss } from "react-icons/si";
+import { TbBrandNextjs } from "react-icons/tb";
 
 const AllProjects = [
     {
@@ -25,6 +27,19 @@ const AllProjects = [
             openai: <SiOpenai />,
         },
         image: Project2,
+    },
+    {
+        id: 3,
+        name: "OpenOCR",
+        description: "A free OCR tool to extract text from images.",
+        link: "https://github.com/Banitongwa7/OpenOCR",
+        techs: {
+            nextjs: <TbBrandNextjs />,
+            tailwind: <SiTailwindcss />,
+            nodejs: <FaNodeJs />,
+            express: <SiExpress />,
+        },
+        image: Project3,
     }
 ]
 
