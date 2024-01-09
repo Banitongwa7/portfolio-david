@@ -1,9 +1,11 @@
 import Project1 from "../public/project/project1.png"
 import Project2 from "../public/project/project2.png"
 import Project3 from "../public/project/project3.png"
-import { FaPython, FaJava, FaNodeJs } from "react-icons/fa6";
+import Project4 from "../public/project/project4.png"
+import { FaPython, FaJava, FaNodeJs, FaAngular } from "react-icons/fa6";
 import { SiStreamlit, SiOpenai, SiExpress, SiTailwindcss } from "react-icons/si";
 import { TbBrandNextjs } from "react-icons/tb";
+import { BiLogoSpringBoot } from "react-icons/bi";
 
 const AllProjects = [
     {
@@ -40,6 +42,17 @@ const AllProjects = [
             express: <SiExpress />,
         },
         image: Project3,
+    },
+    {
+        id: 4,
+        name: "ToDo List",
+        description: "An app to keep track of your tasks.",
+        link: "https://github.com/Banitongwa7/todo-app-spring-angular",
+        techs: {
+            angular: <FaAngular />,
+            springboot: <BiLogoSpringBoot />,
+        },
+        image: Project4,
     }
 ]
 
