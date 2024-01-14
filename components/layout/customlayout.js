@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-export default function BlogLayout({ item, children }) {
+export default function CustomLayout({ item, children }) {
   return (
     <>
       <Head>
