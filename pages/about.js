@@ -40,52 +40,47 @@ export default function about() {
       </div>
       <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
       <div className="w-[80%] mx-auto space-y-5">
-          <h3 className="text-[30px] font-mono text-center">
-            Technical Skills
-          </h3>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-items-center text-center pt-[40px] skills-custom">
-            {Skills.map((skill, index) => (
-              <li key={index}>
-                {skill.icon}
-                <p>{skill.name}</p>
-              </li>
-            ))}
-          </ul>
-          <p className="font-mono text-[20px] text-[#6B7280] text-center mt-8">
-            And more
-          </p>
-        </div>
-
-        <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
-
-      <div className="w-[80%] mx-auto space-y-5">
-          <h3 className="text-[30px] font-mono text-center">Language Skills</h3>
-          <ul className="pt-[40px] grid grid-cols-1 md:grid-cols-2 justify-items-center text-center skills-custom">
-            <li>
-              <p className="icon-language">English</p>
-              <p>Professional</p>
+        <h3 className="text-[30px] font-mono text-center">Technical Skills</h3>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-items-center text-center pt-[40px] skills-custom">
+          {Skills.map((skill, index) => (
+            <li key={index}>
+              {skill.icon}
+              <p>{skill.name}</p>
             </li>
-            <li>
-              <p className="icon-language">French</p>
-              <p>Native</p>
-            </li>
-            <li>
-              <p className="icon-language">Lingala</p>
-              <p>Native</p>
-            </li>
-            <li>
-              <p className="icon-language">Swahili</p>
-              <p>Native</p>
-            </li>
-          </ul>
+          ))}
+        </ul>
+        <p className="font-mono text-[20px] text-[#6B7280] text-center mt-8">
+          And more
+        </p>
       </div>
 
       <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
 
-      <div
-        id="education-experience-custom"
-        className=" w-[80%] mx-auto"
-      >
+      <div className="w-[80%] mx-auto space-y-5">
+        <h3 className="text-[30px] font-mono text-center">Language Skills</h3>
+        <ul className="pt-[40px] grid grid-cols-1 md:grid-cols-2 justify-items-center text-center skills-custom">
+          <li>
+            <p className="icon-language">English</p>
+            <p>Professional</p>
+          </li>
+          <li>
+            <p className="icon-language">French</p>
+            <p>Native</p>
+          </li>
+          <li>
+            <p className="icon-language">Lingala</p>
+            <p>Native</p>
+          </li>
+          <li>
+            <p className="icon-language">Swahili</p>
+            <p>Native</p>
+          </li>
+        </ul>
+      </div>
+
+      <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
+
+      <div id="education-experience-custom" className=" w-[80%] mx-auto">
         <div className="experience space-y-16">
           <h3 className="text-[30px] font-mono text-center">Experience</h3>
           <ul className="relative space-y-14">
@@ -176,7 +171,6 @@ export default function about() {
                 </div>
               </div>
             </li>
-
           </ul>
         </div>
       </div>

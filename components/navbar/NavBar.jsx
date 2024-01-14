@@ -122,34 +122,33 @@ export default function NavBar() {
 
 
       <div
-        className="absolute z-[999] bg-gray-800 text-white w-64 h-full overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300"
+        className="absolute z-[999] bg-gray-800 text-white w-64 h-full overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-500"
         ref={sidebar}
       >
         <div className="p-4">
-          <h1 className="text-2xl font-semibold">David.</h1>
           <ul className="mt-4">
-            <li className="mb-2">
-              <Link href="/" className="block hover:text-green-500 duration-200">
+            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+              <Link href="/" className="block">
                 Home
               </Link>
             </li>
-            <li className="mb-2">
-              <Link href="/about" className="block hover:text-green-500 duration-200">
+            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+              <Link href="/about" className="block">
                 About
               </Link>
             </li>
-            <li className="mb-2">
-              <Link href="/projects" className="block hover:text-green-500 duration-200">
+            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+              <Link href="/projects" className="block">
                 Projects
               </Link>
             </li>
-            <li className="mb-2">
-              <Link href="/blog" className="block hover:text-green-500 duration-200">
+            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+              <Link href="/blog" className="block">
                 Blog
               </Link>
             </li>
-            <li className="mb-2">
-              <Link href="/contact" className="block hover:text-green-500 duration-200">
+            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+              <Link href="/contact" className="block">
                 Contact
               </Link>
             </li>

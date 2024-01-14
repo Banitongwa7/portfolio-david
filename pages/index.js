@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import AllLinks from "@/data/AllLinks";
 
 export default function Home() {
 
