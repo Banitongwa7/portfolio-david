@@ -1,5 +1,6 @@
 ---
 title: 'Outils essentiels pour un développeur JavaScript'
+description: 'En maîtrisant ces outils, vous serez en mesure de créer des applications web plus rapidement et plus facilement, et de résoudre les problèmes plus rapidement.'
 date: '2024-01-01'
 image: '/blog/post2.jpg'
 tags: [JavaScript, Gestionnaire de versions, IDE, Outils de test]

@@ -1,5 +1,6 @@
 ---
 title: 'Be creative'
+description: 'Develop your creativity as a developer'
 date: '2024-01-02'
 image: '/blog/post1.jpg'
 tags: [Creativity, Open Source, Innovation, Creativity, Open Source, Innovation, Creativity, Open Source, Innovation]
