@@ -4,23 +4,16 @@ import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
 import Annoucement from "@/components/annoucement/Annoucement";
 import AnimatedCursor from "react-animated-cursor";
-import LoadPage from "@/components/loader/LoadPage";
 import React from "react";
 
 function MyApp({ Component, pageProps }) {
-  const [loader, setLoader] = React.useState(true);
 
   return (
     <RootLayout>
-      <LoadPage loader={loader} setLoader={setLoader} />
-      {loader ? null : (
-        <>
-          <Annoucement />
-          <NavBar />
-          <Component {...pageProps} />
-          <Footer />
-        </>
-      )}
+      <Annoucement />
+      <NavBar />
+      <Component {...pageProps} />
+      <Footer />
 
       <AnimatedCursor
         innerSize={8}
