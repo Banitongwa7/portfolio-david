@@ -23,7 +23,7 @@ function Post({ frontmatter, content }) {
         />
         <meta
           property="og:image"
-          content={frontmatter.image}
+          content={"https://david-banitongwa.vercel.app" + frontmatter.image}
         />
 
         <meta property="twitter:card" content="summary_large_image" />
@@ -38,7 +38,7 @@ function Post({ frontmatter, content }) {
         />
         <meta
           property="twitter:image"
-          content={frontmatter.image}
+          content={"https://david-banitongwa.vercel.app" + frontmatter.image}
         />
       </Head>
       <motion.div
