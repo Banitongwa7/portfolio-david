@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import { FaLinkedin, FaGithub, FaSquareXTwitter } from "react-icons/fa6";
 import AllLinks from "@/data/AllLinks";
 import { useRouter } from "next/router";
+import Switcher from "../switcher/Switcher";
 
 export default function NavBar() {
   const sidebar = useRef(null);
@@ -84,6 +85,9 @@ export default function NavBar() {
           </ul>
         </nav>
         <div className="w-3/12 justify-end hidden md:flex dark:text-white">
+          <div>
+          <Switcher />
+          </div>
           <Link
             href={AllLinks.linkedin}
             className="p-4 text-[20px] hover:text-green-500 duration-200"
