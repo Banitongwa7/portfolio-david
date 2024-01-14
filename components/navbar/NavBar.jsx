@@ -121,27 +121,27 @@ export default function NavBar() {
       >
         <div className="p-4">
           <ul className="mt-4">
-            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/" ? "active" : ""}`}>
               <Link href="/" className="block">
                 Home
               </Link>
             </li>
-            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/about" ? "active" : ""}`}>
               <Link href="/about" className="block">
                 About
               </Link>
             </li>
-            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/projects" ? "active" : ""}`}>
               <Link href="/projects" className="block">
                 Projects
               </Link>
             </li>
-            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/blog" || router.pathname === "/blog/[slug]" ? "active" : ""}`}>
               <Link href="/blog" className="block">
                 Blog
               </Link>
             </li>
-            <li className="mb-2 hover:bg-green-500 p-3 rounded-md duration-200">
+            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/contact" ? "active" : ""}`}>
               <Link href="/contact" className="block">
                 Contact
               </Link>
