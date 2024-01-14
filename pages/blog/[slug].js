@@ -32,7 +32,7 @@ function Post({ frontmatter, content }) {
           dangerouslySetInnerHTML={{ __html: md().render(content) }}
         />
       </div>
-      <ul className="w-[40%] mx-auto flex flex-wrap mb-10">
+      <ul className="w-[80%] md:w-[40%] mx-auto flex flex-wrap mb-10">
         {frontmatter.tags.map((tag, index) => (
           <li
             key={index}
