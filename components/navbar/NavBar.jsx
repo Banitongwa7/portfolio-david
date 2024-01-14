@@ -31,7 +31,7 @@ export default function NavBar() {
         <h1 className="w-3/12">
           <Link
             href="/"
-            className="text-2xl font-bold hover:text-green-500 duration-200"
+            className="text-2xl font-bold hover:text-green-500 duration-200 dark:text-white"
           >
             David.
           </Link>
@@ -55,7 +55,7 @@ export default function NavBar() {
           </svg>
         </button>
         <nav className="hidden md:block font-semibold text-lg">
-          <ul id="navbar-custom" className="flex items-center">
+          <ul id="navbar-custom" className="flex items-center dark:text-white">
             <li className={`p-4 hover:text-green-500 cursor-pointer ${router.pathname === "/" ? "active" : ""}`}>
               <Link href="/">
                 Home
@@ -83,7 +83,7 @@ export default function NavBar() {
             </li>
           </ul>
         </nav>
-        <div className="w-3/12 justify-end hidden md:flex">
+        <div className="w-3/12 justify-end hidden md:flex dark:text-white">
           <Link
             href={AllLinks.linkedin}
             className="p-4 text-[20px] hover:text-green-500 duration-200"

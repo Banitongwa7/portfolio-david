@@ -23,10 +23,10 @@ function MyApp({ Component, pageProps }) {
         outerAlpha={0}
         hasBlendMode={true}
         innerStyle={{
-          backgroundColor: "#1D2B53",
+          backgroundColor: 'var(--cursor-color)',
         }}
         outerStyle={{
-          border: "2px solid #1D2B53",
+          border: '2px solid var(--cursor-color)',
         }}
       />
     </RootLayout>
