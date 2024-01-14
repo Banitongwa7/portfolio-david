@@ -8,6 +8,10 @@
   @apply text-green-500;
 }
 
+#sidebar-custom li.active {
+  @apply bg-green-500 duration-200;
+}
+
 body {
   @apply bg-[#f8f8f8];
 }

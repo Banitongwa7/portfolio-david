@@ -5,7 +5,6 @@ import AllLinks from "@/data/AllLinks";
 import { useRouter } from "next/router";
 
 export default function NavBar() {
-  const navbar = useRef(null);
   const sidebar = useRef(null);
   const sidebarBtn = useRef(null);
   const router = useRouter();
@@ -56,7 +55,7 @@ export default function NavBar() {
           </svg>
         </button>
         <nav className="hidden md:block font-semibold text-lg">
-          <ul ref={navbar} id="navbar-custom" className="flex items-center">
+          <ul id="navbar-custom" className="flex items-center">
             <li className={`p-4 hover:text-green-500 cursor-pointer ${router.pathname === "/" ? "active" : ""}`}>
               <Link href="/">
                 Home
@@ -116,32 +115,33 @@ export default function NavBar() {
 
 
       <div
+      id="sidebar-custom"
         className="absolute z-[999] bg-gray-800 text-white w-64 h-full overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-500"
         ref={sidebar}
       >
         <div className="p-4">
           <ul className="mt-4">
-            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/" ? "active" : ""}`}>
+            <li className={`mb-2 p-3 rounded-md ${router.pathname === "/" ? "active" : ""}`}>
               <Link href="/" className="block">
                 Home
               </Link>
             </li>
-            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/about" ? "active" : ""}`}>
+            <li className={`mb-2 p-3 rounded-md ${router.pathname === "/about" ? "active" : ""}`}>
               <Link href="/about" className="block">
                 About
               </Link>
             </li>
-            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/projects" ? "active" : ""}`}>
+            <li className={`mb-2 p-3 rounded-md ${router.pathname === "/projects" ? "active" : ""}`}>
               <Link href="/projects" className="block">
                 Projects
               </Link>
             </li>
-            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/blog" || router.pathname === "/blog/[slug]" ? "active" : ""}`}>
+            <li className={`mb-2 p-3 rounded-md ${router.pathname === "/blog" || router.pathname === "/blog/[slug]" ? "active" : ""}`}>
               <Link href="/blog" className="block">
                 Blog
               </Link>
             </li>
-            <li className={`mb-2 hover:bg-green-500 p-3 rounded-md duration-200 ${router.pathname === "/contact" ? "active" : ""}`}>
+            <li className={`mb-2 p-3 rounded-md ${router.pathname === "/contact" ? "active" : ""}`}>
               <Link href="/contact" className="block">
                 Contact
               </Link>
