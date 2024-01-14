@@ -2,45 +2,15 @@ import fs from "fs";
 import matter from "gray-matter";
 import md from "markdown-it";
 import { motion, useScroll } from "framer-motion";
-import Head from "next/head";
+import BlogLayout from "./bloglayout";
+
 
 function Post({ frontmatter, content }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { scrollYProgress } = useScroll();
 
   return (
-    <>
-      <Head>
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://david-banitongwa.vercel.app/"
-        />
-        <meta property="og:title" content={frontmatter.title} />
-        <meta
-          property="og:description"
-          content={frontmatter.description}
-        />
-        <meta
-          property="og:image"
-          content={"https://david-banitongwa.vercel.app" + frontmatter.image}
-        />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://david-banitongwa.vercel.app/"
-        />
-        <meta property="twitter:title" content={frontmatter.title} />
-        <meta
-          property="twitter:description"
-          content={frontmatter.description}
-        />
-        <meta
-          property="twitter:image"
-          content={"https://david-banitongwa.vercel.app" + frontmatter.image}
-        />
-      </Head>
+    <BlogLayout item={frontmatter}>
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 transform origin-left bg-[#05cab6]"
         style={{ scaleX: scrollYProgress }}
@@ -52,7 +22,7 @@ function Post({ frontmatter, content }) {
           dangerouslySetInnerHTML={{ __html: md().render(content) }}
         />
       </div>
-    </>
+    </BlogLayout>
   );
 }
 
