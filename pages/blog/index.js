@@ -22,6 +22,13 @@ export default function blog({ allPostsData }) {
       window.location.href = `/blog/${item.id}`
     }
   }
+
+  const formatDate = (date) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(date).toLocaleDateString("en-US", options);
+  }
+
+
   return (
     <section className="container w-full pb-[100px]">
       <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
@@ -41,7 +48,7 @@ export default function blog({ allPostsData }) {
                 />
               </div>
               <div className="pt-6">
-                <p className="text-[#6B7280] font-mono">{post.date}</p>
+                <p className="text-[#6B7280] font-mono">{formatDate(post.date)}</p>
                 <hr className="my-[10px]"/>
                 <h3 className="text-[20px] font-medium truncate">{post.title}</h3>
                 <div className="mt-4 hover:text-green-500">

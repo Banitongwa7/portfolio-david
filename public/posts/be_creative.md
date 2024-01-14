@@ -3,7 +3,7 @@ title: 'Be creative'
 description: 'Develop your creativity as a developer'
 date: '2024-01-02'
 image: '/blog/post1.jpg'
-tags: [Creativity, Open Source, Innovation, Creativity, Open Source, Innovation, Creativity, Open Source, Innovation]
+tags: [Creativity, Innovation, Productivity, developer]
 ---
 
 **Creativity is an essential skill for any developer. It allows you to find innovative solutions to problems, create unique user experiences, and stand out from the competition.**
