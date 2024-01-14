@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import RootLayout from "./layout";
+import RootLayout from "@/components/layout/layout";
 import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
 import Annoucement from "@/components/annoucement/Annoucement";

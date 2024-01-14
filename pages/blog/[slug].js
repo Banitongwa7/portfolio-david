@@ -2,7 +2,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import md from "markdown-it";
 import { motion, useScroll } from "framer-motion";
-import BlogLayout from "./bloglayout";
+import BlogLayout from "@/components/layout/bloglayout";
 
 
 function Post({ frontmatter, content }) {
