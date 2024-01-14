@@ -2,19 +2,13 @@ import Link from "next/link";
 import React, { useRef, useEffect } from "react";
 import { FaLinkedin, FaGithub, FaSquareXTwitter } from "react-icons/fa6";
 import AllLinks from "@/data/AllLinks";
+import { useRouter } from "next/router";
 
 export default function NavBar() {
   const navbar = useRef(null);
   const sidebar = useRef(null);
   const sidebarBtn = useRef(null);
-
-  const handleChangeMenu = (index) => {
-    let liTags = navbar.current.children;
-    Array.from(liTags).forEach((li) => {
-      li.classList.remove("active");
-    });
-    liTags[index].classList.add("active");
-  };
+  const router = useRouter();
 
   const openSideBar = (e) => {
     e.stopPropagation();
@@ -63,28 +57,28 @@ export default function NavBar() {
         </button>
         <nav className="hidden md:block font-semibold text-lg">
           <ul ref={navbar} id="navbar-custom" className="flex items-center">
-            <li className="p-4 active hover:text-green-500 cursor-pointer active">
-              <Link href="/" onClick={() => handleChangeMenu(0)}>
+            <li className={`p-4 hover:text-green-500 cursor-pointer ${router.pathname === "/" ? "active" : ""}`}>
+              <Link href="/">
                 Home
               </Link>
             </li>
-            <li className="p-4 hover:text-green-500 cursor-pointer">
-              <Link href="/about" onClick={() => handleChangeMenu(1)}>
+            <li className={`p-4 hover:text-green-500 cursor-pointer ${router.pathname === "/about" ? "active" : ""}`}>
+              <Link href="/about">
                 About
               </Link>
             </li>
-            <li className="p-4 hover:text-green-500 cursor-pointer">
-              <Link href="/projects" onClick={() => handleChangeMenu(2)}>
+            <li className={`p-4 hover:text-green-500 cursor-pointer ${router.pathname === "/projects" ? "active" : ""}`}>
+              <Link href="/projects">
                 Projects
               </Link>
             </li>
-            <li className="p-4 hover:text-green-500 cursor-pointer">
-              <Link href="/blog" onClick={() => handleChangeMenu(3)}>
+            <li className={`p-4 hover:text-green-500 cursor-pointer ${router.pathname === "/blog" || router.pathname === "/blog/[slug]" ? "active" : ""}`}>
+              <Link href="/blog">
                 Blog
               </Link>
             </li>
-            <li className="p-4 hover:text-green-500 cursor-pointer">
-              <Link href="/contact" onClick={() => handleChangeMenu(4)}>
+            <li className={`p-4 hover:text-green-500 cursor-pointer ${router.pathname === "/contact" ? "active" : ""}`}>
+              <Link href="/contact">
                 Contact
               </Link>
             </li>
