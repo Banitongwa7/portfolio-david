@@ -3,7 +3,6 @@ import RootLayout from "@/components/layout/layout";
 import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
 import Annoucement from "@/components/annoucement/Annoucement";
-import AnimatedCursor from "react-animated-cursor";
 import React from "react";
 
 function MyApp({ Component, pageProps }) {
@@ -14,21 +13,6 @@ function MyApp({ Component, pageProps }) {
       <NavBar />
       <Component {...pageProps} />
       <Footer />
-
-      <AnimatedCursor
-        innerSize={8}
-        outerSize={35}
-        innerScale={1}
-        outerScale={2}
-        outerAlpha={0}
-        hasBlendMode={true}
-        innerStyle={{
-          backgroundColor: 'var(--cursor-color)',
-        }}
-        outerStyle={{
-          border: '2px solid var(--cursor-color)',
-        }}
-      />
     </RootLayout>
   );
 }
