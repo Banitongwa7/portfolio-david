@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import useDarkSide from "../hooks/useDarkSide";
 import AnimatedCursor from "react-animated-cursor";
@@ -11,6 +11,10 @@ export default function Switcher() {
     setTheme(theme);
     setDarkSide(checked);
   };
+
+  useEffect(() => {
+    console.log(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+  }, [])
 
   return (
     <>
