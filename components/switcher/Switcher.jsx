@@ -12,10 +12,6 @@ export default function Switcher() {
     setDarkSide(checked);
   };
 
-  useEffect(() => {
-    console.log(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-  }, [])
-
   return (
     <>
       <DarkModeSwitch checked={darkSide} onChange={toggleDarkMode} size={30} />
