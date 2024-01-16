@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 export default function useDarkSide() {
-    const [theme, setTheme] = useState( async () => {
-        // Récupérer la valeur du thème depuis le localStorage lors de la première exécution
-        const savedTheme = await localStorage.getItem('theme');
-        return savedTheme == "dark" ? "dark" : "light";
-      });
+    const [theme, setTheme] = useState("dark");
     const colorTheme = theme == "dark" ? "light" : "dark";
 
     useEffect(() => {
