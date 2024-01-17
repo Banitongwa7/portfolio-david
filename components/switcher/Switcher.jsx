@@ -1,16 +1,26 @@
 import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import useDarkSide from "../hooks/useDarkSide";
 import AnimatedCursor from "react-animated-cursor";
 
 export default function Switcher() {
-  const [theme, setTheme] = useDarkSide();
-  const [darkSide, setDarkSide] = useState(theme === "light" ? true : false);
+  /*const [theme, setTheme] = useDarkSide();*/
+  const [darkSide, setDarkSide] = useState(null);
 
   const toggleDarkMode = (checked) => {
-    setTheme(theme);
+    window.localStorage.setItem("darkMode", !checked);
     setDarkSide(checked);
   };
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (window.localStorage.getItem("darkMode") == "false") {
+      root.classList.add("dark");
+      setDarkSide(true);
+    } else {
+      root.classList.remove("dark");
+      setDarkSide(false);
+    }
+  }, [darkSide]);
 
   return (
     <>
