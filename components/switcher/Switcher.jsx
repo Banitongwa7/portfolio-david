@@ -32,6 +32,7 @@ export default function Switcher() {
           outerScale={2}
           outerAlpha={0}
           hasBlendMode={true}
+          showSystemCursor={true}
           innerStyle={{
             backgroundColor: darkSide ? "#fff" : "#1D2B53",
           }}
