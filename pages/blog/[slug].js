@@ -21,7 +21,7 @@ function Post({ frontmatter, content }) {
   return (
     <CustomLayout item={frontmatter}>
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 transform origin-left bg-[#05cab6]"
+        className="fixed top-0 left-0 right-0 h-2 transform origin-left bg-[#05cab6]"
         style={{ scaleX }}
       />
       <div className="prose mx-auto py-8 px-[30px]">
