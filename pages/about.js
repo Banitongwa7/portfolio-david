@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Skills from "@/data/Skills";
 import CustomLayout from "@/components/layout/customlayout";
+import Experience from "@/data/Experience";
+import { MdOutlineWork } from "react-icons/md";
 
 export default function about() {
   const metatags = {
@@ -93,99 +95,39 @@ export default function about() {
           </div>
         </div>
 
-        <div id="education-experience-custom" className=" w-[80%] mx-auto pt-[80px]">
+        <div
+          id="education-experience-custom"
+          className=" w-[80%] mx-auto pt-[80px]"
+        >
           <div className="experience space-y-16">
             <h3 className="text-[30px] font-mono text-center">Experience</h3>
-            <ul className="relative space-y-14">
-              <li className="pl-8 relative">
-                <div className="flex items-start space-x-3">
-                  <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                    02/2023 - Now
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+              {Experience.map((exp, index) => (
+                <li
+                  className="rounded p-1 bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400"
+                  key={index}
+                >
+                  <div className="space-x-3 rounded p-5 bg-[#0f172a] text-white">
+                    <div className="flex items-center justify-between px-2 py-2 md:px-4 md:py-2">
+                      <div className="text-[12px] md:text-[15px] font-semibold">
+                        {exp.date}
+                      </div>
+                      <div className="bg-white p-2 rounded-full">
+                        <MdOutlineWork className="text-[#0f172a]"/>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <p className="font-semibold">{exp.position}</p>
+                      <div className="flex items-center gap-[10px]">
+                      <p className="text-[12px] font-mono">
+                        {exp.company} - {exp.location}
+                      </p>
+                      <Image src={exp.icon} width={20} height={20} alt="icon country" className="rounded"/>
+                      </div>
+                    </div>
                   </div>
-                  <div className="w-[70%] space-y-2">
-                    <p className="font-semibold">Full Stack Web Developer</p>
-                    <p className="text-[12px] font-mono">
-                      Synapse-HR - Tunis/Tunisie
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li className="pl-8 relative">
-                <div className="flex items-start space-x-3">
-                  <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                    10/2022 - Now
-                  </div>
-                  <div className="w-[70%] space-y-2">
-                    <p className="font-semibold">
-                      Consultant Microsoft Power Platform
-                    </p>
-                    <p className="text-[12px] font-mono">
-                      Biware - Tunis/Tunisie
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li className="pl-8 relative">
-                <div className="flex items-start space-x-3">
-                  <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                    09/2022 - 08/2023
-                  </div>
-                  <div className="w-[70%] space-y-2">
-                    <p className="font-semibold">
-                      React JS developer - Freelance
-                    </p>
-                    <p className="text-[12px] font-mono">
-                      BhetiConnect - France
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li className="pl-8 relative">
-                <div className="flex items-start space-x-3">
-                  <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                    02/2022 - 06/2022
-                  </div>
-                  <div className="w-[70%] space-y-2">
-                    <p className="font-semibold">
-                      Full Stack Web Developer - Intern
-                    </p>
-                    <p className="text-[12px] font-mono">ITC - Tunis/Tunisie</p>
-                  </div>
-                </div>
-              </li>
-
-              <li className="pl-8 relative">
-                <div className="flex items-start space-x-3">
-                  <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                    07/2021 - 10/2021
-                  </div>
-                  <div className="w-[70%] space-y-2">
-                    <p className="font-semibold">Assistant Technique</p>
-                    <p className="text-[12px] font-mono">
-                      Allo Pc - Tunis/Tunisie
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li className="pl-8 relative">
-                <div className="flex items-start space-x-3">
-                  <div className="bg-[#d5d5d5] text-[12px] md:text-[15px] font-semibold rounded-full px-2 py-2 md:px-4 md:py-2">
-                    08/2020 - 11/2020
-                  </div>
-                  <div className="w-[70%] space-y-2">
-                    <p className="font-semibold">
-                      SAP Next-Gen Challenge d&#39;été
-                    </p>
-                    <p className="text-[12px] font-mono">
-                      Douane Tunisienne - Tunis/Tunisie
-                    </p>
-                  </div>
-                </div>
-              </li>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
