@@ -38,16 +38,19 @@ export default function Home() {
         />
       </Head>
       <section className="flex flex-col items-center justify-center gap-8 container my-[100px]">
-        <div>
-          <Image
-            src="/assets/david.jpg"
-            alt="Picture of david"
-            priority={true}
-            width={200}
-            height={200}
-            className="rounded-full h-[200px] w-[200px] object-cover"
-          />
-        </div>
+     
+          <div className="bg-gray-200 relative p-1 rounded-full">
+          <div className="absolute w-[200px] h-[200px] rounded-full bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 z-[-1] animate-[ping_5s_linear_infinite] opacity-20"></div>
+            <Image
+              src="/assets/david.jpg"
+              alt="Picture of david"
+              priority={true}
+              width={200}
+              height={200}
+              className="rounded-full h-[200px] w-[200px] object-cover"
+            />
+          </div>
+
         <div className="text-center space-y-4">
           <h2 className="text-[30px] md:text-[40px] font-extrabold uppercase">
             David Banitongwa
