@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import AnimatedCursor from "react-animated-cursor";
 
 export default function Switcher({ setDarkToggle }) {
-  /*const [theme, setTheme] = useDarkSide();*/
   const [darkSide, setDarkSide] = useState(null);
 
   const toggleDarkMode = (checked) => {
@@ -13,7 +11,7 @@ export default function Switcher({ setDarkToggle }) {
 
   useEffect(() => {
     const root = window.document.documentElement;
-    if (window.localStorage.getItem("darkMode") == "false") {
+    if (window.localStorage.getItem("darkMode") == "false" || window.localStorage.getItem("darkMode") == null) {
       root.classList.add("dark");
       setDarkSide(true);
     } else {
