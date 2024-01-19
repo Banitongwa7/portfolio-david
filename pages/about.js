@@ -16,7 +16,8 @@ export default function about() {
   return (
     <CustomLayout item={metatags}>
       <section className="container w-full pb-[100px]">
-        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
+        <div className="bg-gray-100 py-[50px] ">
+        <h2 className="text-[30px] font-extrabold pl-10 mx-auto w-[80%]">
           About Me
         </h2>
         <div className="flex flex-col items-center justify-center gap-8">
@@ -50,6 +51,7 @@ export default function about() {
               <span className="font-bold">Microsoft Power Platform</span>.
             </p>
           </div>
+        </div>
         </div>
 
         <div className="w-[80%] pt-[80px] pb-[80px] mx-auto space-y-5">
