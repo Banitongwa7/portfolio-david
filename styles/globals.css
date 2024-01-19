@@ -48,30 +48,6 @@ ul.skills-custom li p.icon-language {
   background-clip: text;
 }
 
-div#education-experience-custom .education ul::before,
-div#education-experience-custom .experience ul::before {
-  content: "";
-  position: absolute;
-  width: 1px;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.07);
-}
-
-div#education-experience-custom .education ul li::before,
-div#education-experience-custom .experience ul li::before {
-  content: "";
-  position: absolute;
-  height: 18px;
-  width: 18px;
-  background: #fff;
-  border-radius: 100%;
-  border: solid 1px #ccc;
-  left: -9px;
-  top: 8px;
-}
-
 /* Loader on start  */
 
 #wifi-loader {
