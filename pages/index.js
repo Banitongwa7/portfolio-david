@@ -1,55 +1,29 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Head from "next/head";
+import CustomLayout from "@/components/layout/customlayout";
 
 export default function Home() {
-  return (
-    <>
-      <Head>
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://david-banitongwa.vercel.app/"
-        />
-        <meta property="og:title" content="Portfolio | David" />
-        <meta
-          property="og:description"
-          content="Personal Portfolio created by David Banitongwa"
-        />
-        <meta
-          property="og:image"
-          content="https://david-banitongwa.vercel.app/assets/icon.png"
-        />
+  const metatags = {
+    title: "Portfolio | David",
+    description: "Personal Portfolio created by David Banitongwa",
+    image: "/assets/icon.png",
+  };
 
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://david-banitongwa.vercel.app/"
-        />
-        <meta property="twitter:title" content="Portfolio | David" />
-        <meta
-          property="twitter:description"
-          content="Personal Portfolio created by David Banitongwa"
-        />
-        <meta
-          property="twitter:image"
-          content="https://david-banitongwa.vercel.app/assets/icon.png"
-        />
-      </Head>
+  return (
+    <CustomLayout item={metatags}>
       <section className="flex flex-col items-center justify-center gap-8 container my-[100px]">
-     
-          <div className="bg-gray-200 relative p-1 rounded-full">
+        <div className="bg-gray-200 relative p-1 rounded-full">
           <div className="absolute w-[200px] h-[200px] rounded-full bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 z-[-1] animate-[ping_5s_linear_infinite] opacity-20"></div>
-            <Image
-              src="/assets/david.jpg"
-              alt="Picture of david"
-              priority={true}
-              width={200}
-              height={200}
-              className="rounded-full h-[200px] w-[200px] object-cover"
-            />
-          </div>
+          <Image
+            src="/assets/david.jpg"
+            alt="Picture of david"
+            priority={true}
+            width={200}
+            height={200}
+            className="rounded-full h-[200px] w-[200px] object-cover"
+          />
+        </div>
 
         <div className="text-center space-y-4">
           <h2 className="text-[30px] md:text-[40px] font-extrabold uppercase">
@@ -69,6 +43,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </CustomLayout>
   );
 }
