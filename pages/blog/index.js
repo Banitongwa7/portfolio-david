@@ -31,7 +31,7 @@ export default function blog({ allPostsData }) {
 
   return (
     <section className="container w-full pb-[100px]">
-      <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
+      <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-white">
         Blog
       </h2>
       <div>
@@ -48,9 +48,9 @@ export default function blog({ allPostsData }) {
                 />
               </div>
               <div className="pt-6">
-                <p className="text-[#6B7280] font-mono">{formatDate(post.date)}</p>
+                <p className="text-[#6B7280] dark:text-gray-300 font-mono">{formatDate(post.date)}</p>
                 <hr className="my-[10px]"/>
-                <h3 className="text-[20px] font-medium truncate">{post.title}</h3>
+                <h3 className="text-[20px] font-medium truncate dark:text-gray-100">{post.title}</h3>
                 <div className="mt-4 hover:text-green-500">
                   <Link
                     href={post.link ? formaterURL(post.link) : `/blog/${post.id}`}

@@ -13,7 +13,7 @@ export default function projects() {
   return (
     <CustomLayout item={metatags}>
       <section className="container w-full">
-        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
+        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-white">
           Projects
         </h2>
 
@@ -37,13 +37,13 @@ export default function projects() {
                   </div>
 
                   <div className="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
-                    <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-600">
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 group-hover:text-gray-600 dark:group-hover:text-gray-300">
                       {project.name}
                     </h3>
-                    <p className="mt-3 text-gray-600">{project.description}</p>
+                    <p className="mt-3 text-gray-600 dark:text-gray-300">{project.description}</p>
                     <ul className="py-3 flex flex-wrap gap-4 items-center">
                       {Object.keys(project.techs).map((key, index) => (
-                        <li key={index} className="text-2xl">
+                        <li key={index} className="text-2xl dark:text-white">
                           {project.techs[key]}
                         </li>
                       ))}

@@ -45,7 +45,7 @@ export default function contact() {
     <CustomLayout item={metatags}>
       <section className="container w-full pb-[100px]" id="contact">
         <ToastContainer />
-        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%]">
+        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-white">
           Contact
         </h2>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -62,7 +62,7 @@ export default function contact() {
                       <FaLocationDot className="text-green-500 w-10 h-10" />
                     </div>
                     <div className="ml-4 mb-4">
-                      <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900">
+                      <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-gray-200">
                         Address
                       </h3>
                       <p className="text-gray-600 dark:text-slate-400">
@@ -75,7 +75,7 @@ export default function contact() {
                       <IoMdCall className="h-10 w-10 text-green-500" />
                     </div>
                     <div className="ml-4 mb-4">
-                      <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900">
+                      <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-gray-200">
                         Phone
                       </h3>
                       <p className="text-gray-600 dark:text-slate-400">
@@ -88,7 +88,7 @@ export default function contact() {
                       <IoMdMail className="h-10 w-10 text-green-500" />
                     </div>
                     <div className="ml-4 mb-4">
-                      <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900">
+                      <h3 className="mb-2 text-lg font-medium leading-6 text-gray-900 dark:text-gray-200">
                         Email
                       </h3>
                       <p className="text-gray-600 dark:text-slate-400">
@@ -99,7 +99,7 @@ export default function contact() {
                 </ul>
               </div>
               <div className="card h-fit max-w-6xl p-5 md:p-12" id="form">
-                <h2 className="mb-4 text-2xl font-bold">Get in touch</h2>
+                <h2 className="mb-4 text-2xl font-bold dark:text-white">Get in touch</h2>
                 <form id="contactForm" action="#" onSubmit={handleSubmit}>
                   <div className="mb-6">
                     <div className="mx-0 mb-1 sm:mb-4">

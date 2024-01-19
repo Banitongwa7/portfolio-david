@@ -25,7 +25,7 @@ body {
 }
 
 ul.skills-custom li {
-  @apply bg-[#f8f8f8] shadow-md p-4 rounded-md my-4 w-[50%];
+  @apply bg-[#f8f8f8] shadow-md p-4 rounded-md my-4 w-[50%] dark:bg-slate-700 dark:text-white;
 }
 
 ul.skills-custom li svg {
@@ -41,11 +41,7 @@ ul.skills-custom li p {
 }
 
 ul.skills-custom li p.icon-language {
-  @apply text-2xl font-bold;
-  background: linear-gradient(45deg, #0fad63 0%, #0c0404 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  @apply text-2xl font-bold text-clip bg-gradient-to-r from-green-500 to-slate-900 bg-clip-text text-transparent dark:from-green-400 dark:to-slate-600;
 }
 
 /* Loader on start  */

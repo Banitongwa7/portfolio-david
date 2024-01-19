@@ -35,10 +35,10 @@ function Post({ frontmatter, content }) {
           className="object-cover w-[80%] md:w-[60%] h-[200px] sm:h-[300px] md:h-[500px] mx-auto"
         />
         <div className="my-8 space-y-5">
-          <h1 className="text-2xl md:text-3xl text-center font-extrabold">
+          <h1 className="text-2xl md:text-3xl text-center font-extrabold dark:text-gray-100">
             {frontmatter.title}
           </h1>
-          <div className="text-center">
+          <div className="text-center text-gray-400">
             <p className="text-sm">
               <span className="font-bold">Published</span>{" "}
               {formatDate(frontmatter.date)}
@@ -47,7 +47,7 @@ function Post({ frontmatter, content }) {
         </div>
       </div>
 
-      <div className="prose mx-auto pb-8 pt-5 px-[30px]">
+      <div className="prose mx-auto pb-8 pt-5 px-[30px] dark:prose-invert">
         <div
           className="text-[15px] md:text-[17px]"
           dangerouslySetInnerHTML={{ __html: md().render(content) }}
