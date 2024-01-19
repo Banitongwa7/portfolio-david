@@ -120,7 +120,7 @@ export default function NavBar() {
 
       <div
       id="sidebar-custom"
-        className="absolute z-[999] bg-gray-800 text-white w-64 h-full overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-500"
+        className="absolute z-[999] bg-gray-800 text-white w-64 h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-500"
         ref={sidebar}
       >
         <div className="p-4">
