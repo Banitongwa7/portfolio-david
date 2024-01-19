@@ -3,6 +3,7 @@ import matter from "gray-matter";
 import md from "markdown-it";
 import { motion, useScroll, useSpring } from "framer-motion";
 import CustomLayout from "@/components/layout/customlayout";
+import Image from "next/image";
 
 function Post({ frontmatter, content }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -16,7 +17,7 @@ function Post({ frontmatter, content }) {
   const formatDate = (date) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(date).toLocaleDateString("en-US", options);
-  }
+  };
 
   return (
     <CustomLayout item={frontmatter}>
@@ -24,9 +25,29 @@ function Post({ frontmatter, content }) {
         className="fixed top-0 left-0 right-0 h-2 transform origin-left bg-[#05cab6]"
         style={{ scaleX }}
       />
-      <div className="prose mx-auto py-8 px-[30px]">
-        <h1 className="text-2xl md:text-3xl">{frontmatter.title}</h1>
-        <p className="text-sm"><span className="font-bold">Published</span> {formatDate(frontmatter.date)}</p>
+
+      <div>
+        <Image
+          src={frontmatter.image}
+          alt="Picture of post"
+          width={1000}
+          height={500}
+          className="object-cover w-[80%] md:w-[60%] h-[200px] sm:h-[300px] md:h-[500px] mx-auto"
+        />
+        <div className="my-8 space-y-5">
+          <h1 className="text-2xl md:text-3xl text-center font-extrabold">
+            {frontmatter.title}
+          </h1>
+          <div className="text-center">
+            <p className="text-sm">
+              <span className="font-bold">Published</span>{" "}
+              {formatDate(frontmatter.date)}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="prose mx-auto pb-8 pt-5 px-[30px]">
         <div
           className="text-[15px] md:text-[17px]"
           dangerouslySetInnerHTML={{ __html: md().render(content) }}
