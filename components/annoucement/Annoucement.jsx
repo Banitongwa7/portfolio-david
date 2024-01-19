@@ -3,7 +3,7 @@ import { HiRocketLaunch } from "react-icons/hi2";
 
 export default function Annoucement() {
   return (
-    <div className="bg-gray-900">
+    <div className="bg-[#0f172a]">
       <div
         id="annoucement"
         className="max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8 mx-auto flex items-center justify-center"

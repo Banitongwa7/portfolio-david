@@ -6,9 +6,10 @@ import CustomLayout from "@/components/layout/customlayout";
 export default function about() {
   const metatags = {
     title: "About me",
-    description: "Passionate and versatile Fullstack web developer, I create tailored solutions (websites, applications, etc.) that perfectly fit your needs. My skills include MERN Stack, NextJS, Python, and Microsoft Power Platform.",
+    description:
+      "Passionate and versatile Fullstack web developer, I create tailored solutions (websites, applications, etc.) that perfectly fit your needs. My skills include MERN Stack, NextJS, Python, and Microsoft Power Platform.",
     image: "/assets/icon.png",
-  }
+  };
 
   return (
     <CustomLayout item={metatags}>
@@ -33,21 +34,23 @@ export default function about() {
             </p>
           </div>
         </div>
-        <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
-        <div className="w-[80%] mx-auto">
-          <p className="font-['Poppins', sans-serif] text-[20px] text-[#6B7280]">
-            Passionate and versatile{" "}
-            <span className="font-bold">Fullstack web developer</span>, I create
-            tailored solutions (websites, applications, etc.) that perfectly fit
-            your needs. My skills include{" "}
-            <span className="font-bold">MERN Stack</span>,{" "}
-            <span className="font-bold">NextJS</span>,{" "}
-            <span className="font-bold">Python</span>, and{" "}
-            <span className="font-bold">Microsoft Power Platform</span>.
-          </p>
+
+        <div className="p-1 w-[80%] mx-auto my-[50px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 rounded">
+          <div className=" bg-[#0f172a] p-[30px] text-white rounded">
+            <p className="font-['Poppins', sans-serif] text-[20px]">
+              Passionate and versatile{" "}
+              <span className="font-bold">Fullstack web developer</span>, I
+              create tailored solutions (websites, applications, etc.) that
+              perfectly fit your needs. My skills include{" "}
+              <span className="font-bold">MERN Stack</span>,{" "}
+              <span className="font-bold">NextJS</span>,{" "}
+              <span className="font-bold">Python</span>, and{" "}
+              <span className="font-bold">Microsoft Power Platform</span>.
+            </p>
+          </div>
         </div>
-        <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
-        <div className="w-[80%] mx-auto space-y-5">
+
+        <div className="w-[80%] pt-[80px] pb-[80px] mx-auto space-y-5">
           <h3 className="text-[30px] font-mono text-center">
             Technical Skills
           </h3>
@@ -64,33 +67,33 @@ export default function about() {
           </p>
         </div>
 
-        <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
-
-        <div className="w-[80%] mx-auto space-y-5">
-          <h3 className="text-[30px] font-mono text-center">Language Skills</h3>
-          <ul className="pt-[40px] grid grid-cols-1 md:grid-cols-2 justify-items-center text-center skills-custom">
-            <li>
-              <p className="icon-language">English</p>
-              <p>Professional</p>
-            </li>
-            <li>
-              <p className="icon-language">French</p>
-              <p>Native</p>
-            </li>
-            <li>
-              <p className="icon-language">Lingala</p>
-              <p>Native</p>
-            </li>
-            <li>
-              <p className="icon-language">Swahili</p>
-              <p>Native</p>
-            </li>
-          </ul>
+        <div className="bg-gray-100 py-[80px]">
+          <div className="w-[80%] mx-auto space-y-5">
+            <h3 className="text-[30px] font-mono text-center">
+              Language Skills
+            </h3>
+            <ul className="pt-[40px] grid grid-cols-1 md:grid-cols-2 justify-items-center text-center skills-custom">
+              <li>
+                <p className="icon-language">English</p>
+                <p>Professional</p>
+              </li>
+              <li>
+                <p className="icon-language">French</p>
+                <p>Native</p>
+              </li>
+              <li>
+                <p className="icon-language">Lingala</p>
+                <p>Native</p>
+              </li>
+              <li>
+                <p className="icon-language">Swahili</p>
+                <p>Native</p>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <hr className="my-[50px] w-[80%] mx-auto border-[#6B7280] opacity-30" />
-
-        <div id="education-experience-custom" className=" w-[80%] mx-auto">
+        <div id="education-experience-custom" className=" w-[80%] mx-auto pt-[80px]">
           <div className="experience space-y-16">
             <h3 className="text-[30px] font-mono text-center">Experience</h3>
             <ul className="relative space-y-14">
