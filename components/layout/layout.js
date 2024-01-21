@@ -10,6 +10,10 @@ export default function RootLayout({ children }) {
       <Head>
         <title>Portfolio | David</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Personal Portfolio created by David Banitongwa" />
+        <meta name="author" content="David Banitongwa" />
+        <meta charSet="utf-8" />
+        <meta name="keywords" content="portfolio, david, banitongwa, developer, developer portfolio" />
       </Head>
       <div
         className={inter.className}
