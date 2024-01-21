@@ -1,5 +1,5 @@
 ---
-title: 'Apercu sur Microsoft Copilot Studio'
+title: 'Aperçu sur Microsoft Copilot Studio'
 description: 'Un nouvel assistant personnel commandé par le langage naturel'
 date: '2024-01-21'
 image: '/assets/blog/post3/copilot_studio.png'
