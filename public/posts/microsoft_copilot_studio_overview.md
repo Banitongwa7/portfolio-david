@@ -6,7 +6,7 @@ image: '/assets/blog/post3/copilot_studio.png'
 tags: ['copilot studio', 'AI', 'microsoft']
 ---
 
-Lancé le **15 novembre 2023***, Microsoft Copilot Studio est une plateforme low code qui offre la possibilité de personnaliser et de créer vos propres assistants conversationnels (copilotes).
+Lancé le **15 novembre 2023**, Microsoft Copilot Studio est une plateforme low code qui offre la possibilité de personnaliser et de créer vos propres assistants conversationnels (copilotes).
 
 Cette plateforme vous donne accès à un environnement de développement visuel pour **la conception**, **le test** et **le déploiement de vos copilotes**. Elle vous permet également d’utiliser des éditeurs de code ou graphiques pour développer des composants et plugins sur mesure.
 
