@@ -15,7 +15,8 @@ export default function CustomLayout({ item, children }) {
           property="og:image"
           content={"https://david-banitongwa.vercel.app" + item.image}
         />
-
+        <meta property="og:icon" content={"https://david-banitongwa.vercel.app" + item.image} />
+        
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
