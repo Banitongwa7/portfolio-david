@@ -6,9 +6,9 @@ image: '/assets/blog/post3/copilot_studio.png'
 tags: ['copilot studio', 'AI', 'microsoft']
 ---
 
-Lancé le **15 novembre 2023**, Microsoft Copilot Studio est une plateforme low code qui offre la possibilité de personnaliser et de créer vos propres assistants conversationnels (copilotes).
+Lancé le **15 novembre 2023***, Microsoft Copilot Studio est une plateforme low code qui offre la possibilité de personnaliser et de créer vos propres assistants conversationnels (copilotes).
 
-Cette plateforme vous donne accès à un environnement de développement visuel pour **la conception**, **le test** et **le déploiement de vos copilotes**. Elle vous permet également d’utiliser des éditeurs de code ou graphiques pour développer des composants et plugins sur mesure. 
+Cette plateforme vous donne accès à un environnement de développement visuel pour **la conception**, **le test** et **le déploiement de vos copilotes**. Elle vous permet également d’utiliser des éditeurs de code ou graphiques pour développer des composants et plugins sur mesure.
 
 > En outre, vous pouvez tirer parti des outils d’IA conversationnelle de Microsoft, tels que Microsoft 365, Power Platform, Azure et des API tierces, pour intégrer vos copilotes à diverses sources de données et services. De plus, vous avez la possibilité de surveiller et d’améliorer les performances et la qualité de vos copilotes grâce au tableau de bord analytique intégré et aux rapports.
 
@@ -22,11 +22,11 @@ Voici une vidéo de presentation de Microsoft Copilot Studio :
 
 La structure de coût de Microsoft Copilot Studio est basée sur un tarif mensuel fixe (par exemple, **200 $**) pour un quota défini de messages (par exemple, **25 000 messages**). 
 
-Ce tarif comprend la capacité de personnaliser Copilot pour Microsoft 365, de développer des copilotes et des GPT personnalisés, et d'utiliser une plateforme intégrée qui est compatible avec les outils d'IA conversationnelle de Microsoft.
+Ce tarif comprend **la capacité de personnaliser Copilot pour Microsoft**, de **développer des copilotes** et des **GPT personnalisés**, et d'utiliser une plateforme intégrée qui est compatible avec **les outils d'IA conversationnelle de Microsoft**.
 
 ## Comment démarrer avec Microsoft Copilot Studio ?
 
-Pour utiliser le produit, il est nécessaire d'avoir un compte Microsoft et un abonnement Azure.
+Pour utiliser le produit, il est nécessaire d'avoir **un compte Microsoft** et **un abonnement Azure**.
 
 Après votre inscription, l'environnement de développement visuel de Microsoft Copilot Studio sera à votre disposition pour la conception, le test et le déploiement de vos copilotes.
 
@@ -41,7 +41,7 @@ Vous pouvez également consulter [l’article de blog](https://www.microsoft.com
 
 ## Quelles sont les caractéristiques et les possibilités de Microsoft Copilot Studio ?
 
-Microsoft Copilot Studio est bien plus qu’un simple outil de création de copilotes. C’est une plateforme qui offre la possibilité d’exploiter la puissance de l’IA générative, de créer des dialogues sophistiqués, d’intégrer des plugins, d’automatiser des processus et de réaliser des analyses intégrées. Jetons un coup d’œil à certaines de ces fonctionnalités et capacités qui peuvent vous aider à concevoir des copilotes impressionnants pour divers domaines ou scénarios.
+Microsoft Copilot Studio est bien plus qu’un simple outil de création de copilotes. C’est une plateforme qui offre la possibilité d’exploiter **la puissance de l’IA générative**, de créer **des dialogues sophistiqués**, d’intégrer **des plugins**, **d’automatiser des processus** et de réaliser des **analyses intégrées**. Jetons un coup d’œil à certaines de ces fonctionnalités et capacités qui peuvent vous aider à concevoir des copilotes impressionnants pour divers domaines ou scénarios.
 
 Microsoft Copilot Studio vous offre la possibilité de :
 
@@ -55,7 +55,7 @@ Microsoft Copilot Studio offre des fonctionnalités telles que :
 
 Une des caractéristiques les plus captivantes de Microsoft Copilot Studio est la capacité d’employer des modèles d’IA générative avancés pour produire des réponses naturelles et engageantes pour votre copilote. L’IA générative, une sous-discipline de l’intelligence artificielle, est capable de créer du nouveau contenu à partir de données préexistantes, comme du texte, des images, du son ou de la vidéo.
 
-Microsoft Copilot Studio vous offre la possibilité de sélectionner parmi une gamme de modèles d’IA générative formés sur divers domaines et ensembles de données, tels que Microsoft 365, Wikipédia, les actualités, les livres, etc. De plus, vous avez la possibilité d’ajuster ces modèles avec vos propres données et préférences pour élaborer des modèles personnalisés qui correspondent à vos exigences et à vos objectifs.
+Microsoft Copilot Studio vous offre la possibilité de sélectionner parmi **une gamme de modèles d’IA générative** formés sur divers domaines et ensembles de données, tels que Microsoft 365, Wikipédia, les actualités, les livres, etc. De plus, vous avez la possibilité d’ajuster ces modèles avec vos propres données et préférences pour élaborer des modèles personnalisés qui correspondent à vos exigences et à vos objectifs.
 
 ![IA genérative](./../assets/blog/post3/image2.webp "IA genérative")
 
@@ -72,7 +72,7 @@ Ces techniques de gestion de dialogue vous permettent de concevoir des copilotes
 
 ### Les plugins
 
-Une autre fonctionnalité de Microsoft Copilot Studio est la capacité d’élargir les capacités de votre copilote en intégrant des plugins qui se connectent à diverses sources de données et services, tels que Microsoft 365, Power Platform, Azure et des API tierces.
+Une autre fonctionnalité de Microsoft Copilot Studio est la capacité d’élargir les capacités de votre copilote en intégrant des plugins qui se connectent à **diverses sources de données et services**, tels que **Microsoft 365**, **Power Platform**, **Azure** et des **API tierces**.
 
 Les plugins sont des éléments réutilisables que vous pouvez développer ou importer depuis le marché de Microsoft Copilot Studio. Vous pouvez utiliser ces plugins pour accéder à des données, les manipuler, effectuer des calculs, initier des actions et vous intégrer à d’autres applications et systèmes.
 
