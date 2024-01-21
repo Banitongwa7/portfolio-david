@@ -8,7 +8,9 @@ tags: ['copilot studio', 'AI', 'microsoft']
 
 Lancé le **15 novembre 2023**, Microsoft Copilot Studio est une plateforme low code qui offre la possibilité de personnaliser et de créer vos propres assistants conversationnels (copilotes).
 
-Cette plateforme vous donne accès à un environnement de développement visuel pour la conception, le test et le déploiement de vos copilotes. Elle vous permet également d’utiliser des éditeurs de code ou graphiques pour développer des composants et plugins sur mesure. En outre, vous pouvez tirer parti des outils d’IA conversationnelle de Microsoft, tels que Microsoft 365, Power Platform, Azure et des API tierces, pour intégrer vos copilotes à diverses sources de données et services. De plus, vous avez la possibilité de surveiller et d’améliorer les performances et la qualité de vos copilotes grâce au tableau de bord analytique intégré et aux rapports.
+Cette plateforme vous donne accès à un environnement de développement visuel pour **la conception**, **le test** et **le déploiement de vos copilotes**. Elle vous permet également d’utiliser des éditeurs de code ou graphiques pour développer des composants et plugins sur mesure. 
+
+> En outre, vous pouvez tirer parti des outils d’IA conversationnelle de Microsoft, tels que Microsoft 365, Power Platform, Azure et des API tierces, pour intégrer vos copilotes à diverses sources de données et services. De plus, vous avez la possibilité de surveiller et d’améliorer les performances et la qualité de vos copilotes grâce au tableau de bord analytique intégré et aux rapports.
 
 **La structure tarifaire** est basée sur un abonnement mensuel fixe avec une limite de messages. Pour utiliser la plateforme, vous devez disposer d’un compte Microsoft et d’un abonnement Azure.
 
@@ -18,7 +20,9 @@ Voici une vidéo de presentation de Microsoft Copilot Studio :
 
 ## Tarification de Microsoft Copilot Studio
 
-La structure de coût de Microsoft Copilot Studio est basée sur un tarif mensuel fixe (par exemple, 200 $) pour un quota défini de messages (par exemple, 25 000 messages). Ce tarif comprend la capacité de personnaliser Copilot pour Microsoft 365, de développer des copilotes et des GPT personnalisés, et d'utiliser une plateforme intégrée qui est compatible avec les outils d'IA conversationnelle de Microsoft.
+La structure de coût de Microsoft Copilot Studio est basée sur un tarif mensuel fixe (par exemple, **200 $**) pour un quota défini de messages (par exemple, **25 000 messages**). 
+
+Ce tarif comprend la capacité de personnaliser Copilot pour Microsoft 365, de développer des copilotes et des GPT personnalisés, et d'utiliser une plateforme intégrée qui est compatible avec les outils d'IA conversationnelle de Microsoft.
 
 ## Comment démarrer avec Microsoft Copilot Studio ?
 
@@ -31,9 +35,9 @@ L’environnement de développement se présente comme suit :
 ![Environnement de développement](./../assets/blog/post3/image1.webp "Environnement de développement")
 
 
-Pour en savoir plus sur la création et le déploiement d’un copilote Microsoft Copilot Studio, vous pouvez suivre <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-get-started?tabs=web" target="_blank">le guide de démarrage rapide</a> qui vous montre comment créer un copilote simple capable de répondre à des questions sur les produits et services Microsoft. 
+Pour en savoir plus sur la création et le déploiement d’un copilote Microsoft Copilot Studio, vous pouvez suivre [le guide de démarrage rapide](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-get-started?tabs=web) qui vous montre comment créer un copilote simple capable de répondre à des questions sur les produits et services Microsoft.
 
-Vous pouvez également consulter <a href="https://www.microsoft.com/en-us/microsoft-365/blog/2023/11/15/announcing-microsoft-copilot-studio-customize-copilot-for-microsoft-365-and-build-your-own-standalone-copilots/" target="_blank">l’article de blog</a> pour obtenir des instructions et des exemples plus détaillés.
+Vous pouvez également consulter [l’article de blog](https://www.microsoft.com/en-us/microsoft-365/blog/2023/11/15/announcing-microsoft-copilot-studio-customize-copilot-for-microsoft-365-and-build-your-own-standalone-copilots/) pour obtenir des instructions et des exemples plus détaillés.
 
 ## Quelles sont les caractéristiques et les possibilités de Microsoft Copilot Studio ?
 
@@ -85,9 +89,8 @@ En utilisant des plugins, vous pouvez créer des copilotes qui sont capables de 
 
 Une autre fonctionnalité de Microsoft Copilot Studio est la capacité d’automatiser des processus et des flux de travail habituels pour vos utilisateurs en intégrant votre copilote à Microsoft Power Automate et à d’autres outils d’automatisation.
 
-<blockquote>
-Microsoft Power Automate est un service cloud qui vous permet de concevoir et d’exécuter des flux de travail automatisés au sein de vos applications et services. Vous pouvez utiliser Microsoft Power Automate pour relier votre copilote à des centaines de connecteurs et de modèles prédéfinis, ou élaborer vos propres flux personnalisés à l’aide d’un éditeur visuel ou basé sur le code.
-</blockquote>
+> Microsoft Power Automate est un service cloud qui vous permet de concevoir et d’exécuter des flux de travail automatisés au sein de vos applications et services. Vous pouvez utiliser Microsoft Power Automate pour relier votre copilote à des centaines de connecteurs et de modèles prédéfinis, ou élaborer vos propres flux personnalisés à l’aide d’un éditeur visuel ou basé sur le code.
+
 
 ![automatisation des processus](./../assets/blog/post3/image4.webp "automatisation des processus")
 
@@ -104,6 +107,6 @@ Le tableau de bord analytique vous offre diverses mesures et indicateurs pour é
 
 ![analyse](./../assets/blog/post3/image5.webp "analyse")
 
-**Microsoft Copilot Studio** est une plateforme puissante et flexible qui offre une multitude de fonctionnalités pour la création, la personnalisation et l’optimisation de copilotes. 
+**Microsoft Copilot Studio** est une plateforme puissante et flexible qui offre une multitude de fonctionnalités pour la création, la personnalisation et l’optimisation de copilotes.
 
 Que vous soyez un **développeur expérimenté** ou un **débutant**, cette plateforme vous offre les outils nécessaires pour créer des copilotes impressionnants et efficaces. Alors, commencez dès aujourd’hui et découvrez comment Microsoft Copilot Studio peut transformer votre façon de travailler et d’interagir avec vos utilisateurs.
