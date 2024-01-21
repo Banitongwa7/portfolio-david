@@ -9,6 +9,7 @@ export default function RootLayout({ children }) {
     <>
       <Head>
         <title>Portfolio | David</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div
         className={inter.className}
