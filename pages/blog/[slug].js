@@ -13,6 +13,7 @@ function Post({ frontmatter, content }) {
     damping: 30,
     restDelta: 0.001,
   });
+  const [isBlog, setIsBlog] = useState(true);
 
   const formatDate = (date) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
@@ -20,7 +21,7 @@ function Post({ frontmatter, content }) {
   };
 
   return (
-    <CustomLayout item={frontmatter}>
+    <CustomLayout item={frontmatter} isBlog={isBlog}>
       <motion.div
         className="fixed top-0 z-50 left-0 right-0 h-2 transform origin-left bg-[#05cab6]"
         style={{ scaleX }}
