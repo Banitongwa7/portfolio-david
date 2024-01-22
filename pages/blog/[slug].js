@@ -4,6 +4,7 @@ import md from "markdown-it";
 import { motion, useScroll, useSpring } from "framer-motion";
 import CustomLayout from "@/components/layout/customlayout";
 import Image from "next/image";
+import { useState } from "react";
 
 function Post({ frontmatter, content }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
