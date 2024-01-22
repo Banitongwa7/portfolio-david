@@ -13,6 +13,7 @@ export default function CustomLayout({ item,isBlog , children }) {
         <meta property="og:title" content={item.title} />
         <meta property="og:description" content={item.description} />
         <meta
+          name="image"
           property="og:image"
           content={item.image}
         />
