@@ -4,6 +4,7 @@ export default function CustomLayout({ item, children }) {
   return (
     <>
       <Head>
+      <meta name="robots" content="max-snippet:-1, max-image-preview:standard, max-video-preview:-1" />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
@@ -17,9 +18,9 @@ export default function CustomLayout({ item, children }) {
         />
         <meta property="og:site_name" content="David Banitongwa" />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:image:width" content="600" />
-        <meta property="og:image:height" content="300" />
-        
+        <meta property="og:image:width" content="1000" />
+        <meta property="og:image:height" content="400" />
+        <meta property="og:image:alt" content={item.title} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
