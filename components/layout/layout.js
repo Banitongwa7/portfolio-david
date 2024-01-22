@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="keywords" content="portfolio, david, banitongwa, developer, developer portfolio" />
         <link rel="canonical" href="https://david-banitongwa.vercel.app" />
-        <link rel="icon" href="/assets/favicon/favicon.ico" />
+        <link rel="icon" href="https://david-banitongwa.vercel.app/assets/favicon/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="https://david-banitongwa.vercel.app/assets/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="https://david-banitongwa.vercel.app/assets/favicon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="https://david-banitongwa.vercel.app/assets/favicon/favicon-16x16.png" />
