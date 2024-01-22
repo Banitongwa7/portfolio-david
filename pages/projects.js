@@ -7,7 +7,7 @@ export default function projects() {
   const metatags = {
     title: "My Projects",
     description: "Feel free to discover my projects.",
-    image: "/assets/icon.png",
+    image: "/assets/profile2.jpg",
   }
 
   return (
