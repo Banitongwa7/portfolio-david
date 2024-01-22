@@ -10,7 +10,7 @@ export default function about() {
     title: "About me",
     description:
       "Passionate and versatile Fullstack web developer, I create tailored solutions (websites, applications, etc.) that perfectly fit your needs. My skills include MERN Stack, NextJS, Python, and Microsoft Power Platform.",
-    image: "/assets/profile2.jpg",
+    image: "/assets/icon.png",
   };
 
   return (

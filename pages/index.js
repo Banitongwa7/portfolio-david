@@ -7,7 +7,7 @@ export default function Home() {
   const metatags = {
     title: "Portfolio | David",
     description: "Personal Portfolio created by David Banitongwa",
-    image: "/assets/profile2.jpg",
+    image: "/assets/icon.png",
   };
 
   return (

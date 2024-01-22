@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         <meta charSet="utf-8" />
         <meta name="keywords" content="portfolio, david, banitongwa, developer, developer portfolio" />
         <link rel="canonical" href="https://david-banitongwa.vercel.app" />
-        <link rel="icon" href="https://david-banitongwa.vercel.app/assets/profile2.jpg" />
+        <link rel="icon" href="https://portfolio-david-p3h4iftw0-banitongwa7.vercel.app/assets/icon.png" />
       </Head>
       <div
         className={inter.className}

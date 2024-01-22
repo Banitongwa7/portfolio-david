@@ -13,7 +13,7 @@ export default function contact() {
   const metatags = {
     title: "Contact me",
     description: "Discuss a project or just want to say hi ? my inbox is open for all.",
-    image: "/assets/profile2.jpg",
+    image: "/assets/icon.png",
   }
 
   const handleSubmit = (e) => {
