@@ -14,7 +14,7 @@ export default function CustomLayout({ item,isBlog , children }) {
         <meta property="og:description" content={item.description} />
         <meta
           property="og:image"
-          content={"https://david-banitongwa.vercel.app" + item.image}
+          content={"https://portfolio-david-git-main-banitongwa7.vercel.app/assets/icon.png" + item.image}
         />
         <meta property="og:site_name" content="David Banitongwa" />
         <meta property="og:locale" content="en_US" />
@@ -30,7 +30,7 @@ export default function CustomLayout({ item,isBlog , children }) {
         <meta property="twitter:description" content={item.description} />
         <meta
           property="twitter:image"
-          content={"https://david-banitongwa.vercel.app" + item.image}
+          content={"https://portfolio-david-git-main-banitongwa7.vercel.app/assets/icon.png" + item.image}
         />
       </Head>
       {children}
