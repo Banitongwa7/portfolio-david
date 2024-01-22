@@ -14,7 +14,6 @@ export default function RootLayout({ children }) {
         <meta name="author" content="David Banitongwa" />
         <meta charSet="utf-8" />
         <meta name="keywords" content="portfolio, david, banitongwa, developer, developer portfolio" />
-        <link rel="canonical" href="https://portfolio-david-git-main-banitongwa7.vercel.app" />
         <link rel="icon" href="https://portfolio-david-git-main-banitongwa7.vercel.app/assets/icon.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="https://portfolio-david-git-main-banitongwa7.vercel.app/assets/favicon/apple-touch-icon.png" />
       </Head>
