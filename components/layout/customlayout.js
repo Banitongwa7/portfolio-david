@@ -1,6 +1,8 @@
 import Head from "next/head";
+import { Metadata } from "next";
 
 export default function CustomLayout({ item,isBlog , children }) {
+
   return (
     <>
       <Head>

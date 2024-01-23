@@ -13,7 +13,7 @@ export default function projects() {
   return (
     <CustomLayout item={metatags}>
       <section className="container w-full">
-        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-white">
+        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
           Projects
         </h2>
 
@@ -43,7 +43,7 @@ export default function projects() {
                     <p className="mt-3 text-gray-600 dark:text-gray-300">{project.description}</p>
                     <ul className="py-3 flex flex-wrap gap-4 items-center">
                       {Object.keys(project.techs).map((key, index) => (
-                        <li key={index} className="text-2xl dark:text-white">
+                        <li key={index} className="text-2xl dark:text-gray-100">
                           {project.techs[key]}
                         </li>
                       ))}

@@ -29,7 +29,7 @@ export default function Home() {
           <h2 className="text-[30px] md:text-[40px] font-extrabold uppercase dark:text-gray-100">
             David Banitongwa
           </h2>
-          <p className="text-[18px] md:text-[20px] font-light w-[80%] md:w-1/2 mx-auto pb-10 dark:text-white">
+          <p className="text-[18px] md:text-[20px] font-light w-[80%] md:w-1/2 mx-auto pb-10 dark:text-gray-100">
             I am Software Engineer and Microsoft Power-Platform Developer. Feel
             free to contact me or check out my resume here.
           </p>

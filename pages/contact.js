@@ -45,7 +45,7 @@ export default function contact() {
     <CustomLayout item={metatags}>
       <section className="container w-full pb-[100px]" id="contact">
         <ToastContainer />
-        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-white">
+        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
           Contact
         </h2>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -99,7 +99,7 @@ export default function contact() {
                 </ul>
               </div>
               <div className="card h-fit max-w-6xl p-5 md:p-12" id="form">
-                <h2 className="mb-4 text-2xl font-bold dark:text-white">Get in touch</h2>
+                <h2 className="mb-4 text-2xl font-bold dark:text-gray-100">Get in touch</h2>
                 <form id="contactForm" action="#" onSubmit={handleSubmit}>
                   <div className="mb-6">
                     <div className="mx-0 mb-1 sm:mb-4">

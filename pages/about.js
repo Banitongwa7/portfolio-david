@@ -17,7 +17,7 @@ export default function about() {
     <CustomLayout item={metatags}>
       <section className="container w-full pb-[100px]">
         <div className="bg-gray-100 dark:bg-[#0f172a] py-[50px] ">
-          <h2 className="text-[30px] font-extrabold pl-10 mx-auto w-[80%] dark:text-white">
+          <h2 className="text-[30px] font-extrabold pl-10 pb-10 mx-auto w-[80%] dark:text-gray-100">
             About Me
           </h2>
           <div className="flex flex-col items-center justify-center gap-8">
@@ -31,7 +31,7 @@ export default function about() {
               />
             </div>
             <div className="text-center">
-              <h2 className="text-[30px] font-medium dark:text-white">David Banitongwa</h2>
+              <h2 className="text-[30px] font-medium dark:text-gray-100">David Banitongwa</h2>
               <p className="text-[20px] font-mono text-[#6B7280]">
                 Software Engineer and Microsoft Power-Platform Developer
               </p>
@@ -55,7 +55,7 @@ export default function about() {
         </div>
 
         <div className="w-[80%] pt-[80px] pb-[80px] mx-auto space-y-5">
-          <h3 className="text-[30px] font-mono text-center dark:text-white">
+          <h3 className="text-[30px] font-mono text-center dark:text-gray-100">
             Technical Skills
           </h3>
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-items-center text-center pt-[40px] skills-custom">
@@ -73,7 +73,7 @@ export default function about() {
 
         <div className="bg-gray-100 dark:bg-[#0f172a] py-[80px]">
           <div className="w-[80%] mx-auto space-y-5">
-            <h3 className="text-[30px] font-mono text-center dark:text-white">
+            <h3 className="text-[30px] font-mono text-center dark:text-gray-100">
               Language Skills
             </h3>
             <ul className="pt-[40px] grid grid-cols-1 md:grid-cols-2 justify-items-center text-center skills-custom">
@@ -102,7 +102,7 @@ export default function about() {
           className=" w-[80%] mx-auto pt-[80px]"
         >
           <div className="experience space-y-16">
-            <h3 className="text-[30px] font-mono text-center dark:text-white">Experience</h3>
+            <h3 className="text-[30px] font-mono text-center dark:text-gray-100">Experience</h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
               {Experience.map((exp, index) => (
                 <li

@@ -35,12 +35,12 @@ export default function NavBar() {
           <h1 className="w-3/12">
             <Link
               href="/"
-              className="text-2xl font-bold hover:text-green-500 duration-200 dark:text-white"
+              className="text-2xl font-bold hover:text-green-500 duration-200 dark:text-gray-100"
             >
               David.
             </Link>
           </h1>
-          <button className="md:hidden dark:text-white">
+          <button className="md:hidden dark:text-gray-100">
             <svg
               onClick={openSideBar}
               ref={sidebarBtn}
@@ -61,7 +61,7 @@ export default function NavBar() {
           <nav className="hidden md:block font-semibold text-lg">
             <ul
               id="navbar-custom"
-              className="flex items-center dark:text-white"
+              className="flex items-center dark:text-gray-100"
             >
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
@@ -103,7 +103,7 @@ export default function NavBar() {
               </li>
             </ul>
           </nav>
-          <div className="w-3/12 justify-end hidden md:flex md:items-center dark:text-white">
+          <div className="w-3/12 justify-end hidden md:flex md:items-center dark:text-gray-100">
             <Link
               href={AllLinks.linkedin}
               className="p-4 text-[20px] hover:text-green-500 duration-200"
