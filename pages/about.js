@@ -38,8 +38,8 @@ export default function about() {
             </div>
           </div>
 
-          <div className="p-1 w-[80%] mx-auto my-[50px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 rounded">
-            <div className=" bg-[#0f172a] dark:bg-slate-800 p-[30px] text-white rounded">
+          <div className="p-[2px] w-[80%] mx-auto my-[50px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 rounded">
+            <div className=" bg-gray-100 dark:bg-slate-800 p-[50px] dark:text-white text-[#0f172a] rounded">
               <p className="font-['Poppins', sans-serif] text-[20px]">
                 Passionate and versatile{" "}
                 <span className="font-bold">Fullstack web developer</span>, I
@@ -106,10 +106,10 @@ export default function about() {
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
               {Experience.map((exp, index) => (
                 <li
-                  className="rounded p-1 bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400"
+                  className="rounded p-[2px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400"
                   key={index}
                 >
-                  <div className="space-x-3 rounded p-5 bg-[#0f172a] text-white dark:bg-slate-800">
+                  <div className="space-x-3 rounded p-5 bg-gray-100 dark:bg-slate-800 dark:text-white text-[#0f172a]">
                     <div className="flex items-center justify-between px-2 py-2 md:px-4 md:py-2">
                       <div className="text-[12px] md:text-[15px] font-semibold">
                         {exp.date}

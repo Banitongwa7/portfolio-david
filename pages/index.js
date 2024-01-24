@@ -26,7 +26,7 @@ export default function Home() {
         </div>
 
         <div className="text-center space-y-4">
-          <h2 className="text-[30px] md:text-[40px] font-extrabold uppercase dark:text-gray-100">
+          <h2 className="text-[30px] md:text-[40px] font-extrabold uppercase bg-clip-text text-transparent bg-gradient-to-r from-slate-800 via-cyan-600 to-green-700 dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-slate-300 dark:via-cyan-500 dark:to-green-400">
             David Banitongwa
           </h2>
           <p className="text-[18px] md:text-[20px] font-light w-[80%] md:w-1/2 mx-auto pb-10 dark:text-gray-100">

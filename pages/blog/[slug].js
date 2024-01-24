@@ -49,9 +49,9 @@ function Post({ frontmatter, content }) {
         </div>
       </div>
 
-      <div className="prose mx-auto pb-8 pt-5 px-[30px] dark:prose-invert">
+      <div className="prose pb-8 pt-5 mx-auto px-[30px] dark:prose-invert">
         <div
-          className="text-[15px] md:text-[17px]"
+          className="text-[15px] md:text-[20px]"
           dangerouslySetInnerHTML={{ __html: md().render(content) }}
         />
       </div>
