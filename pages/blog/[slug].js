@@ -19,15 +19,6 @@ function Post({ article }) {
     return new Date(date).toLocaleDateString("en-US", options);
   };
 
-  /* 
-  
-  <div
-          className="text-[15px] md:text-[20px]"
-          dangerouslySetInnerHTML={{ __html: article.body_html }}
-        />
-  
-  */
-
   return (
     <CustomLayout item={article} isBlog={isBlog}>
       <motion.div
