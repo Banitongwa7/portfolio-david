@@ -92,7 +92,7 @@ export default function contact() {
                         Email
                       </h3>
                       <p className="text-gray-600 dark:text-slate-400">
-                        davidbanitongwa@outlook.com
+                        davidbanitongwa@gmail.com
                       </p>
                     </div>
                   </li>
