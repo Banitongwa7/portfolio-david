@@ -40,13 +40,13 @@ export default function blog({ allPostsData }) {
                       height={50}
                       className="rounded-full w-[35px]"
                     />
-                    <p className="text-[#6B7280] dark:text-gray-300 font-mono">
+                    <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
                       {post.user.name}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
                     <IoIosTime className="text-[#6B7280] dark:text-gray-300" />
-                    <p className="text-[#6B7280] dark:text-gray-300 font-mono">
+                    <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
                       {post.reading_time_minutes} min read
                     </p>
                   </div>
@@ -58,11 +58,11 @@ export default function blog({ allPostsData }) {
 
                 <p className="text-[#6B7280]">{post.description}</p>
 
-                <div className="mt-3">
+                <div className="mt-3 flex items-center flex-wrap">
                   {post.tag_list.map((tag, index) => (
-                    <span key={index} className="text-[#35bcda] dark:text-[#e3f639] mr-2">
+                    <p key={index} className="text-[#35bcda] dark:text-[#e3f639] mr-2">
                       #{tag}
-                    </span>
+                    </p>
                   ))}
                 </div>
               </div>
