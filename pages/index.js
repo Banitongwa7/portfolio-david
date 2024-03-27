@@ -34,12 +34,12 @@ export default function Home() {
             free to contact me or check out my resume here.
           </p>
           <div className="flex items-center justify-center">
-            <Link
-              href="/contact"
-              className="text-[18px] font-normal py-2 px-4 text-white dark:text-[#0f172a] hover:scale-105 transition-transform duration-500 ease-in-out hover:shadow-md rounded-full bg-gray-900 hover:bg-gray-700 uppercase dark:bg-gray-100 dark:hover:bg-gray-200"
-            >
-              Contact Me
-            </Link>
+
+            <Link href="/contact" className="text-[18px] font-normal py-2 px-4 text-white dark:text-[#0f172a] duration-500 ease-in-out hover:shadow-md rounded-full bg-gray-900 uppercase dark:bg-gray-100 dark:hover:bg-gray-200 group relative inline-flex items-center justify-center overflow-hidden"><span>Contact me</span><div class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]"><div class="relative h-full w-8 bg-white/20 dark:bg-gray-500/20"></div></div></Link>
+
+
+
+
           </div>
         </div>
       </section>
