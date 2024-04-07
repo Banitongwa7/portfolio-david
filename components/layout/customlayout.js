@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { Metadata } from "next";
 
 export default function CustomLayout({ item,isBlog , children }) {
 
@@ -17,7 +16,7 @@ export default function CustomLayout({ item,isBlog , children }) {
         <meta
           name="image"
           property="og:image"
-          content={item.cover_image}
+          content={item.image}
         />
         <meta property="og:site_name" content="David Banitongwa" />
         <meta property="og:locale" content="en_US" />
@@ -33,7 +32,7 @@ export default function CustomLayout({ item,isBlog , children }) {
         <meta property="twitter:description" content={item.description} />
         <meta
           property="twitter:image"
-          content={item.cover_image}
+          content={item.image}
         />
       </Head>
       {children}
