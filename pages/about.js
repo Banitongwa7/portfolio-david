@@ -15,7 +15,7 @@ export default function about() {
 
   return (
     <CustomLayout item={metatags}>
-      <section className="container w-full pb-[100px]">
+      <section className="w-full pb-[100px]">
         <div className="bg-gray-100 dark:bg-[#0f172a] py-[50px] ">
           <h2 className="text-[30px] font-extrabold pl-10 pb-10 mx-auto w-[80%] dark:text-gray-100">
             About Me
@@ -38,7 +38,7 @@ export default function about() {
             </div>
           </div>
 
-          <div className="p-[0.8px] w-[80%] mx-auto my-[50px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 rounded">
+          <div className="p-[1px] w-[80%] mx-auto my-[50px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 rounded">
             <div className=" bg-gray-100 dark:bg-slate-800 p-[50px] dark:text-white text-[#0f172a] rounded">
               <p className="font-['Poppins', sans-serif] text-[20px]">
                 Passionate and versatile{" "}
@@ -106,7 +106,7 @@ export default function about() {
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
               {Experience.map((exp, index) => (
                 <li
-                  className="rounded p-[0.8px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400"
+                  className="rounded p-[1px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400"
                   key={index}
                 >
                   <div className="space-x-3 rounded p-5 bg-gray-100 dark:bg-slate-800 dark:text-white text-[#0f172a]">

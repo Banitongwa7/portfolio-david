@@ -43,7 +43,7 @@ export default function contact() {
 
   return (
     <CustomLayout item={metatags}>
-      <section className="container w-full pb-[100px]" id="contact">
+      <section className="w-full pb-[100px]" id="contact">
         <ToastContainer />
         <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
           Contact

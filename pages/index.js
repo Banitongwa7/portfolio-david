@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <CustomLayout item={metatags}>
-      <section className="flex flex-col items-center justify-center gap-8 container my-[100px]">
+      <section className="flex flex-col items-center justify-center gap-8 my-[100px]">
         <div className="bg-gray-200 relative p-1 rounded-full">
           <div className="absolute w-[200px] h-[200px] rounded-full bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 z-[-1] animate-[ping_5s_linear_infinite] opacity-20"></div>
           <Image

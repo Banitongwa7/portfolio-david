@@ -9,7 +9,7 @@ export default function blog({ allPostsData }) {
   };
 
   return (
-    <section className="container w-full pb-[100px]">
+    <section className="w-full pb-[100px]">
       <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
         Blog
       </h2>
@@ -28,7 +28,7 @@ export default function blog({ allPostsData }) {
                   width={500}
                   height={500}
                   priority={true}
-                  className="hover:scale-105 duration-300 object-cover w-[500px] h-[300px]"
+                  className="hover:scale-105 duration-300 object-cover w-full h-[300px]"
                 />
               </div>
               <div className="pt-6">
