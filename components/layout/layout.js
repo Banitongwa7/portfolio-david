@@ -12,6 +12,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Personal Portfolio created by David Banitongwa" />
         <meta name="google-site-verification" content="7_reHtxgCHRdmTB5pZ83oSLP563GwDP214DYf-30KEg" />
+        <meta name="msvalidate.01" content="2BFB76FBE029311BC23600887905E043" />
         <meta name="author" content="David Banitongwa" />
         <meta charSet="utf-8" />
         <meta name="keywords" content="portfolio, david, banitongwa, developer, developer portfolio" />
