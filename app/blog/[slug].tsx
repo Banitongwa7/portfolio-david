@@ -2,8 +2,9 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import CustomLayout from "@/components/layout/customlayout";
 import Image from "next/image";
 import { useState } from "react";
+import { Metadata } from "next";
 
-function Post({ article }) {
+function Post() {
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -18,10 +19,10 @@ function Post({ article }) {
     return new Date(date).toLocaleDateString("en-US", options);
   };
 
-  const metatags = {
+  const metadata: Metadata = {
     title: article.data.publication.post.title,
     description: article.data.publication.post.brief,
-    image: article.data.publication.post.coverImage.url,
+    icons: article.data.publication.post.coverImage.url,
   };
 
   return (
@@ -75,6 +76,9 @@ function Post({ article }) {
 }
 
 export default Post;
+
+
+/*
 
 export async function getStaticPaths() {
   const res = await fetch("https://gql.hashnode.com", {
@@ -147,3 +151,4 @@ export async function getStaticProps({ params: { slug } }) {
     },
   };
 }
+*/

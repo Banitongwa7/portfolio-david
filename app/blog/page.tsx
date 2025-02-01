@@ -2,11 +2,49 @@ import React from "react";
 import Image from "next/image";
 import { IoIosTime } from "react-icons/io";
 
-export default function blog({ allPostsData }) {
+export default async function blog() {
+  /*
   const formatDate = (date) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(date).toLocaleDateString("en-US", options);
   };
+  */
+
+  const res = await fetch("https://gql.hashnode.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+      query Publication {
+        publication(host: "daviddb.hashnode.dev") {
+          posts(first: 10) {
+            edges {
+              node {
+                coverImage{
+                  url
+                }
+                title
+                readTimeInMinutes
+                tags{
+                  name
+                }
+                brief
+                slug
+                author{
+                  profilePicture
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+      `,
+    }),
+  });
+  const allPostsData = await res.json();
 
   return (
     <section className="w-full pb-[100px]">
@@ -75,6 +113,8 @@ export default function blog({ allPostsData }) {
   );
 }
 
+/*
+
 export async function getStaticProps() {
   const res = await fetch("https://gql.hashnode.com", {
     method: "POST",
@@ -118,3 +158,4 @@ export async function getStaticProps() {
     },
   };
 }
+  */

@@ -1,6 +1,14 @@
 
 
-export default function handler(req, res) {
+
+export default async function GET() {
+    return Response.json({ message: 'Hello World' });
+}
+
+
+
+/*
+export default async function GET(req, res) {
     let nodemailer = require('nodemailer');
     require('dotenv').config();
     const transport = nodemailer.createTransport({
@@ -30,3 +38,4 @@ export default function handler(req, res) {
         }
     })
 }
+    */
