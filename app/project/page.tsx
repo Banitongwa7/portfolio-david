@@ -1,17 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import AllProjects from "@/data/AllProjects";
-import CustomLayout from "@/components/layout/customlayout";
 
 export default function projects() {
-  const metatags = {
-    title: "My Projects",
-    description: "Feel free to discover my projects.",
-    image: "/assets/icon.png",
-  }
 
   return (
-    <CustomLayout item={metatags}>
       <section className="w-full">
         <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
           Projects
@@ -72,6 +65,5 @@ export default function projects() {
           </div>
         </div>
       </section>
-    </CustomLayout>
   );
 }

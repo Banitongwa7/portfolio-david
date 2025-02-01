@@ -1,17 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import CustomLayout from "@/components/layout/customlayout";
 
 export default function Home() {
-  const metatags = {
-    title: "Portfolio | David",
-    description: "Personal Portfolio created by David Banitongwa",
-    image: "/assets/icon.png",
-  };
 
   return (
-    <CustomLayout item={metatags}>
       <section className="flex flex-col items-center justify-center gap-8 mb-[100px] mt-40">
         <div className="bg-gray-200 relative p-1 rounded-full">
           <div className="absolute w-[200px] h-[200px] rounded-full bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 z-[-1] animate-[ping_5s_linear_infinite] opacity-20"></div>
@@ -46,6 +39,5 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </CustomLayout>
   );
 }
