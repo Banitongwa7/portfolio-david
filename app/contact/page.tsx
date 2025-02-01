@@ -4,19 +4,13 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoMdCall, IoMdMail } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CustomLayout from "@/components/layout/customlayout";
 
 export default function contact() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const metatags = {
-    title: "Contact me",
-    description: "Discuss a project or just want to say hi ? my inbox is open for all.",
-    image: "/assets/icon.png",
-  }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (fullName === "" || email === "" || message === "") {
       toast.warn("Please fill in all fields !");
@@ -42,7 +36,6 @@ export default function contact() {
   };
 
   return (
-    <CustomLayout item={metatags}>
       <section className="w-full pb-[100px]" id="contact">
         <ToastContainer />
         <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
@@ -145,8 +138,8 @@ export default function contact() {
                         id="textarea"
                         name="textarea"
                         value={message}
-                        cols="30"
-                        rows="5"
+                        cols={30}
+                        rows={5}
                         placeholder="Write your message..."
                         className="mb-2 w-full rounded-md border outline-green-400 border-gray-400 py-2 pl-2 pr-4 sm:mb-0"
                         onChange={(e) => setMessage(e.target.value)}
@@ -168,6 +161,5 @@ export default function contact() {
           </div>
         </div>
       </section>
-    </CustomLayout>
   );
 }
