@@ -7,6 +7,7 @@ import { SiStreamlit, SiOpenai, SiExpress, SiTailwindcss } from "react-icons/si"
 import { TbBrandNextjs } from "react-icons/tb";
 import { BiLogoSpringBoot } from "react-icons/bi";
 
+
 const AllProjects = [
     {
         id: 1,

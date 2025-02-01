@@ -12,7 +12,8 @@ import { DiLinux } from "react-icons/di";
 import { BsMicrosoft } from "react-icons/bs";
 import { MdOutlineDesignServices } from "react-icons/md";
 import { RiFlowChart } from "react-icons/ri";
-import { SiPowerapps, SiPowerfx } from "react-icons/si";
+import { IoIosApps } from "react-icons/io";
+import { FiCode } from "react-icons/fi";
 
 
 const Skills = [
@@ -84,12 +85,12 @@ const Skills = [
     {
         id: 14,
         name: "PowerApps",
-        icon: <SiPowerapps />,
+        icon: <IoIosApps />,
     },
     {
         id: 15,
         name: "PowerFx",
-        icon: <SiPowerfx />,
+        icon: <FiCode />,
     },
 ]
 
