@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Portfolio | David",
   description: "Personal Portfolio created by David Banitongwa",
   keywords: ["portfolio", "david", "banitongwa", "developer", "developer portfolio"],
-  viewport: "width=device-width, initial-scale=1",
   icons: "https://david-banitongwa.vercel.app/assets/icon.png",
   verification: {
     google: "jkG2w3_QBheX-Gux8DE8N80vTRwrbTFFvaiFWG8xVh4",

@@ -1,37 +1,72 @@
-import { motion, useScroll, useSpring } from "framer-motion";
-import CustomLayout from "@/components/layout/customlayout";
+//import { motion, useScroll, useSpring } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
-import { Metadata } from "next";
 
-function Post() {
+type Tag = {
+  name: string;
+};
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
+  
+  export default async function PostArticle({ params }: { params: Promise<{ slug: string }> }) {
+    const slug = (await params).slug;
+
+  const res = await fetch("https://gql.hashnode.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+      query Publication {
+        publication(host: "daviddb.hashnode.dev") {
+          post(slug: "${slug}") {
+            brief
+            coverImage{
+              url
+            }
+            title
+            publishedAt
+            content {
+              html
+            }
+            tags{
+              name
+            }
+          }
+        }
+      }
+      `,
+    }),
   });
-  const [isBlog, setIsBlog] = useState(true);
+    const article = await res.json();
+  
+    /*
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, {
+      stiffness: 100,
+      damping: 30,
+      restDelta: 0.001,
+    });
+    */
+  
+    const formatDate = (date: string) => {
+      const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(date).toLocaleDateString("en-US", options);
+    };
+    
+    console.log(article)
+    console.log(slug)
+  
+    return (
+      <>
+       
+     
 
-  const formatDate = (date) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(date).toLocaleDateString("en-US", options);
-  };
-
-  const metadata: Metadata = {
-    title: article.data.publication.post.title,
-    description: article.data.publication.post.brief,
-    icons: article.data.publication.post.coverImage.url,
-  };
-
-  return (
-    <CustomLayout item={metatags} isBlog={isBlog}>
-      <motion.div
+{/*
+ <motion.div
         className="fixed top-0 z-50 left-0 right-0 h-2 transform origin-left bg-[#05cab6]"
         style={{ scaleX }}
       />
-
+      */}
       <div>
         <Image
           src={article.data.publication.post.coverImage.url}
@@ -62,7 +97,7 @@ function Post() {
       </div>
 
       <ul className="w-[80%] md:w-[40%] mx-auto flex flex-wrap mb-10">
-        {article.data.publication.post.tags.map((tag, index) => (
+        {article.data.publication.post.tags.map((tag: Tag, index: number) => (
           <li
             key={index}
             className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
@@ -71,11 +106,9 @@ function Post() {
           </li>
         ))}
       </ul>
-    </CustomLayout>
+     </>
   );
 }
-
-export default Post;
 
 
 /*
