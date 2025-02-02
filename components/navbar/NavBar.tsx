@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import React, { useRef, useEffect, useState } from "react";
 import { FaLinkedin, FaGithub, FaSquareXTwitter } from "react-icons/fa6";
@@ -12,7 +14,7 @@ export default function NavBar() {
   const router = useRouter();
   const [darkToggle, setDarkToggle] = useState(null);
 
-  const openSideBar = (e) => {
+  const openSideBar = (e: React.FormEvent<HTMLFormElement>) => {
     e.stopPropagation();
     sidebar.current.classList.toggle("-translate-x-full");
   };

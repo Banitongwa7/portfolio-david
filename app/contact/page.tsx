@@ -1,11 +1,13 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
+
+
 import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdCall, IoMdMail } from "react-icons/io";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function contact() {
+export default function Contact() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");

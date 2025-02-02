@@ -4,7 +4,7 @@ import Skills from "@/data/Skills";
 import Experience from "@/data/Experience";
 import { MdOutlineWork } from "react-icons/md";
 
-export default function about() {
+export default function About() {
   return (
     <section className="w-full pb-[100px]">
       <div className="bg-gray-100 dark:bg-[#0f172a] py-[50px] ">

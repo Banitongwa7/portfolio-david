@@ -1,8 +1,18 @@
 import React from "react";
-import Image from "next/image";
-import { IoIosTime } from "react-icons/io";
+//import Image from "next/image";
+//import { IoIosTime } from "react-icons/io";
+/*
+type Posts = {
+  title: string;
+  readTimeInMinutes: number;
+  tags: { name: string }[];
+  brief: string;
+  slug: string;
+  coverImage: { url: string };
+}
+  */
 
-export default async function blog() {
+export default async function Blog() {
   /*
   const formatDate = (date) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
@@ -46,8 +56,14 @@ export default async function blog() {
   });
   const allPostsData = await res.json();
 
+  console.log(allPostsData);
+
   return (
-    <section className="w-full pb-[100px]">
+    <div>Hello
+
+
+       {/*
+      <section className="w-full pb-[100px]">
       <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
         Blog
       </h2>
@@ -110,6 +126,8 @@ export default async function blog() {
         </ul>
       </div>
     </section>
+      */}
+    </div>
   );
 }
 
