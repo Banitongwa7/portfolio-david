@@ -4,14 +4,14 @@ import Link from "next/link";
 import React, { useRef, useEffect, useState } from "react";
 import { FaLinkedin, FaGithub, FaSquareXTwitter } from "react-icons/fa6";
 import AllLinks from "@/data/AllLinks";
-import { useRouter } from "next/router";
 import Switcher from "../switcher/Switcher";
 import AnimatedCursor from "react-animated-cursor";
+import { usePathname } from "next/navigation";
 
 export default function NavBar() {
   const sidebar = useRef<HTMLDivElement>(null);
   const sidebarBtn = useRef<SVGSVGElement>(null);
-  const router = useRouter();
+  const pathname = usePathname();
   const [darkToggle, setDarkToggle] = useState<boolean>(false);
 
   const openSideBar = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -67,29 +67,29 @@ export default function NavBar() {
             >
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
-                  router.pathname === "/" ? "active" : ""
+                  pathname === "/" ? "active" : ""
                 }`}
               >
                 <Link href="/">Home</Link>
               </li>
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
-                  router.pathname === "/about" ? "active" : ""
+                  pathname === "/about" ? "active" : ""
                 }`}
               >
                 <Link href="/about">About</Link>
               </li>
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
-                  router.pathname === "/projects" ? "active" : ""
+                  pathname === "/projects" ? "active" : ""
                 }`}
               >
                 <Link href="/projects">Projects</Link>
               </li>
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
-                  router.pathname === "/blog" ||
-                  router.pathname === "/blog/[slug]"
+                  pathname === "/blog" ||
+                  pathname === "/blog/[slug]"
                     ? "active"
                     : ""
                 }`}
@@ -98,7 +98,7 @@ export default function NavBar() {
               </li>
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
-                  router.pathname === "/contact" ? "active" : ""
+                  pathname === "/contact" ? "active" : ""
                 }`}
               >
                 <Link href="/contact">Contact</Link>
@@ -146,7 +146,7 @@ export default function NavBar() {
             <ul className="mt-4">
               <li
                 className={`mb-2 p-3 rounded-md ${
-                  router.pathname === "/" ? "active" : ""
+                  pathname === "/" ? "active" : ""
                 }`}
               >
                 <Link href="/" className="block">
@@ -155,7 +155,7 @@ export default function NavBar() {
               </li>
               <li
                 className={`mb-2 p-3 rounded-md ${
-                  router.pathname === "/about" ? "active" : ""
+                  pathname === "/about" ? "active" : ""
                 }`}
               >
                 <Link href="/about" className="block">
@@ -164,7 +164,7 @@ export default function NavBar() {
               </li>
               <li
                 className={`mb-2 p-3 rounded-md ${
-                  router.pathname === "/projects" ? "active" : ""
+                  pathname === "/projects" ? "active" : ""
                 }`}
               >
                 <Link href="/projects" className="block">
@@ -173,8 +173,8 @@ export default function NavBar() {
               </li>
               <li
                 className={`mb-2 p-3 rounded-md ${
-                  router.pathname === "/blog" ||
-                  router.pathname === "/blog/[slug]"
+                  pathname === "/blog" ||
+                  pathname === "/blog/[slug]"
                     ? "active"
                     : ""
                 }`}
@@ -185,7 +185,7 @@ export default function NavBar() {
               </li>
               <li
                 className={`mb-2 p-3 rounded-md ${
-                  router.pathname === "/contact" ? "active" : ""
+                  pathname === "/contact" ? "active" : ""
                 }`}
               >
                 <Link href="/contact" className="block">
