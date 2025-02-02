@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function LoadPage({loader, setLoader }) {
+export default function LoadPage({loader, setLoader } : {loader: boolean, setLoader: (value: boolean) => void}) {
   
 
   React.useEffect(() => {

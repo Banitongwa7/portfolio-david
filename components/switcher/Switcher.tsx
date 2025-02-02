@@ -1,11 +1,13 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 
-export default function Switcher({ setDarkToggle }) {
-  const [darkSide, setDarkSide] = useState(null);
+export default function Switcher({ setDarkToggle }: { setDarkToggle: (value: boolean) => void }) {
+  const [darkSide, setDarkSide] = useState<boolean>(false);
 
   const toggleDarkMode = (checked: boolean) => {
-    window.localStorage.setItem("darkMode", !checked);
+    window.localStorage.setItem("darkMode", (!checked).toString());
     setDarkSide(checked);
   };
 

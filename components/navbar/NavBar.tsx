@@ -9,23 +9,23 @@ import Switcher from "../switcher/Switcher";
 import AnimatedCursor from "react-animated-cursor";
 
 export default function NavBar() {
-  const sidebar = useRef(null);
-  const sidebarBtn = useRef(null);
+  const sidebar = useRef<HTMLDivElement>(null);
+  const sidebarBtn = useRef<SVGSVGElement>(null);
   const router = useRouter();
-  const [darkToggle, setDarkToggle] = useState(null);
+  const [darkToggle, setDarkToggle] = useState<boolean>(false);
 
-  const openSideBar = (e: React.FormEvent<HTMLFormElement>) => {
+  const openSideBar = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
-    sidebar.current.classList.toggle("-translate-x-full");
+    sidebar.current?.classList.toggle("-translate-x-full");
   };
 
   useEffect(() => {
     document.addEventListener("click", (e) => {
       if (
-        !sidebar.current.contains(e.target) &&
-        !sidebarBtn.current.contains(e.target)
+        !sidebar.current?.contains(e.target as Node) &&
+        !sidebarBtn.current?.contains(e.target as Node)
       ) {
-        sidebar.current.classList.add("-translate-x-full");
+        sidebar.current?.classList.add("-translate-x-full");
       }
     });
   }, []);
@@ -232,7 +232,6 @@ export default function NavBar() {
         innerScale={1}
         outerScale={2}
         outerAlpha={0}
-        hasBlendMode={true}
         showSystemCursor={true}
         innerStyle={{
           backgroundColor: darkToggle ? "#fff" : "#1D2B53",
