@@ -1,15 +1,14 @@
 import Image from "next/image";
+import type { Tag } from "@/types/types";
 
-type Tag = {
-  name: string;
-};
+
 
 export default async function PostArticle({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ blogSlug: string }>;
 }) {
-  const slug = (await params).slug;
+  const slug = (await params).blogSlug;
 
   const res = await fetch("https://gql.hashnode.com", {
     method: "POST",

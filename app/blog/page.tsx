@@ -1,18 +1,9 @@
 import Image from "next/image";
 import { IoIosTime } from "react-icons/io";
 import Link from "next/link";
+import type { Post } from "@/types/types";
 
-type Post = {
-  node: {
-    title: string;
-    readTimeInMinutes: number;
-    tags: { name: string }[];
-    brief: string;
-    slug: string;
-    coverImage: { url: string };
-    author: { profilePicture: string; name: string };
-  };
-};
+
 
 export default async function Blog() {
   

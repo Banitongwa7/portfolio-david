@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import AllProjects from "@/data/AllProjects";
 
-export default function projects() {
+export default function Projects() {
   return (
     <section className="w-full">
       <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
