@@ -19,7 +19,7 @@ export default function Contact() {
       return;
     }
 
-    fetch("/api/contact", {
+    fetch("/api/mail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

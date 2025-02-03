@@ -13,7 +13,7 @@
     "@vercel/analytics": "^1.4.1",
     "framer-motion": "^11.16.4",
     "next": "15.1.4",
-    "nodemailer": "^6.9.16",
+    "nodemailer": "^6.10.0",
     "react": "^19.0.0",
     "react-animated-cursor": "^2.11.2",
     "react-dom": "^19.0.0",
