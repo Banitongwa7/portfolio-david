@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import { IoIosTime } from "react-icons/io";
 import Link from "next/link";
@@ -16,7 +15,7 @@ type Post = {
 };
 
 export default async function Blog() {
-
+  
   const res = await fetch("https://gql.hashnode.com", {
     method: "POST",
     headers: {
