@@ -38,8 +38,8 @@ export async function POST(req: NextRequest) {
         await transport.sendMail(mailData);
 
         return NextResponse.json({ success: true, message: "Email sent successfully" });
-    } catch (error: { [key: string]: string }) {
+    } catch (error) {
         console.error("Email sending error:", error);
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+        return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
     }
 }
