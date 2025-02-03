@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { Tag } from "@/types/types";
-
-
+import ProgressBar from "./progressbar";
 
 export default async function PostArticle({
   params,
@@ -50,7 +49,7 @@ export default async function PostArticle({
   };
 
   return (
-    <>
+    <ProgressBar>
       <div>
         <Image
           src={article.data.publication.post.coverImage.url}
@@ -92,6 +91,6 @@ export default async function PostArticle({
           </li>
         ))}
       </ul>
-    </>
+    </ProgressBar>
   );
 }

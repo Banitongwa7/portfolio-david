@@ -3,8 +3,6 @@ import { IoIosTime } from "react-icons/io";
 import Link from "next/link";
 import type { Post } from "@/types/types";
 
-
-
 export default async function Blog() {
   
   const res = await fetch("https://gql.hashnode.com", {

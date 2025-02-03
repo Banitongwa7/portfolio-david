@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdCall, IoMdMail } from "react-icons/io";
@@ -94,7 +93,9 @@ export default function Contact() {
                 </ul>
               </div>
               <div className="card h-fit max-w-6xl p-5 md:p-12" id="form">
-                <h2 className="mb-4 text-2xl font-bold dark:text-gray-100">Get in touch</h2>
+                <h2 className="mb-4 text-2xl font-bold dark:text-gray-100">
+                  Get in touch
+                </h2>
                 <form id="contactForm" action="#" onSubmit={handleSubmit}>
                   <div className="mb-6">
                     <div className="mx-0 mb-1 sm:mb-4">
