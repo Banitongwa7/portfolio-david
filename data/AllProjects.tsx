@@ -2,8 +2,9 @@ import Project1 from "../public/project/project1.png"
 import Project2 from "../public/project/project2.png"
 import Project3 from "../public/project/project3.png"
 import Project4 from "../public/project/project4.png"
+import Project5 from "../public/project/project5.jpg"
 import { FaPython, FaJava, FaNodeJs, FaAngular } from "react-icons/fa6";
-import { SiStreamlit, SiOpenai, SiExpress, SiTailwindcss } from "react-icons/si";
+import { SiStreamlit, SiOpenai, SiExpress, SiTailwindcss, SiDjango } from "react-icons/si";
 import { TbBrandNextjs } from "react-icons/tb";
 import { BiLogoSpringBoot } from "react-icons/bi";
 
@@ -54,6 +55,18 @@ const AllProjects = [
             springboot: <BiLogoSpringBoot />,
         },
         image: Project4,
+    },
+    {
+        id: 5,
+        name: "RecycleAI",
+        description: "A waste management & Recycling Copilot",
+        link: "https://github.com/Banitongwa7/RecycleAI",
+        techs: {
+            nextjs: <TbBrandNextjs />,
+            tailwind: <SiTailwindcss />,
+            django: <SiDjango />
+        },
+        image: Project5
     }
 ]
 
