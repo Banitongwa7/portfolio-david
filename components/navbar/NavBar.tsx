@@ -1,18 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { FaLinkedin, FaGithub, FaSquareXTwitter } from "react-icons/fa6";
 import AllLinks from "@/data/AllLinks";
 import Switcher from "../switcher/Switcher";
-import AnimatedCursor from "react-animated-cursor";
+//import AnimatedCursor from "react-animated-cursor";
 import { usePathname } from "next/navigation";
 
 export default function NavBar() {
   const sidebar = useRef<HTMLDivElement>(null);
   const sidebarBtn = useRef<SVGSVGElement>(null);
   const pathname = usePathname();
-  const [darkToggle, setDarkToggle] = useState<boolean>(false);
 
   const openSideBar = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
@@ -133,7 +132,7 @@ export default function NavBar() {
               <FaSquareXTwitter />
             </Link>
 
-            <Switcher setDarkToggle={setDarkToggle} />
+            <Switcher />
           </div>
         </div>
 
@@ -222,24 +221,10 @@ export default function NavBar() {
               <FaSquareXTwitter />
             </Link>
 
-            <Switcher setDarkToggle={setDarkToggle} />
+            <Switcher/>
           </div>
         </div>
       </header>
-      <AnimatedCursor
-        innerSize={8}
-        outerSize={35}
-        innerScale={1}
-        outerScale={2}
-        outerAlpha={0}
-        showSystemCursor={true}
-        innerStyle={{
-          backgroundColor: darkToggle ? "#fff" : "#1D2B53",
-        }}
-        outerStyle={{
-          border: darkToggle ? "2px solid #fff" : "2px solid #1D2B53",
-        }}
-      />
     </>
   );
 }

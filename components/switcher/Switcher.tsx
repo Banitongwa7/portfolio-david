@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 
-export default function Switcher({ setDarkToggle }: { setDarkToggle: (value: boolean) => void }) {
+export default function Switcher() {
   const [darkSide, setDarkSide] = useState<boolean>(false);
 
   const toggleDarkMode = (checked: boolean) => {
@@ -22,9 +22,6 @@ export default function Switcher({ setDarkToggle }: { setDarkToggle: (value: boo
     }
   }, [darkSide]);
 
-  useEffect(() => {
-    setDarkToggle(darkSide);
-  })
 
 
   return (
