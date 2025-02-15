@@ -39,7 +39,7 @@ export default function Home() {
             <Link
               href={AllLinks.needService}
               target="_blank"
-              className="text-[18px] font-normal py-2 px-4 text-white dark:text-white dark:hover:text-[#0f172a] duration-500 ease-in-out hover:shadow-md rounded-full bg-gray-900 dark:hover:bg-gray-200 group relative inline-flex items-center justify-center overflow-hidden dark:border dark:border-white"
+              className="text-[18px] font-normal py-2 px-4 text-[#0f172a] border border-[#0f172a] dark:text-white duration-500 ease-in-out hover:shadow-md rounded-full group relative inline-flex items-center justify-center overflow-hidden dark:border dark:border-white"
             >
               <span>Need my services?</span>
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">

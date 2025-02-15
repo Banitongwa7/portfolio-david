@@ -22,11 +22,9 @@ export default function Switcher() {
     }
   }, [darkSide]);
 
-
-
   return (
     <div className="p-2 bg-gray-200 dark:bg-gray-800 filter backdrop-blur rounded-lg border border-gray-300 dark:border-green-800" title="Toggle Dark Mode">
-     <DarkModeSwitch checked={darkSide} onChange={toggleDarkMode} size={20} />
+      <DarkModeSwitch checked={darkSide} onChange={toggleDarkMode} size={20} />
      </div>
   );
 }
