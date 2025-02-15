@@ -78,14 +78,6 @@ export default function About() {
               <p className="icon-language">French</p>
               <p>Native</p>
             </li>
-            <li>
-              <p className="icon-language">Lingala</p>
-              <p>Native</p>
-            </li>
-            <li>
-              <p className="icon-language">Swahili</p>
-              <p>Native</p>
-            </li>
           </ul>
         </div>
       </div>
