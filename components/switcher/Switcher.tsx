@@ -27,14 +27,14 @@ export default function Switcher() {
 
   return (
     <div
-      className="p-2 bg-gray-200 dark:bg-gray-800 filter backdrop-blur rounded-lg border border-gray-300 dark:border-green-800"
+      className=" bg-gray-200 p-1 dark:bg-gray-800 filter backdrop-blur rounded-lg border border-gray-300 dark:border-green-800 dark:hover:border-green-500"
       title="Toggle Dark Mode"
     >
       <button
         type="button"
         aria-label="Toggle Dark Mode"
         onClick={() => toggleDarkMode(!darkSide)}
-        className="h-12 w-12 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+        className="h-8 w-8 rounded-lg p-1"
       >
         <svg
           className="fill-violet-700 block dark:hidden"
