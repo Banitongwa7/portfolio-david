@@ -5,7 +5,7 @@ import React, { useRef, useEffect } from "react";
 import { FaLinkedin, FaGithub, FaSquareXTwitter } from "react-icons/fa6";
 import AllLinks from "@/data/AllLinks";
 import Switcher from "../switcher/Switcher";
-//import AnimatedCursor from "react-animated-cursor";
+import Annoucement from "../annoucement/Annoucement";
 import { usePathname } from "next/navigation";
 
 export default function NavBar() {
@@ -31,6 +31,7 @@ export default function NavBar() {
 
   return (
     <>
+      <Annoucement />
       <header className="bg-white dark:bg-[#0f172a] bg-opacity-80 filter backdrop-blur-sm dark:bg-opacity-80 sticky top-0 z-40">
         <div className="header top-0 flex items-center justify-between px-8 md:py-2 py-4">
           <h1 className="w-3/12">

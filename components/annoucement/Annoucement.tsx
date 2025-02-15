@@ -13,9 +13,8 @@ export default function Annoucement() {
         </p>
         <div className="words">
           <span className="word"></span>
-          <span className="word">launched</span>
-          <span className="word">online</span>
-          <span className="word">ready</span>
+          <span className="word">Updated</span>
+          <span className="word">v3.0</span>
         </div>
       </div>
     </div>
