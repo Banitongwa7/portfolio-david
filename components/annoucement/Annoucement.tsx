@@ -15,7 +15,7 @@ export default function Annoucement() {
           <span className="word"></span>
           <span className="word">Updated</span>
           <span className="word">v3.0</span>
-        </div>
+        </div>  
       </div>
     </div>
   );
