@@ -10,10 +10,6 @@ export default async function Blog() {
     headers: {
       "Content-Type": "application/json",
     },
-    next: {
-      revalidate: 3600, // 1 hour
-    }
-    ,
     body: JSON.stringify({
       query: `
       query Publication {
