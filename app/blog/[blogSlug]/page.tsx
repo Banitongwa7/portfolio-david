@@ -1,6 +1,8 @@
 import Image from "next/image";
 import type { Tag } from "@/types/types";
 import ProgressBar from "./progressbar";
+import { IoIosTime, IoMdEye } from "react-icons/io";
+import { BiSolidLike } from "react-icons/bi";
 
 export default async function PostArticle({
   params,
@@ -19,6 +21,9 @@ export default async function PostArticle({
       query Publication {
         publication(host: "daviddb.hashnode.dev") {
           post(slug: "${slug}") {
+            views
+            reactionCount
+            readTimeInMinutes
             brief
             coverImage{
               url
@@ -59,10 +64,30 @@ export default async function PostArticle({
           priority={true}
           className="object-cover w-[80%] md:w-[60%] h-[200px] sm:h-[300px] md:h-[500px] mx-auto"
         />
-        <div className="my-8 space-y-5">
+        <div className="my-8 space-y-5 flex flex-col items-center">
           <h1 className="text-2xl md:text-3xl text-center font-extrabold dark:text-gray-100">
             {article.data.publication.post.title}
           </h1>
+          <div className="flex items-center gap-5 text-[#6B7280] dark:text-gray-300">
+            <div className="flex items-center gap-2">
+              <BiSolidLike className="text-[#6B7280] dark:text-gray-300" />
+              <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                {article.data.publication.post.reactionCount}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <IoMdEye className="text-[#6B7280] dark:text-gray-300" />
+              <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                {article.data.publication.post.views}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <IoIosTime className="text-[#6B7280] dark:text-gray-300" />
+              <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                {article.data.publication.post.readTimeInMinutes} min read
+              </p>
+            </div>
+          </div>
           <div className="text-center text-gray-400">
             <p className="text-sm">
               <span className="font-bold">Published</span>{" "}

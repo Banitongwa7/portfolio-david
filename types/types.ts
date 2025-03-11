@@ -7,6 +7,8 @@ export type Post = {
     slug: string;
     coverImage: { url: string };
     author: { profilePicture: string; name: string };
+    views: number;
+    reactionCount: number;
   };
 };
 

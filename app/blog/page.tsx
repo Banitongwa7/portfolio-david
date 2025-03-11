@@ -1,17 +1,16 @@
 import Image from "next/image";
-import { IoIosTime } from "react-icons/io";
+import { IoIosTime, IoMdEye } from "react-icons/io";
+import { BiSolidLike } from "react-icons/bi";
 import Link from "next/link";
 import type { Post } from "@/types/types";
 
 export default async function Blog() {
-  
   const res = await fetch("https://gql.hashnode.com", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-store"
-    ,
+    cache: "no-store",
     body: JSON.stringify({
       query: `
       query Publication {
@@ -19,6 +18,8 @@ export default async function Blog() {
           posts(first: 10) {
             edges {
               node {
+                views
+                reactionCount
                 coverImage{
                   url
                 }
@@ -41,6 +42,7 @@ export default async function Blog() {
       `,
     }),
   });
+
   const allPostsData = await res.json();
 
   return (
@@ -52,7 +54,9 @@ export default async function Blog() {
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none w-full md:w-[80%] justify-items-center mx-auto">
           {allPostsData.data.publication.posts.edges.map(
             (post: Post, index: number) => (
-              <Link href={`/blog/${post.node.slug}`} key={index}
+              <Link
+                href={`/blog/${post.node.slug}`}
+                key={index}
                 className="w-[80%] border border-gray-200 p-6 rounded-md cursor-pointer  hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="overflow-hidden rounded-md">
@@ -80,10 +84,24 @@ export default async function Blog() {
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <IoIosTime className="text-[#6B7280] dark:text-gray-300" />
-                      <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
-                        {post.node.readTimeInMinutes} min read
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <BiSolidLike className="text-[#6B7280] dark:text-gray-300" />
+                        <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                          {post.node.reactionCount}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <IoMdEye className="text-[#6B7280] dark:text-gray-300" />
+                        <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                          {post.node.views}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <IoIosTime className="text-[#6B7280] dark:text-gray-300" />
+                        <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                          {post.node.readTimeInMinutes} min read
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <div className="my-[10px] w-[50%] mx-auto h-[1px] bg-gradient-to-r from-slate-100 via-slate-700 to-slate-100 dark:bg-gradient-to-r dark:from-slate-700 dark:via-slate-100 dark:to-slate-700">
