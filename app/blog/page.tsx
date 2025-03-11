@@ -84,24 +84,10 @@ export default async function Blog() {
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-2">
-                        <BiSolidLike className="text-[#6B7280] dark:text-gray-300" />
-                        <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
-                          {post.node.reactionCount}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <IoMdEye className="text-[#6B7280] dark:text-gray-300" />
-                        <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
-                          {post.node.views}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <IoIosTime className="text-[#6B7280] dark:text-gray-300" />
-                        <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
-                          {post.node.readTimeInMinutes} min read
-                        </p>
-                      </div>
+                      <IoIosTime className="text-[#6B7280] dark:text-gray-300" />
+                      <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                        {post.node.readTimeInMinutes} min read
+                      </p>
                     </div>
                   </div>
                   <div className="my-[10px] w-[50%] mx-auto h-[1px] bg-gradient-to-r from-slate-100 via-slate-700 to-slate-100 dark:bg-gradient-to-r dark:from-slate-700 dark:via-slate-100 dark:to-slate-700">
@@ -122,6 +108,21 @@ export default async function Blog() {
                         #{tag.name}
                       </p>
                     ))}
+                  </div>
+
+                  <div className="flex items-center justify-end gap-5 mt-5">
+                    <div className="flex items-center gap-2">
+                      <BiSolidLike className="text-[#6B7280] dark:text-gray-300" />
+                      <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                        {post.node.reactionCount}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <IoMdEye className="text-[#6B7280] dark:text-gray-300" />
+                      <p className="text-[#6B7280] dark:text-gray-300 font-mono text-[12px] md:text-[14px]">
+                        {post.node.views}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Link>
