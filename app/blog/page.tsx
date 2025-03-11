@@ -10,6 +10,8 @@ export default async function Blog() {
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-store"
+    ,
     body: JSON.stringify({
       query: `
       query Publication {
