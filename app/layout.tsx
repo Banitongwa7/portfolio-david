@@ -5,18 +5,25 @@ import { Analytics } from "@vercel/analytics/react";
 import "./../styles/globals.css";
 import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Portfolio | David",
   description: "Personal Portfolio created by David Banitongwa",
-  keywords: ["portfolio", "david", "banitongwa", "developer", "developer portfolio"],
+  keywords: [
+    "portfolio",
+    "david",
+    "banitongwa",
+    "developer",
+    "developer portfolio",
+  ],
   icons: "https://david-banitongwa.vercel.app/assets/icon.png",
   verification: {
     google: "jkG2w3_QBheX-Gux8DE8N80vTRwrbTFFvaiFWG8xVh4",
     other: {
       name: "msvalidate.01",
       content: "2BFB76FBE029311BC23600887905E043",
-    }
+    },
   },
   authors: {
     name: "David Banitongwa",
@@ -36,7 +43,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
 };
 
 export default function RootLayout({
@@ -51,6 +57,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics />
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="dbanitongwa" data-description="Support me on Buy me a coffee!" data-message="Thanks for your support 💖" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
       </body>
     </html>
   );
