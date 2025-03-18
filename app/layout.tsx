@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import "./../styles/globals.css";
 import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Portfolio | David",
@@ -50,6 +49,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -57,7 +57,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics />
-        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="dbanitongwa" data-description="Support me on Buy me a coffee!" data-message="Thanks for your support 💖" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="dbanitongwa" data-description="Support me on Buy me a coffee!" data-message="Thanks for your support 💖" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18" defer></script>
       </body>
     </html>
   );
