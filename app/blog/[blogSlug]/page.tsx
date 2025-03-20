@@ -3,6 +3,52 @@ import type { Tag } from "@/types/types";
 import ProgressBar from "./progressbar";
 import { IoIosTime, IoMdEye } from "react-icons/io";
 import { BiSolidLike } from "react-icons/bi";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ blogSlug: string }>;
+}): Promise<Metadata> {
+  const slug = (await params).blogSlug;
+  const res = await fetch("https://gql.hashnode.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+      query Publication {
+        publication(host: "daviddb.hashnode.dev") {
+          post(slug: "${slug}") {
+            brief
+            coverImage{
+              url
+            }
+            title
+          }
+        }
+      }
+      `,
+    }),
+  });
+  const article = await res.json();
+
+  return {
+    title: article.data.publication.post.title,
+    description: article.data.publication.post.brief,
+    openGraph: {
+      images: [
+        {
+          url: article.data.publication.post.coverImage.url,
+          width: 1000,
+          height: 500,
+          alt: article.data.publication.post.title,
+        },
+      ],
+    },
+  };
+}
 
 export default async function PostArticle({
   params,
