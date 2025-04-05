@@ -7,6 +7,7 @@ export default function LoadPage({loader, setLoader } : {loader: boolean, setLoa
     setTimeout(() => {
       setLoader(false);
     }, 3000);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

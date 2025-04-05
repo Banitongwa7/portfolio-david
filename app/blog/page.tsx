@@ -9,7 +9,7 @@ async function fetchBlogPosts() {
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "no-store",
+      next: { revalidate: 5 },
       body: JSON.stringify({
         query: `
         query Publication {
