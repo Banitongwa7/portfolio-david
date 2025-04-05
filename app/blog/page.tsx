@@ -9,7 +9,6 @@ async function fetchBlogPosts() {
       headers: {
         "Content-Type": "application/json",
       },
-      next: { revalidate: 5 },
       body: JSON.stringify({
         query: `
         query Publication {
@@ -54,6 +53,7 @@ async function fetchBlogPosts() {
 }
 
 export default async function Blog() {
+  
   const data = await fetchBlogPosts();
 
   if (!data) {
