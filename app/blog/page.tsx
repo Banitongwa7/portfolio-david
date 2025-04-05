@@ -1,8 +1,10 @@
 import type { Post } from "@/types/types";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import BlogSkeleton from "@/components/blog/BlogSkeleton";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function fetchBlogPosts() {
+  noStore();
   try {
     const res = await fetch("https://gql.hashnode.com", {
       method: "POST",
