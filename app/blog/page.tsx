@@ -1,8 +1,7 @@
 import type { Post } from "@/types/types";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import BlogSkeleton from "@/components/blog/BlogSkeleton";
-
-export const dynamic = "force-dynamic";
+import { unstable_noStore as noStore } from 'next/cache';
 
 async function fetchBlogPosts() {
   try {
@@ -11,8 +10,6 @@ async function fetchBlogPosts() {
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "no-store",
-      next: { revalidate: 0 },
       body: JSON.stringify({
         query: `
         query Publication {
@@ -57,7 +54,8 @@ async function fetchBlogPosts() {
 }
 
 export default async function Blog() {
-  
+
+  noStore();
   const data = await fetchBlogPosts();
 
   if (!data) {
