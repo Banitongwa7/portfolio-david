@@ -4,20 +4,24 @@ import ProgressBar from "./progressbar";
 import { IoIosTime, IoMdEye } from "react-icons/io";
 import { BiSolidLike } from "react-icons/bi";
 import type { Metadata } from "next";
-import { unstable_noStore as noStore } from "next/cache";
+
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ blogSlug: string }>;
 }): Promise<Metadata> {
-  noStore();
+  
   const slug = (await params).blogSlug;
   const res = await fetch("https://gql.hashnode.com", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-store",
+    next: { revalidate: 0 },
     body: JSON.stringify({
       query: `
       query Publication {
