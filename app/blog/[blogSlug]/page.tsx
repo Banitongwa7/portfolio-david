@@ -4,7 +4,6 @@ import ProgressBar from "./progressbar";
 import { IoIosTime, IoMdEye } from "react-icons/io";
 import { BiSolidLike } from "react-icons/bi";
 import type { Metadata } from "next";
-import { unstable_noStore as noStore } from 'next/cache';
 
 export async function generateMetadata({
   params,
@@ -18,6 +17,7 @@ export async function generateMetadata({
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-store",
     body: JSON.stringify({
       query: `
       query Publication {
@@ -57,8 +57,6 @@ export default async function PostArticle({
 }: {
   params: Promise<{ blogSlug: string }>;
 }) {
-  
-  noStore();
 
   const slug = (await params).blogSlug;
   const res = await fetch("https://gql.hashnode.com", {
@@ -66,6 +64,7 @@ export default async function PostArticle({
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-store",
     body: JSON.stringify({
       query: `
       query Publication {
@@ -90,8 +89,7 @@ export default async function PostArticle({
         }
       }
       `,
-    }),
-    cache: "no-store"
+    })
   });
   const article = await res.json();
 

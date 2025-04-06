@@ -5,60 +5,6 @@ import BlogPostCard from "@/components/blog/BlogPostCard";
 import BlogSkeleton from "@/components/blog/BlogSkeleton";
 import { useEffect, useState } from "react";
 
-/*
-async function fetchBlogPosts() {
-  try {
-    const res = await fetch("https://gql.hashnode.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: 'no-store',
-      next: { revalidate: 0 },
-      body: JSON.stringify({
-        query: `
-        query Publication {
-          publication(host: "daviddb.hashnode.dev") {
-            posts(first: 10) {
-              edges {
-                node {
-                  views
-                  reactionCount
-                  coverImage{
-                    url
-                  }
-                  title
-                  readTimeInMinutes
-                  tags{
-                    name
-                  }
-                  brief
-                  slug
-                  author{
-                    profilePicture
-                    name
-                  }
-                }
-              }
-            }
-          }
-        }
-        `,
-      })
-    });
-
-    if (!res.ok) {
-      return null
-    }
-
-    return await res.json();
-  } catch (error) {
-    console.error('Error fetching blog posts:', error);
-    return null;
-  }
-}
-*/
-
 
 export default function Blog() {
   const [data, setData] = useState<{ data: { publication: { posts: { edges: Post[] } } } } | null>(null);
@@ -72,7 +18,6 @@ export default function Blog() {
             "Content-Type": "application/json",
           },
           cache: 'no-store',
-          next: { revalidate: 0 },
           body: JSON.stringify({
             query: `
             query Publication {
@@ -118,6 +63,8 @@ export default function Blog() {
     fetchBlogPosts();
   }, []);
 
+  console.log(data)
+
   if (!data) {
     return (
       <section className="w-full pb-[100px]">
@@ -135,8 +82,6 @@ export default function Blog() {
     );
   }
 
-  const posts = data.data.publication.posts.edges;
-
   return (
     <section className="w-full pb-[100px]">
       <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
@@ -144,7 +89,7 @@ export default function Blog() {
       </h2>
       <div>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 list-none w-full md:w-[80%] justify-items-center mx-auto">
-          {posts.map((post: Post, index: number) => (
+          {data.data.publication.posts.edges.map((post: Post, index: number) => (
             <BlogPostCard key={index} post={post} />
           ))}
         </ul>
