@@ -40,6 +40,7 @@ async function fetchBlogPosts() {
         }
         `,
       }),
+      cache: 'no-store'
     });
 
     if (!res.ok) {

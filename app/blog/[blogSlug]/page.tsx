@@ -91,6 +91,7 @@ export default async function PostArticle({
       }
       `,
     }),
+    cache: "no-store"
   });
   const article = await res.json();
 
