@@ -63,8 +63,6 @@ export default function Blog() {
     fetchBlogPosts();
   }, []);
 
-  console.log(data)
-
   if (!data) {
     return (
       <section className="w-full pb-[100px]">
