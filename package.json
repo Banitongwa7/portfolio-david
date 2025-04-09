@@ -11,6 +11,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.2.0",
     "framer-motion": "^11.16.4",
     "next": "15.1.4",
     "nodemailer": "^6.10.0",
