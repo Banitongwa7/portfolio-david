@@ -69,7 +69,9 @@ export default async function PostArticle({
       query: `
       query Publication {
         publication(host: "daviddb.hashnode.dev") {
+          id
           post(slug: "${slug}") {
+            id
             views
             reactionCount
             readTimeInMinutes
@@ -83,6 +85,7 @@ export default async function PostArticle({
               html
             }
             tags{
+              id
               name
             }
           }

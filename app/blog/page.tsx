@@ -22,9 +22,11 @@ export default function Blog() {
             query: `
             query Publication {
               publication(host: "daviddb.hashnode.dev") {
+                id
                 posts(first: 10) {
                   edges {
                     node {
+                      id
                       views
                       reactionCount
                       coverImage{
@@ -38,6 +40,7 @@ export default function Blog() {
                       brief
                       slug
                       author{
+                        id
                         profilePicture
                         name
                       }
