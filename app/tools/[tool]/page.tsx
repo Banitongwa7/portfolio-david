@@ -20,5 +20,9 @@ export default async function ToolItem({
         return (
             <div className='h-screen text-center text-3xl font-bold text-white'>Tool 3</div>
         )
+    }else {
+        return (
+            <div className='text-2xl text-center font-bold w-full h-screen place-content-center dark:text-white text-[#0f172a]'>404 Page Not Found</div>
+          )
     }
 }
