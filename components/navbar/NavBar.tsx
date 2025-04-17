@@ -87,12 +87,19 @@ export default function NavBar() {
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
                   pathname === "/blog" ||
-                  pathname === "/blog/[slug]"
+                  pathname === "/blog/[blogSlug]"
                     ? "active"
                     : ""
                 }`}
               >
                 <Link href="/blog">Blog</Link>
+              </li>
+              <li
+                className={`p-4 hover:text-green-500 cursor-pointer ${
+                  pathname === "/tools" || pathname === "/tools/[tool]" ? "active" : ""
+                }`}
+              >
+                <Link href="/tools">Tools</Link>
               </li>
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
@@ -172,13 +179,24 @@ export default function NavBar() {
               <li
                 className={`mb-2 p-3 rounded-md ${
                   pathname === "/blog" ||
-                  pathname === "/blog/[slug]"
+                  pathname === "/blog/[blogSlug]"
                     ? "active"
                     : ""
                 }`}
               >
                 <Link href="/blog" className="block">
                   Blog
+                </Link>
+              </li>
+              <li
+                className={`mb-2 p-3 rounded-md ${
+                  pathname === "/tools" || pathname === "/tools/[tool]"
+                    ? "active"
+                    : ""
+                }`}
+              >
+                <Link href="/tools" className="block">
+                  Tools
                 </Link>
               </li>
               <li
