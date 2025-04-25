@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./../styles/globals.css";
 import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Portfolio | David",
@@ -59,7 +60,28 @@ export default function RootLayout({
         <Footer />
         <Analytics />
         <SpeedInsights />
-        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="dbanitongwa" data-description="Support me on Buy me a coffee!" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18" defer></script>
+     
+        <Script
+          id="tawk-script"
+          strategy="lazyOnload"
+          async
+          defer
+        >
+          {`
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/680b9cb34b378d190bfa0fa3/1ipmlo7jl';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+          `}
+        </Script>
+
+        {/*  <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="dbanitongwa" data-description="Support me on Buy me a coffee!" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18" defer></script> */}
+       
       </body>
     </html>
   );
