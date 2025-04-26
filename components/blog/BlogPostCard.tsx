@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoIosTime, IoMdEye } from "react-icons/io";
 import { BiSolidLike } from "react-icons/bi";
-import type { Post } from "@/types/types";
+import type { PostType } from "@/types/types";
 
 interface BlogPostCardProps {
-  post: Post;
+  post: PostType;
 }
 
 export default function BlogPostCard({ post }: BlogPostCardProps) {
