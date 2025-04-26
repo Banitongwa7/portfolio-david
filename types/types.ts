@@ -1,4 +1,6 @@
-export type Post = {
+import { JSX } from "react";
+
+export type PostType = {
   node: {
     title: string;
     readTimeInMinutes: number;
@@ -12,6 +14,16 @@ export type Post = {
   };
 };
 
-export type Tag = {
+export type TagType = {
   name: string;
 };
+
+export type ToolType = {
+  id: string;
+  name: string;
+  description: string;
+  icon: JSX.Element;
+  slug: string;
+  developer: string;
+  publishedAt: string;
+}
