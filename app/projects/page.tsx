@@ -7,7 +7,7 @@ import AllProjects from "@/data/AllProjects";
 export default function Projects() {
   return (
       <section className="w-full">
-        <h2 className="text-[30px] font-extrabold pl-10 mt-[50px] mx-auto w-[80%] dark:text-gray-100 text-center">
+        <h2 className="text-[30px] font-extrabold mt-[50px] mx-auto w-[80%] dark:text-gray-100 text-center">
           Projects
         </h2>
         <p className="text-center text-gray-400 mt-4 mb-10">

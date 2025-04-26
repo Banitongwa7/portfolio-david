@@ -69,7 +69,7 @@ export default function Blog() {
   if (!data) {
     return (
       <section className="w-full pb-[100px]">
-        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
+        <h2 className="text-[30px] font-extrabold my-[50px] mx-auto w-[80%] dark:text-gray-100">
           Blog
         </h2>
         <div>
