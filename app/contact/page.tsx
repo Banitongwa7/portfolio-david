@@ -39,17 +39,16 @@ export default function Contact() {
   return (
       <section className="w-full pb-[100px]" id="contact">
         <ToastContainer />
-        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
+        <h2 className="text-[30px] font-extrabold pl-10 mt-[50px] mx-auto w-[80%] dark:text-gray-100 text-center">
           Contact
         </h2>
+        <p className="text-center text-lg text-gray-600 dark:text-slate-400 mt-4 mb-10">
+          {"I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision."}
+        </p>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-stretch justify-center">
             <div className="grid md:grid-cols-2">
-              <div className="h-full pr-6">
-                <p className="mt-3 mb-12 text-lg text-gray-600 dark:text-slate-400">
-                  Discuss a project or just want to say hi ? my inbox is open
-                  for all.
-                </p>
+              <div className="h-full pr-6 flex flex-col justify-center items-center md:items-start">
                 <ul className="mb-6 md:mb-0">
                   <li className="flex">
                     <div className="flex h-10 w-10 items-center justify-center rounded">

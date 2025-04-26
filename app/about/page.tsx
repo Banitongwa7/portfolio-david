@@ -8,8 +8,8 @@ export default function About() {
   return (
     <section className="w-full pb-[100px]">
       <div className="bg-gray-100 dark:bg-[#0f172a] py-[50px] ">
-        <h2 className="text-[30px] font-extrabold pl-10 pb-10 mx-auto w-[80%] dark:text-gray-100">
-          About Me
+        <h2 className="text-[30px] font-extrabold pl-10 pb-10 mx-auto w-[80%] dark:text-gray-100 text-center">
+          Welcome to My Portfolio
         </h2>
         <div className="flex flex-col items-center justify-center gap-8">
           <div className="bg-gray-200 p-1 rounded-full">

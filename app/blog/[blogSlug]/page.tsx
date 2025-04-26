@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Tag } from "@/types/types";
+import type { TagType } from "@/types/types";
 import ProgressBar from "./progressbar";
 import { IoIosTime, IoMdEye } from "react-icons/io";
 import { BiSolidLike } from "react-icons/bi";
@@ -159,7 +159,7 @@ export default async function PostArticle({
       </div>
 
       <ul className="w-[80%] md:w-[40%] mx-auto flex flex-wrap mb-10">
-        {article.data.publication.post.tags.map((tag: Tag, index: number) => (
+        {article.data.publication.post.tags.map((tag: TagType, index: number) => (
           <li
             key={index}
             className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"

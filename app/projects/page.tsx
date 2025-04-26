@@ -7,9 +7,12 @@ import AllProjects from "@/data/AllProjects";
 export default function Projects() {
   return (
       <section className="w-full">
-        <h2 className="text-[30px] font-extrabold pl-10 my-[50px] mx-auto w-[80%] dark:text-gray-100">
+        <h2 className="text-[30px] font-extrabold pl-10 mt-[50px] mx-auto w-[80%] dark:text-gray-100 text-center">
           Projects
         </h2>
+        <p className="text-center text-gray-400 mt-4 mb-10">
+          {"Here are some projects I've worked on. I hope you find them useful and inspiring for your own journey!"}
+        </p>
 
         <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           <div className="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
