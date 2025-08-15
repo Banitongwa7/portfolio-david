@@ -8,9 +8,28 @@ export default function Home() {
   const currentDate = new Date()
   const currentDay = Number(String(currentDate.getDate()).padStart(2, "0"));
   const currentMonth = currentDate.getMonth() + 1;
+  const currentYear = currentDate.getFullYear();
   const quote = Quotes.find(
     (quote) => quote.day === currentDay && quote.month === currentMonth
   ) || Quotes[0];
+
+  const formatCurrentDate = () => {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return `${monthNames[currentMonth - 1]} ${currentDay}, ${currentYear}`;
+  }
 
   return (
     <section className="flex flex-col items-center justify-center gap-8 mb-[100px] mt-40">
@@ -70,8 +89,8 @@ export default function Home() {
           <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
         </svg>
         {/* title Quote of the day */}
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-300 mb-9 text-center">Quote of the day</h2>
-
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-300 text-center">Quote of the day</h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-9 text-center mt-2">{formatCurrentDate()}</p>
         <blockquote>
           <p className="text-2xl italic font-medium text-gray-900 dark:text-white">{`"${quote.quote}"`}</p>
         </blockquote>
