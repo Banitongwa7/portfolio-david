@@ -1,5 +1,0 @@
-﻿{
-  "Description": "Fichier de vérification de la propriété du domaine pour Microsoft 365 : placer dans la racine du site web",
-  "Domain": "david-banitongwa.vercel.app",
-  "Id": "8dc05904-8335-4f0d-801c-6df09b8b3e0a"
-}
