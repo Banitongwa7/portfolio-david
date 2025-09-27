@@ -72,6 +72,13 @@ export default function NavBar() {
               </li>
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
+                  pathname === "/quote" ? "active" : ""
+                }`}
+              >
+                <Link href="/quote">Quote</Link>
+              </li>
+              <li
+                className={`p-4 hover:text-green-500 cursor-pointer ${
                   pathname === "/about" ? "active" : ""
                 }`}
               >
@@ -156,6 +163,15 @@ export default function NavBar() {
               >
                 <Link href="/" className="block">
                   Home
+                </Link>
+              </li>
+                <li
+                className={`mb-2 p-3 rounded-md ${
+                  pathname === "/quote" ? "active" : ""
+                }`}
+              >
+                <Link href="/quote" className="block">
+                  Quote
                 </Link>
               </li>
               <li
