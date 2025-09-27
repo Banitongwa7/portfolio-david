@@ -1,4 +1,5 @@
 import { HiColorSwatch } from "react-icons/hi";
+import { FaHeadphones } from 'react-icons/fa'
 import type { ToolType } from "@/types/types";
 
 const AllTools: ToolType[] = [
@@ -11,6 +12,15 @@ const AllTools: ToolType[] = [
         developer: "David B.",
         publishedAt: "2025-04-26"
     },
+    {
+        id: "0002",
+        name: "Lofi Space",
+        description: "A relaxing lofi music player with ambient sounds to help you focus and unwind.",
+        icon: <FaHeadphones />,
+        slug: "/tools/tool/tool2",
+        developer: "David B.",
+        publishedAt: "2025-04-26"
+    }
 ]
 
 export default AllTools;
