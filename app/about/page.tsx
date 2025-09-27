@@ -3,127 +3,179 @@ import Image from "next/image";
 import Skills from "@/data/Skills";
 import Experience from "@/data/Experience";
 import { MdOutlineWork } from "react-icons/md";
+import { FaLaptopCode } from "react-icons/fa";
 
 export default function About() {
   return (
-    <section className="w-full pb-[100px]">
-      <div className="bg-gray-100 dark:bg-[#0f172a] py-[50px] ">
-        <h2 className="text-[30px] font-extrabold pb-10 mx-auto w-[80%] dark:text-gray-100 text-center">
-          Welcome to My Portfolio
+    <section className="w-full pb-20 transition duration-500">
+      {/* 1. Header and Bio Section - Retained from previous iteration */}
+      <div className="py-20 border-b border-gray-200 dark:border-gray-800">
+        <h2 className="text-4xl font-extrabold mb-12 text-center text-gray-900 dark:text-gray-100">
+          A Bit About Me
         </h2>
-        <div className="flex flex-col items-center justify-center gap-8">
-          <div className="bg-gray-200 p-1 rounded-full">
+
+        <div className="flex flex-col items-center justify-center gap-8 max-w-4xl mx-auto px-4">
+          {/* Profile Picture */}
+          <div className="p-1 rounded-full border-4 border-indigo-500 dark:border-cyan-400 shadow-xl shadow-indigo-300/50 dark:shadow-cyan-600/30">
             <Image
               src="/assets/david.jpg"
               alt="Picture of david"
-              width={200}
-              height={200}
-              className="rounded-full h-[200px] w-[200px] object-cover"
+              width={180}
+              height={180}
+              className="rounded-full h-[180px] w-[180px] object-cover"
             />
           </div>
-          <div className="text-center">
-            <h2 className="text-[30px] font-medium dark:text-gray-100">
+
+          {/* Title Block */}
+          <div className="text-center space-y-1">
+            <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
               David Banitongwa
-            </h2>
-            <p className="text-[20px] font-mono text-[#6B7280]">
+            </h3>
+            <p className="text-xl font-medium text-indigo-600 dark:text-cyan-400">
               Software Engineer and Microsoft Power-Platform Developer
             </p>
           </div>
-        </div>
 
-        <div className="p-[1px] w-[80%] mx-auto my-[50px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 rounded">
-          <div className=" bg-gray-100 dark:bg-slate-800 p-[50px] dark:text-white text-[#0f172a] rounded">
-            <p className="font-['Poppins', sans-serif] text-[20px]">
+          {/* Main Bio Card */}
+          <div className="mt-8 max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl border-l-4 border-indigo-500 dark:border-cyan-400">
+            <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed font-light">
               Passionate and versatile{" "}
-              <span className="font-bold">Fullstack web developer</span>, I
-              create tailored solutions (websites, applications, etc.) that
-              perfectly fit your needs. My skills include{" "}
-              <span className="font-bold">MERN Stack</span>,{" "}
-              <span className="font-bold">NextJS</span>,{" "}
-              <span className="font-bold">Python</span>, and{" "}
-              <span className="font-bold">Microsoft Power Platform</span>.
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">
+                Full-stack Web Developer
+              </strong>
+              , I create tailored solutions (websites, applications, etc.) that
+              perfectly fit your needs. My core competencies include the{" "}
+              <strong className="font-semibold">MERN Stack</strong>,{" "}
+              <strong className="font-semibold">Next.js</strong>,{" "}
+              <strong className="font-semibold">Python</strong>, and the{" "}
+              <strong className="font-semibold">
+                Microsoft Power Platform
+              </strong>
+              .
             </p>
           </div>
         </div>
       </div>
 
-      <div className="w-[80%] pt-[80px] pb-[80px] mx-auto space-y-5">
-        <h3 className="text-[30px] font-mono text-center dark:text-gray-100">
+      {/* 2. Technical Skills Section - Retained */}
+      <div className="w-[90%] md:w-[80%] pt-20 pb-16 mx-auto">
+        <h3 className="text-4xl font-extrabold text-center mb-16 text-gray-900 dark:text-gray-100 flex items-center justify-center gap-4">
+          <FaLaptopCode className="text-indigo-500 dark:text-cyan-400 text-3xl" />
           Technical Skills
         </h3>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 justify-items-center text-center pt-[40px] skills-custom">
-          {Skills.map((skill, index) => (
-            <li key={index}>
-              {skill.icon}
-              <p>{skill.name}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="font-mono text-[20px] text-[#6B7280] text-center mt-8">
-          And more
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 justify-items-center">
+          {Skills &&
+            Skills.map((skill, index) => (
+              <div
+                key={index}
+                className="group flex flex-col items-center p-4 w-full cursor-pointer 
+                         transition-all duration-300 ease-in-out transform 
+                         hover:scale-105 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-lg"
+              >
+                {/* Skill Icon */}
+                <div className="text-5xl mb-3 text-gray-600 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors duration-300">
+                  {skill.icon}
+                </div>
+                {/* Skill Name */}
+                <p className="text-base font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-700 dark:group-hover:text-cyan-300 transition-colors duration-300">
+                  {skill.name}
+                </p>
+              </div>
+            ))}
+        </div>
+        <p className="text-base text-gray-500 dark:text-gray-400 text-center mt-12">
+          Proficient across a diverse range of modern technologies and
+          platforms.
         </p>
       </div>
 
-      <div className="bg-gray-100 dark:bg-[#0f172a] py-[80px]">
-        <div className="w-[80%] mx-auto space-y-5">
-          <h3 className="text-[30px] font-mono text-center dark:text-gray-100">
-            Language Skills
+      {/* 3. Language Skills Section - Retained */}
+      <div className="py-16 border-b border-t border-gray-200 dark:border-gray-800">
+        <div className="w-[90%] md:w-[80%] mx-auto">
+          <h3 className="text-3xl font-extrabold text-center mb-12 text-gray-900 dark:text-gray-100">
+            Language Proficiency
           </h3>
-          <ul className="pt-[40px] grid grid-cols-1 md:grid-cols-2 justify-items-center text-center skills-custom">
-            <li>
-              <p className="icon-language">English</p>
-              <p>Professional</p>
+          <ul className="grid grid-cols-2 max-w-md mx-auto gap-8 text-center">
+            {/* English */}
+            <li className="p-4 border-b-2 border-indigo-500 dark:border-cyan-400">
+              <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                English
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Professional Working Proficiency
+              </p>
             </li>
-            <li>
-              <p className="icon-language">French</p>
-              <p>Native</p>
+            {/* French */}
+            <li className="p-4 border-b-2 border-indigo-500 dark:border-cyan-400">
+              <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                French
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Native Proficiency
+              </p>
             </li>
           </ul>
         </div>
       </div>
 
+      {/* 4. Experience Section - NEW TIMELINE UI */}
       <div
-        id="education-experience-custom"
-        className=" w-[80%] mx-auto pt-[80px]"
+        id="professional-journey"
+        className="w-[90%] md:w-[70%] mx-auto pt-20"
       >
-        <div className="experience space-y-16">
-          <h3 className="text-[30px] font-mono text-center dark:text-gray-100">
-            Experience
-          </h3>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-            {Experience.map((exp, index) => (
-              <li
-                className="rounded p-[1px] bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400"
-                key={index}
-              >
-                <div className="space-x-3 rounded p-5 bg-gray-100 dark:bg-slate-800 dark:text-white text-[#0f172a]">
-                  <div className="flex items-center justify-between px-2 py-2 md:px-4 md:py-2">
-                    <div className="text-[12px] md:text-[15px] font-semibold">
+        <h3 className="text-4xl font-extrabold text-center mb-16 text-gray-900 dark:text-gray-100">
+          Professional Journey 🚀
+        </h3>
+
+        {/* Timeline Container */}
+        <div className="relative border-l-4 border-indigo-200 dark:border-cyan-900 ml-4 md:ml-12">
+          {Experience &&
+            Experience.map((exp, index) => (
+              <div key={index} className="mb-10 ml-6 md:ml-10">
+                {/* Timeline Dot (Pill) */}
+                <div
+                  className="absolute w-6 h-6 rounded-full -left-3 md:-left-3.5 mt-1.5 
+                            bg-indigo-500 dark:bg-cyan-400 border-4 border-white dark:border-gray-900 shadow-md"
+                ></div>
+
+                {/* Timeline Card Content */}
+                <div
+                  className="p-5 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 
+                            transform transition duration-300 hover:shadow-2xl hover:border-indigo-500 dark:hover:border-cyan-400"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    {/* Date */}
+                    <div className="text-sm font-semibold text-indigo-700 dark:text-cyan-400 tracking-wide">
                       {exp.date}
                     </div>
-                    <div className="bg-white p-2 rounded-full">
-                      <MdOutlineWork className="text-[#0f172a]" />
+                    {/* Icon */}
+                    <div className="p-1.5 rounded-full bg-indigo-100 dark:bg-cyan-900/50 text-indigo-600 dark:text-cyan-400">
+                      <MdOutlineWork className="w-5 h-5" />
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <p className="font-semibold">{exp.position}</p>
-                    <div className="flex items-center gap-[10px]">
-                      <p className="text-[12px] font-mono">
-                        {exp.company} - {exp.location}
-                      </p>
-                      <Image
-                        src={exp.icon}
-                        width={20}
-                        height={20}
-                        alt="icon country"
-                        className="rounded"
-                      />
-                    </div>
+
+                  {/* Position and Company */}
+                  <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                    {exp.position}
+                  </p>
+
+                  <div className="flex items-center gap-2 mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    <p className="font-medium">
+                      {exp.company} - {exp.location}
+                    </p>
+                    {/* Country Icon */}
+                    <Image
+                      src={exp.icon}
+                      width={16}
+                      height={16}
+                      alt={`Flag for ${exp.location}`}
+                      className="rounded"
+                    />
                   </div>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
         </div>
       </div>
     </section>
