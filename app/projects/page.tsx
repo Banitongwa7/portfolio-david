@@ -15,7 +15,7 @@ export default function Projects() {
           Projects
         </h2>
         <p className="mt-4 text-xl font-light text-gray-600 dark:text-gray-400">
-          In-depth looks at my recent and most impactful development work.
+          {"Here are some projects I've worked on. I hope you find them useful and inspiring for your own journey!"}
         </p>
       </div>
 
