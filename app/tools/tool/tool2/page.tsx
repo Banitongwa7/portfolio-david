@@ -1,210 +1,288 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
-import { FaPlay, FaPause, FaCloudRain, FaWind, FaVolumeUp, FaVolumeOff, FaHeadphones } from 'react-icons/fa'; // Added FaHeadphones
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { FaPlay, FaPause, FaCloudRain, FaWind, FaVolumeUp, FaVolumeOff, FaHeadphones } from 'react-icons/fa';
 import { IoThunderstormOutline } from "react-icons/io5";
 import { PiWavesBold } from "react-icons/pi";
 
-// --- Placeholder Audio URLs (Ensure these are publicly accessible or in your /public folder) ---
-const LOFI_MUSIC_URL = '/audio/lofi.mp3'; 
-const RAIN_SOUND_URL = '/audio/rain.wav';
-const WIND_SOUND_URL = '/audio/wind.wav';
-const WAVES_SOUND_URL = '/audio/waves.wav';
-const THUNDER_SOUND_URL = '/audio/thunder.wav';
-// ---------------------------------------------------------------------------------
+// --- Audio URLs from Blob Storage ---
+const LOFI_MUSIC_URL = 'https://rcrywjjangbgljsl.public.blob.vercel-storage.com/audio/lofi.mp3';
+const RAIN_SOUND_URL = 'https://rcrywjjangbgljsl.public.blob.vercel-storage.com/audio/rain.mp3';
+const WIND_SOUND_URL = 'https://rcrywjjangbgljsl.public.blob.vercel-storage.com/audio/wind.mp3';
+const WAVES_SOUND_URL = 'https://rcrywjjangbgljsl.public.blob.vercel-storage.com/audio/waves.mp3';
+const THUNDER_SOUND_URL = 'https://rcrywjjangbgljsl.public.blob.vercel-storage.com/audio/thunder.mp3';
+// ------------------------------------
 
-// --- LOFI BACKGROUND IMAGE (IMPORTANT: Replace this with your actual image path) ---
+// --- LOFI BACKGROUND IMAGE ---
 const LOFI_BACKGROUND_IMAGE = '/images/lofi/window.gif'; 
-// Example: A cozy image of a desk, rain on a window, or a peaceful night scene with a laptop.
-// ---------------------------------------------------------------------------------
+// -----------------------------
 
-// Helper component for sound control
-// Added optional 'defaultVolume' prop for better control mixing
-const VolumeControl = ({ icon: Icon, label, audioRef, defaultVolume = 0.5 }: { 
+// Define an Interface for the extended Audio Ref
+interface AudioElementWithInit extends HTMLAudioElement {
+    initializeVolume?: (initialPlay: boolean) => void;
+}
+
+// ----------------------------------------------------------------------
+// 🔊 VOLUME CONTROL COMPONENT: Manages individual track state
+// ----------------------------------------------------------------------
+
+const VolumeControl = ({ icon: Icon, label, audioRef, defaultVolume = 0.5, isLofiTrack = false }: { 
     icon: React.ComponentType<{ className?: string }>, 
     label: string, 
-    audioRef: React.RefObject<HTMLAudioElement>,
-    defaultVolume?: number // Optional prop for initial volume
+    audioRef: React.RefObject<AudioElementWithInit>,
+    defaultVolume?: number,
+    isLofiTrack?: boolean
 }) => {
-  const [volume, setVolume] = useState(defaultVolume);
-  const [isMuted, setIsMuted] = useState(false);
+    // We track the non-zero volume level
+    const [actualVolume, setActualVolume] = useState(defaultVolume);
+    const [isMuted, setIsMuted] = useState(false);
+    const [hasUserInteracted, setHasUserInteracted] = useState(false); 
+    // State for individual play status
+    const [isPlaying, setIsPlaying] = useState(false); 
 
-  useEffect(() => {
-    if (audioRef.current) {
-      // Set initial volume
-      audioRef.current.volume = defaultVolume; 
-      audioRef.current.loop = true; 
-    }
-  }, [audioRef, defaultVolume]);
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-      if (newVolume > 0 && isMuted) {
-        setIsMuted(false);
-      }
-    }
-  };
-
-  const toggleMute = () => {
-    const newMutedState = !isMuted;
-    setIsMuted(newMutedState);
-    if (audioRef.current) {
-      if (newMutedState) {
-        audioRef.current.volume = 0;
-      } else {
-        // Restore to saved volume level
-        audioRef.current.volume = volume; 
-      }
-    }
-  };
-
-  return (
-    // Applied Glassmorphism style: semi-transparent white/blur
-    <div className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 transition duration-300 hover:bg-white/20">
-      <Icon className="text-xl text-cyan-300 shrink-0" />
-      <span className="text-sm font-medium w-16 text-gray-100 shrink-0">{label}</span>
-      
-      {/* Mute Button */}
-      <button onClick={toggleMute} className="text-lg text-gray-300 hover:text-white transition duration-200" aria-label={`Toggle mute for ${label}`}>
-        {isMuted || volume === 0 ? <FaVolumeOff /> : <FaVolumeUp />}
-      </button>
-
-      {/* Volume Slider */}
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.05"
-        // Use the saved volume if not muted, otherwise 0
-        value={isMuted ? 0 : volume} 
-        onChange={handleVolumeChange}
-        className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-lg accent-cyan-400"
-        disabled={isMuted} // Disable slider interaction when muted
-      />
-      <audio
-        ref={audioRef}
-        src={
-          label === 'Lofi Track'
-            ? LOFI_MUSIC_URL
-            : label === 'Rain'
-            ? RAIN_SOUND_URL
-            : label === 'Wind'
-            ? WIND_SOUND_URL
-            : label === 'Waves'
-            ? WAVES_SOUND_URL
-            : label === 'Thunder'
-            ? THUNDER_SOUND_URL
-            : undefined
+    // Audio setup (looping)
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.loop = true;
+            
+            if (!hasUserInteracted) {
+                 // Ambient tracks start fully silent in state
+                 if (!isLofiTrack) {
+                    setActualVolume(0);
+                    audioRef.current.volume = 0;
+                 } else {
+                    audioRef.current.volume = defaultVolume;
+                 }
+            }
         }
-        preload="auto"
-      />
-    </div>
-  );
-};
+    }, [audioRef, defaultVolume, hasUserInteracted, isLofiTrack]);
 
-// Main Component
-export default function Tool2() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  // Ensure we use null as the initial value for useRef when using TS
-  const lofiRef = useRef<HTMLAudioElement>(null!) as React.RefObject<HTMLAudioElement>;
-  const rainRef = useRef<HTMLAudioElement>(null!) as React.RefObject<HTMLAudioElement>;
-  const windRef = useRef<HTMLAudioElement>(null!) as React.RefObject<HTMLAudioElement>;
-  const wavesRef = useRef<HTMLAudioElement>(null!) as React.RefObject<HTMLAudioElement>;
-  const thunderRef = useRef<HTMLAudioElement>(null!) as React.RefObject<HTMLAudioElement>;
+    const playAudio = useCallback(() => {
+        const audio = audioRef.current;
+        if (audio && audio.paused) {
+            audio.play().then(() => {
+                setIsPlaying(true);
+            }).catch(e => console.error(`Audio playback failed for ${label}:`, e));
+        }
+    }, [audioRef, label]);
 
-  // Play/Pause logic for the main Lofi track and ambient sounds
-  const togglePlayPause = () => {
-    const nextIsPlaying = !isPlaying;
-    setIsPlaying(nextIsPlaying);
+    const pauseAudio = useCallback(() => {
+        const audio = audioRef.current;
+        if (audio && !audio.paused) {
+            audio.pause();
+            setIsPlaying(false);
+        }
+    }, [audioRef]);
 
-    const playOrPause = (ref: React.RefObject<HTMLAudioElement | null>) => {
-      if (ref.current) {
-        // Attempt to play only if volume is above zero (or not muted by user)
-        if (nextIsPlaying) {
-          // Play starts muted tracks too, user will un-mute via controls
-          ref.current.play().catch(e => console.error("Audio playback failed:", e));
+    const handlePlayToggle = () => {
+        setHasUserInteracted(true);
+        
+        if (isPlaying) {
+            pauseAudio();
         } else {
-          ref.current.pause();
+            // When playing, set volume to the actual volume (or default if still 0) and un-mute
+            if (audioRef.current) {
+                const targetVolume = actualVolume > 0 ? actualVolume : defaultVolume;
+                audioRef.current.volume = targetVolume;
+                setActualVolume(targetVolume);
+                setIsMuted(false);
+            }
+            playAudio();
         }
-      }
     };
 
-    // Play/pause all tracks
-    playOrPause(lofiRef);
-    playOrPause(rainRef);
-    playOrPause(windRef);
-    playOrPause(wavesRef);
-    playOrPause(thunderRef);
 
-  };
+    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newVolume = parseFloat(e.target.value);
+        setHasUserInteracted(true); 
 
-  useEffect(() => {
-    if (lofiRef.current) {
-      lofiRef.current.loop = true; 
-    }
-  }, []);
+        if (audioRef.current) {
+            audioRef.current.volume = newVolume;
+
+            if (newVolume > 0) {
+                setActualVolume(newVolume);
+                if (isMuted) setIsMuted(false);
+                
+                // Start playback when volume is increased from zero
+                if (audioRef.current.paused) {
+                    playAudio();
+                }
+
+            } else { // newVolume is 0
+                // Pause playback when volume hits zero
+                pauseAudio();
+            }
+        }
+    };
+
+    const toggleMute = () => {
+        setHasUserInteracted(true);
+
+        if (isMuted) {
+            // Unmute: Restore to saved volume and ensure play
+            if (audioRef.current) {
+                audioRef.current.volume = actualVolume;
+            }
+            setIsMuted(false);
+            if (!isPlaying) {
+                playAudio();
+            }
+        } else {
+            // Mute: set volume to 0 and pause playback
+            if (audioRef.current) {
+                audioRef.current.volume = 0;
+            }
+            setIsMuted(true);
+            pauseAudio(); // Ensure pause on mute
+        }
+    };
+    
+    // The mobile volume initialization function is technically redundant now that 
+    // the card button controls everything, but we keep the structure for safety.
+    const initializeVolume = (initialPlay: boolean) => {
+        if (audioRef.current && initialPlay && !hasUserInteracted && isLofiTrack) { 
+            audioRef.current.volume = defaultVolume;
+            setActualVolume(defaultVolume); 
+            setIsPlaying(true);
+        }
+    };
+    
+    // Attach initializeVolume to the ref object
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.initializeVolume = initializeVolume;
+        }
+    }, [audioRef, defaultVolume, hasUserInteracted, isLofiTrack]);
 
 
-  return (
-    <section 
-      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-      style={{ 
-        backgroundImage: `url(${LOFI_BACKGROUND_IMAGE})`, 
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed' 
-      }}
-    >
-        {/* Overlay for darkening the image and improving readability */}
-        <div className="absolute inset-0 bg-black/50 backdrop-brightness-75 z-0"></div>
+    const getAudioSrc = () => {
+        switch (label) {
+            case 'Lofi Track': return LOFI_MUSIC_URL;
+            case 'Rain': return RAIN_SOUND_URL;
+            case 'Wind': return WIND_SOUND_URL;
+            case 'Waves': return WAVES_SOUND_URL;
+            case 'Thunder': return THUNDER_SOUND_URL;
+            default: return undefined;
+        }
+    };
 
-      {/* Main Control Card */}
-      <div className="w-full max-w-lg relative z-10 bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl space-y-8 animate-in fade-in duration-1000 border border-white/20">
+    // The value displayed on the slider.
+    const sliderValue = isMuted ? 0 : actualVolume;
+    // UI state for active track
+    const isActive = isPlaying && !isMuted && sliderValue > 0;
+    
+    // Dynamic styling for visual feedback
+    const activeClass = isActive 
+        ? 'bg-cyan-600 hover:bg-cyan-700 shadow-cyan-500/50' 
+        : 'bg-white/10 hover:bg-white/20';
         
-        {/* Header and Title */}
-        <header className="text-center space-y-2">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white flex items-center justify-center gap-2">
-            <FaHeadphones className="text-cyan-400" /> Lofi Focus
-          </h1>
-          <p className="text-gray-300 text-md">Your perfect coding and study atmosphere.</p>
-        </header>
+    const activeBorder = isActive 
+        ? 'border-cyan-400 shadow-xl'
+        : 'border-white/20';
 
-        {/* Main Play/Pause Control */}
-        <div className="flex justify-center">
-          <button
-            onClick={togglePlayPause}
-            className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all duration-300 
-                        ${isPlaying ? 'bg-red-500 hover:bg-red-600' : 'bg-cyan-500 hover:bg-cyan-600'} 
-                        text-white shadow-lg transform hover:scale-105 border-2 border-white/30`}
-            aria-label={isPlaying ? "Pause Music" : "Play Music"}
-          >
-            {isPlaying ? <FaPause /> : <FaPlay />}
-          </button>
+
+    return (
+        <div className={`flex items-center gap-4 p-4 backdrop-blur-sm rounded-lg border transition duration-300 ${activeClass} ${activeBorder}`}>
+            
+            {/* Play/Pause Button for the individual track */}
+            <button
+                onClick={handlePlayToggle}
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all duration-200 shrink-0
+                            ${isPlaying ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'} 
+                            text-white shadow-md`}
+                aria-label={isPlaying ? `Pause ${label}` : `Play ${label}`}
+            >
+                {isPlaying ? <FaPause /> : <FaPlay />}
+            </button>
+            
+            <Icon className="text-xl text-cyan-300 shrink-0" />
+            <span className="text-sm font-medium w-16 text-gray-100 shrink-0">{label}</span>
+            
+            {/* Mute Button */}
+            <button onClick={toggleMute} className="text-lg text-gray-300 hover:text-white transition duration-200" aria-label={`Toggle mute for ${label}`}>
+                {isMuted || sliderValue === 0 ? <FaVolumeOff /> : <FaVolumeUp />}
+            </button>
+
+            {/* Volume Slider */}
+            <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value={sliderValue} 
+                onChange={handleVolumeChange}
+                className="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer range-lg accent-cyan-400"
+            />
+            <audio 
+                ref={audioRef} 
+                src={getAudioSrc()} 
+                preload="metadata" 
+            />
         </div>
+    );
+};
 
-        {/* Music Control */}
-        <div className="space-y-4">
-            {/* Switched FaPlay to FaHeadphones for better semantic meaning */}
-            <VolumeControl icon={FaHeadphones} label="Lofi Track" audioRef={lofiRef} defaultVolume={0.7} /> 
-        </div>
+// ----------------------------------------------------------------------
+// 🏠 MAIN COMPONENT: LofiSpace
+// ----------------------------------------------------------------------
 
-        {/* Ambient Controls */}
-        <div className="pt-4 space-y-4 border-t border-white/20">
-          <p className="text-sm font-semibold uppercase text-gray-300 tracking-wider">Ambient Mixer</p>
-          <VolumeControl icon={FaCloudRain} label="Rain" audioRef={rainRef} defaultVolume={0.4} />
-          <VolumeControl icon={FaWind} label="Wind" audioRef={windRef} defaultVolume={0.0} />
-          <VolumeControl icon={PiWavesBold} label="Waves" audioRef={wavesRef} defaultVolume={0.0} />
-          <VolumeControl icon={IoThunderstormOutline} label="Thunder" audioRef={thunderRef} defaultVolume={0.4} />
-        </div>
-        
-        {/* Footer/Note */}
-        <footer className="text-center text-xs text-gray-400 pt-4">
-            <p>Built for better focus.</p>
-        </footer>
+export default function Tool2() {
+    // Refs for all tracks
+    const lofiRef = useRef<AudioElementWithInit | null>(null);
+    const rainRef = useRef<AudioElementWithInit | null>(null);
+    const windRef = useRef<AudioElementWithInit | null>(null);
+    const wavesRef = useRef<AudioElementWithInit | null>(null);
+    const thunderRef = useRef<AudioElementWithInit | null>(null);
+    
+    // NOTE: The unused handleLofiPlay function has been removed.
 
-      </div>
-    </section>
-  );
+    return (
+        <section 
+            className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+            style={{ 
+                backgroundImage: `url(${LOFI_BACKGROUND_IMAGE})`, 
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center',
+                backgroundAttachment: 'fixed' 
+            }}
+        >
+            <div className="absolute inset-0 bg-black/50 backdrop-brightness-75 z-0"></div>
+
+            {/* Main Control Container */}
+            <div className="w-full max-w-xl relative z-10 bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl space-y-8 animate-in fade-in duration-1000 border border-white/20">
+                
+                <header className="text-center space-y-2">
+                    <h1 className="text-4xl font-extrabold tracking-tight text-white flex items-center justify-center gap-2">
+                        <FaHeadphones className="text-cyan-400" /> Lofi Space
+                    </h1>
+                    <p className="text-gray-300 text-md">Your perfect coding and study atmosphere.</p>
+                </header>
+
+                {/* 🎧 LOFI TRACK CARD */}
+                <div className="p-4 rounded-xl space-y-4 bg-black/10 border border-cyan-400/50 shadow-lg shadow-cyan-500/10">
+                    <h2 className="text-xl font-bold text-cyan-400">Lofi Track</h2>
+                    <VolumeControl 
+                        icon={FaHeadphones} 
+                        label="Lofi Track" 
+                        audioRef={lofiRef as React.RefObject<AudioElementWithInit>} 
+                        defaultVolume={0.7} 
+                        isLofiTrack={true}
+                    />
+                </div>
+
+                {/* 🌧️ AMBIENT MIXER CARD */}
+                <div className="p-4 rounded-xl space-y-4 bg-black/10 border border-white/20 shadow-lg">
+                    <h2 className="text-xl font-bold text-gray-300">Ambient Mixer</h2>
+                    <VolumeControl icon={FaCloudRain} label="Rain" audioRef={rainRef as React.RefObject<AudioElementWithInit>} defaultVolume={0.4} />
+                    <VolumeControl icon={FaWind} label="Wind" audioRef={windRef as React.RefObject<AudioElementWithInit>} defaultVolume={0.4} /> 
+                    <VolumeControl icon={PiWavesBold} label="Waves" audioRef={wavesRef as React.RefObject<AudioElementWithInit>} defaultVolume={0.4} />
+                    <VolumeControl icon={IoThunderstormOutline} label="Thunder" audioRef={thunderRef as React.RefObject<AudioElementWithInit>} defaultVolume={0.4} />
+                </div>
+                
+                <footer className="text-center text-xs text-gray-400 pt-4">
+                    <p>Built for better focus.</p>
+                </footer>
+
+            </div>
+        </section>
+    );
 }
