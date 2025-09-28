@@ -20,7 +20,16 @@ const AllTools: ToolType[] = [
         slug: "/tools/tool/tool2",
         developer: "David B.",
         publishedAt: "2025-04-26"
-    }
+    },
+    {
+        id: "0003",
+        name: "Image Optimizer",
+        description: "Optimize and convert images to different formats with adjustable quality settings.",
+        icon: <HiColorSwatch />,
+        slug: "/tools/tool/tool3",
+        developer: "David B.",
+        publishedAt: "2025-04-26"
+    },
 ]
 
 export default AllTools;
