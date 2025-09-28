@@ -1,6 +1,7 @@
 import { HiColorSwatch } from "react-icons/hi";
 import { FaHeadphones, FaStickyNote, FaImage } from 'react-icons/fa'
 import { IoQrCode } from "react-icons/io5";
+import { GrTextAlignFull } from "react-icons/gr";
 import type { ToolType } from "@/types/types";
 
 const AllTools: ToolType[] = [
@@ -49,6 +50,15 @@ const AllTools: ToolType[] = [
         developer: "David B.",
         publishedAt: "2025-09-28"
     },
+    {
+        id: "0006",
+        name: "Text Analyzer",
+        description: "Analyze your text to get insights like word count, character count, sentence count, and estimated reading time.",
+        icon: <GrTextAlignFull />,
+        slug: "/tools/tool/tool6",
+        developer: "David B.",
+        publishedAt: "2025-09-28"
+    }
 ]
 
 export default AllTools;

@@ -4,6 +4,8 @@ import Skills from "@/data/Skills";
 import Experience from "@/data/Experience";
 import { MdOutlineWork } from "react-icons/md";
 import { FaLaptopCode } from "react-icons/fa";
+import { IoLanguage } from "react-icons/io5";
+import { HiMiniRocketLaunch } from "react-icons/hi2";
 
 export default function About() {
   return (
@@ -93,7 +95,8 @@ export default function About() {
       {/* 3. Language Skills Section - Retained */}
       <div className="py-16 border-b border-t border-gray-200 dark:border-gray-800">
         <div className="w-[90%] md:w-[80%] mx-auto">
-          <h3 className="text-3xl font-extrabold text-center mb-12 text-gray-900 dark:text-gray-100">
+          <h3 className="text-4xl font-extrabold text-center mb-16 text-gray-900 dark:text-gray-100 flex items-center justify-center gap-4">
+          <IoLanguage className="text-indigo-500 dark:text-cyan-400 text-3xl" />
             Language Proficiency
           </h3>
           <ul className="grid grid-cols-2 max-w-md mx-auto gap-8 text-center">
@@ -124,8 +127,9 @@ export default function About() {
         id="professional-journey"
         className="w-[90%] md:w-[70%] mx-auto pt-20"
       >
-        <h3 className="text-4xl font-extrabold text-center mb-16 text-gray-900 dark:text-gray-100">
-          Professional Journey 🚀
+        <h3 className="text-4xl font-extrabold text-center mb-16 text-gray-900 dark:text-gray-100 flex items-center justify-center gap-4">
+          <HiMiniRocketLaunch className="text-indigo-500 dark:text-cyan-400 text-3xl" />
+          Professional Journey
         </h3>
 
         {/* Timeline Container */}
