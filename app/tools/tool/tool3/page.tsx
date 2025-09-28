@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { jsPDF } from "jspdf";
 
-export default function Tool3_QRGenerator() {
+export default function Tool3() {
   const [text, setText] = useState("https://yourwebsite.com");
   const [size, setSize] = useState(200);
   const [format, setFormat] = useState("png");
@@ -58,7 +58,7 @@ export default function Tool3_QRGenerator() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+    <section className="min-h-screen flex items-center justify-center p-6">
       <div className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-xl max-w-md w-full space-y-6">
         
         <header className="text-center">

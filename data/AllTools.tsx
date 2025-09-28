@@ -1,5 +1,6 @@
 import { HiColorSwatch } from "react-icons/hi";
-import { FaHeadphones } from 'react-icons/fa'
+import { FaHeadphones, FaStickyNote, FaImage } from 'react-icons/fa'
+import { IoQrCode } from "react-icons/io5";
 import type { ToolType } from "@/types/types";
 
 const AllTools: ToolType[] = [
@@ -19,16 +20,34 @@ const AllTools: ToolType[] = [
         icon: <FaHeadphones />,
         slug: "/tools/tool/tool2",
         developer: "David B.",
-        publishedAt: "2025-04-26"
+        publishedAt: "2025-09-27"
     },
     {
         id: "0003",
-        name: "Image Optimizer",
-        description: "Optimize and convert images to different formats with adjustable quality settings.",
-        icon: <HiColorSwatch />,
+        name: "QR Code Generator",
+        description: "Create and download QR codes instantly.",
+        icon: <IoQrCode />,
         slug: "/tools/tool/tool3",
         developer: "David B.",
-        publishedAt: "2025-04-26"
+        publishedAt: "2025-09-28"
+    },
+    {
+        id: "0004",
+        name: "Sticky Notes",
+        description: "A simple and intuitive sticky notes app to jot down your thoughts and ideas.",
+        icon: <FaStickyNote />,
+        slug: "/tools/tool/tool4",
+        developer: "David B.",
+        publishedAt: "2025-09-28"
+    },
+    {
+        id: "0005",
+        name: "Image Compressor",
+        description: "Compress images to reduce file size while maintaining quality.",
+        icon: <FaImage />,
+        slug: "/tools/tool/tool5",
+        developer: "David B.",
+        publishedAt: "2025-09-28"
     },
 ]
 
