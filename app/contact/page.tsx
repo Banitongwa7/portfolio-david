@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdCall, IoMdMail } from "react-icons/io";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function Contact() {
   const [fullName, setFullName] = useState("");
@@ -38,7 +37,6 @@ export default function Contact() {
 
   return (
     <section className="w-full py-20 bg-gray-50 dark:bg-gray-900" id="contact">
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       
       <div className="mx-auto max-w-4xl text-center mb-16 px-4">
         <p className="text-base font-semibold tracking-wide text-green-600 dark:text-green-400 uppercase">

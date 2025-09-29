@@ -1,5 +1,5 @@
 import { HiColorSwatch } from "react-icons/hi";
-import { FaHeadphones, FaStickyNote, FaImage } from 'react-icons/fa'
+import { FaHeadphones, FaStickyNote, FaImage, FaLock } from 'react-icons/fa'
 import { IoQrCode } from "react-icons/io5";
 import { GrTextAlignFull } from "react-icons/gr";
 import type { ToolType } from "@/types/types";
@@ -58,7 +58,16 @@ const AllTools: ToolType[] = [
         slug: "/tools/tool/tool6",
         developer: "David B.",
         publishedAt: "2025-09-28"
-    }
+    },
+    {
+        id: "0007",
+        name: "Password Generator",
+        description: "Generate strong and secure passwords to protect your online accounts.",
+        icon: <FaLock />,
+        slug: "/tools/tool/tool7",
+        developer: "David B.",
+        publishedAt: "2025-09-29"
+    },
 ]
 
 export default AllTools;
