@@ -2,6 +2,7 @@ import { HiColorSwatch } from "react-icons/hi";
 import { FaHeadphones, FaStickyNote, FaImage, FaLock } from 'react-icons/fa'
 import { IoQrCode } from "react-icons/io5";
 import { GrTextAlignFull } from "react-icons/gr";
+import { LuSpeech } from "react-icons/lu";
 import type { ToolType } from "@/types/types";
 
 const AllTools: ToolType[] = [
@@ -72,7 +73,7 @@ const AllTools: ToolType[] = [
         id: "0008",
         name: "Text to Speech",
         description: "Convert written text into spoken words using text-to-speech technology.",
-        icon: <FaHeadphones />,
+        icon: <LuSpeech />,
         slug: "/tools/tool/tool8",
         developer: "David B.",
         publishedAt: "2025-09-29"
