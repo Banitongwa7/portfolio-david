@@ -325,3 +325,18 @@ ul.skills-custom li p.icon-language {
 }
 
 }
+
+
+@keyframes visualizer {
+  0%, 100% {
+    height: 0.5rem;
+  }
+  50% {
+    height: 1.5rem;
+  }
+}
+
+.animate-visualizer {
+  animation: visualizer 1s infinite ease-in-out;
+}
+

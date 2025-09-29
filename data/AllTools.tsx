@@ -68,6 +68,15 @@ const AllTools: ToolType[] = [
         developer: "David B.",
         publishedAt: "2025-09-29"
     },
+    {
+        id: "0008",
+        name: "Text to Speech",
+        description: "Convert written text into spoken words using text-to-speech technology.",
+        icon: <FaHeadphones />,
+        slug: "/tools/tool/tool8",
+        developer: "David B.",
+        publishedAt: "2025-09-29"
+    },
 ]
 
 export default AllTools;

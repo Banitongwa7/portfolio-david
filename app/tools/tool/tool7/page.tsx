@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { FaCopy, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
-const Tool3PasswordGenerator = () => {
+const Tool7 = () => {
   const [length, setLength] = useState(16);
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
@@ -142,4 +142,4 @@ const Tool3PasswordGenerator = () => {
   );
 };
 
-export default Tool3PasswordGenerator;
+export default Tool7;
