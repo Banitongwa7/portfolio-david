@@ -2,6 +2,7 @@ import { JSX } from "react";
 
 export type PostType = {
   node: {
+    id: string;
     title: string;
     readTimeInMinutes: number;
     tags: { name: string }[];

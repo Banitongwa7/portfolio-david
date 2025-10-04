@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-8 py-20 md:py-32 lg:py-40 px-4 min-h-[80vh]">
       <div className="bg-gray-200 relative p-1 rounded-full">
-        <div className="absolute w-full h-full rounded-full bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 z-[-1] animate-[ping_5s_linear_infinite] opacity-20"></div>
+        <div className="absolute w-full h-full rounded-full bg-gradient-to-r from-green-400 via-cyan-300 to-emerald-400 z-[-1] inset-0 mx-auto animate-[ping_5s_linear_infinite] opacity-20"></div>
         <Image
           src="/assets/david.jpg"
           alt="Picture of david"
