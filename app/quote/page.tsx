@@ -1,15 +1,11 @@
-import React from "react";
+"use client"
+import { useState, useEffect } from "react";
 import Quotes from "@/data/quotes.json";
 
 export default function Quote() {
-  const currentDate = new Date();
-  const currentDay = currentDate.getDate();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentYear = currentDate.getFullYear();
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
-  const quote =
-    Quotes.find((q) => q.day === currentDay && q.month === currentMonth) ||
-    Quotes[0];
+  const quote = Quotes.find((q) => q.day === currentDate.getDate() && q.month === (currentDate.getMonth() + 1)) || Quotes[0];
 
   const formatCurrentDate = () => {
     const monthNames = [
@@ -26,8 +22,12 @@ export default function Quote() {
       "November",
       "December",
     ];
-    return `${monthNames[currentMonth - 1]} ${currentDay}, ${currentYear}`;
+    return `${monthNames[(currentDate.getMonth() + 1) - 1]} ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
   };
+
+  useEffect(() => {
+      setCurrentDate(new Date());
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 p-4 sm:p-8 transition duration-300">
