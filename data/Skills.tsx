@@ -12,8 +12,10 @@ import { DiLinux } from "react-icons/di";
 import { BsMicrosoft } from "react-icons/bs";
 import { MdOutlineDesignServices } from "react-icons/md";
 import { RiFlowChart } from "react-icons/ri";
-import { IoIosApps } from "react-icons/io";
+import { IoIosApps, IoMdCloud  } from "react-icons/io";
 import { FiCode } from "react-icons/fi";
+import { RiBrain2Fill } from "react-icons/ri";
+import { VscGraph } from "react-icons/vsc";
 
 
 const Skills = [
@@ -84,7 +86,7 @@ const Skills = [
     },
     {
         id: 14,
-        name: "PowerApps",
+        name: "Power Platform",
         icon: <IoIosApps />,
     },
     {
@@ -92,6 +94,26 @@ const Skills = [
         name: "PowerFx",
         icon: <FiCode />,
     },
+    {
+        id: 16,
+        name: "Cloud Computing",
+        icon: <IoMdCloud />,
+    },
+    {
+        id: 17,
+        name: "React Native",
+        icon: <FaReact />,
+    },
+    {
+        id: 18,
+        name: "Artificial Intelligence",
+        icon: <RiBrain2Fill />,
+    },
+    {
+        id: 19,
+        name: "Data Visualization",
+        icon: <VscGraph />,
+    }
 ]
 
 export default Skills

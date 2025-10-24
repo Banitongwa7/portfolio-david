@@ -40,17 +40,21 @@ export default function About() {
             <p className="text-base md:text-lg text-gray-700 dark:text-gray-200 leading-relaxed font-light">
               Passionate and versatile{" "}
               <strong className="font-semibold text-indigo-600 dark:text-cyan-400">
-                Full-stack Web Developer
+                Software Engineer
               </strong>
-              , I create tailored solutions (websites, applications, etc.) that
-              perfectly fit your needs. My core competencies include the{" "}
+              , I design and build modern digital solutions, from dynamic websites to intelligent applications that perfectly fit your needs. My expertise spans the{" "}
               <strong className="font-semibold">MERN Stack</strong>,{" "}
               <strong className="font-semibold">Next.js</strong>,{" "}
+              <strong className="font-semibold">React</strong>,{" "}
+              <strong className="font-semibold">React Native</strong>,{" "}
+              <strong className="font-semibold">TypeScript</strong>,{" "}
+              <strong className="font-semibold">NodeJS</strong>,{" "}
+              <strong className="font-semibold">Database</strong>,{" "}
               <strong className="font-semibold">Python</strong>, and the{" "}
               <strong className="font-semibold">
-                Microsoft Power Platform
+                Microsoft Power Platform.
               </strong>
-              .
+              {"I’m also deeply interested in AI, data, cloud technologies, and emerging innovations shaping the future of software development."}
             </p>
           </div>
         </div>
