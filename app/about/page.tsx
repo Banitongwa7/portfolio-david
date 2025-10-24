@@ -43,18 +43,20 @@ export default function About() {
                 Software Engineer
               </strong>
               , I design and build modern digital solutions, from dynamic websites to intelligent applications that perfectly fit your needs. My expertise spans the{" "}
-              <strong className="font-semibold">MERN Stack</strong>,{" "}
-              <strong className="font-semibold">Next.js</strong>,{" "}
-              <strong className="font-semibold">React</strong>,{" "}
-              <strong className="font-semibold">React Native</strong>,{" "}
-              <strong className="font-semibold">TypeScript</strong>,{" "}
-              <strong className="font-semibold">NodeJS</strong>,{" "}
-              <strong className="font-semibold">Database</strong>,{" "}
-              <strong className="font-semibold">Python</strong>, and the{" "}
-              <strong className="font-semibold">
-                Microsoft Power Platform.
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">MERN Stack</strong>,{" "}
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Next.js</strong>,{" "}
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">React</strong>,{" "}
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">React Native</strong>,{" "}
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">TypeScript</strong>,{" "}
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">NodeJS</strong>,{" "}
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Database</strong>,{" "}
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Python</strong>, the{" "}
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">
+                Microsoft Power Platform{" "}
               </strong>
-              {"I’m also deeply interested in AI, data, cloud technologies, and emerging innovations shaping the future of software development."}
+              and
+              <strong className="font-semibold text-indigo-600 dark:text-cyan-400"> More</strong>.{" "}
+              {"I’m also skilled in "}<strong className="font-semibold text-indigo-600 dark:text-cyan-400">AI</strong>, <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Data</strong>, <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Cloud technologies</strong>, and <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Emerging innovations</strong> shaping the future of software development.
             </p>
           </div>
         </div>

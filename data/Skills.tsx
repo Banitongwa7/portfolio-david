@@ -21,98 +21,98 @@ import { VscGraph } from "react-icons/vsc";
 const Skills = [
     {
         id: 1,
-        name: "TypeScript",
-        icon: <BiLogoTypescript />,
-    },
-    {
-        id: 2,
-        name: "React JS",
-        icon: <FaReact />,
-    },
-    {
-        id: 3,
-        name: "Next JS",
-        icon: <TbBrandNextjs />,
-    },
-    {
-        id: 4,
-        name: "Node JS",
-        icon: <FaNodeJs />,
-    },
-    {
-        id: 5,
-        name: "Python",
-        icon: <FaPython />,
-    },
-    {
-        id: 6,
-        name: "Tailwind CSS",
-        icon: <BiLogoTailwindCss />,
-    },
-    {
-        id: 7,
-        name: "Bootstrap",
-        icon: <FaBootstrap />,
-    },
-    {
-        id: 8,
-        name: "Git",
-        icon: <FaGitAlt />,
-    },
-    {
-        id: 9,
-        name: "Linux",
-        icon: <DiLinux />,
-    },
-    {
-        id: 10,
-        name: "Microsoft",
-        icon: <BsMicrosoft />,
-    },
-    {
-        id: 11,
-        name: "Database SQL & NoSQL",
-        icon: <FaDatabase />,
-    },
-    {
-        id: 12,
-        name: "UI/UX Design",
-        icon: <MdOutlineDesignServices />,
-    },
-    {
-        id: 13,
-        name: "Automatization",
-        icon: <RiFlowChart />,
-    },
-    {
-        id: 14,
-        name: "Power Platform",
-        icon: <IoIosApps />,
-    },
-    {
-        id: 15,
-        name: "PowerFx",
-        icon: <FiCode />,
-    },
-    {
-        id: 16,
-        name: "Cloud Computing",
-        icon: <IoMdCloud />,
-    },
-    {
-        id: 17,
-        name: "React Native",
-        icon: <FaReact />,
-    },
-    {
-        id: 18,
         name: "Artificial Intelligence",
         icon: <RiBrain2Fill />,
     },
     {
-        id: 19,
+        id: 2,
+        name: "Automatization",
+        icon: <RiFlowChart />,
+    },
+    {
+        id: 3,
+        name: "Bootstrap",
+        icon: <FaBootstrap />,
+    },
+    {
+        id: 4,
+        name: "Cloud Computing",
+        icon: <IoMdCloud />,
+    },
+    {
+        id: 5,
+        name: "Database SQL & NoSQL",
+        icon: <FaDatabase />,
+    },
+    {
+        id: 6,
+        name: "Git",
+        icon: <FaGitAlt />,
+    },
+    {
+        id: 7,
+        name: "Linux",
+        icon: <DiLinux />,
+    },
+    {
+        id: 8,
+        name: "Microsoft",
+        icon: <BsMicrosoft />,
+    },
+    {
+        id: 9,
+        name: "Next JS",
+        icon: <TbBrandNextjs />,
+    },
+    {
+        id: 10,
+        name: "Power Platform",
+        icon: <IoIosApps />,
+    },
+    {
+        id: 11,
+        name: "PowerFx",
+        icon: <FiCode />,
+    },
+    {
+        id: 12,
+        name: "Python",
+        icon: <FaPython />,
+    },
+    {
+        id: 13,
+        name: "React JS",
+        icon: <FaReact />,
+    },
+    {
+        id: 14,
+        name: "React Native",
+        icon: <FaReact />,
+    },
+    {
+        id: 15,
+        name: "Tailwind CSS",
+        icon: <BiLogoTailwindCss />,
+    },
+    {
+        id: 16,
+        name: "UI/UX Design",
+        icon: <MdOutlineDesignServices />,
+    },
+    {
+        id: 17,
         name: "Data Visualization",
         icon: <VscGraph />,
+    },
+    {
+        id: 18,
+        name: "TypeScript",
+        icon: <BiLogoTypescript />,
+    },
+    {
+        id: 19,
+        name: "Node JS",
+        icon: <FaNodeJs />,
     }
 ]
 
