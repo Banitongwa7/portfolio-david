@@ -145,7 +145,7 @@ export default function NavBar() {
 
             <Link
               href={AllLinks.twitter}
-              className="p-4 text-[20px] hover:text-green-500 duration-200 mr-5"
+              className="p-4 text-[20px] hover:text-green-500 duration-200"
               target="_blank"
               rel="noreferrer"
             >
@@ -163,7 +163,7 @@ export default function NavBar() {
 
             <Link
               href={AllLinks.hashnode}
-              className="p-4 text-[20px] hover:text-green-500 duration-200"
+              className="p-4 text-[20px] hover:text-green-500 duration-200 mr-5"
               target="_blank"
               rel="noreferrer"
             >
