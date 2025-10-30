@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import React, { useRef, useEffect } from "react";
-import { FaLinkedin, FaGithub, FaSquareXTwitter } from "react-icons/fa6";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaSquareXTwitter,
+  FaBehance,
+  FaHashnode,
+} from "react-icons/fa6";
 import AllLinks from "@/data/AllLinks";
 import Switcher from "../switcher/Switcher";
 import { usePathname } from "next/navigation";
@@ -93,8 +99,7 @@ export default function NavBar() {
               </li>
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
-                  pathname === "/blog" ||
-                  pathname === "/blog/[blogSlug]"
+                  pathname === "/blog" || pathname === "/blog/[blogSlug]"
                     ? "active"
                     : ""
                 }`}
@@ -103,7 +108,9 @@ export default function NavBar() {
               </li>
               <li
                 className={`p-4 hover:text-green-500 cursor-pointer ${
-                  pathname === "/tools" || pathname === "/tools/[tool]" ? "active" : ""
+                  pathname === "/tools" || pathname === "/tools/[tool]"
+                    ? "active"
+                    : ""
                 }`}
               >
                 <Link href="/tools">Tools</Link>
@@ -145,6 +152,24 @@ export default function NavBar() {
               <FaSquareXTwitter />
             </Link>
 
+            <Link
+              href={AllLinks.behance}
+              className="p-4 text-[20px] hover:text-green-500 duration-200"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaBehance />
+            </Link>
+
+            <Link
+              href={AllLinks.hashnode}
+              className="p-4 text-[20px] hover:text-green-500 duration-200"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaHashnode />
+            </Link>
+
             <Switcher />
           </div>
         </div>
@@ -165,7 +190,7 @@ export default function NavBar() {
                   Home
                 </Link>
               </li>
-                <li
+              <li
                 className={`mb-2 p-3 rounded-md ${
                   pathname === "/quote" ? "active" : ""
                 }`}
@@ -194,8 +219,7 @@ export default function NavBar() {
               </li>
               <li
                 className={`mb-2 p-3 rounded-md ${
-                  pathname === "/blog" ||
-                  pathname === "/blog/[blogSlug]"
+                  pathname === "/blog" || pathname === "/blog/[blogSlug]"
                     ? "active"
                     : ""
                 }`}
@@ -254,7 +278,25 @@ export default function NavBar() {
               <FaSquareXTwitter />
             </Link>
 
-            <Switcher/>
+            <Link
+              href={AllLinks.behance}
+              className="p-4 text-[20px] hover:text-green-500 duration-200"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaBehance />
+            </Link>
+
+            <Link
+              href={AllLinks.hashnode}
+              className="p-4 text-[20px] hover:text-green-500 duration-200"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaHashnode />
+            </Link>
+
+            <Switcher />
           </div>
         </div>
       </header>
