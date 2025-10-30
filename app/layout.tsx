@@ -9,6 +9,8 @@ import Footer from "@/components/footer/Footer";
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import ClarityComponent from "@/utils/Clarity";
+
 
 export const metadata: Metadata = {
   title: "Portfolio | David",
@@ -61,6 +63,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics />
+        <ClarityComponent />
         <SpeedInsights />
         <Script id="tawk-script" strategy="lazyOnload" defer>
           {`
