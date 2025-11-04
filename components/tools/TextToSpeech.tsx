@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { FaPlay, FaPause, FaStop } from "react-icons/fa";
 
-const Tool8 = () => {
+export default function TextToSpeech() {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [languages, setLanguages] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
@@ -172,6 +172,4 @@ const Tool8 = () => {
       </div>
     </div>
   );
-};
-
-export default Tool8;
+}

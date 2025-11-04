@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const TextAnalyzer = () => {
+export default function TextAnalyzer () {
   const [text, setText] = useState("");
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
@@ -44,5 +44,3 @@ const Stat = ({ label, value }: { label: string; value: string | number }) => (
     <p className="text-xl font-semibold text-gray-700 dark:text-white">{value}</p>
   </div>
 );
-
-export default TextAnalyzer;

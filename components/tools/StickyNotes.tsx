@@ -12,7 +12,7 @@ type Note = {
   color: string;
 };
 
-export default function Tool4() {
+export default function StickyNotes() {
   const [notes, setNotes] = useState<Note[]>([]);
 
   const colors = [

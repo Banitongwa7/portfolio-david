@@ -21,10 +21,6 @@ interface AudioElementWithInit extends HTMLAudioElement {
     initializeVolume?: (initialPlay: boolean) => void;
 }
 
-// ----------------------------------------------------------------------
-// 🔊 VOLUME CONTROL COMPONENT: Manages individual track state
-// ----------------------------------------------------------------------
-
 const VolumeControl = ({ icon: Icon, label, audioRef, defaultVolume = 0.5, isLofiTrack = false }: { 
     icon: React.ComponentType<{ className?: string }>, 
     label: string, 
@@ -221,19 +217,13 @@ const VolumeControl = ({ icon: Icon, label, audioRef, defaultVolume = 0.5, isLof
     );
 };
 
-// ----------------------------------------------------------------------
-// 🏠 MAIN COMPONENT: LofiSpace
-// ----------------------------------------------------------------------
-
-export default function Tool2() {
+export default function LofiSpace() {
     // Refs for all tracks
     const lofiRef = useRef<AudioElementWithInit | null>(null);
     const rainRef = useRef<AudioElementWithInit | null>(null);
     const windRef = useRef<AudioElementWithInit | null>(null);
     const wavesRef = useRef<AudioElementWithInit | null>(null);
     const thunderRef = useRef<AudioElementWithInit | null>(null);
-    
-    // NOTE: The unused handleLofiPlay function has been removed.
 
     return (
         <section 
@@ -269,7 +259,6 @@ export default function Tool2() {
                     />
                 </div>
 
-                {/* 🌧️ AMBIENT MIXER CARD */}
                 <div className="p-4 rounded-xl space-y-4 bg-black/10 border border-white/20 shadow-lg">
                     <h2 className="text-xl font-bold text-gray-300">Ambient Mixer</h2>
                     <VolumeControl icon={FaCloudRain} label="Rain" audioRef={rainRef as React.RefObject<AudioElementWithInit>} defaultVolume={0.4} />

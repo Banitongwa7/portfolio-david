@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { jsPDF } from "jspdf";
 
-export default function Tool3() {
+export default function QRCodeGenerator() {
   const [text, setText] = useState("https://yourwebsite.com");
   const [size, setSize] = useState(200);
   const [format, setFormat] = useState("png");

@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import CardTool from "@/components/alltools/CardTool";
+import CardTool from "@/components/cards/CardTool";
 import AllTools from "@/data/AllTools";
 import { FaPlusCircle } from "react-icons/fa";
 
-const TOOLS_PER_LOAD = 9;
-const TOOLS_TO_ADD = 6;
-
 export default function Tools() {
+  const TOOLS_PER_LOAD = 9;
+  const TOOLS_TO_ADD = 6;
   const [visibleTools, setVisibleTools] = useState(TOOLS_PER_LOAD);
   const totalTools = AllTools.length;
   const toolsToShow = AllTools.slice(0, visibleTools);
