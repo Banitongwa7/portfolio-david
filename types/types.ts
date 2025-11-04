@@ -28,4 +28,5 @@ export type ToolType = {
   developer: string;
   publishedAt: string;
   component: JSX.Element;
+  coverImage: string;
 }

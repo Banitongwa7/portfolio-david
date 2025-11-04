@@ -16,6 +16,14 @@ export async function generateMetadata({
     openGraph: {
       title: `${ tool?.name || "Tool Not Found"}`,
       description: `${tool?.description || "The requested tool could not be found."}`,
+      images: [
+        {
+            url: tool?.coverImage || "",
+            width: 1000,
+            height: 500,
+            alt: tool?.name || "Tool Not Found",
+        }
+      ]
     },
   };
 }
