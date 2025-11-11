@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { FaMicrophone, FaMicrophoneSlash, FaCopy, FaTrash } from "react-icons/fa";
+import "./../../node_modules/flag-icons/css/flag-icons.min.css";
 
 export default function SpeechToText() {
   const [supported, setSupported] = useState(true);
@@ -244,14 +245,14 @@ export default function SpeechToText() {
           </label>
           <div className="flex flex-wrap gap-2">
             {[
-              { value: "en-US", label: "🇺🇸 English" },
-              { value: "es-ES", label: "🇪🇸 Spanish" },
-              { value: "fr-FR", label: "🇫🇷 French" },
-              { value: "de-DE", label: "🇩🇪 German" },
-              { value: "zh-CN", label: "🇨🇳 Chinese" },
-              { value: "ja-JP", label: "🇯🇵 Japanese" },
-              { value: "ar-SA", label: "🇸🇦 Arabic" },
-              { value: "hi-IN", label: "🇮🇳 Hindi" },
+              { value: "en-US", label: "English", flag: "fi fi-us" },
+              { value: "es-ES", label: "Spanish", flag: "fi fi-es"},
+              { value: "fr-FR", label: "French", flag: "fi fi-fr"},
+              { value: "de-DE", label: "German", flag: "fi fi-de"},
+              { value: "zh-CN", label: "Chinese", flag: "fi fi-cn"},
+              { value: "ja-JP", label: "Japanese", flag: "fi fi-jp"},
+              { value: "ar-SA", label: "Arabic", flag: "fi fi-sa"},
+              { value: "hi-IN", label: "Hindi", flag: "fi fi-in"},
             ].map((lang) => (
               <button
                 key={lang.value}
@@ -268,7 +269,7 @@ export default function SpeechToText() {
                     : 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
               >
-                {lang.label}
+                <span className={`${lang.flag} mr-3 rounded-sm`}></span>{lang.label}
               </button>
             ))}
           </div>
