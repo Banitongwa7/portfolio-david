@@ -2,7 +2,7 @@ import { HiColorSwatch } from "react-icons/hi";
 import { FaHeadphones, FaStickyNote, FaImage, FaLock } from 'react-icons/fa'
 import { IoQrCode } from "react-icons/io5";
 import { GrTextAlignFull } from "react-icons/gr";
-import { LuSpeech } from "react-icons/lu";
+import { LuSpeech, LuAudioLines } from "react-icons/lu";
 import type { ToolType } from "@/types/types";
 import ColorGenerator from "@/components/tools/ColorGenerator";
 import LofiSpace from "@/components/tools/LofiSpace";
@@ -13,6 +13,7 @@ import TextAnalyzer from "@/components/tools/TextAnalyzer";
 import PasswordGenerator from "@/components/tools/PasswordGenerator";
 import TextToSpeech from "@/components/tools/TextToSpeech";
 import Cover from "./../public/tools/cover.jpeg";
+import SpeechToText from "@/components/tools/SpeechToText";
 
 const AllTools: ToolType[] = [
     {
@@ -103,6 +104,17 @@ const AllTools: ToolType[] = [
         component: <TextToSpeech />,
         coverImage: Cover.src
     },
+    {
+        id: "0009",
+        name: "Speech to Text",
+        description: "Convert spoken words into written text using speech recognition technology.",
+        icon: <LuAudioLines />,
+        slug: "/tools/speech-to-text",
+        developer: "David B.",
+        publishedAt: "2025-11-11",
+        component: <SpeechToText />,
+        coverImage: Cover.src
+    }
 ]
 
 export default AllTools;
