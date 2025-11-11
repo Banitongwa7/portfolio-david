@@ -17,91 +17,41 @@ export default function SpeechToText() {
     isMicrophoneAvailable
   } = useSpeechRecognition();
 
-  // Most commonly used language options
   const languageOptions = [
-    // English variants
     { value: "en-US", label: "English (US)" },
     { value: "en-GB", label: "English (UK)" },
     { value: "en-AU", label: "English (Australia)" },
     { value: "en-CA", label: "English (Canada)" },
-    
-    // Spanish variants
     { value: "es-ES", label: "Spanish (Spain)" },
     { value: "es-MX", label: "Spanish (Mexico)" },
     { value: "es-US", label: "Spanish (US)" },
-    
-    // French variants
     { value: "fr-FR", label: "French (France)" },
     { value: "fr-CA", label: "French (Canada)" },
-    
-    // German
     { value: "de-DE", label: "German" },
-    
-    // Italian
     { value: "it-IT", label: "Italian" },
-    
-    // Portuguese variants
     { value: "pt-BR", label: "Portuguese (Brazil)" },
     { value: "pt-PT", label: "Portuguese (Portugal)" },
-    
-    // Chinese variants
     { value: "zh-CN", label: "Chinese (Simplified)" },
     { value: "zh-TW", label: "Chinese (Traditional)" },
     { value: "zh-HK", label: "Chinese (Hong Kong)" },
-    
-    // Japanese
     { value: "ja-JP", label: "Japanese" },
-    
-    // Korean
     { value: "ko-KR", label: "Korean" },
-    
-    // Hindi
     { value: "hi-IN", label: "Hindi" },
-    
-    // Arabic
     { value: "ar-SA", label: "Arabic (Saudi Arabia)" },
     { value: "ar-AE", label: "Arabic (UAE)" },
-    
-    // Russian
     { value: "ru-RU", label: "Russian" },
-    
-    // Dutch
     { value: "nl-NL", label: "Dutch" },
-    
-    // Swedish
     { value: "sv-SE", label: "Swedish" },
-    
-    // Norwegian
     { value: "nb-NO", label: "Norwegian" },
-    
-    // Danish
     { value: "da-DK", label: "Danish" },
-    
-    // Finnish
     { value: "fi-FI", label: "Finnish" },
-    
-    // Polish
     { value: "pl-PL", label: "Polish" },
-    
-    // Turkish
     { value: "tr-TR", label: "Turkish" },
-    
-    // Greek
     { value: "el-GR", label: "Greek" },
-    
-    // Hebrew
     { value: "he-IL", label: "Hebrew" },
-    
-    // Thai
     { value: "th-TH", label: "Thai" },
-    
-    // Vietnamese
     { value: "vi-VN", label: "Vietnamese" },
-    
-    // Indonesian
     { value: "id-ID", label: "Indonesian" },
-    
-    // Malay
     { value: "ms-MY", label: "Malay" },
   ];
 
