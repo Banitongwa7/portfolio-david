@@ -12,10 +12,6 @@ import {
   Sequence,
 } from "remotion";
 
-/* -------------------------------------------------------------------------- */
-/*                         REMOTION COMPOSITION (VIDEO)                       */
-/* -------------------------------------------------------------------------- */
-
 interface Props {
   name: string;
 }
@@ -25,7 +21,6 @@ const MyVideo: React.FC<Props> = ({ name }) => {
   const { fps, width, height, durationInFrames } = useVideoConfig();
 
   /* -------------------------- TIMINGS (frames) -------------------------- */
-  const TITLE_IN = 15;
   const NAME_IN = 40;
   const TYPEWRITER_START = 55;
   const TYPEWRITER_END = 85;
@@ -126,7 +121,7 @@ const MyVideo: React.FC<Props> = ({ name }) => {
             letterSpacing: "-0.03em",
           }}
         >
-          console.log("Welcome")
+          Welcome
         </div>
       </Sequence>
 
@@ -193,7 +188,7 @@ const MyVideo: React.FC<Props> = ({ name }) => {
             boxShadow: "0 0 20px rgba(0,255,255,0.3)",
           }}
         >
-          <div style={{ fontFamily: "monospace" }}>// Developer Profile Initialized</div>
+          <div style={{ fontFamily: "monospace" }}>Developer Profile Initialized</div>
           <div style={{ fontFamily: "monospace", marginTop: 8, color: "#00ffff" }}>
             &gt; status: ready
           </div>
@@ -311,12 +306,8 @@ export default function FunVideo() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-2 shadow-lg border border-gray-700 mb-6">
-            <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-sm font-mono text-green-400">$ CODE-INTRO-GENERATOR</span>
-          </div>
           <h1 className="text-6xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4 tracking-tighter">
-            Developer Hype Reel
+            Fun Video Generator
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Generate a cinematic intro video with your name in seconds.
@@ -327,7 +318,7 @@ export default function FunVideo() {
           {/* ---- FORM ---- */}
           <div className="bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-700">
             <h2 className="text-3xl font-bold mb-2">Enter Your Name</h2>
-            <p className="text-gray-400 mb-6">We'll put you in the spotlight.</p>
+            <p className="text-gray-400 mb-6">{"We'll put you in the spotlight."}</p>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -445,24 +436,6 @@ export default function FunVideo() {
               </div>
             )}
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-16 text-center">
-          <p className="text-sm text-gray-500">
-            Powered by{" "}
-            <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300">
-              Next.js
-            </a>
-            ,{" "}
-            <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300">
-              Tailwind
-            </a>
-            , and{" "}
-            <a href="https://www.remotion.dev" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300 font-semibold">
-              Remotion
-            </a>
-          </p>
         </div>
       </div>
 
