@@ -245,6 +245,7 @@ export default function FunVideo() {
   const [submittedName, setSubmittedName] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
 
   const composition = useMemo(
     () => ({
@@ -273,179 +274,311 @@ export default function FunVideo() {
     setFullName("");
     setSubmittedName("");
     setIsGenerating(false);
+    setDownloadProgress(0);
   };
 
   const handleDownload = async () => {
     if (!submittedName) return;
     setIsDownloading(true);
+    setDownloadProgress(0);
+
     try {
       const res = await fetch("/api/render-video", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fullName: submittedName }),
       });
-      const data = await res.json();
-      if (data.url) {
-        const a = document.createElement("a");
-        a.href = data.url;
-        a.download = `${submittedName.replace(/\s+/g, "_")}_intro.mp4`;
-        a.click();
-      } else {
-        alert(data.error ?? "Render failed");
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || "Render failed");
       }
+
+      // Get the blob from response
+      const blob = await res.blob();
+
+      // Create download link
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${submittedName.replace(/\s+/g, "_")}_intro.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      setDownloadProgress(100);
     } catch (e) {
       console.error(e);
-      alert("Download failed");
+      alert(e instanceof Error ? e.message : "Download failed");
     } finally {
       setIsDownloading(false);
+      setTimeout(() => setDownloadProgress(0), 2000);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-6xl font-extrabold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4 tracking-tighter">
+        <div className="text-center mb-16 space-y-4">
+          <h1 className="text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 tracking-tight animate-fade-in">
             Fun Video Generator
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Generate a cinematic intro video with your name in seconds.
+          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light">
+            Generate a <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 font-semibold">cinematic intro video</span> with your name in seconds.
           </p>
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span>Powered by Remotion</span>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* ---- FORM ---- */}
-          <div className="bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-700">
-            <h2 className="text-3xl font-bold mb-2">Enter Your Name</h2>
-            <p className="text-gray-400 mb-6">{"We'll put you in the spotlight."}</p>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="fullName" className="block text-sm font-mono text-cyan-400 mb-2">
-                  &lt;Full Name /&gt;
-                </label>
-                <input
-                  id="fullName"
-                  type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="e.g., Ada Lovelace"
-                  className="w-full px-5 py-3 bg-gray-700 border border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-lg text-white font-mono placeholder-gray-500"
-                  required
-                  disabled={isGenerating}
-                />
+          <div className="group relative">
+            {/* Glassmorphism Card */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/10">
+              <div className="mb-6">
+                <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Enter Your Name</h2>
+                <p className="text-gray-400">{"We'll create something special for you ✨"}</p>
               </div>
 
-              <div className="flex gap-4">
-                <button
-                  type="submit"
-                  disabled={!fullName.trim() || isGenerating}
-                  className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-4 px-6 rounded-xl font-bold text-lg hover:from-cyan-600 hover:to-blue-700 disabled:opacity-50 transition-all duration-300 shadow-xl shadow-cyan-900/50"
-                >
-                  {isGenerating ? (
-                    <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Compiling…
-                    </span>
-                  ) : (
-                    "Generate Preview"
-                  )}
-                </button>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="fullName" className="block text-sm font-mono text-cyan-400 mb-2 flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+                    </svg>
+                    &lt;Full Name /&gt;
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="fullName"
+                      type="text"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="e.g., Ada Lovelace"
+                      className="w-full px-5 py-4 bg-slate-800/50 border border-purple-500/30 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-lg text-white placeholder-gray-500 hover:border-purple-500/50"
+                      required
+                      disabled={isGenerating}
+                    />
+                    {fullName && (
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                        <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                </div>
 
-                {(submittedName || isGenerating) && (
+                <div className="flex gap-4">
                   <button
-                    type="button"
-                    onClick={handleReset}
-                    disabled={isGenerating}
-                    className="px-6 bg-gray-700 text-gray-300 py-4 rounded-xl font-semibold hover:bg-gray-600 disabled:opacity-50"
+                    type="submit"
+                    disabled={!fullName.trim() || isGenerating}
+                    className="group/btn flex-1 relative bg-gradient-to-r from-cyan-500 via-purple-500 to-blue-600 text-white py-4 px-6 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-purple-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    Reset
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      {isGenerating ? (
+                        <>
+                          <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Compiling…
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          Generate Preview
+                        </>
+                      )}
+                    </span>
                   </button>
-                )}
+
+                  {(submittedName || isGenerating) && (
+                    <button
+                      type="button"
+                      onClick={handleReset}
+                      disabled={isGenerating}
+                      className="px-6 bg-slate-800/50 text-gray-300 py-4 rounded-xl font-semibold hover:bg-slate-700/50 disabled:opacity-50 transition-all duration-200 border border-white/10 hover:border-white/20"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+              </form>
+
+              {/* Feature Highlights */}
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div className="space-y-1">
+                    <div className="text-2xl">🎬</div>
+                    <div className="text-xs text-gray-400">HD Quality</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-2xl">⚡</div>
+                    <div className="text-xs text-gray-400">Fast Render</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-2xl">✨</div>
+                    <div className="text-xs text-gray-400">Animated</div>
+                  </div>
+                </div>
               </div>
-            </form>
+            </div>
           </div>
 
           {/* ---- PREVIEW ---- */}
-          <div className="bg-gray-800 rounded-3xl shadow-2xl p-6 border border-gray-700">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-3xl font-bold">Video Output</h2>
-              {submittedName && (
-                <span className="bg-purple-900 text-purple-300 text-sm font-mono px-3 py-1 rounded-full border border-purple-700">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full inline-block mr-1 animate-pulse" />
-                  Playback Ready
-                </span>
+          <div className="group relative">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            <div className="relative bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-2xl p-6 border border-white/10">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Video Output</h2>
+                {submittedName && (
+                  <span className="relative flex items-center gap-2 bg-purple-500/20 text-purple-300 text-sm font-mono px-3 py-1.5 rounded-full border border-purple-500/50 backdrop-blur-sm">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-400"></span>
+                    </span>
+                    Ready
+                  </span>
+                )}
+              </div>
+
+              {submittedName ? (
+                <div className="space-y-4">
+                  <div className="relative group/preview">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur-sm opacity-50 group-hover/preview:opacity-75 transition duration-300"></div>
+                    <div className="relative aspect-video bg-black rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+                      <Player
+                        component={MyVideo}
+                        inputProps={{ name: submittedName }}
+                        durationInFrames={composition.durationInFrames}
+                        compositionWidth={composition.width}
+                        compositionHeight={composition.height}
+                        fps={composition.fps}
+                        controls
+                        autoPlay
+                        loop
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    className="group/download w-full relative bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white py-4 px-6 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-green-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
+                  >
+                    {isDownloading && (
+                      <div
+                        className="absolute inset-0 bg-white/20 transition-all duration-300"
+                        style={{ width: `${downloadProgress}%` }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      {isDownloading ? (
+                        <>
+                          <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Rendering MP4…
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-6 h-6 group-hover/download:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                          Download Full-Res MP4
+                        </>
+                      )}
+                    </span>
+                  </button>
+
+                  {/* Video Info */}
+                  <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10">
+                    <div className="text-center">
+                      <div className="text-xs text-gray-400 mb-1">Resolution</div>
+                      <div className="text-sm font-semibold text-purple-300">1920×1080</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xs text-gray-400 mb-1">Duration</div>
+                      <div className="text-sm font-semibold text-purple-300">8 seconds</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-xs text-gray-400 mb-1">FPS</div>
+                      <div className="text-sm font-semibold text-purple-300">30</div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="aspect-video bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border-2 border-dashed border-purple-500/30 flex items-center justify-center p-8 backdrop-blur-sm">
+                  <div className="text-center space-y-4">
+                    <div className="relative w-20 h-20 mx-auto">
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-2xl animate-spin" style={{ animationDuration: "3s" }}></div>
+                      <div className="absolute inset-1 bg-slate-900 rounded-xl flex items-center justify-center">
+                        <svg className="w-10 h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Awaiting Input</h3>
+                      <p className="text-gray-400 text-sm">Enter a name to generate your personalized video</p>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
-
-            {submittedName ? (
-              <>
-                <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-2xl mb-6 ring-4 ring-purple-500/30">
-                  <Player
-                    component={MyVideo}
-                    inputProps={{ name: submittedName }}
-                    durationInFrames={composition.durationInFrames}
-                    compositionWidth={composition.width}
-                    compositionHeight={composition.height}
-                    fps={composition.fps}
-                    controls
-                    autoPlay
-                    loop
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </div>
-
-                <button
-                  onClick={handleDownload}
-                  disabled={isDownloading}
-                  className="w-full bg-gradient-to-r from-green-500 to-lime-500 text-white py-4 px-6 rounded-xl font-bold text-lg hover:from-green-600 hover:to-lime-600 disabled:opacity-50 transition-all duration-300 shadow-xl shadow-green-900/50"
-                >
-                  {isDownloading ? (
-                    <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Rendering MP4…
-                    </span>
-                  ) : (
-                    <span className="flex items-center justify-center">
-                      <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                      </svg>
-                      Download Full-Res MP4
-                    </span>
-                  )}
-                </button>
-              </>
-            ) : (
-              <div className="aspect-video bg-gray-700/50 rounded-xl border-4 border-dashed border-gray-600 flex items-center justify-center p-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0h6" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">Awaiting Input…</h3>
-                  <p className="text-gray-400">Enter a name to see the preview.</p>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
 
-      {/* Blinking cursor animation */}
+      {/* Global Styles */}
       <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out;
+        }
+        
         @keyframes blink {
           50% {
             opacity: 0;
           }
         }
+        
         span[style*="|"] {
           animation: blink 0.7s step-end infinite;
         }

@@ -14,8 +14,8 @@ import PasswordGenerator from "@/components/tools/PasswordGenerator";
 import TextToSpeech from "@/components/tools/TextToSpeech";
 import Cover from "./../public/tools/cover.jpeg";
 import SpeechToText from "@/components/tools/SpeechToText";
-import FunVideo from "@/components/tools/FunVideo";
-import { BsCollectionPlayFill } from "react-icons/bs";
+// import FunVideo from "@/components/tools/FunVideo";
+// import { BsCollectionPlayFill } from "react-icons/bs";
 
 const AllTools: ToolType[] = [
     {
@@ -116,7 +116,7 @@ const AllTools: ToolType[] = [
         publishedAt: "2025-11-11",
         component: <SpeechToText />,
         coverImage: Cover.src
-    },
+    }/*,
     {
         id: "0010",
         name: "Fun Video Generator",
@@ -127,7 +127,7 @@ const AllTools: ToolType[] = [
         publishedAt: "2025-11-14",
         component: <FunVideo />,
         coverImage: Cover.src
-    },
+    },*/
 ]
 
 export default AllTools;
