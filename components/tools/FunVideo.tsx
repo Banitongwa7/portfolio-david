@@ -354,7 +354,7 @@ export default function FunVideo() {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <label htmlFor="fullName" className="block text-sm font-mono text-cyan-400 mb-2 flex items-center gap-2">
+                  <label htmlFor="fullName" className="text-sm font-mono text-cyan-400 mb-2 flex items-center gap-2">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
                     </svg>
