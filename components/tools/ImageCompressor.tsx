@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import NextImage from "next/image";
 
 export default function ImageCompressor() {
   const [originalFile, setOriginalFile] = useState<File | null>(null);
@@ -114,9 +115,12 @@ export default function ImageCompressor() {
                 Original Image:
               </h3>
               <div className="w-full h-auto border rounded overflow-hidden">
-                <img
+                <NextImage
                   src={URL.createObjectURL(originalFile)}
                   alt="Original"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
                   className="w-full h-auto object-contain"
                 />
               </div>
@@ -132,9 +136,12 @@ export default function ImageCompressor() {
                 Compressed Image:
               </h3>
               <div className="w-full h-auto border rounded overflow-hidden">
-                <img
+                <NextImage
                   src={compressedUrl}
                   alt="Compressed"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
                   className="w-full h-auto object-contain"
                 />
               </div>

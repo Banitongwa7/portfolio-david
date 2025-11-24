@@ -33,7 +33,7 @@ export default function TextToSpeech() {
     } else {
       loadVoices();
     }
-  }, []);
+  }, [selectedLanguage]);
 
   useEffect(() => {
     const filtered = voices.filter((v) => v.lang.startsWith(selectedLanguage));
