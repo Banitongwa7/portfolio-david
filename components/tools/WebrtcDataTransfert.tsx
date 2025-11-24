@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import type { DataConnection, MediaConnection } from 'peerjs';
 import type Peer from 'peerjs';
 import { 
@@ -54,12 +54,88 @@ export default function WebrtcDataTransfert() {
   // Call State
   const [mediaConnection, setMediaConnection] = useState<MediaConnection | null>(null);
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
-  const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
   
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Refs for accessing latest state in callbacks/effects without triggering re-renders
+  const mediaConnectionRef = useRef<MediaConnection | null>(null);
+  const localStreamRef = useRef<MediaStream | null>(null);
+
+  // Keep refs in sync with state
+  useEffect(() => {
+    mediaConnectionRef.current = mediaConnection;
+  }, [mediaConnection]);
+
+  useEffect(() => {
+    localStreamRef.current = localStream;
+  }, [localStream]);
+
+  // Define endCall first so it can be used in setupMediaConnection
+  const endCall = useCallback(() => {
+    mediaConnectionRef.current?.close();
+    localStreamRef.current?.getTracks().forEach(track => track.stop());
+    setMediaConnection(null);
+    setLocalStream(null);
+    setStatus('ready');
+    setStatusMessage('Call ended');
+  }, []);
+
+  const setupMediaConnection = useCallback((call: MediaConnection) => {
+    setMediaConnection(call);
+    setStatus('in-call');
+    setStatusMessage('In call');
+
+    call.on('stream', (remoteStream) => {
+      if (remoteVideoRef.current) {
+        remoteVideoRef.current.srcObject = remoteStream;
+      }
+    });
+
+    call.on('close', () => {
+      endCall();
+    });
+
+    call.on('error', (err) => {
+      console.error(err);
+      setError('Call error');
+      endCall();
+    });
+  }, [endCall]);
+
+  const setupDataConnection = useCallback((conn: DataConnection) => {
+    conn.on('open', () => {
+      setStatus('connected');
+      setStatusMessage('Connected for file transfer');
+      setDataConnection(conn);
+      setError('');
+    });
+
+    conn.on('data', (data) => {
+      const fileData = data as FileData;
+      if (fileData.file && fileData.name) {
+        try {
+          const blob = new Blob([fileData.file], { type: fileData.type || 'application/octet-stream' });
+          const url = URL.createObjectURL(blob);
+          setReceivedFile({ url, name: fileData.name, size: fileData.size });
+          setStatusMessage('File received!');
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    });
+
+    conn.on('close', () => {
+      setDataConnection(null);
+      // Use ref to check if we are in a call, to avoid stale closure
+      if (!mediaConnectionRef.current) {
+        setStatus('ready');
+        setStatusMessage('Connection closed');
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const initPeer = async () => {
@@ -96,8 +172,7 @@ export default function WebrtcDataTransfert() {
           setStatus('calling');
           setStatusMessage('Incoming call...');
           
-          // Ask user to answer? For now auto-answer or show UI
-          // We'll auto-answer if we are in call tab, or switch to it
+          // Auto-answer logic
           setActiveTab('call');
           
           navigator.mediaDevices.getUserMedia({ video: true, audio: true })
@@ -125,42 +200,10 @@ export default function WebrtcDataTransfert() {
 
     return () => {
       peerInstance.current?.destroy();
-      localStream?.getTracks().forEach(track => track.stop());
+      localStreamRef.current?.getTracks().forEach(track => track.stop());
       if (receivedFile?.url) URL.revokeObjectURL(receivedFile.url);
     };
-  }, []);
-
-  // --- Data Connection Logic (Files) ---
-  const setupDataConnection = (conn: DataConnection) => {
-    conn.on('open', () => {
-      setStatus('connected');
-      setStatusMessage('Connected for file transfer');
-      setDataConnection(conn);
-      setError('');
-    });
-
-    conn.on('data', (data) => {
-      const fileData = data as FileData;
-      if (fileData.file && fileData.name) {
-        try {
-          const blob = new Blob([fileData.file], { type: fileData.type || 'application/octet-stream' });
-          const url = URL.createObjectURL(blob);
-          setReceivedFile({ url, name: fileData.name, size: fileData.size });
-          setStatusMessage('File received!');
-        } catch (err) {
-          console.error(err);
-        }
-      }
-    });
-
-    conn.on('close', () => {
-      setDataConnection(null);
-      if (!mediaConnection) {
-        setStatus('ready');
-        setStatusMessage('Connection closed');
-      }
-    });
-  };
+  }, [setupDataConnection, setupMediaConnection, receivedFile?.url]);
 
   const connectDataPeer = () => {
     if (!remoteId.trim() || !peerInstance.current) return;
@@ -189,35 +232,12 @@ export default function WebrtcDataTransfert() {
       setStatusMessage('File sent!');
       if (fileInputRef.current) fileInputRef.current.value = '';
       setTimeout(() => setUploadProgress(0), 2000);
-    } catch (err) {
+    } catch {
       setError('Failed to send file');
     }
   };
 
   // --- Media Connection Logic (Calls) ---
-  const setupMediaConnection = (call: MediaConnection) => {
-    setMediaConnection(call);
-    setStatus('in-call');
-    setStatusMessage('In call');
-
-    call.on('stream', (remoteStream) => {
-      setRemoteStream(remoteStream);
-      if (remoteVideoRef.current) {
-        remoteVideoRef.current.srcObject = remoteStream;
-      }
-    });
-
-    call.on('close', () => {
-      endCall();
-    });
-
-    call.on('error', (err) => {
-      console.error(err);
-      setError('Call error');
-      endCall();
-    });
-  };
-
   const startCall = () => {
     if (!remoteId.trim() || !peerInstance.current) return;
     
@@ -232,20 +252,10 @@ export default function WebrtcDataTransfert() {
         const call = peerInstance.current!.call(remoteId.trim(), stream);
         setupMediaConnection(call);
       })
-      .catch((err) => {
+      .catch(() => {
         setError('Could not access camera/microphone');
         setStatus('error');
       });
-  };
-
-  const endCall = () => {
-    mediaConnection?.close();
-    localStream?.getTracks().forEach(track => track.stop());
-    setMediaConnection(null);
-    setLocalStream(null);
-    setRemoteStream(null);
-    setStatus('ready');
-    setStatusMessage('Call ended');
   };
 
   const toggleMute = () => {
