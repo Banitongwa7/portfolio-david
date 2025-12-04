@@ -6,7 +6,7 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "partykit": "partykit dev"
   },
   "dependencies": {
@@ -21,14 +21,14 @@
     "flag-icons": "^7.5.0",
     "framer-motion": "^11.16.4",
     "jspdf": "^3.0.3",
-    "next": "15.1.4",
+    "next": "16.0.7",
     "nodemailer": "^6.10.0",
     "object-hash": "^3.0.0",
     "partysocket": "^1.1.6",
     "peerjs": "^1.5.5",
     "qrcode.react": "^4.2.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "react-icons": "^5.4.0",
     "react-speech-recognition": "^4.0.1",
     "react-toastify": "^11.0.2",
@@ -36,18 +36,21 @@
     "values.js": "^2.1.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.17",
     "@types/object-hash": "^3.0.6",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
     "@types/react-speech-recognition": "^3.9.6",
     "eslint": "^9",
-    "eslint-config-next": "15.1.4",
+    "eslint-config-next": "16.0.7",
     "partykit": "^0.0.115",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3"
   }
 }
