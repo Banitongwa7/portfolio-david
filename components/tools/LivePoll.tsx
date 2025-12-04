@@ -20,8 +20,13 @@ interface Poll {
 
 type ViewMode = 'home' | 'create' | 'vote' | 'join'
 
-// Generate or retrieve a unique voter ID for this browser
+// Generate or retrieve a unique voter ID for this browser (client-side only)
 const getVoterId = (): string => {
+  // Check if we're in the browser
+  if (typeof window === 'undefined') {
+    return ''
+  }
+  
   const storageKey = 'livepoll-voter-id'
   let voterId = localStorage.getItem(storageKey)
   
@@ -50,7 +55,7 @@ export default function LivePoll() {
   const [socket, setSocket] = useState<PartySocket | null>(null)
   const [pollId, setPollId] = useState<string>('')
   const [shareUrl, setShareUrl] = useState<string>('')
-  const [voterId] = useState<string>(getVoterId())
+  const [voterId, setVoterId] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   // Poll creation form state
@@ -59,6 +64,11 @@ export default function LivePoll() {
 
   // PartyKit host - change this to your deployed PartyKit URL
   const PARTYKIT_HOST = process.env.NEXT_PUBLIC_PARTYKIT_HOST || '127.0.0.1:1999'
+
+  // Initialize voter ID on client side only
+  useEffect(() => {
+    setVoterId(getVoterId())
+  }, [])
 
   useEffect(() => {
     return () => {
@@ -164,10 +174,12 @@ export default function LivePoll() {
           setPollId(roomIdToJoin)
           
           // Check with server if this voter has already voted
-          newSocket.send(JSON.stringify({
-            type: 'checkVoter',
-            voterId: voterId
-          }))
+          if (voterId) {
+            newSocket.send(JSON.stringify({
+              type: 'checkVoter',
+              voterId: voterId
+            }))
+          }
         }
       } else if (msg.type === 'voterStatus') {
         setHasVoted(msg.hasVoted)
@@ -184,7 +196,7 @@ export default function LivePoll() {
   }
 
   const handleVote = () => {
-    if (!selectedOption || !poll || !socket) return
+    if (!selectedOption || !poll || !socket || !voterId) return
 
     const optionText = poll.options.find(opt => opt.id === selectedOption)?.text
     if (!optionText) return
@@ -633,10 +645,10 @@ export default function LivePoll() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleVote}
-                    disabled={!selectedOption}
+                    disabled={!selectedOption || !voterId}
                     className={`w-full mt-6 py-4 rounded-xl font-bold text-lg transition-all duration-300
                       ${
-                        selectedOption
+                        selectedOption && voterId
                           ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg hover:shadow-xl'
                           : 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
                       }`}
