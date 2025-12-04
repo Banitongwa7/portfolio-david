@@ -54,7 +54,7 @@ export default function LivePoll() {
   const [poll, setPoll] = useState<Poll | null>(null)
   const [socket, setSocket] = useState<PartySocket | null>(null)
   const [pollId, setPollId] = useState<string>('')
-  const [shareUrl, setShareUrl] = useState<string>('')
+  const [room, setRoom] = useState<string>('')
   const [voterId, setVoterId] = useState<string>('')
   const [errorMessage, setErrorMessage] = useState<string>('')
 
@@ -138,9 +138,9 @@ export default function LivePoll() {
     setSocket(newSocket)
     setViewMode('vote')
     
-    // Generate share URL
-    const url = `${window.location.origin}/tools/live-poll?poll=${roomId}`
-    setShareUrl(url)
+    // Generate share Room ID
+    const room = `${roomId}`
+    setRoom(room)
   }
 
   const joinPoll = (roomIdToJoin: string) => {
@@ -228,10 +228,10 @@ export default function LivePoll() {
     setNewOptions(updated)
   }
 
-  const copyShareUrl = async () => {
+  const copyRoom = async () => {
     try {
-      await navigator.clipboard.writeText(shareUrl)
-      alert('Share URL copied to clipboard!')
+      await navigator.clipboard.writeText(room)
+      alert('Room ID copied to clipboard!')
     } catch (error) {
       console.error('Failed to copy:', error)
     }
@@ -518,8 +518,8 @@ export default function LivePoll() {
           </button>
         </motion.div>
 
-        {/* Share Banner */}
-        {shareUrl && (
+        {/* Share Room ID */}
+        {room && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -536,12 +536,12 @@ export default function LivePoll() {
                 <input
                   type="text"
                   readOnly
-                  value={shareUrl}
+                  value={room}
                   className="w-full px-3 py-2 bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-800 rounded-lg text-sm text-gray-700 dark:text-gray-300 font-mono"
                 />
               </div>
               <button
-                onClick={copyShareUrl}
+                onClick={copyRoom}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
               >
                 <FiCopy /> Copy
