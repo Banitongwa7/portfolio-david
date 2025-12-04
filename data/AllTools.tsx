@@ -3,6 +3,7 @@ import { FaHeadphones, FaStickyNote, FaImage, FaLock } from "react-icons/fa";
 import { IoQrCode } from "react-icons/io5";
 import { GrTextAlignFull } from "react-icons/gr";
 import { LuSpeech, LuAudioLines } from "react-icons/lu";
+import { FiBarChart2 } from "react-icons/fi";
 import type { ToolType } from "@/types/types";
 import ColorGenerator from "@/components/tools/ColorGenerator";
 import LofiSpace from "@/components/tools/LofiSpace";
@@ -15,6 +16,7 @@ import TextToSpeech from "@/components/tools/TextToSpeech";
 import Cover from "./../public/tools/cover.jpeg";
 import SpeechToText from "@/components/tools/SpeechToText";
 import WebrtcDataTransfert from "@/components/tools/WebrtcDataTransfert";
+import LivePoll from "@/components/tools/LivePoll";
 import { MdHub } from "react-icons/md";
 // import FunVideo from "@/components/tools/FunVideo";
 // import { BsCollectionPlayFill } from "react-icons/bs";
@@ -147,6 +149,17 @@ const AllTools: ToolType[] = [
     developer: "David B.",
     publishedAt: "2025-11-24",
     component: <WebrtcDataTransfert />,
+    coverImage: Cover.src,
+  },
+  {
+    id: "0012",
+    name: "Live Poll",
+    description: "Create and participate in real-time polls with beautiful visualizations and instant results.",
+    icon: <FiBarChart2 />,
+    slug: "/tools/live-poll",
+    developer: "David B.",
+    publishedAt: "2025-12-04",
+    component: <LivePoll />,
     coverImage: Cover.src,
   },
 ];

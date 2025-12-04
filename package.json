@@ -6,7 +6,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "partykit": "partykit dev"
   },
   "dependencies": {
     "@microsoft/clarity": "^1.0.0",
@@ -22,6 +23,8 @@
     "jspdf": "^3.0.3",
     "next": "15.1.4",
     "nodemailer": "^6.10.0",
+    "object-hash": "^3.0.0",
+    "partysocket": "^1.1.6",
     "peerjs": "^1.5.5",
     "qrcode.react": "^4.2.0",
     "react": "^19.0.0",
@@ -36,11 +39,13 @@
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.17",
+    "@types/object-hash": "^3.0.6",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19",
     "@types/react-speech-recognition": "^3.9.6",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
+    "partykit": "^0.0.115",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
