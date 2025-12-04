@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react'
-import { FiCheck, FiBarChart2, FiRefreshCw, FiUsers, FiPlus, FiTrash2, FiShare2, FiCopy } from 'react-icons/fi'
+import { FiCheck, FiBarChart2, FiUsers, FiPlus, FiTrash2, FiShare2, FiCopy, FiAlertCircle } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 import PartySocket from 'partysocket'
 import hash from 'object-hash'
@@ -20,6 +20,28 @@ interface Poll {
 
 type ViewMode = 'home' | 'create' | 'vote' | 'join'
 
+// Generate or retrieve a unique voter ID for this browser
+const getVoterId = (): string => {
+  const storageKey = 'livepoll-voter-id'
+  let voterId = localStorage.getItem(storageKey)
+  
+  if (!voterId) {
+    // Generate a unique ID based on browser fingerprint + random
+    const fingerprint = [
+      navigator.userAgent,
+      navigator.language,
+      new Date().getTimezoneOffset(),
+      screen.width + 'x' + screen.height,
+      Math.random().toString(36).substring(2, 15)
+    ].join('|')
+    
+    voterId = hash(fingerprint)
+    localStorage.setItem(storageKey, voterId)
+  }
+  
+  return voterId
+}
+
 export default function LivePoll() {
   const [viewMode, setViewMode] = useState<ViewMode>('home')
   const [hasVoted, setHasVoted] = useState(false)
@@ -28,6 +50,8 @@ export default function LivePoll() {
   const [socket, setSocket] = useState<PartySocket | null>(null)
   const [pollId, setPollId] = useState<string>('')
   const [shareUrl, setShareUrl] = useState<string>('')
+  const [voterId] = useState<string>(getVoterId())
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
   // Poll creation form state
   const [newQuestion, setNewQuestion] = useState('')
@@ -92,6 +116,12 @@ export default function LivePoll() {
           options: pollOptions,
           totalVotes,
         })
+      } else if (msg.type === 'error') {
+        setErrorMessage(msg.message)
+        setHasVoted(true)
+      } else if (msg.type === 'voteSuccess') {
+        setHasVoted(true)
+        setErrorMessage('')
       }
     })
 
@@ -133,12 +163,20 @@ export default function LivePoll() {
           setViewMode('vote')
           setPollId(roomIdToJoin)
           
-          // Check if already voted
-          const votedState = localStorage.getItem(`poll-${roomIdToJoin}`)
-          if (votedState === 'true') {
-            setHasVoted(true)
-          }
+          // Check with server if this voter has already voted
+          newSocket.send(JSON.stringify({
+            type: 'checkVoter',
+            voterId: voterId
+          }))
         }
+      } else if (msg.type === 'voterStatus') {
+        setHasVoted(msg.hasVoted)
+      } else if (msg.type === 'error') {
+        setErrorMessage(msg.message)
+        setHasVoted(true)
+      } else if (msg.type === 'voteSuccess') {
+        setHasVoted(true)
+        setErrorMessage('')
       }
     })
 
@@ -151,19 +189,13 @@ export default function LivePoll() {
     const optionText = poll.options.find(opt => opt.id === selectedOption)?.text
     if (!optionText) return
 
+    setErrorMessage('')
+    
     socket.send(JSON.stringify({
       type: 'vote',
       option: optionText,
+      voterId: voterId
     }))
-
-    setHasVoted(true)
-    localStorage.setItem(`poll-${pollId}`, 'true')
-  }
-
-  const handleReset = () => {
-    setHasVoted(false)
-    setSelectedOption(null)
-    localStorage.removeItem(`poll-${pollId}`)
   }
 
   const handleAddOption = () => {
@@ -531,6 +563,30 @@ export default function LivePoll() {
 
           {/* Poll Body */}
           <div className="p-6">
+            {/* Error Message */}
+            <AnimatePresence>
+              {errorMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl"
+                >
+                  <div className="flex items-start gap-3">
+                    <FiAlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm font-semibold text-red-800 dark:text-red-300 mb-1">
+                        Unable to vote
+                      </p>
+                      <p className="text-xs text-red-700 dark:text-red-400">
+                        {errorMessage}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             <AnimatePresence mode="wait">
               {!hasVoted ? (
                 // Voting Interface
@@ -664,15 +720,23 @@ export default function LivePoll() {
                     )
                   })}
 
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleReset}
-                    className="w-full mt-6 py-4 rounded-xl font-semibold text-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 flex items-center justify-center gap-2"
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl"
                   >
-                    <FiRefreshCw className="w-5 h-5" />
-                    Vote Again
-                  </motion.button>
+                    <div className="flex items-start gap-3">
+                      <FiAlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-1">
+                          Thank you for voting!
+                        </p>
+                        <p className="text-xs text-blue-700 dark:text-blue-400">
+                          You can only vote once per poll. Your vote has been securely recorded.
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>
