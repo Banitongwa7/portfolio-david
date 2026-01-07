@@ -37,7 +37,6 @@ export default function Contact() {
 
   return (
     <section className="w-full py-20 bg-gray-50 dark:bg-gray-900" id="contact">
-      
       <div className="mx-auto max-w-4xl text-center mb-16 px-4">
         <p className="text-base font-semibold tracking-wide text-green-600 dark:text-green-400 uppercase">
           Get in Touch
@@ -46,26 +45,38 @@ export default function Contact() {
           Contact Me
         </h2>
         <p className="mt-4 text-xl text-gray-600 dark:text-gray-400">
-          {"I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision."}
+          {
+            "I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision."
+          }
         </p>
       </div>
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
           <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700/50 h-fit">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
               My Information
             </h3>
-            
+
             <ul className="space-y-6">
               {[
-                { icon: FaLocationDot, title: "Address", detail: "Tunis, Tunisia", color: "text-green-500" },
-                { icon: IoMdCall, title: "Phone", detail: "+216 52 482 172", color: "text-blue-500" },
-                { icon: IoMdMail, title: "Email", detail: "davidbanitongwa@gmail.com", color: "text-teal-500" },
+                {
+                  icon: FaLocationDot,
+                  title: "Address",
+                  detail: "Kinshasa, Democratic Republic of Congo",
+                  color: "text-green-500",
+                },
+                {
+                  icon: IoMdMail,
+                  title: "Email",
+                  detail: "davidbanitongwa@gmail.com",
+                  color: "text-teal-500",
+                },
               ].map((item, index) => (
                 <li key={index} className="flex items-start">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700/50 flex-shrink-0 mr-4 ${item.color} shadow-md`}>
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700/50 flex-shrink-0 mr-4 ${item.color} shadow-md`}
+                  >
                     <item.icon className="h-6 w-6" />
                   </div>
                   <div>
@@ -85,8 +96,11 @@ export default function Contact() {
             <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
               Send a Message
             </h3>
-            <form id="contactForm" onSubmit={handleSubmit} className="space-y-6">
-              
+            <form
+              id="contactForm"
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
               <div>
                 <input
                   type="text"
@@ -99,7 +113,7 @@ export default function Contact() {
                   required
                 />
               </div>
-              
+
               <div>
                 <input
                   type="email"
@@ -112,7 +126,7 @@ export default function Contact() {
                   required
                 />
               </div>
-              
+
               <div>
                 <textarea
                   id="textarea"
@@ -126,7 +140,7 @@ export default function Contact() {
                   required
                 ></textarea>
               </div>
-              
+
               <div className="pt-2">
                 <button
                   type="submit"
