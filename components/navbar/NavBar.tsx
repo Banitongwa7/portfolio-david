@@ -88,26 +88,6 @@ export default function NavBar() {
           </nav>
 
           <div className="flex items-center gap-1">
-            <a
-              href={AllLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              title="GitHub"
-              className="hidden h-10 w-10 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-900/5 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white md:inline-flex"
-            >
-              <FaGithub className="h-5 w-5" aria-hidden="true" />
-            </a>
-            <a
-              href={AllLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              title="LinkedIn"
-              className="hidden h-10 w-10 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-900/5 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white md:inline-flex"
-            >
-              <FaLinkedin className="h-5 w-5" aria-hidden="true" />
-            </a>
             <Switcher />
             <button
               ref={menuButton}
