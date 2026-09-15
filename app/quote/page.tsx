@@ -42,7 +42,7 @@ export default function Quote() {
               </p>
             </blockquote>
             <figcaption className="relative mt-8 text-base font-semibold text-accent-700 dark:text-accent-400">
-              — <cite className="not-italic">{quote.author}</cite>
+              <cite className="not-italic">{quote.author}</cite>
             </figcaption>
           </>
         ) : (
