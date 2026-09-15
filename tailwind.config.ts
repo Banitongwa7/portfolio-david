@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import colors from "tailwindcss/colors";
 
 export default {
   content: [
@@ -9,6 +10,10 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        // Single brand color used across the site: change it here to rebrand.
+        accent: colors.emerald,
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

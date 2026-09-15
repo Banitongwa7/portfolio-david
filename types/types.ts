@@ -1,22 +1,15 @@
 import { JSX } from "react";
 
 export type PostType = {
-  node: {
-    id: string;
-    title: string;
-    readTimeInMinutes: number;
-    tags: { name: string }[];
-    brief: string;
-    slug: string;
-    coverImage: { url: string };
-    author: { profilePicture: string; name: string };
-    views: number;
-    reactionCount: number;
-  };
-};
-
-export type TagType = {
-  name: string;
+  slug: string;
+  title: string;
+  brief: string;
+  coverImage: string | null;
+  tags: string[];
+  author: string;
+  publishedAt: string;
+  readTimeInMinutes: number;
+  html: string;
 };
 
 export type ToolType = {

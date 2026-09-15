@@ -50,17 +50,31 @@ export const metadata: Metadata = {
   },
 };
 
+// Applies the saved theme before the first paint to avoid a light/dark flash.
+// Dark is the default; "darkMode" is the key used by the previous switcher
+// (where "true" meant light).
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(!t){t=localStorage.getItem("darkMode")==="true"?"light":"dark"}document.documentElement.classList.toggle("dark",t==="dark")}catch(e){document.documentElement.classList.add("dark")}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={inter.className}>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-slate-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Skip to content
+        </a>
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         <NavBar />
-        {children}
+        <main id="main" className="scroll-mt-16">{children}</main>
         <Footer />
         <Analytics />
         <ClarityComponent />

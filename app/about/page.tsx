@@ -1,182 +1,162 @@
-"use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Skills from "@/data/Skills";
 import Experience from "@/data/Experience";
-import { MdOutlineWork } from "react-icons/md";
-import { FaLaptopCode } from "react-icons/fa";
-import { IoLanguage } from "react-icons/io5";
-import { HiMiniRocketLaunch } from "react-icons/hi2";
+import PageHeader from "@/components/pageheader/PageHeader";
+
+const HIGHLIGHT = "font-semibold text-slate-900 dark:text-slate-100";
+
+const LANGUAGES = [
+  { name: "English", level: "Professional Working Proficiency" },
+  { name: "French", level: "Native Proficiency" },
+];
 
 export default function About() {
   return (
-    <section className="w-full pt-10 pb-20 transition duration-500">
-      <div className="py-12 md:py-20 border-b border-gray-200 dark:border-gray-800 px-4">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-10 md:mb-12 text-center text-gray-900 dark:text-gray-100">
-          A Bit About Me
-        </h2>
+    <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+      <PageHeader eyebrow="About" title="A Bit About Me" />
 
-        <div className="flex flex-col items-center justify-center gap-6 md:gap-8 max-w-4xl mx-auto">
-          <div className="p-1 rounded-full border-4 border-indigo-500 dark:border-cyan-400 shadow-xl shadow-indigo-300/50 dark:shadow-cyan-600/30">
-            <Image
-              src="/assets/david.jpg"
-              alt="Picture of david"
-              width={180}
-              height={180}
-              className="rounded-full h-[150px] w-[150px] md:h-[180px] md:w-[180px] object-cover transition-all duration-300"
-            />
-          </div>
+      <section className="grid items-center gap-10 md:grid-cols-[auto_1fr] md:gap-14">
+        <div className="flex flex-col items-center text-center">
+          <Image
+            src="/assets/david.jpg"
+            alt="Portrait of David Banitongwa"
+            width={220}
+            height={220}
+            className="h-40 w-40 rounded-full object-cover ring-4 ring-white dark:ring-slate-800 md:h-52 md:w-52"
+          />
+          <h2 className="mt-5 text-2xl font-bold text-slate-900 dark:text-slate-100">
+            David Banitongwa
+          </h2>
+          <p className="mt-1 max-w-xs text-sm font-medium text-accent-700 dark:text-accent-400">
+            Software Engineer and Microsoft Power-Platform Developer
+          </p>
+        </div>
 
-          <div className="text-center space-y-1 px-2">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
-              David Banitongwa
-            </h3>
-            <p className="text-base md:text-xl font-medium text-indigo-600 dark:text-cyan-400">
-              Software Engineer and Microsoft Power-Platform Developer
-            </p>
-          </div>
-
-          <div className="mt-6 md:mt-8 max-w-3xl w-full bg-white dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl border-l-4 border-indigo-500 dark:border-cyan-400">
-            <p className="text-base md:text-lg text-gray-700 dark:text-gray-200 leading-relaxed font-light">
-              Passionate and versatile{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">
-                Software Engineer
-              </strong>
-              , I design and build modern digital solutions, from dynamic websites to intelligent applications that perfectly fit your needs. My expertise spans the{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">MERN Stack</strong>,{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Next.js</strong>,{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">React</strong>,{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">React Native</strong>,{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">TypeScript</strong>,{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">NodeJS</strong>,{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Database</strong>,{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Python</strong>, the{" "}
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400">
-                Microsoft Power Platform{" "}
-              </strong>
-              and
-              <strong className="font-semibold text-indigo-600 dark:text-cyan-400"> More</strong>.{" "}
-              {"I’m also skilled in "}<strong className="font-semibold text-indigo-600 dark:text-cyan-400">AI</strong>, <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Data</strong>, <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Cloud technologies</strong>, and <strong className="font-semibold text-indigo-600 dark:text-cyan-400">Emerging innovations</strong> shaping the future of software development.
-            </p>
+        <div className="card p-6 md:p-8">
+          <p className="text-base leading-relaxed text-slate-600 dark:text-slate-300 md:text-lg">
+            Passionate and versatile{" "}
+            <strong className={HIGHLIGHT}>Software Engineer</strong>, I design
+            and build modern digital solutions, from dynamic websites to
+            intelligent applications that perfectly fit your needs. My expertise
+            spans the <strong className={HIGHLIGHT}>MERN Stack</strong>,{" "}
+            <strong className={HIGHLIGHT}>Next.js</strong>,{" "}
+            <strong className={HIGHLIGHT}>React</strong>,{" "}
+            <strong className={HIGHLIGHT}>React Native</strong>,{" "}
+            <strong className={HIGHLIGHT}>TypeScript</strong>,{" "}
+            <strong className={HIGHLIGHT}>NodeJS</strong>,{" "}
+            <strong className={HIGHLIGHT}>Database</strong>,{" "}
+            <strong className={HIGHLIGHT}>Python</strong>, the{" "}
+            <strong className={HIGHLIGHT}>Microsoft Power Platform</strong> and{" "}
+            <strong className={HIGHLIGHT}>More</strong>.{" "}
+            {"I’m also skilled in "}
+            <strong className={HIGHLIGHT}>AI</strong>,{" "}
+            <strong className={HIGHLIGHT}>Data</strong>,{" "}
+            <strong className={HIGHLIGHT}>Cloud technologies</strong>, and{" "}
+            <strong className={HIGHLIGHT}>Emerging innovations</strong> shaping
+            the future of software development.
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link href="/contact" className="btn btn-primary">
+              Contact me
+            </Link>
+            <Link href="/projects" className="btn btn-secondary">
+              View my projects
+            </Link>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-6xl w-full pt-16 md:pt-20 pb-12 md:pb-16 mx-auto px-4">
-        <h3 className="text-3xl md:text-4xl font-extrabold text-center mb-10 md:mb-16 text-gray-900 dark:text-gray-100 flex items-center justify-center gap-4">
-          <FaLaptopCode className="text-indigo-500 dark:text-cyan-400 text-3xl" />
-          Technical Skills
-        </h3>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6 justify-items-center">
-          {Skills &&
-            Skills.map((skill, index) => (
-              <div
-                key={index}
-                className="group flex flex-col items-center p-3 md:p-4 w-full cursor-pointer 
-                  transition-all duration-300 ease-in-out transform 
-                  hover:scale-105 hover:bg-indigo-50 dark:hover:bg-gray-700 rounded-lg"
+      <section className="mt-20 md:mt-28">
+        <SectionTitle
+          title="Technical Skills"
+          description="Proficient across a diverse range of modern technologies and platforms."
+        />
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {Skills.map((skill) => (
+            <li
+              key={skill.id}
+              className="card flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300"
+            >
+              <span
+                aria-hidden="true"
+                className="shrink-0 text-xl text-accent-600 dark:text-accent-400"
               >
-                <div className="text-4xl md:text-5xl mb-2 text-gray-600 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors duration-300">
-                  {skill.icon}
-                </div>
+                {skill.icon}
+              </span>
+              {skill.name}
+            </li>
+          ))}
+        </ul>
+      </section>
 
-                <p className="text-sm md:text-base font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-700 dark:group-hover:text-cyan-300 transition-colors duration-300 text-center">
-                  {skill.name}
+      <div className="mt-20 grid gap-16 md:mt-28 md:grid-cols-[1fr_2fr] md:gap-12">
+        <section>
+          <SectionTitle title="Languages" />
+          <ul className="space-y-3">
+            {LANGUAGES.map((language) => (
+              <li key={language.name} className="card px-5 py-4">
+                <p className="font-bold text-slate-900 dark:text-slate-100">
+                  {language.name}
                 </p>
-              </div>
+                <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">
+                  {language.level}
+                </p>
+              </li>
             ))}
-        </div>
-
-        <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 text-center mt-8 md:mt-12 px-4">
-          Proficient across a diverse range of modern technologies and
-          platforms.
-        </p>
-      </div>
-
-      <div className="py-12 md:py-16 border-b border-t border-gray-200 dark:border-gray-800 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h3 className="text-3xl md:text-4xl font-extrabold text-center mb-10 md:mb-16 text-gray-900 dark:text-gray-100 flex items-center justify-center gap-4">
-            <IoLanguage className="text-indigo-500 dark:text-cyan-400 text-3xl" />
-            Language Proficiency
-          </h3>
-
-          <ul className="grid grid-cols-2 w-full max-w-sm sm:max-w-md mx-auto gap-4 md:gap-8 text-center">
-            <li className="p-3 md:p-4 border-b-2 border-indigo-500 dark:border-cyan-400">
-              <p className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100">
-                English
-              </p>
-              <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1">
-                Professional Working Proficiency
-              </p>
-            </li>
-
-            <li className="p-3 md:p-4 border-b-2 border-indigo-500 dark:border-cyan-400">
-              <p className="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100">
-                French
-              </p>
-              <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1">
-                Native Proficiency
-              </p>
-            </li>
           </ul>
-        </div>
-      </div>
+        </section>
 
-      <div
-        id="professional-journey"
-        className="max-w-4xl w-full mx-auto pt-16 md:pt-20 px-4"
-      >
-        <h3 className="text-3xl md:text-4xl font-extrabold text-center mb-10 md:mb-16 text-gray-900 dark:text-gray-100 flex items-center justify-center gap-4">
-          <HiMiniRocketLaunch className="text-indigo-500 dark:text-cyan-400 text-3xl" />
-          Professional Journey
-        </h3>
-
-        <div className="relative border-l-4 border-indigo-200 dark:border-cyan-900 ml-4 sm:ml-8 md:ml-12">
-          {Experience &&
-            Experience.map((exp, index) => (
-              <div key={index} className="mb-8 md:mb-10 ml-6 sm:ml-8 md:ml-10">
-                <div
-                  className="absolute w-5 h-5 md:w-6 md:h-6 rounded-full -left-2.5 sm:-left-3.5 md:-left-3.5 mt-1.5 
-                             bg-indigo-500 dark:bg-cyan-400 border-4 border-white dark:border-gray-900 shadow-md"
-                ></div>
-
-                <div
-                  className="p-4 md:p-5 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 
-                             transform transition duration-300 hover:shadow-2xl hover:border-indigo-500 dark:hover:border-cyan-400"
-                >
-                  <div className="flex items-center justify-between mb-2 md:mb-3">
-                    <div className="text-xs md:text-sm font-semibold text-indigo-700 dark:text-cyan-400 tracking-wide">
-                      {exp.date}
-                    </div>
-
-                    <div className="p-1 md:p-1.5 rounded-full bg-indigo-100 dark:bg-cyan-900/50 text-indigo-600 dark:text-cyan-400">
-                      <MdOutlineWork className="w-4 h-4 md:w-5 md:h-5" />
-                    </div>
-                  </div>
-
-                  <p className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">
-                    {exp.position}
-                  </p>
-
-                  <div className="flex items-center gap-2 mt-1 text-xs md:text-sm text-gray-600 dark:text-gray-400">
-                    <p className="font-medium">
-                      {exp.company} - {exp.location}
-                    </p>
-
-                    <Image
-                      src={exp.icon}
-                      width={16}
-                      height={16}
-                      alt={`Flag for ${exp.location}`}
-                      className="rounded"
-                    />
-                  </div>
-                </div>
-              </div>
+        <section id="professional-journey">
+          <SectionTitle title="Professional Journey" />
+          <ol className="relative ms-1.5 border-s border-slate-200 dark:border-slate-800">
+            {Experience.map((exp) => (
+              <li key={exp.id} className="mb-8 ms-6 last:mb-0">
+                <span
+                  aria-hidden="true"
+                  className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border-2 border-[#f8f8f8] bg-accent-500 dark:border-[#0f172a]"
+                />
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                  {exp.date}
+                </p>
+                <h3 className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-100">
+                  {exp.position}
+                </h3>
+                <p className="mt-0.5 flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                  {exp.company} · {exp.location}
+                  <Image
+                    src={exp.icon}
+                    width={16}
+                    height={16}
+                    alt=""
+                    className="rounded-sm"
+                  />
+                </p>
+              </li>
             ))}
-        </div>
+          </ol>
+        </section>
       </div>
-    </section>
+    </div>
+  );
+}
+
+function SectionTitle({
+  title,
+  description,
+}: {
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div className="mb-8">
+      <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 sm:text-3xl">
+        {title}
+      </h2>
+      {description && (
+        <p className="mt-2 text-slate-600 dark:text-slate-400">{description}</p>
+      )}
+    </div>
   );
 }
