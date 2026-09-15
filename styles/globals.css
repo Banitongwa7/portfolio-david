@@ -1,47 +1,51 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --cursor-color: #1D2B53;
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-[#f8f8f8] antialiased dark:bg-[#0f172a];
+  }
+
+  ::selection {
+    @apply bg-accent-500/30;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-accent-500;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
-[data-theme="dark"] {
-  --cursor-color: #fff;
-}
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  }
 
-#navbar-custom li.active {
-  @apply text-green-500;
-}
+  .btn-primary {
+    @apply bg-slate-900 text-white hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200;
+  }
 
-#sidebar-custom li.active {
-  @apply bg-green-500 duration-200;
-}
+  .btn-secondary {
+    @apply border border-slate-300 text-slate-900 hover:bg-slate-900/5 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-white/10;
+  }
 
-body {
-  @apply bg-[#f8f8f8] dark:bg-[#0f172a];
-}
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/60;
+  }
 
-ul.skills-custom li {
-  @apply bg-[#f8f8f8] shadow-md p-4 rounded-md my-4 w-[50%] dark:bg-slate-700 dark:text-white;
-}
-
-ul.skills-custom li svg {
-  @apply w-[80px] h-[80px] mx-auto;
-}
-
-ul.skills-custom li:hover {
-  @apply text-green-500 transition-colors duration-300 ease-in-out;
-}
-
-ul.skills-custom li p {
-  @apply font-["Poppins"] pt-4;
-}
-
-ul.skills-custom li p.icon-language {
-  @apply text-2xl font-bold text-clip bg-gradient-to-r from-green-500 to-slate-900 bg-clip-text text-transparent dark:from-green-400 dark:to-slate-600;
+  .text-link {
+    @apply inline-flex items-center gap-1 font-semibold text-accent-700 transition-colors hover:text-accent-600 dark:text-accent-400 dark:hover:text-accent-300;
+  }
 }
 
 /* Loader on start  */

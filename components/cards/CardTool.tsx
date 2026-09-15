@@ -1,54 +1,45 @@
 import React from "react";
 import type { ToolType } from "@/types/types";
 import Link from "next/link";
-import { PiCalendarCheckFill } from "react-icons/pi";
+import { HiArrowRight } from "react-icons/hi2";
 
 export default function CardTool({ item }: { item: ToolType }) {
   return (
-    <Link
-      href={item.slug}
-      className="rounded-xl border-2 w-full border-green-700 bg-white dark:bg-gray-800 dark:border-green-600 shadow-lg shadow-gray-300/50 dark:shadow-gray-700/50 transition-transform duration-300 hover:scale-[1.03] group"
-    >
-      <div className="flex items-start gap-3 sm:gap-4 p-4 lg:p-6 w-full">
-        <div className="block shrink-0 text-3xl sm:text-4xl lg:text-5xl dark:text-emerald-500 mt-0.5">
+    <li className="card group relative flex flex-col p-5 transition-colors hover:border-slate-300 dark:hover:border-slate-700">
+      <div className="flex items-start gap-4">
+        <span
+          aria-hidden="true"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent-500/10 text-2xl text-accent-600 dark:text-accent-400"
+        >
           {item.icon}
-        </div>
-
-        <div className="w-full">
-          <h3 className="font-bold text-base sm:text-lg dark:text-white transition-colors duration-200 group-hover:text-green-700 dark:group-hover:text-green-500">
-            {item.name}
-          </h3>
-          <p className="line-clamp-2 text-xs sm:text-sm text-gray-700 dark:text-gray-300 mt-1">
+        </span>
+        <div className="min-w-0">
+          <h2 className="text-base font-bold text-slate-900 transition-colors group-hover:text-accent-700 dark:text-slate-100 dark:group-hover:text-accent-400">
+            <Link
+              href={item.slug}
+              className="after:absolute after:inset-0 after:content-['']"
+            >
+              {item.name}
+            </Link>
+          </h2>
+          <p className="mt-1 line-clamp-2 text-sm text-slate-600 dark:text-slate-400">
             {item.description}
           </p>
-
-          <div className="mt-3 sm:flex sm:items-center sm:gap-2 space-y-1 sm:space-y-0">
-            <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-              <PiCalendarCheckFill className="w-4 h-4" />
-              <p className="text-xs dark:text-gray-400">{item.publishedAt}</p>
-            </div>
-            <span
-              className="hidden sm:block dark:text-gray-400"
-              aria-hidden="true"
-            >
-              &middot;
-            </span>
-
-            <p className="text-xs sm:text-xs text-gray-500 dark:text-gray-400">
-              Developed by {" "}
-              <span className="font-medium underline hover:text-gray-700 dark:hover:text-gray-300">
-                {item.developer}
-              </span>
-            </p>
-          </div>
         </div>
       </div>
 
-      <div className="flex justify-end">
-        <strong className="-me-[2px] -mb-[2px] inline-flex items-center gap-1 rounded-ss-xl rounded-ee-xl bg-green-700 dark:bg-green-700 px-3 py-1.5 text-white">
-          <span className="text-[10px] font-medium sm:text-xs">#{item.id}</span>
-        </strong>
+      <div className="mt-5 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <p>
+          Published <time dateTime={item.publishedAt}>{item.publishedAt}</time>
+        </p>
+        <span className="inline-flex items-center gap-1 font-semibold text-accent-700 dark:text-accent-400">
+          Open tool
+          <HiArrowRight
+            className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+            aria-hidden="true"
+          />
+        </span>
       </div>
-    </Link>
+    </li>
   );
 }

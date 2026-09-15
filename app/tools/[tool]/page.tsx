@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import AllTools from "@/data/AllTools";
 
 export async function generateMetadata({
@@ -34,16 +35,11 @@ export default async function DisplayTool({
   params: Promise<{ tool: string }>;
 }) {
   const slug = (await params).tool;
+  const tool = AllTools.find((tool) => tool.slug === `/tools/${slug}`);
 
-  console.log("Tool slug : ", slug)
+  if (!tool) {
+    notFound();
+  }
 
-  return (
-    <>
-      {AllTools.find((tool) => tool.slug === `/tools/${slug}`)?.component || (
-        <div className="min-h-screen flex items-center justify-center">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">Tool not found</h2>
-        </div>
-      )}
-    </>
-  );
+  return <>{tool.component}</>;
 }

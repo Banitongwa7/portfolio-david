@@ -1,7 +1,7 @@
 import type { PostType } from "@/types/types";
 import BlogPostCard from "@/components/blog/BlogPostCard";
+import PageHeader from "@/components/pageheader/PageHeader";
 import { getPosts } from "@/utils/hashnode";
-import { FaBookmark, FaFeatherAlt } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,8 +13,8 @@ export default async function Blog() {
   } catch (err) {
     console.error("Error fetching blog posts:", err);
     return (
-      <section className="w-full py-20 bg-white dark:bg-gray-900 text-center min-h-[80vh]">
-        <p className="text-xl md:text-2xl text-red-600 dark:text-red-400 mt-10">
+      <section className="mx-auto w-full max-w-6xl px-4 py-24 text-center sm:px-6">
+        <p className="text-xl text-red-600 dark:text-red-400 md:text-2xl">
           Error loading articles
         </p>
       </section>
@@ -23,8 +23,8 @@ export default async function Blog() {
 
   if (allPosts.length === 0) {
     return (
-      <section className="w-full py-20 bg-white dark:bg-gray-900 text-center min-h-[80vh]">
-        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mt-10">
+      <section className="mx-auto w-full max-w-6xl px-4 py-24 text-center sm:px-6">
+        <p className="text-xl text-slate-600 dark:text-slate-400 md:text-2xl">
           No articles found at this time. Check back soon for new content!
         </p>
       </section>
@@ -35,74 +35,61 @@ export default async function Blog() {
   const recentPosts = allPosts.slice(1);
 
   return (
-    <section className="w-full pt-16 md:pt-20 pb-20 bg-white dark:bg-gray-900">
-      <div className="mx-auto max-w-5xl text-center mb-12 md:mb-16 px-4">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 flex items-center justify-center gap-3">
-          <FaFeatherAlt className="text-indigo-600 dark:text-cyan-400 text-2xl lg:text-3xl" />
-          {"All My Blog Posts"}
-        </h2>
-        <p className="mt-3 md:mt-4 text-base md:text-xl font-light text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-          {
-            "Here are all my blog posts. I hope you find them helpful! If you do, feel free to share them with your friends."
-          }
-        </p>
-      </div>
+    <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+      <PageHeader
+        eyebrow="Blog"
+        title="All My Blog Posts"
+        description="Here are all my blog posts. I hope you find them helpful! If you do, feel free to share them with your friends."
+      />
 
-      <div className="max-w-7xl mx-auto px-4">
-        <h3 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 md:mb-8 flex items-center gap-2">
-          <FaBookmark className="text-indigo-500 dark:text-cyan-400 text-xl" />{" "}
-          {"Last Article"}
-        </h3>
-        <Link
-          href={`/blog/${featuredPost.slug}`}
-          className="group mb-12 md:mb-16 block bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-2xl
-                       transition duration-500 hover:shadow-indigo-500/50 dark:hover:shadow-cyan-400/40"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="relative h-56 sm:h-64 md:h-80 w-full overflow-hidden">
-              <Image
-                src={featuredPost.coverImage || "/assets/icon.png"}
-                alt={`Cover image for ${featuredPost.title}`}
-                width={800}
-                height={600}
-                priority={true}
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6 sm:p-8 flex flex-col justify-center">
-              <p className="text-xs sm:text-sm font-semibold uppercase text-indigo-600 dark:text-cyan-400 mb-2">
-                {featuredPost.tags[0] || "FEATURED"} •{" "}
-                {featuredPost.readTimeInMinutes} min read
-              </p>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-2 leading-tight group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
-                {featuredPost.title}
-              </h3>
-              <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">
-                {featuredPost.brief}
-              </p>
-              <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                <span>By {featuredPost.author}</span>
-                <span className="dot text-gray-400">•</span>
-                <span>{formatDate(featuredPost.publishedAt)}</span>
-              </div>
-            </div>
-          </div>
-        </Link>
+      <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+        Last Article
+      </h2>
+      <article className="card group relative mb-16 grid grid-cols-1 overflow-hidden transition-colors hover:border-slate-300 dark:hover:border-slate-700 md:grid-cols-2">
+        <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-100 dark:bg-slate-800 md:aspect-auto md:min-h-80">
+          <Image
+            src={featuredPost.coverImage || "/assets/icon.png"}
+            alt=""
+            fill
+            sizes="(min-width: 768px) 560px, 100vw"
+            priority={true}
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          />
+        </div>
+        <div className="flex flex-col justify-center p-6 sm:p-8">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-accent-700 dark:text-accent-400 sm:text-sm">
+            {featuredPost.tags[0] || "Featured"} ·{" "}
+            {featuredPost.readTimeInMinutes} min read
+          </p>
+          <h3 className="text-2xl font-extrabold leading-tight text-slate-900 transition-colors group-hover:text-accent-700 dark:text-slate-100 dark:group-hover:text-accent-400 sm:text-3xl">
+            <Link
+              href={`/blog/${featuredPost.slug}`}
+              className="after:absolute after:inset-0 after:content-['']"
+            >
+              {featuredPost.title}
+            </Link>
+          </h3>
+          <p className="mt-3 line-clamp-3 text-base text-slate-600 dark:text-slate-400">
+            {featuredPost.brief}
+          </p>
+          <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
+            By {featuredPost.author} · {formatDate(featuredPost.publishedAt)}
+          </p>
+        </div>
+      </article>
 
-        {recentPosts.length > 0 && (
-          <>
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 md:mb-8 mt-8 md:mt-12">
-              More Articles
-            </h3>
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 list-none">
-              {recentPosts.map((post) => (
-                <BlogPostCard key={post.slug} post={post} />
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
+      {recentPosts.length > 0 && (
+        <>
+          <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+            More Articles
+          </h2>
+          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {recentPosts.map((post) => (
+              <BlogPostCard key={post.slug} post={post} />
+            ))}
+          </ul>
+        </>
+      )}
     </section>
   );
 }
