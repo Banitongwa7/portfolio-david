@@ -27,14 +27,6 @@ export default async function Home() {
     <>
       <section className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pb-16 pt-12 sm:px-6 md:grid-cols-[1fr_auto] md:gap-16 md:pb-12 md:pt-24">
         <div className="order-2 md:order-1">
-          <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 sm:text-sm">
-            <span className="relative flex h-2 w-2" aria-hidden="true">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-60 motion-reduce:animate-none" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-500" />
-            </span>
-            {currentRole.position} @ {currentRole.company}
-          </p>
-
           <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100 sm:text-5xl lg:text-6xl">
             {"Hi, I'm David Banitongwa."}
           </h1>
