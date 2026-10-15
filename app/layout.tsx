@@ -10,9 +10,12 @@ import Script from "next/script";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ClarityComponent from "@/utils/Clarity";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import { SITE_URL } from "@/utils/site";
 
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Portfolio | David",
   description: "Personal Portfolio created by David Banitongwa",
   keywords: [
@@ -37,16 +40,12 @@ export const metadata: Metadata = {
     title: "Portfolio | David",
     description: "Personal Portfolio created by David Banitongwa",
     type: "website",
-    url: "https://david-banitongwa.vercel.app/",
+    url: SITE_URL,
     siteName: "Portfolio | David",
-    images: [
-      {
-        url: "https://david-banitongwa.vercel.app/assets/icon.png",
-        width: 1200,
-        height: 630,
-        alt: "Portfolio | David",
-      },
-    ],
+    // The share image comes from app/opengraph-image.tsx.
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
@@ -73,6 +72,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        <SmoothScroll />
         <NavBar />
         <main id="main" className="scroll-mt-16">{children}</main>
         <Footer />

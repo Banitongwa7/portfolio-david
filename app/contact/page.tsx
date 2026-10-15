@@ -103,7 +103,10 @@ export default function Contact() {
                     className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-900/5 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
                   >
                     {copied ? (
-                      <HiCheck className="h-4 w-4 text-accent-600 dark:text-accent-400" aria-hidden="true" />
+                      <HiCheck
+                        className="h-4 w-4 animate-pop text-accent-600 motion-reduce:animate-none dark:text-accent-400"
+                        aria-hidden="true"
+                      />
                     ) : (
                       <HiOutlineClipboardDocument className="h-4 w-4" aria-hidden="true" />
                     )}

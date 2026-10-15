@@ -23,6 +23,20 @@
     html {
       scroll-behavior: auto;
     }
+
+    /* Scroll-reveal wrappers never stay hidden: see components/motion/Reveal.tsx */
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* Nothing scrolls on paper, so reveal everything up front. */
+  @media print {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 }
 
@@ -41,6 +55,11 @@
 
   .card {
     @apply rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/60;
+  }
+
+  /* Cards that link somewhere: they lift slightly under the pointer. */
+  .card-interactive {
+    @apply transition duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-900/5 motion-reduce:transform-none motion-reduce:transition-none dark:hover:border-slate-700 dark:hover:shadow-black/30;
   }
 
   .text-link {

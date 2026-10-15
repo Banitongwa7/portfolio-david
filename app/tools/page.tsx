@@ -1,5 +1,6 @@
 import CardTool from "@/components/cards/CardTool";
 import PageHeader from "@/components/pageheader/PageHeader";
+import Reveal from "@/components/motion/Reveal";
 import AllTools from "@/data/AllTools";
 
 export default function Tools() {
@@ -11,11 +12,11 @@ export default function Tools() {
         description="Here are some tools I've created to support you on your professional journey."
       />
 
-      <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal items="li" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {AllTools.map((item) => (
           <CardTool key={item.id} item={item} />
         ))}
-      </ul>
+      </Reveal>
     </section>
   );
 }

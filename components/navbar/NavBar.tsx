@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { useGSAP } from "@gsap/react";
+import { gsap, prefersReducedMotion, registerGsap } from "@/utils/motion";
 import { HiBars3, HiXMark } from "react-icons/hi2";
-import AllLinks from "@/data/AllLinks";
 import Switcher from "../switcher/Switcher";
 import SocialLinks from "../social/SocialLinks";
 
@@ -27,6 +27,49 @@ export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
+  const navList = useRef<HTMLUListElement>(null);
+  const pill = useRef<HTMLSpanElement>(null);
+  const pillPlaced = useRef(false);
+
+  // The highlight is one element that travels to the active tab, instead of a
+  // background appearing and disappearing on each link.
+  useGSAP(
+    () => {
+      registerGsap();
+      const list = navList.current;
+      const highlight = pill.current;
+      if (!list || !highlight) return;
+
+      const place = (animate: boolean) => {
+        const active = list.querySelector<HTMLElement>('a[aria-current="page"]');
+        if (!active) {
+          gsap.set(highlight, { autoAlpha: 0 });
+          return;
+        }
+
+        const vars = {
+          x: active.getBoundingClientRect().left - list.getBoundingClientRect().left,
+          width: active.offsetWidth,
+          autoAlpha: 1,
+        };
+
+        if (animate && !prefersReducedMotion()) {
+          gsap.to(highlight, { ...vars, duration: 0.45, ease: "power3.out" });
+        } else {
+          gsap.set(highlight, vars);
+        }
+        list.dataset.pillReady = "true";
+      };
+
+      place(pillPlaced.current);
+      pillPlaced.current = true;
+
+      const onResize = () => place(false);
+      window.addEventListener("resize", onResize);
+      return () => window.removeEventListener("resize", onResize);
+    },
+    { dependencies: [pathname] }
+  );
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -65,7 +108,12 @@ export default function NavBar() {
           </Link>
 
           <nav aria-label="Main" className="hidden md:block">
-            <ul className="flex items-center gap-1">
+            <ul ref={navList} className="group/nav relative flex items-center gap-1">
+              <span
+                ref={pill}
+                aria-hidden="true"
+                className="pointer-events-none absolute left-0 top-0 h-full rounded-full bg-slate-900/5 opacity-0 dark:bg-white/10"
+              />
               {NAV_ITEMS.map(({ href, label }) => {
                 const active = isActive(pathname, href);
                 return (
@@ -73,13 +121,15 @@ export default function NavBar() {
                     <Link
                       href={href}
                       aria-current={active ? "page" : undefined}
-                      className={`rounded-full px-3 py-2 text-sm font-medium transition-colors ${
+                      // Until the travelling highlight is measured, the active
+                      // tab carries its own background.
+                      className={`relative inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors ${
                         active
-                          ? "bg-slate-900/5 text-slate-900 dark:bg-white/10 dark:text-white"
+                          ? "bg-slate-900/5 text-slate-900 group-data-[pill-ready=true]/nav:bg-transparent dark:bg-white/10 dark:text-white"
                           : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                       }`}
                     >
-                      {label}
+                      <span className="relative">{label}</span>
                     </Link>
                   </li>
                 );
@@ -142,10 +192,17 @@ export default function NavBar() {
 
           <nav aria-label="Mobile" className="flex-1 overflow-y-auto p-3">
             <ul className="space-y-1">
-              {NAV_ITEMS.map(({ href, label }) => {
+              {NAV_ITEMS.map(({ href, label }, index) => {
                 const active = isActive(pathname, href);
                 return (
-                  <li key={href}>
+                  <li
+                    key={href}
+                    // Items slide in one after the other once the panel opens.
+                    style={{ transitionDelay: menuOpen ? `${80 + index * 35}ms` : "0ms" }}
+                    className={`transition duration-300 ease-out motion-reduce:transition-none ${
+                      menuOpen ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"
+                    }`}
+                  >
                     <Link
                       href={href}
                       aria-current={active ? "page" : undefined}

@@ -5,7 +5,7 @@ import { HiArrowRight } from "react-icons/hi2";
 
 export default function CardTool({ item }: { item: ToolType }) {
   return (
-    <li className="card group relative flex flex-col p-5 transition-colors hover:border-slate-300 dark:hover:border-slate-700">
+    <li className="card card-interactive group relative flex flex-col p-5">
       <div className="flex items-start gap-4">
         <span
           aria-hidden="true"

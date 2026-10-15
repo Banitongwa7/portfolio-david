@@ -1,6 +1,7 @@
 import type { PostType } from "@/types/types";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import PageHeader from "@/components/pageheader/PageHeader";
+import Reveal from "@/components/motion/Reveal";
 import { getPosts } from "@/utils/hashnode";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,7 +46,7 @@ export default async function Blog() {
       <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
         Last Article
       </h2>
-      <article className="card group relative mb-16 grid grid-cols-1 overflow-hidden transition-colors hover:border-slate-300 dark:hover:border-slate-700 md:grid-cols-2">
+      <article className="card card-interactive group relative mb-16 grid grid-cols-1 overflow-hidden md:grid-cols-2">
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-100 dark:bg-slate-800 md:aspect-auto md:min-h-80">
           <Image
             src={featuredPost.coverImage || "/assets/icon.png"}
@@ -79,16 +80,16 @@ export default async function Blog() {
       </article>
 
       {recentPosts.length > 0 && (
-        <>
+        <div>
           <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
             More Articles
           </h2>
-          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal items="li" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {recentPosts.map((post) => (
               <BlogPostCard key={post.slug} post={post} />
             ))}
-          </ul>
-        </>
+          </Reveal>
+        </div>
       )}
     </section>
   );

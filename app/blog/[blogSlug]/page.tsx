@@ -6,6 +6,7 @@ import ProgressBar from "./progressbar";
 import { IoIosTime } from "react-icons/io";
 import type { Metadata } from "next";
 import { getPost } from "@/utils/hashnode";
+import Parallax from "@/components/motion/Parallax";
 
 export async function generateMetadata({
   params,
@@ -22,16 +23,14 @@ export async function generateMetadata({
     title: article.title,
     description: article.brief,
     openGraph: {
-      images: article.coverImage
-        ? [
-            {
-              url: article.coverImage,
-              width: 1000,
-              height: 500,
-              alt: article.title,
-            },
-          ]
-        : [],
+      type: "article",
+      title: article.title,
+      description: article.brief,
+      publishedTime: article.publishedAt,
+      // The share image comes from the sibling opengraph-image.tsx.
+    },
+    twitter: {
+      card: "summary_large_image",
     },
   };
 }
@@ -84,14 +83,18 @@ export default async function PostArticle({
         </header>
 
         {article.coverImage && (
-          <Image
-            src={article.coverImage}
-            alt=""
-            width={1000}
-            height={500}
-            priority={true}
-            className="mt-10 aspect-[2/1] w-full rounded-2xl border border-slate-200 object-cover dark:border-slate-800"
-          />
+          <div className="relative mt-10 aspect-[2/1] w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+            <Parallax className="absolute inset-x-0 -inset-y-[6%]">
+              <Image
+                src={article.coverImage}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 768px, 100vw"
+                priority={true}
+                className="object-cover"
+              />
+            </Parallax>
+          </div>
         )}
 
         <div

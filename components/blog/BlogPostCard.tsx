@@ -10,7 +10,7 @@ interface BlogPostCardProps {
 
 export default function BlogPostCard({ post }: BlogPostCardProps) {
   return (
-    <li className="card group relative flex flex-col overflow-hidden transition-colors hover:border-slate-300 dark:hover:border-slate-700">
+    <li className="card card-interactive group relative flex flex-col overflow-hidden">
       <div className="relative aspect-[16/9] overflow-hidden border-b border-slate-200 bg-slate-100 dark:border-slate-800 dark:bg-slate-800">
         <Image
           src={post.coverImage || "/assets/icon.png"}

@@ -4,6 +4,8 @@ import Link from "next/link";
 import Skills from "@/data/Skills";
 import Experience from "@/data/Experience";
 import PageHeader from "@/components/pageheader/PageHeader";
+import Reveal from "@/components/motion/Reveal";
+import TimelineDraw from "@/components/motion/TimelineDraw";
 
 const HIGHLIGHT = "font-semibold text-slate-900 dark:text-slate-100";
 
@@ -73,7 +75,7 @@ export default function About() {
           title="Technical Skills"
           description="Proficient across a diverse range of modern technologies and platforms."
         />
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <Reveal items="li" className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {Skills.map((skill) => (
             <li
               key={skill.id}
@@ -88,13 +90,13 @@ export default function About() {
               {skill.name}
             </li>
           ))}
-        </ul>
+        </Reveal>
       </section>
 
       <div className="mt-20 grid gap-16 md:mt-28 md:grid-cols-[1fr_2fr] md:gap-12">
         <section>
           <SectionTitle title="Languages" />
-          <ul className="space-y-3">
+          <Reveal items="li" className="space-y-3">
             {LANGUAGES.map((language) => (
               <li key={language.name} className="card px-5 py-4">
                 <p className="font-bold text-slate-900 dark:text-slate-100">
@@ -105,15 +107,23 @@ export default function About() {
                 </p>
               </li>
             ))}
-          </ul>
+          </Reveal>
         </section>
 
         <section id="professional-journey">
           <SectionTitle title="Professional Journey" />
-          <ol className="relative ms-1.5 border-s border-slate-200 dark:border-slate-800">
+          <TimelineDraw>
+          <ol className="relative ms-1.5">
+            {/* Drawn by TimelineDraw as the section scrolls past. */}
+            <span
+              data-line
+              aria-hidden="true"
+              className="absolute inset-y-0 start-0 w-px origin-top bg-slate-200 dark:bg-slate-800"
+            />
             {Experience.map((exp) => (
               <li key={exp.id} className="mb-8 ms-6 last:mb-0">
                 <span
+                  data-dot
                   aria-hidden="true"
                   className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border-2 border-[#f8f8f8] bg-accent-500 dark:border-[#0f172a]"
                 />
@@ -136,6 +146,7 @@ export default function About() {
               </li>
             ))}
           </ol>
+          </TimelineDraw>
         </section>
       </div>
     </div>

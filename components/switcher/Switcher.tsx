@@ -22,8 +22,10 @@ export default function Switcher() {
       onClick={toggleDarkMode}
       className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-600 transition-colors hover:bg-slate-900/5 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white"
     >
+      {/* Both icons stay mounted and swap by rotating into place. */}
+      <span className="relative block h-5 w-5">
       <svg
-        className="block h-5 w-5 dark:hidden"
+        className="absolute inset-0 h-5 w-5 rotate-0 scale-100 opacity-100 transition-all duration-300 ease-out motion-reduce:transition-none dark:-rotate-90 dark:scale-0 dark:opacity-0"
         fill="currentColor"
         viewBox="0 0 20 20"
         aria-hidden="true"
@@ -31,7 +33,7 @@ export default function Switcher() {
         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
       </svg>
       <svg
-        className="hidden h-5 w-5 dark:block"
+        className="absolute inset-0 h-5 w-5 rotate-90 scale-0 opacity-0 transition-all duration-300 ease-out motion-reduce:transition-none dark:rotate-0 dark:scale-100 dark:opacity-100"
         fill="currentColor"
         viewBox="0 0 20 20"
         aria-hidden="true"
@@ -42,6 +44,7 @@ export default function Switcher() {
           clipRule="evenodd"
         ></path>
       </svg>
+      </span>
     </button>
   );
 }
