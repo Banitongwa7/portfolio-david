@@ -1,173 +1,199 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Skills from "@/data/Skills";
+import { HiArrowUpRight, HiOutlineCloud, HiOutlineCodeBracket, HiOutlineSparkles, HiOutlineSquares2X2 } from "react-icons/hi2";
+import AllLinks from "@/data/AllLinks";
 import Experience from "@/data/Experience";
-import PageHeader from "@/components/pageheader/PageHeader";
-import Reveal from "@/components/motion/Reveal";
+import Skills from "@/data/Skills";
 import TimelineDraw from "@/components/motion/TimelineDraw";
+import EndCta from "@/components/site/EndCta";
+import { formatRange, formatRole } from "@/utils/format";
+import s from "@/components/about/about.module.css";
 
-const HIGHLIGHT = "font-semibold text-slate-900 dark:text-slate-100";
+// Readable labels for a few skill names stored in data/Skills.tsx.
+const LABELS: Record<string, string> = {
+  "Next JS": "Next.js",
+  "React JS": "React",
+  "Node JS": "Node.js",
+  PowerFx: "Power Fx",
+  Automatization: "Automation",
+  "Database SQL & NoSQL": "SQL & NoSQL databases",
+};
 
-const LANGUAGES = [
-  { name: "English", level: "Professional Working Proficiency" },
-  { name: "French", level: "Native Proficiency" },
+const GROUPS = [
+  {
+    title: "Web and mobile",
+    icon: <HiOutlineCodeBracket aria-hidden="true" />,
+    text: "Interfaces and APIs for products people use every day, on the web and on phones.",
+    names: ["Next JS", "React JS", "React Native", "TypeScript", "Node JS", "Tailwind CSS", "Bootstrap", "UI/UX Design"],
+  },
+  {
+    title: "Business apps",
+    icon: <HiOutlineSquares2X2 aria-hidden="true" />,
+    text: "Low-code apps and automated flows that replace manual work inside companies.",
+    names: ["Power Platform", "PowerFx", "Microsoft", "Automatization"],
+  },
+  {
+    title: "Data and AI",
+    icon: <HiOutlineSparkles aria-hidden="true" />,
+    text: "Models, dashboards and the databases behind them.",
+    names: ["Artificial Intelligence", "Python", "Data Visualization", "Database SQL & NoSQL"],
+  },
+  {
+    title: "Cloud and workflow",
+    icon: <HiOutlineCloud aria-hidden="true" />,
+    text: "The environment that keeps projects versioned, deployed and running.",
+    names: ["Cloud Computing", "Git", "Linux"],
+  },
 ];
 
+const WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+
 export default function About() {
+  // Every skill lands in a group; anything new falls into the last one.
+  const grouped = GROUPS.map((g) => ({ ...g, skills: Skills.filter((sk) => g.names.includes(sk.name)) }));
+  const ungrouped = Skills.filter((sk) => !GROUPS.some((g) => g.names.includes(sk.name)));
+  grouped[grouped.length - 1].skills.push(...ungrouped);
+
+  const current = Experience.find((e) => /now/i.test(e.date));
+  const firstYear = Experience[Experience.length - 1].date.match(/\d{4}/)?.[0];
+
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24">
-      <PageHeader eyebrow="About" title="A Bit About Me" />
-
-      <section className="grid items-center gap-10 md:grid-cols-[auto_1fr] md:gap-14">
-        <div className="flex flex-col items-center text-center">
-          <Image
-            src="/assets/david.jpg"
-            alt="Portrait of David Banitongwa"
-            width={220}
-            height={220}
-            className="h-40 w-40 rounded-full object-cover ring-4 ring-white dark:ring-slate-800 md:h-52 md:w-52"
-          />
-          <h2 className="mt-5 text-2xl font-bold text-slate-900 dark:text-slate-100">
-            David Banitongwa
-          </h2>
-          <p className="mt-1 max-w-xs text-sm font-medium text-accent-700 dark:text-accent-400">
-            Software Engineer and Microsoft Power-Platform Developer
-          </p>
+    <>
+      <section className="phead" aria-labelledby="page-title">
+        <div className={`wrap ${s.abHead}`}>
+          <div>
+            <span className="tag">About</span>
+            <h1 id="page-title">
+              Hi, I&apos;m <span className="serif">David Banitongwa</span>
+            </h1>
+            <p className={s.bio}>
+              A <strong>software engineer</strong> who designs and builds modern digital solutions, from dynamic
+              websites to intelligent business applications. My work spans <strong>Next.js</strong>,{" "}
+              <strong>React</strong>, <strong>React Native</strong>, <strong>TypeScript</strong>,{" "}
+              <strong>Node.js</strong>, <strong>Python</strong>, databases and the{" "}
+              <strong>Microsoft Power Platform</strong>, along with AI, data and cloud technologies.
+            </p>
+            <div className="cta-row">
+              <a className="btn btn-neon" href={AllLinks.needService} target="_blank" rel="noopener noreferrer">
+                Start a project<span className="sr"> (opens in a new tab)</span>
+                <span className="ic">
+                  <HiArrowUpRight aria-hidden="true" />
+                </span>
+              </a>
+              <Link className="btn btn-line" href="/contact">
+                Send a message
+              </Link>
+            </div>
+          </div>
+          <dl className={s.facts} aria-label="Quick facts">
+            <div className={s.fact}>
+              <dt>Based in</dt>
+              <dd>Kinshasa, DR&nbsp;Congo</dd>
+            </div>
+            {current && (
+              <div className={s.fact}>
+                <dt>Currently</dt>
+                <dd>
+                  {formatRole(current.position)}
+                  <small>
+                    {current.company}, since {formatRange(current.date).split(" – ")[0]}
+                  </small>
+                </dd>
+              </div>
+            )}
+            <div className={s.fact}>
+              <dt>Experience</dt>
+              <dd>
+                {Experience.length} experiences since {firstYear}
+                <small>DR Congo, Tunisia and France</small>
+              </dd>
+            </div>
+            <div className={s.fact}>
+              <dt>Languages</dt>
+              <dd>
+                French, native
+                <small>English, professional working proficiency</small>
+              </dd>
+            </div>
+            <div className={s.fact}>
+              <dt>Status</dt>
+              <dd>
+                <span className="live">
+                  <span className="pulse" />
+                  Open to new projects
+                </span>
+              </dd>
+            </div>
+          </dl>
         </div>
+      </section>
 
-        <div className="card p-6 md:p-8">
-          <p className="text-base leading-relaxed text-slate-600 dark:text-slate-300 md:text-lg">
-            Passionate and versatile{" "}
-            <strong className={HIGHLIGHT}>Software Engineer</strong>, I design
-            and build modern digital solutions, from dynamic websites to
-            intelligent applications that perfectly fit your needs. My expertise
-            spans the <strong className={HIGHLIGHT}>MERN Stack</strong>,{" "}
-            <strong className={HIGHLIGHT}>Next.js</strong>,{" "}
-            <strong className={HIGHLIGHT}>React</strong>,{" "}
-            <strong className={HIGHLIGHT}>React Native</strong>,{" "}
-            <strong className={HIGHLIGHT}>TypeScript</strong>,{" "}
-            <strong className={HIGHLIGHT}>NodeJS</strong>,{" "}
-            <strong className={HIGHLIGHT}>Database</strong>,{" "}
-            <strong className={HIGHLIGHT}>Python</strong>, the{" "}
-            <strong className={HIGHLIGHT}>Microsoft Power Platform</strong> and{" "}
-            <strong className={HIGHLIGHT}>More</strong>.{" "}
-            {"I’m also skilled in "}
-            <strong className={HIGHLIGHT}>AI</strong>,{" "}
-            <strong className={HIGHLIGHT}>Data</strong>,{" "}
-            <strong className={HIGHLIGHT}>Cloud technologies</strong>, and{" "}
-            <strong className={HIGHLIGHT}>Emerging innovations</strong> shaping
-            the future of software development.
-          </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" className="btn btn-primary">
-              Contact me
-            </Link>
-            <Link href="/projects" className="btn btn-secondary">
-              View my projects
-            </Link>
+      <section className="sec" style={{ paddingTop: 0 }} aria-labelledby="skills-title">
+        <div className="wrap">
+          <span className="tag">Skills</span>
+          <h2 id="skills-title" className="h2">
+            {Skills.length} skills across {grouped.length} areas
+          </h2>
+          <div className={s.skills}>
+            {grouped.map((group) => (
+              <article key={group.title} className={s.sk}>
+                <div className={s.skTop}>
+                  <span className={s.skIc}>{group.icon}</span>
+                  <h3>{group.title}</h3>
+                  <span className={s.skCount}>{group.skills.length} skills</span>
+                </div>
+                <p>{group.text}</p>
+                <ul>
+                  {group.skills.map((skill) => (
+                    <li key={skill.id}>
+                      <span aria-hidden="true">{skill.icon}</span>
+                      {LABELS[skill.name] ?? skill.name}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="mt-20 md:mt-28">
-        <SectionTitle
-          title="Technical Skills"
-          description="Proficient across a diverse range of modern technologies and platforms."
-        />
-        <Reveal items="li" className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {Skills.map((skill) => (
-            <li
-              key={skill.id}
-              className="card flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 dark:text-slate-300"
-            >
-              <span
-                aria-hidden="true"
-                className="shrink-0 text-xl text-accent-600 dark:text-accent-400"
-              >
-                {skill.icon}
-              </span>
-              {skill.name}
-            </li>
-          ))}
-        </Reveal>
+      <section id="professional-journey" className={`dark ${s.journey}`} aria-labelledby="journey-title">
+        <div className="wrap">
+          <span className="tag tag-dark">Journey</span>
+          <h2 id="journey-title" className="h2">
+            From Tunis to Kinshasa: {WORDS[Experience.length] ?? Experience.length} experiences since {firstYear}
+          </h2>
+          <TimelineDraw className={s.tl}>
+            <span className={s.tlLine} data-line aria-hidden="true" />
+            <ol>
+              {Experience.map((exp) => {
+                const now = /now/i.test(exp.date);
+                return (
+                  <li key={exp.id} className={now ? `${s.item} ${s.now}` : s.item}>
+                    <p className={s.date}>{formatRange(exp.date)}</p>
+                    <span className={s.dot} data-dot aria-hidden="true" />
+                    <div className={s.itemBody}>
+                      <h3>
+                        {formatRole(exp.position)}
+                        {now && <span className={s.badge}>Current</span>}
+                      </h3>
+                      <p className={s.meta}>
+                        <Image src={exp.icon} alt="" width={20} height={20} />
+                        {exp.company}, {exp.location}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </TimelineDraw>
+        </div>
       </section>
 
-      <div className="mt-20 grid gap-16 md:mt-28 md:grid-cols-[1fr_2fr] md:gap-12">
-        <section>
-          <SectionTitle title="Languages" />
-          <Reveal items="li" className="space-y-3">
-            {LANGUAGES.map((language) => (
-              <li key={language.name} className="card px-5 py-4">
-                <p className="font-bold text-slate-900 dark:text-slate-100">
-                  {language.name}
-                </p>
-                <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">
-                  {language.level}
-                </p>
-              </li>
-            ))}
-          </Reveal>
-        </section>
-
-        <section id="professional-journey">
-          <SectionTitle title="Professional Journey" />
-          <TimelineDraw>
-          <ol className="relative ms-1.5">
-            {/* Drawn by TimelineDraw as the section scrolls past. */}
-            <span
-              data-line
-              aria-hidden="true"
-              className="absolute inset-y-0 start-0 w-px origin-top bg-slate-200 dark:bg-slate-800"
-            />
-            {Experience.map((exp) => (
-              <li key={exp.id} className="mb-8 ms-6 last:mb-0">
-                <span
-                  data-dot
-                  aria-hidden="true"
-                  className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border-2 border-[#f8f8f8] bg-accent-500 dark:border-[#0f172a]"
-                />
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-                  {exp.date}
-                </p>
-                <h3 className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-100">
-                  {exp.position}
-                </h3>
-                <p className="mt-0.5 flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-                  {exp.company} · {exp.location}
-                  <Image
-                    src={exp.icon}
-                    width={16}
-                    height={16}
-                    alt=""
-                    className="rounded-sm"
-                  />
-                </p>
-              </li>
-            ))}
-          </ol>
-          </TimelineDraw>
-        </section>
-      </div>
-    </div>
-  );
-}
-
-function SectionTitle({
-  title,
-  description,
-}: {
-  title: string;
-  description?: string;
-}) {
-  return (
-    <div className="mb-8">
-      <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 sm:text-3xl">
-        {title}
-      </h2>
-      {description && (
-        <p className="mt-2 text-slate-600 dark:text-slate-400">{description}</p>
-      )}
-    </div>
+      <EndCta
+        title="Want to build something together?"
+        text="Tell me about your project and I'll come back with questions, a scope and an estimate."
+      />
+    </>
   );
 }

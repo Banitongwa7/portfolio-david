@@ -1,58 +1,102 @@
 import Link from "next/link";
-import { HiArrowUp } from "react-icons/hi2";
-import SocialLinks from "../social/SocialLinks";
+import AllLinks from "@/data/AllLinks";
+import AllProjects from "@/data/AllProjects";
+import WordRise from "@/components/motion/WordRise";
 
-const FOOTER_LINKS = [
+// The closing banner. Change this one word to change it on every page.
+const FOOTER_WORD = "LET'S BUILD";
+export const EMAIL = "davidbanitongwa@gmail.com";
+
+const PAGES = [
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
   { href: "/tools", label: "Tools" },
+  { href: "/quote", label: "Quote of the day" },
   { href: "/contact", label: "Contact" },
 ];
 
+const SOCIALS = [
+  { href: AllLinks.linkedin, label: "LinkedIn" },
+  { href: AllLinks.github, label: "GitHub" },
+  { href: AllLinks.twitter, label: "X" },
+  { href: AllLinks.behance, label: "Behance" },
+  { href: AllLinks.hashnode, label: "Hashnode" },
+];
+
+const FEATURED = ["Credit Squares", "Synapse HR", "RecycleAI", "OpenOCR"];
+
 export default function Footer() {
+  const projects = FEATURED.map((name) => AllProjects.find((p) => p.name === name)).filter(
+    (p): p is (typeof AllProjects)[number] => Boolean(p && p.link && p.link !== "#")
+  );
+
   return (
-    <footer className="mt-10 border-t border-slate-200 dark:border-slate-800">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 md:flex-row md:items-start md:justify-between">
-        <div className="max-w-xs">
-          <Link
-            href="/"
-            className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100"
-          >
-            David<span className="text-accent-500">.</span>
-          </Link>
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-            Software Engineer and Microsoft Power Platform Developer.
-          </p>
-          <SocialLinks className="-ml-2.5 mt-4" />
-        </div>
-
-        <nav aria-label="Footer">
-          <ul className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm sm:grid-cols-3">
-            {FOOTER_LINKS.map(({ href, label }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className="text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                >
-                  {label}
-                </Link>
+    <footer>
+      <h2 className="sr">Site links</h2>
+      <div className="wrap">
+        <div className="foot">
+          <div className="foot-brand">
+            <Link href="/" className="logo" aria-label="David Banitongwa, home">
+              David<span className="logo-dot" />
+            </Link>
+            <p>Software engineer and Microsoft Power Platform developer based in Kinshasa, DR&nbsp;Congo.</p>
+            <ul className="socials">
+              {SOCIALS.map(({ href, label }) => (
+                <li key={label}>
+                  <a href={href} target="_blank" rel="noopener noreferrer">
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <nav aria-label="Footer">
+            <h3>Pages</h3>
+            <ul className="foot-links">
+              {PAGES.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href}>{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div>
+            <h3>Projects</h3>
+            <ul className="foot-links">
+              {projects.map((p) => (
+                <li key={p.id}>
+                  <a href={p.link} target="_blank" rel="noopener noreferrer">
+                    {p.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <ul className="foot-links">
+              <li>
+                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
               </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-
-      <div className="border-t border-slate-200 dark:border-slate-800">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-5 text-sm text-slate-500 dark:text-slate-400 sm:px-6">
-          <p>© {new Date().getFullYear()} David Banitongwa. All rights reserved.</p>
-          <a
-            href="#main"
-            className="inline-flex shrink-0 items-center gap-1 transition-colors hover:text-slate-900 dark:hover:text-white"
-          >
-            Back to top <HiArrowUp className="h-4 w-4" aria-hidden="true" />
-          </a>
+              <li>
+                <span>Kinshasa, DR&nbsp;Congo</span>
+              </li>
+              <li>
+                <a href={AllLinks.needService} target="_blank" rel="noopener noreferrer">
+                  Start a project
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
+      <div className="mark">
+        <WordRise word={FOOTER_WORD} className="mark-word" />
+      </div>
+      <div className="wrap legal">
+        <p>© {new Date().getFullYear()} David Banitongwa</p>
+        <a href="#top">Back to top</a>
       </div>
     </footer>
   );

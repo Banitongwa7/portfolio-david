@@ -40,7 +40,8 @@ export default function ProgressBar({
       <div
         ref={bar}
         aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-50 h-1 origin-left scale-x-0 transform bg-accent-500"
+        className="fixed left-0 right-0 top-0 z-50 h-1 origin-left scale-x-0 transform"
+        style={{ background: "linear-gradient(90deg, #FF8A3D, #E8479B 50%, #7B5CFA)" }}
       />
       {children}
     </>

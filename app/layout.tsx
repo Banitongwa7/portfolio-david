@@ -1,18 +1,33 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+import { Archivo, Instrument_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./../styles/globals.css";
+import "./../styles/site.css";
 import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import ClarityComponent from "@/utils/Clarity";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import { SITE_URL } from "@/utils/site";
 
+// Archivo carries the whole interface; its width axis gives the stretched
+// display caps. Instrument Serif is only used for one italic accent per title.
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -49,33 +64,27 @@ export const metadata: Metadata = {
   },
 };
 
-// Applies the saved theme before the first paint to avoid a light/dark flash.
-// Dark is the default; "darkMode" is the key used by the previous switcher
-// (where "true" meant light).
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(!t){t=localStorage.getItem("darkMode")==="true"?"light":"dark"}document.documentElement.classList.toggle("dark",t==="dark")}catch(e){document.documentElement.classList.add("dark")}})();`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
-      <body className={inter.className}>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-slate-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
-        >
+    <html lang="en" className={`${archivo.variable} ${instrumentSerif.variable}`}>
+      <body>
+        <a href="#main" className="skip">
           Skip to content
         </a>
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         <SmoothScroll />
-        <NavBar />
-        <main id="main" className="scroll-mt-16">{children}</main>
-        <Footer />
+        <div className="pg" id="top">
+          <div className="sheet">
+            {/* The home page draws its own dark navigation inside the hero. */}
+            <NavBar />
+            <main id="main">{children}</main>
+            <Footer />
+          </div>
+        </div>
         <Analytics />
         <ClarityComponent />
         <SpeedInsights />

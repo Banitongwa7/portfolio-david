@@ -1,0 +1,207 @@
+.qod {
+  min-height: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(64px, 8cqi, 112px);
+}
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.glow {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: min(780px, 90%);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123, 92, 250, 0.35), rgba(232, 71, 155, 0.15) 45%, transparent 70%);
+}
+.date {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.86);
+  animation: fadeUp 0.5s var(--ease-out) both;
+}
+.inner h1 {
+  margin-top: 20px;
+  font-size: clamp(20px, 2cqi, 26px);
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  animation: fadeUp 0.5s 0.05s var(--ease-out) both;
+}
+.markQ {
+  display: block;
+  height: 0.62em;
+  margin-top: 28px;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(120px, 14cqi, 200px);
+  line-height: 1;
+  background: linear-gradient(135deg, #ff8a3d, #e8479b 55%, #9b7bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeUp 0.6s 0.1s var(--ease-out) both;
+}
+.figure {
+  max-width: 22ch;
+  font-size: clamp(32px, 4.6cqi, 64px);
+}
+.figure blockquote p {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: #fff;
+  text-wrap: balance;
+  animation: fadeUp 0.7s 0.18s var(--ease-out) both;
+}
+.figure figcaption {
+  margin-top: 32px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  animation: fadeUp 0.6s 0.3s var(--ease-out) both;
+}
+.figure cite {
+  font-style: normal;
+  color: #fff;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+  animation: fadeUp 0.6s 0.38s var(--ease-out) both;
+}
+.note {
+  margin-top: 28px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.66);
+}
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: min(560px, 100%);
+}
+.skeleton span {
+  display: block;
+  height: 28px;
+  width: 100%;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.skeleton span:nth-child(2) {
+  width: 75%;
+}
+.skeleton span:nth-child(3) {
+  width: 30%;
+  height: 18px;
+  margin-top: 18px;
+}
+
+/* 404 */
+.nf {
+  min-height: 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(56px, 7cqi, 104px);
+}
+.code {
+  font-size: clamp(120px, 22cqi, 320px);
+  font-weight: 800;
+  font-stretch: 125%;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #ff8a3d 0%, #e8479b 45%, #9b7bff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeUp 0.6s var(--ease-out) both;
+}
+.nf h1 {
+  margin-top: 28px;
+  font-size: clamp(30px, 3.6cqi, 48px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  animation: fadeUp 0.5s 0.08s var(--ease-out) both;
+}
+.nf .lead {
+  margin-top: 14px;
+  max-width: 46ch;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  animation: fadeUp 0.5s 0.14s var(--ease-out) both;
+}
+.nf :global(.cta-row) {
+  justify-content: center;
+  margin-top: 32px;
+  animation: fadeUp 0.5s 0.2s var(--ease-out) both;
+}
+.tryl {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  width: min(520px, 100%);
+}
+.tryl h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+.tryl ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+.tryl a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  transition: background 0.2s;
+}
+.tryl a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.streak {
+  position: absolute;
+  z-index: -1;
+  left: -10%;
+  top: 30%;
+  width: 120%;
+  height: 1.5px;
+  opacity: 0.5;
+  transform: rotate(-10deg);
+  background: linear-gradient(90deg, transparent, #ff8a3d 35%, #e8479b 60%, #9b7bff 85%, transparent);
+}

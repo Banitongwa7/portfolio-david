@@ -1,21 +1,30 @@
-import AllProjects from "@/data/AllProjects";
-import ProjectCard from "@/components/cards/ProjectCard";
-import PageHeader from "@/components/pageheader/PageHeader";
+import { Suspense } from "react";
+import PageHead from "@/components/site/PageHead";
+import EndCta from "@/components/site/EndCta";
+import ProjectsExplorer from "@/components/projects/ProjectsExplorer";
+import s from "@/components/projects/projects.module.css";
 
 export default function Projects() {
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 md:py-24">
-      <PageHeader
-        eyebrow="Portfolio"
-        title="Projects"
-        description="Here are some projects I've worked on. I hope you find them useful and inspiring for your own journey!"
+    <>
+      <PageHead
+        className={s.head}
+        tag="Projects"
+        title={
+          <>
+            Things I&apos;ve built, for teams <span className="serif">and for myself</span>
+          </>
+        }
+        text="Business apps on Microsoft Power Platform, web and mobile products, and AI experiments. Filter by practice or search a technology."
       />
-
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {AllProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
-    </section>
+      {/* The explorer reads ?practice= from the URL. */}
+      <Suspense>
+        <ProjectsExplorer />
+      </Suspense>
+      <EndCta
+        title="Need something similar?"
+        text="Tell me about your project and I'll come back with a scope and an estimate."
+      />
+    </>
   );
 }

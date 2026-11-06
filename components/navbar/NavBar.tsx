@@ -3,40 +3,46 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useGSAP } from "@gsap/react";
+import { HiArrowUpRight, HiBars3, HiXMark } from "react-icons/hi2";
 import { gsap, prefersReducedMotion, registerGsap } from "@/utils/motion";
-import { HiBars3, HiXMark } from "react-icons/hi2";
-import Switcher from "../switcher/Switcher";
-import SocialLinks from "../social/SocialLinks";
+import AllLinks from "@/data/AllLinks";
 
-const NAV_ITEMS = [
+export const NAV_ITEMS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
   { href: "/tools", label: "Tools" },
-  { href: "/quote", label: "Quote" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
 const isActive = (pathname: string, href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-export default function NavBar() {
+const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+// The Tawk chat bubble sits above everything; it is hidden while the menu is open.
+type TawkApi = { hideWidget?: () => void; showWidget?: () => void };
+const tawk = () => (window as unknown as { Tawk_API?: TawkApi }).Tawk_API;
+
+// The light bar sits at the top of every inner page. The home page renders the
+// dark variant itself, inside its hero, so the layout's copy steps aside there.
+export default function NavBar({ variant = "light" }: { variant?: "light" | "dark" }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
-  const closeButton = useRef<HTMLButtonElement>(null);
-  const navList = useRef<HTMLUListElement>(null);
+  const navEl = useRef<HTMLElement>(null);
   const pill = useRef<HTMLSpanElement>(null);
   const pillPlaced = useRef(false);
+  const hidden = variant === "light" && pathname === "/";
 
-  // The highlight is one element that travels to the active tab, instead of a
-  // background appearing and disappearing on each link.
+  // One highlight travels to the active tab instead of each link lighting up.
   useGSAP(
     () => {
       registerGsap();
-      const list = navList.current;
+      const list = navEl.current;
       const highlight = pill.current;
       if (!list || !highlight) return;
 
@@ -46,19 +52,17 @@ export default function NavBar() {
           gsap.set(highlight, { autoAlpha: 0 });
           return;
         }
-
         const vars = {
           x: active.getBoundingClientRect().left - list.getBoundingClientRect().left,
           width: active.offsetWidth,
           autoAlpha: 1,
         };
-
         if (animate && !prefersReducedMotion()) {
           gsap.to(highlight, { ...vars, duration: 0.45, ease: "power3.out" });
         } else {
           gsap.set(highlight, vars);
         }
-        list.dataset.pillReady = "true";
+        list.dataset.ready = "true";
       };
 
       place(pillPlaced.current);
@@ -66,26 +70,39 @@ export default function NavBar() {
 
       const onResize = () => place(false);
       window.addEventListener("resize", onResize);
+      // Web fonts change the tab widths once they load.
+      document.fonts?.ready.then(() => place(false));
       return () => window.removeEventListener("resize", onResize);
     },
-    { dependencies: [pathname] }
+    { dependencies: [pathname, hidden] }
   );
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-    menuButton.current?.focus();
-  };
 
   useEffect(() => {
     if (!menuOpen) return;
 
-    closeButton.current?.focus();
+    const dialog = document.getElementById("mobile-menu");
+    dialog?.querySelector<HTMLElement>(".mmenu-close")?.focus();
     document.body.style.overflow = "hidden";
+    tawk()?.hideWidget?.();
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setMenuOpen(false);
         menuButton.current?.focus();
+        return;
+      }
+      // Keep Tab inside the open menu.
+      if (e.key === "Tab" && dialog) {
+        const items = Array.from(dialog.querySelectorAll<HTMLElement>(FOCUSABLE));
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -93,139 +110,101 @@ export default function NavBar() {
     return () => {
       document.body.style.overflow = "";
       document.removeEventListener("keydown", onKeyDown);
+      tawk()?.showWidget?.();
     };
   }, [menuOpen]);
 
+  if (hidden) return null;
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+    menuButton.current?.focus();
+  };
+
   return (
-    <>
-      <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-[#f8f8f8]/80 backdrop-blur-md dark:border-slate-800/70 dark:bg-[#0f172a]/80">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-          <Link
-            href="/"
-            className="text-xl font-bold tracking-tight text-slate-900 transition-colors hover:text-accent-600 dark:text-slate-100 dark:hover:text-accent-400"
-          >
-            David<span className="text-accent-500">.</span>
-          </Link>
+    <header className={variant === "dark" ? "nav nav-dark" : "nav"}>
+      <Link href="/" className="logo" aria-label="David Banitongwa, home">
+        David<span className="logo-dot" />
+      </Link>
 
-          <nav aria-label="Main" className="hidden md:block">
-            <ul ref={navList} className="group/nav relative flex items-center gap-1">
-              <span
-                ref={pill}
-                aria-hidden="true"
-                className="pointer-events-none absolute left-0 top-0 h-full rounded-full bg-slate-900/5 opacity-0 dark:bg-white/10"
-              />
-              {NAV_ITEMS.map(({ href, label }) => {
-                const active = isActive(pathname, href);
-                return (
-                  <li key={href}>
-                    <Link
-                      href={href}
-                      aria-current={active ? "page" : undefined}
-                      // Until the travelling highlight is measured, the active
-                      // tab carries its own background.
-                      className={`relative inline-flex rounded-full px-3 py-2 text-sm font-medium transition-colors ${
-                        active
-                          ? "bg-slate-900/5 text-slate-900 group-data-[pill-ready=true]/nav:bg-transparent dark:bg-white/10 dark:text-white"
-                          : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
-                      }`}
-                    >
-                      <span className="relative">{label}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+      <nav ref={navEl} aria-label="Main" className="navpill">
+        <span ref={pill} className="navpill-hl" aria-hidden="true" />
+        <ul style={{ display: "flex", gap: 2 }}>
+          {NAV_ITEMS.map(({ href, label }) => (
+            <li key={href}>
+              <Link href={href} aria-current={isActive(pathname, href) ? "page" : undefined}>
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-          <div className="flex items-center gap-1">
-            <Switcher />
-            <button
-              ref={menuButton}
-              type="button"
-              aria-label="Open menu"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              onClick={() => setMenuOpen(true)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-900/5 dark:text-slate-200 dark:hover:bg-white/10 md:hidden"
-            >
-              <HiBars3 className="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Kept outside <header>: its backdrop-filter would trap `fixed` children. */}
-      <div
-        className={`fixed inset-0 z-50 md:hidden ${menuOpen ? "" : "pointer-events-none"}`}
-        inert={!menuOpen}
-      >
-        <div
-          aria-hidden="true"
-          onClick={closeMenu}
-          className={`absolute inset-0 bg-slate-950/50 backdrop-blur-sm transition-opacity duration-300 ${
-            menuOpen ? "opacity-100" : "opacity-0"
-          }`}
-        />
-        <div
-          id="mobile-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Menu"
-          className={`absolute right-0 top-0 flex h-full w-72 max-w-[85vw] flex-col bg-white shadow-2xl transition-transform duration-300 ease-out dark:bg-slate-900 ${
-            menuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+      <div className="nav-end">
+        <a
+          className="btn btn-neon btn-sm nav-cta"
+          href={AllLinks.needService}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <div className="flex h-16 items-center justify-between border-b border-slate-200 px-4 dark:border-slate-800">
-            <span className="text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-              Menu
-            </span>
-            <button
-              ref={closeButton}
-              type="button"
-              aria-label="Close menu"
-              onClick={closeMenu}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-700 transition-colors hover:bg-slate-900/5 dark:text-slate-200 dark:hover:bg-white/10"
-            >
-              <HiXMark className="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-
-          <nav aria-label="Mobile" className="flex-1 overflow-y-auto p-3">
-            <ul className="space-y-1">
-              {NAV_ITEMS.map(({ href, label }, index) => {
-                const active = isActive(pathname, href);
-                return (
-                  <li
-                    key={href}
-                    // Items slide in one after the other once the panel opens.
-                    style={{ transitionDelay: menuOpen ? `${80 + index * 35}ms` : "0ms" }}
-                    className={`transition duration-300 ease-out motion-reduce:transition-none ${
-                      menuOpen ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"
-                    }`}
-                  >
-                    <Link
-                      href={href}
-                      aria-current={active ? "page" : undefined}
-                      onClick={() => setMenuOpen(false)}
-                      className={`block rounded-xl px-4 py-3 text-base font-medium transition-colors ${
-                        active
-                          ? "bg-accent-500/10 text-accent-700 dark:text-accent-400"
-                          : "text-slate-700 hover:bg-slate-900/5 dark:text-slate-300 dark:hover:bg-white/5"
-                      }`}
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-
-          <div className="border-t border-slate-200 p-4 dark:border-slate-800">
-            <SocialLinks className="justify-center" />
-          </div>
-        </div>
+          Start a project<span className="sr"> (opens in a new tab)</span>
+          <span className="ic">
+            <HiArrowUpRight aria-hidden="true" />
+          </span>
+        </a>
+        <button
+          ref={menuButton}
+          type="button"
+          className="menu-btn"
+          aria-label="Open menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMenuOpen(true)}
+        >
+          <HiBars3 size={22} aria-hidden="true" />
+        </button>
       </div>
-    </>
+
+      {menuOpen &&
+        createPortal(
+          <div className="mmenu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+            <div className="mmenu-top">
+              <Link href="/" className="logo" onClick={() => setMenuOpen(false)}>
+                David<span className="logo-dot" />
+              </Link>
+              <button type="button" className="mmenu-close" aria-label="Close menu" onClick={closeMenu}>
+                <HiXMark size={22} aria-hidden="true" />
+              </button>
+            </div>
+            <nav aria-label="Mobile">
+              <ul className="mmenu-list">
+                {NAV_ITEMS.map(({ href, label }, index) => {
+                  const active = isActive(pathname, href);
+                  return (
+                    <li key={href} style={{ animationDelay: `${index * 40}ms` }}>
+                      <Link
+                        href={href}
+                        aria-current={active ? "page" : undefined}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        {active ? <span className="neon">{label}</span> : label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+            <div className="mmenu-foot">
+              <a className="btn btn-neon" href={AllLinks.needService} target="_blank" rel="noopener noreferrer">
+                Start a project<span className="sr"> (opens in a new tab)</span>
+              </a>
+              <Link className="btn btn-glass" href="/contact" onClick={() => setMenuOpen(false)}>
+                Send a message
+              </Link>
+            </div>
+          </div>,
+          document.body
+        )}
+    </header>
   );
 }

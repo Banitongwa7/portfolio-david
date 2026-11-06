@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { HiArrowLeft } from "react-icons/hi2";
 import AllTools from "@/data/AllTools";
+import { categoryOf } from "@/data/toolCategories";
+import s from "@/components/tools/tools.module.css";
 
 export async function generateMetadata({
   params,
@@ -31,6 +33,19 @@ export async function generateMetadata({
   };
 }
 
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+
+// These tools render their own <h1>; the others get a visually hidden one.
+const HAS_OWN_H1 = new Set([
+  "/tools/lofi-space",
+  "/tools/qr-code-generator",
+  "/tools/sticky-notes",
+  "/tools/webRTC-data-transfert",
+  "/tools/live-poll",
+  "/tools/fun-video-generator",
+]);
+
 export default async function DisplayTool({
   params,
 }: {
@@ -43,31 +58,50 @@ export default async function DisplayTool({
     notFound();
   }
 
+  // Suggest tools from the same family first, then the newest others.
+  const others = AllTools.filter((t) => t.slug !== tool.slug).sort(
+    (a, b) =>
+      Number(categoryOf(b.slug) === categoryOf(tool.slug)) - Number(categoryOf(a.slug) === categoryOf(tool.slug)) ||
+      b.publishedAt.localeCompare(a.publishedAt)
+  );
+
   return (
-    <>
-      {/* Each tool renders its own title, so this is only a way back out. */}
-      <div className="mx-auto w-full max-w-6xl px-4 pt-8 sm:px-6">
-        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm">
-          <Link href="/tools" className="text-link group">
-            <HiArrowLeft
-              className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5 motion-reduce:transition-none"
-              aria-hidden="true"
-            />
+    <section className="sec" style={{ paddingTop: 0 }}>
+      <div className="wrap">
+        {/* Each tool renders its own title, so this is only a way back out. */}
+        <nav aria-label="Breadcrumb" className={s.crumbs}>
+          <Link href="/tools">
+            <HiArrowLeft aria-hidden="true" />
             All tools
           </Link>
-          <span aria-hidden="true" className="text-slate-400 dark:text-slate-600">
-            /
-          </span>
-          <span className="text-slate-600 dark:text-slate-400">{tool.name}</span>
-          <span aria-hidden="true" className="text-slate-400 dark:text-slate-600">
-            ·
-          </span>
-          <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
-            Published <time dateTime={tool.publishedAt}>{tool.publishedAt}</time>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{tool.name}</span>
+          <span aria-hidden="true">/</span>
+          <span>
+            Published <time dateTime={tool.publishedAt}>{formatDate(tool.publishedAt)}</time>
           </span>
         </nav>
+
+        {!HAS_OWN_H1.has(tool.slug) && <h1 className="sr">{tool.name}</h1>}
+        <div className={s.bench}>{tool.component}</div>
+
+        <h2 className="h2" style={{ marginTop: 72, fontSize: 28 }}>
+          More tools
+        </h2>
+        <div className={s.more}>
+          {others.slice(0, 3).map((t) => (
+            <Link key={t.id} href={t.slug}>
+              <span className={s.ic} aria-hidden="true">
+                {t.icon}
+              </span>
+              <span>
+                <strong>{t.name}</strong>
+                <span className={s.text}>{t.description}</span>
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
-      {tool.component}
-    </>
+    </section>
   );
 }

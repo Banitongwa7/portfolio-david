@@ -2,29 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* The redesign's tokens and shared components live in styles/site.css. */
 @layer base {
-  html {
-    @apply scroll-smooth;
-  }
-
-  body {
-    @apply bg-[#f8f8f8] antialiased dark:bg-[#0f172a];
-  }
-
   ::selection {
-    @apply bg-accent-500/30;
+    background: rgba(232, 71, 155, 0.25);
   }
 
-  :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-accent-500;
-  }
-
+  /* Scroll-reveal wrappers never stay hidden: see components/motion/Reveal.tsx */
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
-    /* Scroll-reveal wrappers never stay hidden: see components/motion/Reveal.tsx */
     .reveal {
       opacity: 1 !important;
       transform: none !important;
@@ -37,33 +22,6 @@
       opacity: 1 !important;
       transform: none !important;
     }
-  }
-}
-
-@layer components {
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60;
-  }
-
-  .btn-primary {
-    @apply bg-slate-900 text-white hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200;
-  }
-
-  .btn-secondary {
-    @apply border border-slate-300 text-slate-900 hover:bg-slate-900/5 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-white/10;
-  }
-
-  .card {
-    @apply rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/60;
-  }
-
-  /* Cards that link somewhere: they lift slightly under the pointer. */
-  .card-interactive {
-    @apply transition duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-900/5 motion-reduce:transform-none motion-reduce:transition-none dark:hover:border-slate-700 dark:hover:shadow-black/30;
-  }
-
-  .text-link {
-    @apply inline-flex items-center gap-1 font-semibold text-accent-700 transition-colors hover:text-accent-600 dark:text-accent-400 dark:hover:text-accent-300;
   }
 }
 
