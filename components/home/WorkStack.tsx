@@ -65,6 +65,10 @@ const CARDS: {
 // The signature scroll: each practice card pins, and the next one slides over
 // it while the covered card shrinks and dims. Sticky positioning does the
 // pinning; ScrollTrigger only scrubs the depth.
+//
+// The dimming fades a dark veil in with opacity rather than animating
+// `filter`: a filter tween starting from "none" begins at brightness(0),
+// which turned resting cards black, and filters are costly to repaint.
 export default function WorkStack() {
   const scope = useRef<HTMLElement>(null);
 
@@ -79,17 +83,15 @@ export default function WorkStack() {
         cards.forEach((card, i) => {
           const next = cards[i + 1];
           if (!next) return;
-          gsap.to(card, {
-            scale: 0.94,
-            filter: "brightness(0.8)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: next,
-              start: "top bottom",
-              end: () => `top ${88 + (i + 1) * 28}px`,
-              scrub: true,
-            },
-          });
+          const scrollTrigger = {
+            trigger: next,
+            start: "top bottom",
+            end: () => `top ${88 + (i + 1) * 28}px`,
+            scrub: true,
+          };
+          gsap.fromTo(card, { scale: 1 }, { scale: 0.94, ease: "none", scrollTrigger });
+          const veil = card.querySelector("[data-veil]");
+          if (veil) gsap.fromTo(veil, { opacity: 0 }, { opacity: 0.32, ease: "none", scrollTrigger });
         });
 
         const giant = scope.current?.querySelector("[data-giant]");
@@ -130,6 +132,7 @@ export default function WorkStack() {
             const others = projects.filter((p) => p !== lead);
             return (
               <article key={card.practice} className={`${s.pcard} ${card.className}`} data-card>
+                <span className={s.veil} data-veil aria-hidden="true" />
                 <div className={s.pcCopy}>
                   <h3 className={s.pcTitle}>{card.title}</h3>
                   <p className={s.pcDesc}>{card.description}</p>

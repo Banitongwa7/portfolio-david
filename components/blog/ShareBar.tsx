@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { HiCheck, HiOutlineLink } from "react-icons/hi2";
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import s from "./article.module.css";
 
@@ -32,6 +33,7 @@ export default function ShareBar({ url, title }: { url: string; title: string })
         target="_blank"
         rel="noopener noreferrer"
       >
+        <FaLinkedinIn aria-hidden="true" />
         LinkedIn<span className="sr"> (opens in a new tab)</span>
       </a>
       <a
@@ -40,7 +42,8 @@ export default function ShareBar({ url, title }: { url: string; title: string })
         target="_blank"
         rel="noopener noreferrer"
       >
-        X<span className="sr"> (opens in a new tab)</span>
+        <FaXTwitter aria-hidden="true" />
+        Post on X<span className="sr"> (opens in a new tab)</span>
       </a>
       <span className="sr" aria-live="polite">
         {copied ? "Link copied to the clipboard" : ""}

@@ -407,6 +407,16 @@
 .pcard:focus-within {
   z-index: 5;
 }
+/* Darkens a card while the next one covers it (opacity driven by GSAP). */
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background: var(--night);
+  opacity: 0;
+  pointer-events: none;
+}
 .pc1 { --i: 0; background: linear-gradient(135deg, #f4f1ff 0%, #dde6ff 48%, #ccc6ff 100%); }
 .pc2 { --i: 1; background: linear-gradient(135deg, #fff2f8 0%, #f7def7 50%, #d9cdff 100%); }
 .pc3 {

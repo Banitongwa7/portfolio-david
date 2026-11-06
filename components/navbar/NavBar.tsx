@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import { HiArrowUpRight, HiBars3, HiXMark } from "react-icons/hi2";
 import { gsap, prefersReducedMotion, registerGsap } from "@/utils/motion";
 import AllLinks from "@/data/AllLinks";
+import { SOCIALS } from "@/components/site/socials";
 
 export const NAV_ITEMS = [
   { href: "/", label: "Home" },
@@ -201,6 +202,15 @@ export default function NavBar({ variant = "light" }: { variant?: "light" | "dar
               <Link className="btn btn-glass" href="/contact" onClick={() => setMenuOpen(false)}>
                 Send a message
               </Link>
+              <ul className="mmenu-social">
+                {SOCIALS.map(({ href, label, Icon }) => (
+                  <li key={label}>
+                    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${label} (opens in a new tab)`}>
+                      <Icon aria-hidden="true" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>,
           document.body

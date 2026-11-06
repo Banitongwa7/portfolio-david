@@ -3,9 +3,24 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { HiOutlineLockClosed, HiOutlineMagnifyingGlass } from "react-icons/hi2";
+import type { IconType } from "react-icons";
+import { FaGithub } from "react-icons/fa6";
+import {
+  HiArrowUpRight,
+  HiOutlineGlobeAlt,
+  HiOutlineLockClosed,
+  HiOutlineMagnifyingGlass,
+} from "react-icons/hi2";
 import AllProjects, { PRACTICES, PRACTICE_SLUG, type Practice } from "@/data/AllProjects";
 import s from "./projects.module.css";
+
+type LinkKind = NonNullable<(typeof AllProjects)[number]["linkKind"]>;
+// The icon says where the button leads before the label is read.
+const LINK_ICON: Record<LinkKind, IconType> = {
+  "Open source": FaGithub,
+  "Live site": HiOutlineGlobeAlt,
+  "Product page": HiArrowUpRight,
+};
 
 type Filter = "all" | Practice;
 const FILTERS: Filter[] = ["all", "pp", "web", "ai"];
@@ -73,6 +88,7 @@ export default function ProjectsExplorer() {
           <ul className={s.grid}>
             {list.map((p) => {
               const isPrivate = !p.link || p.link === "#";
+              const LinkIcon = LINK_ICON[p.linkKind ?? "Product page"];
               return (
                 <li key={p.id}>
                   <article className={s.pj}>
@@ -110,6 +126,7 @@ export default function ProjectsExplorer() {
                           <>
                             <span className={s.kind}>{p.linkKind}</span>
                             <a className="btn btn-ink btn-sm" href={p.link} target="_blank" rel="noopener noreferrer">
+                              <LinkIcon aria-hidden="true" />
                               {p.linkLabel ?? "Open"}
                               <span className="sr"> {p.name} (opens in a new tab)</span>
                             </a>

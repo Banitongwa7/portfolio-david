@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { HiArrowUpRight, HiOutlineEnvelope, HiOutlineMapPin } from "react-icons/hi2";
 import AllLinks from "@/data/AllLinks";
 import AllProjects from "@/data/AllProjects";
 import WordRise from "@/components/motion/WordRise";
+import { SOCIALS } from "@/components/site/socials";
 
 // The closing banner. Change this one word to change it on every page.
 const FOOTER_WORD = "LET'S BUILD";
@@ -14,14 +16,6 @@ const PAGES = [
   { href: "/tools", label: "Tools" },
   { href: "/quote", label: "Quote of the day" },
   { href: "/contact", label: "Contact" },
-];
-
-const SOCIALS = [
-  { href: AllLinks.linkedin, label: "LinkedIn" },
-  { href: AllLinks.github, label: "GitHub" },
-  { href: AllLinks.twitter, label: "X" },
-  { href: AllLinks.behance, label: "Behance" },
-  { href: AllLinks.hashnode, label: "Hashnode" },
 ];
 
 const FEATURED = ["Credit Squares", "Synapse HR", "RecycleAI", "OpenOCR"];
@@ -42,10 +36,10 @@ export default function Footer() {
             </Link>
             <p>Software engineer and Microsoft Power Platform developer based in Kinshasa, DR&nbsp;Congo.</p>
             <ul className="socials">
-              {SOCIALS.map(({ href, label }) => (
+              {SOCIALS.map(({ href, label, Icon }) => (
                 <li key={label}>
-                  <a href={href} target="_blank" rel="noopener noreferrer">
-                    {label}
+                  <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`${label} (opens in a new tab)`} title={label}>
+                    <Icon aria-hidden="true" />
                   </a>
                 </li>
               ))}
@@ -77,13 +71,20 @@ export default function Footer() {
             <h3>Contact</h3>
             <ul className="foot-links">
               <li>
-                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                <a href={`mailto:${EMAIL}`}>
+                  <HiOutlineEnvelope aria-hidden="true" />
+                  {EMAIL}
+                </a>
               </li>
               <li>
-                <span>Kinshasa, DR&nbsp;Congo</span>
+                <span>
+                  <HiOutlineMapPin aria-hidden="true" />
+                  Kinshasa, DR&nbsp;Congo
+                </span>
               </li>
               <li>
                 <a href={AllLinks.needService} target="_blank" rel="noopener noreferrer">
+                  <HiArrowUpRight aria-hidden="true" />
                   Start a project
                 </a>
               </li>

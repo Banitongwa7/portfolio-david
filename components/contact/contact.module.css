@@ -94,8 +94,9 @@
 .online a {
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   min-height: 44px;
-  padding: 0 16px;
+  padding: 0 16px 0 14px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   font-size: 14px;
@@ -104,6 +105,10 @@
 }
 .online a:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+.online a svg {
+  flex: none;
+  font-size: 16px;
 }
 .hire {
   margin-top: 24px;

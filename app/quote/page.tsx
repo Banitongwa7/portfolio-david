@@ -1,6 +1,7 @@
 "use client"
 import { useState, useSyncExternalStore } from "react";
 import { HiOutlineCalendarDays, HiOutlineClipboardDocument, HiCheck } from "react-icons/hi2";
+import { FaXTwitter } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import Quotes from "@/data/quotes.json";
 import s from "@/components/quote/quote.module.css";
@@ -77,6 +78,7 @@ export default function Quote() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <FaXTwitter aria-hidden="true" />
                 Share on X<span className="sr"> (opens in a new tab)</span>
               </a>
               <span className="sr" aria-live="polite">

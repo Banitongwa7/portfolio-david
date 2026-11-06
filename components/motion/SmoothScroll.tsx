@@ -30,7 +30,19 @@ export default function SmoothScroll() {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    // The first-visit intro holds the page still until its curtain opens;
+    // the scrollbar comes back then, so triggers are measured again.
+    const onIntroDone = () => {
+      lenis.start();
+      ScrollTrigger.refresh();
+    };
+    if (document.documentElement.dataset.intro === "playing") {
+      lenis.stop();
+      window.addEventListener("intro:done", onIntroDone, { once: true });
+    }
+
     return () => {
+      window.removeEventListener("intro:done", onIntroDone);
       gsap.ticker.remove(raf);
       lenis.destroy();
       lenisInstance = null;

@@ -7,6 +7,7 @@ import EndCta from "@/components/site/EndCta";
 import BlogExplorer from "@/components/blog/BlogExplorer";
 import AllLinks from "@/data/AllLinks";
 import { HiArrowUpRight } from "react-icons/hi2";
+import { SiHashnode } from "react-icons/si";
 import s from "@/components/blog/blog.module.css";
 
 export default async function Blog() {
@@ -44,6 +45,7 @@ export default async function Blog() {
               <h3>The articles could not be loaded</h3>
               <p>The blog feed did not answer. Reload the page, or read the articles directly on Hashnode.</p>
               <a className="btn btn-line" href={AllLinks.hashnode} target="_blank" rel="noopener noreferrer">
+                <SiHashnode aria-hidden="true" />
                 Open the blog on Hashnode
               </a>
             </div>
@@ -80,6 +82,7 @@ export default async function Blog() {
 
       <EndCta title="Follow new articles" text="New posts appear first on Hashnode, in French or English.">
         <a className="btn btn-neon" href={AllLinks.hashnode} target="_blank" rel="noopener noreferrer">
+          <SiHashnode aria-hidden="true" />
           Follow on Hashnode<span className="sr"> (opens in a new tab)</span>
           <span className="ic">
             <HiArrowUpRight aria-hidden="true" />

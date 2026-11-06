@@ -12,18 +12,11 @@ import {
 import { toast } from "react-toastify";
 import AllLinks from "@/data/AllLinks";
 import PageHead from "@/components/site/PageHead";
+import { SOCIALS } from "@/components/site/socials";
 import s from "@/components/contact/contact.module.css";
 
 const EMAIL = "davidbanitongwa@gmail.com";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const SOCIALS = [
-  { href: AllLinks.linkedin, label: "LinkedIn" },
-  { href: AllLinks.github, label: "GitHub" },
-  { href: AllLinks.twitter, label: "X" },
-  { href: AllLinks.behance, label: "Behance" },
-  { href: AllLinks.hashnode, label: "Hashnode" },
-];
 
 export default function Contact() {
   const [fullName, setFullName] = useState("");
@@ -136,10 +129,12 @@ export default function Contact() {
             <div className={s.online}>
               <h3>Find me online</h3>
               <ul>
-                {SOCIALS.map(({ href, label }) => (
+                {SOCIALS.map(({ href, label, Icon }) => (
                   <li key={label}>
                     <a href={href} target="_blank" rel="noopener noreferrer">
+                      <Icon aria-hidden="true" />
                       {label}
+                      <span className="sr"> (opens in a new tab)</span>
                     </a>
                   </li>
                 ))}

@@ -494,6 +494,23 @@ body {
   flex-direction: column;
   gap: 10px;
 }
+.mmenu-social {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.mmenu-social a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 18px;
+  color: #fff;
+}
 
 /* Page header and sections */
 .phead {
@@ -630,19 +647,22 @@ body {
   margin-top: 20px;
 }
 .socials a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 16px;
-  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   background: #fff;
   border: 1px solid var(--line);
-  font-size: 14px;
-  font-weight: 600;
-  transition: border-color 0.2s;
+  font-size: 18px;
+  color: var(--ink);
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s var(--ease-out);
 }
 .socials a:hover {
+  background: var(--ink);
   border-color: var(--ink);
+  color: #fff;
+  transform: translateY(-2px);
 }
 .foot h3 {
   margin-bottom: 10px;
@@ -653,10 +673,16 @@ body {
 .foot-links span {
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   min-height: 40px;
   font-size: 15px;
   color: var(--muted);
   transition: color 0.2s;
+}
+.foot-links svg {
+  flex: none;
+  font-size: 17px;
+  color: var(--violet);
 }
 .foot-links a:hover {
   color: var(--violet);
@@ -829,6 +855,173 @@ body {
 }
 
 :where(.pg, .mmenu) :focus-visible {
+  outline: 2px solid #9b7bff;
+  outline-offset: 3px;
+}
+
+/*
+ * First-visit intro. The inline script in app/layout.tsx sets
+ * <html data-intro="playing"> before the first paint, once per session;
+ * components/intro/IntroLoader.tsx plays the curtain and removes it.
+ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  color: #fff;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+}
+html[data-intro="playing"] .intro {
+  display: block;
+}
+html[data-intro="playing"] {
+  overflow: hidden;
+}
+/* The page's own entrances wait behind the curtain, then play as it opens. */
+html[data-intro="playing"] .pg *,
+html[data-intro="playing"] .pg *::before,
+html[data-intro="playing"] .pg *::after {
+  animation-play-state: paused !important;
+}
+.intro-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* The extra pixel overlaps the halves so no hairline of the page shows
+     between them at fractional viewport heights. */
+  height: calc(50% + 1px);
+  /* One backdrop split across both halves, so the seam is invisible:
+     a faint dot grid like an editor canvas over the two neon glows. */
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1.6px),
+    radial-gradient(45% 60% at 85% 15%, rgba(123, 92, 250, 0.45), transparent 70%),
+    radial-gradient(40% 55% at 15% 85%, rgba(232, 71, 155, 0.32), transparent 70%), var(--night);
+  background-size: 22px 22px, 100vw 100vh, 100vw 100vh;
+  will-change: transform;
+}
+.intro-top {
+  top: 0;
+  background-position: 0 0, center top, center top;
+}
+.intro-bottom {
+  bottom: 0;
+  background-position: 0 0, center bottom, center bottom;
+}
+
+/* Abstract code: syntax-coloured bars instead of characters. */
+.intro-code {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  font-size: clamp(9px, 1.25vw, 16px);
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 14px rgba(155, 123, 255, 0.35));
+}
+.intro-row {
+  display: flex;
+  align-items: center;
+  height: 2.1em;
+  width: 28em;
+  transform-origin: left center;
+}
+.intro-ln {
+  flex: none;
+  width: 1.4em;
+  height: 0.5em;
+  margin-right: 1.6em;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.16);
+  opacity: 0;
+}
+.intro-line {
+  display: flex;
+  gap: 0.6em;
+  clip-path: inset(0% 100% 0% 0%);
+}
+.intro-tok {
+  flex: none;
+  height: 0.78em;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.82);
+}
+.intro-tok[data-tone="v"] {
+  background: #9b7bff;
+}
+.intro-tok[data-tone="p"] {
+  background: #e8479b;
+}
+.intro-tok[data-tone="o"] {
+  background: #ff8a3d;
+}
+.intro-tok[data-tone="d"] {
+  background: rgba(255, 255, 255, 0.2);
+}
+.intro-caret {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.2em;
+  height: 1.25em;
+  margin-left: 0.25em;
+  border-radius: 2px;
+  background: linear-gradient(#ff8a3d, #e8479b 50%, #9b7bff);
+  box-shadow: 0 0 12px rgba(232, 71, 155, 0.9);
+  visibility: hidden;
+  animation: introBlink 1s steps(1, end) infinite;
+}
+.intro-caret.is-typing {
+  animation: none;
+}
+.intro-scan {
+  position: absolute;
+  top: 0;
+  left: -8%;
+  right: -8%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff8a3d 20%, #e8479b 50%, #9b7bff 80%, transparent);
+  box-shadow: 0 0 18px 3px rgba(232, 71, 155, 0.55);
+  visibility: hidden;
+}
+@keyframes introBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.intro-seam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 2;
+  height: 2px;
+  margin-top: -1px;
+  transform: scaleX(0);
+  transform-origin: center;
+  background: linear-gradient(90deg, #ff8a3d, #e8479b 50%, #9b7bff);
+  box-shadow: 0 0 24px 2px rgba(232, 71, 155, 0.6);
+}
+.intro-skip {
+  position: absolute;
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+.intro-skip:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.intro-skip:focus-visible {
   outline: 2px solid #9b7bff;
   outline-offset: 3px;
 }
