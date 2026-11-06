@@ -13,10 +13,23 @@ type Note = {
   createdAt: number;
 };
 
+const STORAGE_KEY = "sticky-notes";
+
+// Saved notes, read once when the tool opens. The tool only renders in the
+// browser (see components/tools/ToolView.tsx), so localStorage is there.
+function loadNotes(): Note[] {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 export default function StickyNotes() {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<Note[]>(loadNotes);
   const [isDragging, setIsDragging] = useState<string | null>(null);
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(() => notes.length === 0);
 
   const colors = [
     "bg-yellow-100 dark:bg-yellow-900 border-yellow-300 dark:border-yellow-700",
@@ -28,16 +41,11 @@ export default function StickyNotes() {
   ];
 
   useEffect(() => {
-    const saved = localStorage.getItem("sticky-notes");
-    if (saved) {
-      const parsedNotes = JSON.parse(saved);
-      setNotes(parsedNotes);
-      setShowWelcome(parsedNotes.length === 0);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+    } catch {
+      // Storage full or blocked: the notes live until the page closes.
     }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("sticky-notes", JSON.stringify(notes));
   }, [notes]);
 
   const addNote = () => {

@@ -725,10 +725,69 @@ body {
   font-size: 13px;
   color: var(--muted);
 }
-.legal a {
+.legal a,
+.legal button {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+}
+.legal button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.legal button:hover,
+.legal a:hover {
+  color: var(--ink);
+}
+.legal-links {
+  display: flex;
+  gap: 20px;
+}
+
+/* Cookie banner (components/site/ConsentManager.tsx). Sits under the mobile
+   menu and the intro, bottom left, away from the chat bubble. */
+.consent {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 50;
+  width: min(400px, calc(100vw - 32px));
+  padding: 18px 20px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(15, 10, 30, 0.94);
+  color: #fff;
+  box-shadow: 0 24px 60px -24px rgba(15, 10, 30, 0.7);
+  backdrop-filter: blur(12px);
+  font-family: var(--font-archivo), system-ui, sans-serif;
+  animation: fadeUp 0.5s var(--ease-out) both;
+}
+.consent h2 {
+  font-size: 15px;
+  font-weight: 700;
+}
+.consent p {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+.consent-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+.consent-actions .btn {
+  flex: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .consent {
+    animation: none;
+  }
 }
 
 /* Scroll-filled headline: fully colored unless the scroll animation runs. */

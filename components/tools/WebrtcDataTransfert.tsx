@@ -32,6 +32,8 @@ interface FileData {
 type ConnectionStatus = 'initializing' | 'ready' | 'connecting' | 'connected' | 'error' | 'disconnected' | 'calling' | 'in-call';
 type TabMode = 'files' | 'call';
 
+const RING_TIMEOUT_MS = 30_000;
+
 export default function WebrtcDataTransfert() {
   // Common State
   const [myId, setMyId] = useState<string>('');
@@ -50,9 +52,15 @@ export default function WebrtcDataTransfert() {
   const [receivedFile, setReceivedFile] = useState<ReceivedFile | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // The download link of the last received file, freed when the next one
+  // arrives or the tool closes. Kept in a ref so receiving a file never
+  // re-runs the peer setup (which would drop the connection).
+  const receivedUrlRef = useRef<string | null>(null);
 
   // Call State
   const [mediaConnection, setMediaConnection] = useState<MediaConnection | null>(null);
+  // A call that rings until the user accepts or declines it.
+  const [incomingCall, setIncomingCall] = useState<MediaConnection | null>(null);
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
@@ -63,6 +71,12 @@ export default function WebrtcDataTransfert() {
   // Refs for accessing latest state in callbacks/effects without triggering re-renders
   const mediaConnectionRef = useRef<MediaConnection | null>(null);
   const localStreamRef = useRef<MediaStream | null>(null);
+  // An outgoing call gives up if nobody answers in time.
+  const ringTimeoutRef = useRef<number | null>(null);
+  const clearRing = useCallback(() => {
+    if (ringTimeoutRef.current) window.clearTimeout(ringTimeoutRef.current);
+    ringTimeoutRef.current = null;
+  }, []);
 
   // Keep refs in sync with state
   useEffect(() => {
@@ -75,13 +89,14 @@ export default function WebrtcDataTransfert() {
 
   // Define endCall first so it can be used in setupMediaConnection
   const endCall = useCallback(() => {
+    clearRing();
     mediaConnectionRef.current?.close();
     localStreamRef.current?.getTracks().forEach(track => track.stop());
     setMediaConnection(null);
     setLocalStream(null);
     setStatus('ready');
     setStatusMessage('Call ended');
-  }, []);
+  }, [clearRing]);
 
   const setupMediaConnection = useCallback((call: MediaConnection) => {
     setMediaConnection(call);
@@ -89,6 +104,8 @@ export default function WebrtcDataTransfert() {
     setStatusMessage('In call');
 
     call.on('stream', (remoteStream) => {
+      clearRing(); // Answered.
+      setStatusMessage('In call');
       if (remoteVideoRef.current) {
         remoteVideoRef.current.srcObject = remoteStream;
       }
@@ -103,7 +120,7 @@ export default function WebrtcDataTransfert() {
       setError('Call error');
       endCall();
     });
-  }, [endCall]);
+  }, [endCall, clearRing]);
 
   const setupDataConnection = useCallback((conn: DataConnection) => {
     conn.on('open', () => {
@@ -119,6 +136,8 @@ export default function WebrtcDataTransfert() {
         try {
           const blob = new Blob([fileData.file], { type: fileData.type || 'application/octet-stream' });
           const url = URL.createObjectURL(blob);
+          if (receivedUrlRef.current) URL.revokeObjectURL(receivedUrlRef.current);
+          receivedUrlRef.current = url;
           setReceivedFile({ url, name: fileData.name, size: fileData.size });
           setStatusMessage('File received!');
         } catch (err) {
@@ -162,31 +181,33 @@ export default function WebrtcDataTransfert() {
 
         // Handle incoming data connection (Files)
         peer.on('connection', (conn) => {
+          // Not a file link: the person we are calling declined the call.
+          if ((conn.metadata as { type?: string } | undefined)?.type === 'call-declined') {
+            conn.close();
+            if (mediaConnectionRef.current?.peer === conn.peer) {
+              endCall();
+              setStatusMessage('Call declined');
+            }
+            return;
+          }
           setStatus('connecting');
           setStatusMessage('Incoming file connection...');
           setupDataConnection(conn);
         });
 
-        // Handle incoming media call (Video/Audio)
+        // Handle incoming media call (Video/Audio). It only rings: the camera
+        // and microphone turn on when the user accepts it.
         peer.on('call', (call) => {
+          if (mediaConnectionRef.current) {
+            call.close(); // Already in a call.
+            return;
+          }
+          setIncomingCall(call);
+          setActiveTab('call');
           setStatus('calling');
           setStatusMessage('Incoming call...');
-          
-          // Auto-answer logic
-          setActiveTab('call');
-          
-          navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-            .then((stream) => {
-              setLocalStream(stream);
-              if (localVideoRef.current) localVideoRef.current.srcObject = stream;
-              
-              call.answer(stream); // Answer the call with an A/V stream.
-              setupMediaConnection(call);
-            })
-            .catch((err) => {
-              console.error('Failed to get local stream', err);
-              setError('Could not access camera/microphone');
-            });
+          // The caller may hang up before an answer.
+          call.on('close', () => setIncomingCall((current) => (current === call ? null : current)));
         });
 
         peerInstance.current = peer;
@@ -201,9 +222,43 @@ export default function WebrtcDataTransfert() {
     return () => {
       peerInstance.current?.destroy();
       localStreamRef.current?.getTracks().forEach(track => track.stop());
-      if (receivedFile?.url) URL.revokeObjectURL(receivedFile.url);
+      if (receivedUrlRef.current) URL.revokeObjectURL(receivedUrlRef.current);
+      receivedUrlRef.current = null;
     };
-  }, [setupDataConnection, setupMediaConnection, receivedFile?.url]);
+    // These callbacks are stable, so the peer is created once per visit.
+  }, [setupDataConnection, setupMediaConnection, endCall]);
+
+  const acceptCall = () => {
+    const call = incomingCall;
+    if (!call) return;
+    setIncomingCall(null);
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        setLocalStream(stream);
+        if (localVideoRef.current) localVideoRef.current.srcObject = stream;
+        call.answer(stream);
+        setupMediaConnection(call);
+      })
+      .catch((err) => {
+        console.error('Failed to get local stream', err);
+        setError('Could not access camera/microphone');
+        call.close();
+        setStatus('ready');
+      });
+  };
+
+  const declineCall = () => {
+    const call = incomingCall;
+    if (!call) return;
+    call.close();
+    setIncomingCall(null);
+    setStatus('ready');
+    setStatusMessage('Call declined');
+    // PeerJS doesn't tell the caller about an unanswered call being closed,
+    // so a short-lived link carries the news; the caller closes it at once.
+    const notice = peerInstance.current?.connect(call.peer, { metadata: { type: 'call-declined' } });
+    if (notice) window.setTimeout(() => notice.close(), 5000);
+  };
 
   const connectDataPeer = () => {
     if (!remoteId.trim() || !peerInstance.current) return;
@@ -251,6 +306,12 @@ export default function WebrtcDataTransfert() {
 
         const call = peerInstance.current!.call(remoteId.trim(), stream);
         setupMediaConnection(call);
+        setStatusMessage('Ringing...');
+        clearRing();
+        ringTimeoutRef.current = window.setTimeout(() => {
+          endCall();
+          setStatusMessage('No answer');
+        }, RING_TIMEOUT_MS);
       })
       .catch(() => {
         setError('Could not access camera/microphone');
@@ -459,6 +520,32 @@ export default function WebrtcDataTransfert() {
             {/* --- CALL TAB CONTENT --- */}
             {activeTab === 'call' && (
               <div className="animate-fade-in h-full flex flex-col">
+                {incomingCall && (
+                  <div
+                    role="alertdialog"
+                    aria-labelledby="incoming-call-title"
+                    className="mb-6 p-4 rounded-xl border border-purple-200 dark:border-purple-800 bg-purple-50 dark:bg-purple-900/20 flex flex-col sm:flex-row items-center justify-between gap-4"
+                  >
+                    <p id="incoming-call-title" className="font-semibold text-gray-800 dark:text-gray-200 text-center sm:text-left">
+                      Incoming call from{' '}
+                      <code className="font-mono text-sm break-all">{incomingCall.peer}</code>
+                    </p>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={declineCall}
+                        className="px-5 py-2 rounded-xl font-semibold bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600"
+                      >
+                        Decline
+                      </button>
+                      <button
+                        onClick={acceptCall}
+                        className="px-5 py-2 rounded-xl font-semibold bg-purple-600 text-white hover:bg-purple-700"
+                      >
+                        Accept
+                      </button>
+                    </div>
+                  </div>
+                )}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 flex-1 min-h-[300px]">
                   {/* Local Video */}
                   <div className="relative bg-gray-900 rounded-2xl overflow-hidden aspect-video shadow-lg group">

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { FiCheck, FiBarChart2, FiUsers, FiPlus, FiTrash2, FiShare2, FiCopy, FiAlertCircle } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 import PartySocket from 'partysocket'
+import { toast } from 'react-toastify'
 import hash from 'object-hash'
 
 interface PollOption {
@@ -19,6 +20,32 @@ interface Poll {
 }
 
 type ViewMode = 'home' | 'create' | 'vote' | 'join'
+
+// The deployed poll server (see partykit.json), set in NEXT_PUBLIC_PARTYKIT_HOST.
+// Only local development falls back to `npx partykit dev`; in production a
+// missing value means the tool says it is offline instead of failing silently.
+const PARTYKIT_HOST =
+  process.env.NEXT_PUBLIC_PARTYKIT_HOST || (process.env.NODE_ENV === 'development' ? '127.0.0.1:1999' : '')
+
+const OFFLINE_MESSAGE = "Can't reach the poll server right now. Check your connection and try again."
+
+// Warns once per socket when the poll server can't be reached; PartySocket
+// keeps retrying in the background.
+const watchConnection = (socket: PartySocket) => {
+  socket.addEventListener('error', () => toast.error(OFFLINE_MESSAGE, { toastId: 'poll-offline' }))
+  socket.addEventListener('open', () => toast.dismiss('poll-offline'))
+}
+
+// A malformed message from the socket is ignored instead of crashing the tool.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const parseMessage = (data: unknown): any => {
+  if (typeof data !== 'string') return null
+  try {
+    return JSON.parse(data)
+  } catch {
+    return null
+  }
+}
 
 // Generate or retrieve a unique voter ID for this browser (client-side only)
 const getVoterId = (): string => {
@@ -55,20 +82,14 @@ export default function LivePoll() {
   const [socket, setSocket] = useState<PartySocket | null>(null)
   const [pollId, setPollId] = useState<string>('')
   const [room, setRoom] = useState<string>('')
-  const [voterId, setVoterId] = useState<string>('')
+  // Read once in the browser ('' on the server). The home view doesn't show
+  // it, so server and browser HTML still match.
+  const [voterId] = useState<string>(getVoterId)
   const [errorMessage, setErrorMessage] = useState<string>('')
 
   // Poll creation form state
   const [newQuestion, setNewQuestion] = useState('')
   const [newOptions, setNewOptions] = useState<string[]>(['', ''])
-
-  // PartyKit host - change this to your deployed PartyKit URL
-  const PARTYKIT_HOST = process.env.NEXT_PUBLIC_PARTYKIT_HOST || '127.0.0.1:1999'
-
-  // Initialize voter ID on client side only
-  useEffect(() => {
-    setVoterId(getVoterId())
-  }, [])
 
   useEffect(() => {
     return () => {
@@ -84,19 +105,27 @@ export default function LivePoll() {
       return
     }
 
-    const validOptions = newOptions.filter(opt => opt.trim())
+    // Same rules as the server: trimmed, no duplicates.
+    const validOptions = [...new Set(newOptions.map(opt => opt.trim()).filter(Boolean))]
+    if (validOptions.length < 2) {
+      alert('Please enter at least 2 different options')
+      return
+    }
     const pollData = {
       question: newQuestion.trim(),
-      options: validOptions.map(opt => opt.trim()),
+      options: validOptions,
     }
 
-    const roomId = hash(pollData)
+    // A random nonce makes every new poll its own room, even when two polls
+    // share the same question and options.
+    const roomId = hash({ ...pollData, nonce: crypto.randomUUID() })
     setPollId(roomId)
 
     const newSocket = new PartySocket({
       host: PARTYKIT_HOST,
       room: roomId,
     })
+    watchConnection(newSocket)
 
     newSocket.addEventListener('open', () => {
       // Send poll creation message
@@ -108,7 +137,8 @@ export default function LivePoll() {
     })
 
     newSocket.addEventListener('message', (event) => {
-      const msg = JSON.parse(event.data)
+      const msg = parseMessage(event.data)
+      if (!msg) return
       if (msg.type === 'sync') {
         const pollOptions: PollOption[] = pollData.options.map((opt, idx) => ({
           id: `option-${idx}`,
@@ -148,9 +178,11 @@ export default function LivePoll() {
       host: PARTYKIT_HOST,
       room: roomIdToJoin,
     })
+    watchConnection(newSocket)
 
     newSocket.addEventListener('message', (event) => {
-      const msg = JSON.parse(event.data)
+      const msg = parseMessage(event.data)
+      if (!msg) return
       if (msg.type === 'sync') {
         if (msg.pollData) {
           const pollOptions: PollOption[] = msg.pollData.options.map((opt: string, idx: number) => ({
@@ -261,12 +293,19 @@ export default function LivePoll() {
             </p>
           </motion.div>
 
+          {!PARTYKIT_HOST && (
+            <div role="alert" className="mb-6 p-4 rounded-xl border border-amber-300 bg-amber-50 text-amber-900 text-center">
+              Live polls are offline at the moment. Please come back later.
+            </div>
+          )}
+
           <div className="grid md:grid-cols-2 gap-6">
             <motion.button
               whileHover={{ scale: 1.02, y: -5 }}
               whileTap={{ scale: 0.98 }}
+              disabled={!PARTYKIT_HOST}
               onClick={() => setViewMode('create')}
-              className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300"
+              className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <div className="text-6xl mb-4">🎯</div>
               <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
@@ -280,8 +319,9 @@ export default function LivePoll() {
             <motion.button
               whileHover={{ scale: 1.02, y: -5 }}
               whileTap={{ scale: 0.98 }}
+              disabled={!PARTYKIT_HOST}
               onClick={() => setViewMode('join')}
-              className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300"
+              className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <div className="text-6xl mb-4">👥</div>
               <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
@@ -372,6 +412,7 @@ export default function LivePoll() {
                 <input
                   type="text"
                   value={newQuestion}
+                  maxLength={200}
                   onChange={(e) => setNewQuestion(e.target.value)}
                   placeholder="What's your favorite programming language?"
                   className="w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200"
@@ -388,6 +429,7 @@ export default function LivePoll() {
                       <input
                         type="text"
                         value={option}
+                        maxLength={100}
                         onChange={(e) => handleOptionChange(index, e.target.value)}
                         placeholder={`Option ${index + 1}`}
                         className="flex-1 px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200"

@@ -29,12 +29,21 @@ const VolumeControl = ({ icon: Icon, label, audioRef, defaultVolume = 0.5, isLof
     defaultVolume?: number,
     isLofiTrack?: boolean
 }) => {
+    // Ambient tracks start silent; the music starts at its default level.
+    const initialVolume = isLofiTrack ? defaultVolume : 0;
     // Volume level when not muted (the slider's actual position)
-    const [actualVolume, setActualVolume] = useState(defaultVolume);
+    const [actualVolume, setActualVolume] = useState(initialVolume);
+    // What the audio element really plays at (0 while muted). It mirrors
+    // audio.volume so rendering never reads the element through the ref.
+    const [liveVolume, setLiveVolume] = useState(initialVolume);
     // Track play state separately for button visual (important for Lofi)
     const [isPlaying, setIsPlaying] = useState(false);
-    // State to force an initial play interaction
-    const [hasUserInteracted, setHasUserInteracted] = useState(false);
+
+    const setVolume = useCallback((volume: number) => {
+        const audio = audioRef.current;
+        if (audio) audio.volume = volume;
+        setLiveVolume(volume);
+    }, [audioRef]);
 
     const playAudio = useCallback(() => {
         const audio = audioRef.current;
@@ -53,85 +62,55 @@ const VolumeControl = ({ icon: Icon, label, audioRef, defaultVolume = 0.5, isLof
         }
     }, [audioRef]);
 
-    // Audio setup (looping and initial volume)
+    // Audio setup on mount: looping and the initial volume. The music tries
+    // to start by itself (browsers may wait for a first interaction).
     useEffect(() => {
         const audio = audioRef.current;
-        if (audio) {
-            audio.loop = true;
-
-            if (!hasUserInteracted) {
-                // Ambient tracks start fully silent on initial load
-                if (!isLofiTrack) {
-                    audio.volume = 0;
-                    setActualVolume(0);
-                } else {
-                    audio.volume = defaultVolume;
-                    setActualVolume(defaultVolume);
-                }
-            }
-            // For Lofi Track, attempt to autoplay if no interaction yet
-            if (isLofiTrack && !hasUserInteracted && audio.volume > 0) {
-                playAudio();
-            }
-        }
-    }, [audioRef, defaultVolume, hasUserInteracted, isLofiTrack, playAudio]);
+        if (!audio) return;
+        audio.loop = true;
+        audio.volume = initialVolume;
+        if (initialVolume > 0) playAudio();
+    }, [audioRef, initialVolume, playAudio]);
 
     const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newVolume = parseFloat(e.target.value);
-        const audio = audioRef.current;
-        setHasUserInteracted(true);
+        setVolume(newVolume);
+        setActualVolume(newVolume);
 
-        if (audio) {
-            audio.volume = newVolume;
-            setActualVolume(newVolume);
-
-            if (newVolume > 0) {
-                if (audio.paused) {
-                    playAudio(); // Start playback when volume is increased from zero
-                }
-            } else { // newVolume is 0
-                pauseAudio(); // Pause playback when volume hits zero
-            }
+        if (newVolume > 0) {
+            playAudio(); // Start playback when volume is increased from zero
+        } else {
+            pauseAudio(); // Pause playback when volume hits zero
         }
     };
-    
+
     // Mute/Unmute Toggle
     const toggleMute = () => {
-        setHasUserInteracted(true);
-        const audio = audioRef.current;
-
-        if (audio) {
-            if (audio.volume === 0) {
-                // Unmute: Restore to saved volume (or default if actualVolume is 0)
-                const targetVolume = actualVolume > 0 ? actualVolume : defaultVolume;
-                audio.volume = targetVolume;
-                setActualVolume(targetVolume);
-                playAudio();
-            } else {
-                // Mute: set volume to 0
-                audio.volume = 0;
-                pauseAudio();
-            }
+        if (liveVolume === 0) {
+            // Unmute: Restore to saved volume (or default if actualVolume is 0)
+            const targetVolume = actualVolume > 0 ? actualVolume : defaultVolume;
+            setVolume(targetVolume);
+            setActualVolume(targetVolume);
+            playAudio();
+        } else {
+            // Mute: set volume to 0
+            setVolume(0);
+            pauseAudio();
         }
     };
 
     // Play/Pause Toggle (only used for Lofi music)
     const handleLofiPlayToggle = () => {
-        setHasUserInteracted(true);
-        const audio = audioRef.current;
-
-        if (audio) {
-            if (isPlaying) {
-                // Pause and Mute
-                audio.volume = 0;
-                pauseAudio();
-            } else {
-                // Play and set to last volume
-                const targetVolume = actualVolume > 0 ? actualVolume : defaultVolume;
-                audio.volume = targetVolume;
-                setActualVolume(targetVolume);
-                playAudio();
-            }
+        if (isPlaying) {
+            // Pause and Mute
+            setVolume(0);
+            pauseAudio();
+        } else {
+            // Play and set to last volume
+            const targetVolume = actualVolume > 0 ? actualVolume : defaultVolume;
+            setVolume(targetVolume);
+            setActualVolume(targetVolume);
+            playAudio();
         }
     };
 
@@ -146,10 +125,10 @@ const VolumeControl = ({ icon: Icon, label, audioRef, defaultVolume = 0.5, isLof
         }
     };
 
-    const isCurrentlyMuted = actualVolume === 0 || audioRef.current?.volume === 0;
+    const isCurrentlyMuted = actualVolume === 0 || liveVolume === 0;
 
     // UI state for active track
-    const isActive = audioRef.current && audioRef.current.volume > 0 && !audioRef.current.paused;
+    const isActive = liveVolume > 0 && isPlaying;
     const isLofiActive = isLofiTrack && isPlaying; // Only rely on isPlaying for the Lofi button
 
     // Dynamic styling for visual feedback

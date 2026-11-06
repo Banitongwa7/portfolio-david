@@ -1,47 +1,53 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState, useSyncExternalStore } from "react";
 import { FaPlay, FaPause, FaStop } from "react-icons/fa";
 
+// The browser's voices, read straight from speechSynthesis. They often load
+// after the page, which fires "voiceschanged". getVoices() returns a new
+// array each call, so the last list is reused while it hasn't changed.
+const NO_VOICES: SpeechSynthesisVoice[] = [];
+let cachedVoices = NO_VOICES;
+let cachedKey = "";
+
+const hasSpeech = () => typeof window !== "undefined" && "speechSynthesis" in window;
+
+function subscribeVoices(onChange: () => void) {
+  if (!hasSpeech()) return () => {};
+  window.speechSynthesis.addEventListener("voiceschanged", onChange);
+  return () => window.speechSynthesis.removeEventListener("voiceschanged", onChange);
+}
+
+function readVoices() {
+  if (!hasSpeech()) return NO_VOICES;
+  const voices = window.speechSynthesis.getVoices();
+  const key = voices.map((v) => v.voiceURI).join("|");
+  if (key !== cachedKey) {
+    cachedKey = key;
+    cachedVoices = voices;
+  }
+  return cachedVoices;
+}
+
 export default function TextToSpeech() {
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
-  const [languages, setLanguages] = useState<string[]>([]);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
-  const [filteredVoices, setFilteredVoices] = useState<SpeechSynthesisVoice[]>(
-    []
-  );
-  const [selectedVoiceName, setSelectedVoiceName] = useState<string>("");
+  const voices = useSyncExternalStore(subscribeVoices, readVoices, () => NO_VOICES);
+  // Empty means "the first available": nothing to keep in sync when the
+  // voices arrive or the language changes.
+  const [chosenLanguage, setChosenLanguage] = useState<string>("");
+  const [chosenVoiceName, setChosenVoiceName] = useState<string>("");
   const [text, setText] = useState("Welcome to Text-to-Speech tool!");
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  useEffect(() => {
-    const loadVoices = () => {
-      const vs = window.speechSynthesis.getVoices();
-      setVoices(vs);
-
-      const langs = Array.from(new Set(vs.map((v) => v.lang.split("-")[0])));
-      setLanguages(langs);
-
-      if (langs.length > 0 && !selectedLanguage) {
-        setSelectedLanguage(langs[0]);
-      }
-    };
-
-    if (window.speechSynthesis.getVoices().length === 0) {
-      window.speechSynthesis.onvoiceschanged = loadVoices;
-    } else {
-      loadVoices();
-    }
-  }, [selectedLanguage]);
-
-  useEffect(() => {
-    const filtered = voices.filter((v) => v.lang.startsWith(selectedLanguage));
-    setFilteredVoices(filtered);
-    if (filtered.length > 0) {
-      setSelectedVoiceName(filtered[0].name);
-    }
-  }, [selectedLanguage, voices]);
+  const languages = useMemo(() => Array.from(new Set(voices.map((v) => v.lang.split("-")[0]))), [voices]);
+  const selectedLanguage = languages.includes(chosenLanguage) ? chosenLanguage : (languages[0] ?? "");
+  const filteredVoices = useMemo(
+    () => voices.filter((v) => v.lang.startsWith(selectedLanguage)),
+    [voices, selectedLanguage]
+  );
+  const selectedVoiceName = filteredVoices.some((v) => v.name === chosenVoiceName)
+    ? chosenVoiceName
+    : (filteredVoices[0]?.name ?? "");
 
   const handlePlay = () => {
     if (!text.trim()) return;
@@ -101,7 +107,10 @@ export default function TextToSpeech() {
           </label>
           <select
             value={selectedLanguage}
-            onChange={(e) => setSelectedLanguage(e.target.value)}
+            onChange={(e) => {
+              setChosenLanguage(e.target.value);
+              setChosenVoiceName(""); // First voice of the new language.
+            }}
             className="w-full p-2 rounded border dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
             disabled={isSpeaking}
           >
@@ -119,7 +128,7 @@ export default function TextToSpeech() {
           </label>
           <select
             value={selectedVoiceName}
-            onChange={(e) => setSelectedVoiceName(e.target.value)}
+            onChange={(e) => setChosenVoiceName(e.target.value)}
             className="w-full p-2 rounded border dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
             disabled={isSpeaking}
           >

@@ -12,7 +12,6 @@ export const TOOL_CATEGORY: Record<string, ToolCategory> = {
   "/tools/color-generator": "create",
   "/tools/qr-code-generator": "create",
   "/tools/image-compressor": "create",
-  "/tools/fun-video-generator": "create",
   "/tools/text-analyzer": "words",
   "/tools/text-to-speech": "words",
   "/tools/speech-to-text": "words",

@@ -5,22 +5,12 @@ import { GrTextAlignFull } from "react-icons/gr";
 import { LuSpeech, LuAudioLines } from "react-icons/lu";
 import { FiBarChart2 } from "react-icons/fi";
 import type { ToolType } from "@/types/types";
-import ColorGenerator from "@/components/tools/ColorGenerator";
-import LofiSpace from "@/components/tools/LofiSpace";
-import QRCodeGenerator from "@/components/tools/QRCodeGenerator";
-import StickyNotes from "@/components/tools/StickyNotes";
-import ImageCompressor from "@/components/tools/ImageCompressor";
-import TextAnalyzer from "@/components/tools/TextAnalyzer";
-import PasswordGenerator from "@/components/tools/PasswordGenerator";
-import TextToSpeech from "@/components/tools/TextToSpeech";
 import Cover from "./../public/tools/cover.jpeg";
-import SpeechToText from "@/components/tools/SpeechToText";
-import WebrtcDataTransfert from "@/components/tools/WebrtcDataTransfert";
-import LivePoll from "@/components/tools/LivePoll";
 import { MdHub } from "react-icons/md";
-// import FunVideo from "@/components/tools/FunVideo";
-// import { BsCollectionPlayFill } from "react-icons/bs";
 
+// Only what lists and pages need to describe a tool. The tools themselves are
+// loaded on demand by components/tools/ToolView.tsx, so a page that lists
+// tools never downloads their code (jsPDF, PeerJS, PartySocket...).
 const AllTools: ToolType[] = [
   {
     id: "0001",
@@ -31,7 +21,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/color-generator",
     developer: "David B.",
     publishedAt: "2025-04-26",
-    component: <ColorGenerator />,
     coverImage: Cover.src,
   },
   {
@@ -43,7 +32,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/lofi-space",
     developer: "David B.",
     publishedAt: "2025-09-27",
-    component: <LofiSpace />,
     coverImage: Cover.src,
   },
   {
@@ -54,7 +42,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/qr-code-generator",
     developer: "David B.",
     publishedAt: "2025-09-28",
-    component: <QRCodeGenerator />,
     coverImage: Cover.src,
   },
   {
@@ -66,7 +53,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/sticky-notes",
     developer: "David B.",
     publishedAt: "2025-09-28",
-    component: <StickyNotes />,
     coverImage: Cover.src,
   },
   {
@@ -78,7 +64,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/image-compressor",
     developer: "David B.",
     publishedAt: "2025-09-28",
-    component: <ImageCompressor />,
     coverImage: Cover.src,
   },
   {
@@ -90,7 +75,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/text-analyzer",
     developer: "David B.",
     publishedAt: "2025-09-28",
-    component: <TextAnalyzer />,
     coverImage: Cover.src,
   },
   {
@@ -102,7 +86,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/password-generator",
     developer: "David B.",
     publishedAt: "2025-09-29",
-    component: <PasswordGenerator />,
     coverImage: Cover.src,
   },
   {
@@ -114,7 +97,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/text-to-speech",
     developer: "David B.",
     publishedAt: "2025-09-29",
-    component: <TextToSpeech />,
     coverImage: Cover.src,
   },
   {
@@ -126,20 +108,9 @@ const AllTools: ToolType[] = [
     slug: "/tools/speech-to-text",
     developer: "David B.",
     publishedAt: "2025-11-11",
-    component: <SpeechToText />,
     coverImage: Cover.src,
-  } /*,
-    {
-        id: "0010",
-        name: "Fun Video Generator",
-        description: "Create personalized fun videos with your name using Remotion.",
-        icon: <BsCollectionPlayFill />,
-        slug: "/tools/fun-video-generator",
-        developer: "David B.",
-        publishedAt: "2025-11-14",
-        component: <FunVideo />,
-        coverImage: Cover.src
-    },*/,
+  },
+  // 0010 was the Fun Video Generator (Remotion), removed; see git history.
   {
     id: "0011",
     name: "WebRTC Hub",
@@ -148,7 +119,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/webRTC-data-transfert",
     developer: "David B.",
     publishedAt: "2025-11-24",
-    component: <WebrtcDataTransfert />,
     coverImage: Cover.src,
   },
   {
@@ -159,7 +129,6 @@ const AllTools: ToolType[] = [
     slug: "/tools/live-poll",
     developer: "David B.",
     publishedAt: "2025-12-04",
-    component: <LivePoll />,
     coverImage: Cover.src,
   },
 ];

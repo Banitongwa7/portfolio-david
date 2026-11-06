@@ -1,23 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function TextAnalyzer () {
   const [text, setText] = useState("");
-  const [wordCount, setWordCount] = useState(0);
-  const [charCount, setCharCount] = useState(0);
-  const [sentenceCount, setSentenceCount] = useState(0);
-  const [readingTime, setReadingTime] = useState("0 min");
 
-  useEffect(() => {
-    const words = text.trim().split(/\s+/).filter(Boolean);
-    const sentences = text.split(/[.!?]+/).filter(Boolean);
-    const chars = text.replace(/\s/g, "");
-
-    setWordCount(words.length);
-    setCharCount(chars.length);
-    setSentenceCount(sentences.length);
-    setReadingTime(`${Math.ceil(words.length / 200)} min`);
-  }, [text]);
+  // Derived from the text on each render: nothing to keep in sync.
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+  const charCount = text.replace(/\s/g, "").length;
+  const sentenceCount = text.split(/[.!?]+/).filter((s) => s.trim()).length;
+  const readingTime = `${Math.ceil(wordCount / 200)} min`;
 
   return (
     <div className="max-w-3xl mx-auto p-6 rounded-lg shadow-md">

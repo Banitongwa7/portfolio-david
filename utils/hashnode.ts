@@ -36,20 +36,36 @@ function estimateReadTime(html: string): number {
   return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 }
 
-function parseItem(item: string): PostType {
+function slugFromLink(link: string): string {
+  try {
+    return new URL(link).pathname.replace(/^\/+|\/+$/g, "");
+  } catch {
+    return "";
+  }
+}
+
+// Returns null for an item missing its link, title or date, so one broken
+// entry is skipped instead of taking the whole blog down.
+function parseItem(item: string): PostType | null {
   const html = readTag(item, "content:encoded");
   // Drop the article body so tags inside it can't be mistaken for feed fields.
   const meta = item.replace(/<content:encoded>[\s\S]*?<\/content:encoded>/, "");
-  const link = readTag(meta, "link");
+  const slug = slugFromLink(readTag(meta, "link"));
+  const title = readTag(meta, "title");
+  const published = new Date(readTag(meta, "pubDate"));
+
+  if (!slug || !title || Number.isNaN(published.getTime())) {
+    return null;
+  }
 
   return {
-    slug: new URL(link).pathname.replace(/^\/+|\/+$/g, ""),
-    title: readTag(meta, "title"),
+    slug,
+    title,
     brief: readTag(meta, "description"),
     coverImage: meta.match(/<enclosure[^>]*\surl="([^"]+)"/)?.[1] ?? null,
     tags: readTags(meta, "category"),
     author: readTag(meta, "dc:creator"),
-    publishedAt: new Date(readTag(meta, "pubDate")).toISOString(),
+    publishedAt: published.toISOString(),
     readTimeInMinutes: estimateReadTime(html),
     html,
   };
@@ -65,9 +81,12 @@ export async function getPosts(): Promise<PostType[]> {
   }
 
   const xml = await res.text();
-  return [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map((match) =>
-    parseItem(match[1])
-  );
+  const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)];
+  const posts = items.map((match) => parseItem(match[1])).filter((post): post is PostType => post !== null);
+  if (posts.length < items.length) {
+    console.warn(`Skipped ${items.length - posts.length} malformed item(s) in the Hashnode feed`);
+  }
+  return posts;
 }
 
 export async function getPost(slug: string): Promise<PostType | null> {

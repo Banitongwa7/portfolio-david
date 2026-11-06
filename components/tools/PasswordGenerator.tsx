@@ -3,6 +3,18 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { FaCopy, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
+// A uniformly random index in [0, max) from the browser's cryptographic
+// generator. Values above the last whole multiple of `max` are drawn again,
+// so no character comes up more often than another (no modulo bias).
+function secureIndex(max: number): number {
+  const limit = Math.floor(0x100000000 / max) * max;
+  const buffer = new Uint32Array(1);
+  do {
+    crypto.getRandomValues(buffer);
+  } while (buffer[0] >= limit);
+  return buffer[0] % max;
+}
+
 export default function PasswordGenerator() {
   const [length, setLength] = useState(16);
   const [includeUppercase, setIncludeUppercase] = useState(true);
@@ -31,17 +43,20 @@ export default function PasswordGenerator() {
 
     let generated = "";
     for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      generated += charset[randomIndex];
+      generated += charset[secureIndex(charset.length)];
     }
 
     setPassword(generated);
     toast.success("Password generated!");
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(password);
-    toast.info("Password copied to clipboard!");
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(password);
+      toast.info("Password copied to clipboard!");
+    } catch {
+      toast.error("Could not copy the password.");
+    }
   };
 
   return (

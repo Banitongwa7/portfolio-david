@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { HiArrowLeft } from "react-icons/hi2";
 import AllTools from "@/data/AllTools";
 import { categoryOf } from "@/data/toolCategories";
+import ToolView from "@/components/tools/ToolView";
 import s from "@/components/tools/tools.module.css";
 
 export async function generateMetadata({
@@ -15,20 +16,18 @@ export async function generateMetadata({
   const slug = (await params).tool;
   const tool = AllTools.find((tool) => tool.slug === `/tools/${slug}`);
 
+  // The page itself answers with a 404; no share card for a missing tool.
+  if (!tool) {
+    return { title: "Tool not found" };
+  }
+
   return {
-    title: `${ tool?.name || "Tool Not Found"}`,
-    description: `${tool?.description || "The requested tool could not be found."}`,
+    title: tool.name,
+    description: tool.description,
     openGraph: {
-      title: `${ tool?.name || "Tool Not Found"}`,
-      description: `${tool?.description || "The requested tool could not be found."}`,
-      images: [
-        {
-            url: tool?.coverImage || "",
-            width: 1000,
-            height: 500,
-            alt: tool?.name || "Tool Not Found",
-        }
-      ]
+      title: tool.name,
+      description: tool.description,
+      images: [{ url: tool.coverImage, width: 1000, height: 500, alt: tool.name }],
     },
   };
 }
@@ -43,7 +42,6 @@ const HAS_OWN_H1 = new Set([
   "/tools/sticky-notes",
   "/tools/webRTC-data-transfert",
   "/tools/live-poll",
-  "/tools/fun-video-generator",
 ]);
 
 export default async function DisplayTool({
@@ -83,7 +81,9 @@ export default async function DisplayTool({
         </nav>
 
         {!HAS_OWN_H1.has(tool.slug) && <h1 className="sr">{tool.name}</h1>}
-        <div className={s.bench}>{tool.component}</div>
+        <div className={s.bench}>
+          <ToolView slug={tool.slug} />
+        </div>
 
         <h2 className="h2" style={{ marginTop: 72, fontSize: 28 }}>
           More tools

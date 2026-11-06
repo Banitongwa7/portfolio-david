@@ -20,6 +20,9 @@ export default function Template({
         y: 10,
         duration: DURATION.short,
         ease: EASE,
+        // A leftover transform would make this wrapper the containing block
+        // of every `position: fixed` element on the page.
+        clearProps: "transform,opacity",
       });
     },
     { scope }

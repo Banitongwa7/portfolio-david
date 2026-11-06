@@ -1,12 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useSyncExternalStore } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { FaMicrophone, FaMicrophoneSlash, FaCopy, FaTrash } from "react-icons/fa";
 import "./../../node_modules/flag-icons/css/flag-icons.min.css";
 
+// True only in the browser, after hydration.
+const subscribeNoop = () => () => {};
+const onClient = () => true;
+const onServer = () => false;
+
 export default function SpeechToText() {
-  const [supported, setSupported] = useState(true);
+  const isClient = useSyncExternalStore(subscribeNoop, onClient, onServer);
   const [copied, setCopied] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("en-US");
 
@@ -56,11 +61,9 @@ export default function SpeechToText() {
     { value: "ms-MY", label: "Malay" },
   ];
 
-  useEffect(() => {
-    if (!browserSupportsSpeechRecognition || !isMicrophoneAvailable) {
-      setSupported(false);
-    }
-  }, [browserSupportsSpeechRecognition, isMicrophoneAvailable]);
+  // The server can't know, so it renders the tool; the browser then shows
+  // the "not supported" message if needed, without a hydration mismatch.
+  const supported = !isClient || (browserSupportsSpeechRecognition && isMicrophoneAvailable);
 
   const handleStartListening = () => {
     SpeechRecognition.startListening({ 

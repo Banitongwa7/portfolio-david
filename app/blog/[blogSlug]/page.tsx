@@ -7,17 +7,34 @@ import type { Metadata } from "next";
 import { getPost, getPosts } from "@/utils/hashnode";
 import { LANGS, TOPICS, langOf, topicOf } from "@/utils/blogMeta";
 import { formatLongDate } from "@/utils/format";
+import { cleanArticleHtml } from "@/utils/articleHtml";
 import { SITE_URL } from "@/utils/site";
 import Parallax from "@/components/motion/Parallax";
 import ShareBar from "@/components/blog/ShareBar";
 import s from "@/components/blog/article.module.css";
+
+// Articles are rendered at build time and refreshed hourly, like the feed.
+// A post published since the last build is rendered on its first visit.
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  try {
+    return (await getPosts()).map((post) => ({ blogSlug: post.slug }));
+  } catch (err) {
+    // The build must not fail because the feed is down; pages render on demand.
+    console.error("Could not list blog posts at build time:", err);
+    return [];
+  }
+}
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ blogSlug: string }>;
 }): Promise<Metadata> {
-  const article = await getPost((await params).blogSlug);
+  // A feed outage is handled by the page itself (app/error.tsx); the
+  // metadata just falls back to the site defaults.
+  const article = await getPost((await params).blogSlug).catch(() => null);
 
   if (!article) {
     return {};
@@ -89,7 +106,7 @@ export default async function PostArticle({
     notFound();
   }
 
-  const { html, toc } = withAnchors(article.html);
+  const { html, toc } = withAnchors(cleanArticleHtml(article.html));
   const lang = langOf(article);
   const topic = topicOf(article);
   const newer = posts[index - 1];

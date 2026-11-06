@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   HiArrowUpRight,
   HiCheck,
@@ -26,6 +26,9 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
   const [sentTo, setSentTo] = useState<{ name: string; email: string } | null>(null);
   const [copied, setCopied] = useState(false);
+  // When the visitor first touched the form; the API turns away instant posts.
+  const startedAt = useRef(0);
+  const trap = useRef<HTMLInputElement>(null);
 
   const nameError = tried && !fullName.trim() ? "Enter your full name." : "";
   const emailError =
@@ -50,10 +53,22 @@ export default function Contact() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ fullName, email, message }),
+        body: JSON.stringify({
+          fullName,
+          email,
+          message,
+          startedAt: startedAt.current,
+          website: trap.current?.value ?? "",
+        }),
       });
 
       if (!res.ok) {
+        // Validation and rate-limit answers explain what to do; show them.
+        const data = await res.json().catch(() => null);
+        if (res.status !== 500 && typeof data?.error === "string") {
+          toast.error(data.error);
+          return;
+        }
         throw new Error(`Request failed with status ${res.status}`);
       }
 
@@ -167,7 +182,19 @@ export default function Contact() {
               <>
                 <h2>Send a message</h2>
                 <p>All fields are required.</p>
-                <form id="contactForm" className={s.form} onSubmit={handleSubmit} noValidate>
+                <form
+                  id="contactForm"
+                  className={s.form}
+                  onSubmit={handleSubmit}
+                  onFocus={() => {
+                    if (!startedAt.current) startedAt.current = Date.now();
+                  }}
+                  noValidate
+                >
+                  <div className={s.trap} aria-hidden="true">
+                    <label htmlFor="website">Leave this field empty</label>
+                    <input ref={trap} type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+                  </div>
                   <div className={s.two}>
                     <div className={s.field}>
                       <label htmlFor="name">Full name</label>
@@ -176,6 +203,7 @@ export default function Contact() {
                         id="name"
                         name="name"
                         autoComplete="name"
+                        maxLength={100}
                         placeholder="Jane Doe"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
@@ -196,6 +224,7 @@ export default function Contact() {
                         id="email"
                         name="email"
                         autoComplete="email"
+                        maxLength={254}
                         placeholder="jane@company.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -216,6 +245,7 @@ export default function Contact() {
                       id="message"
                       name="message"
                       rows={6}
+                      maxLength={5000}
                       placeholder="Tell me about your project..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}

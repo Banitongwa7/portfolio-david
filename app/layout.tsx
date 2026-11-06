@@ -6,11 +6,10 @@ import "./../styles/globals.css";
 import "./../styles/site.css";
 import NavBar from "@/components/navbar/NavBar";
 import Footer from "@/components/footer/Footer";
-import Script from "next/script";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ClarityComponent from "@/utils/Clarity";
 import SmoothScroll from "@/components/motion/SmoothScroll";
+import ConsentManager from "@/components/site/ConsentManager";
 import IntroLoader from "@/components/intro/IntroLoader";
 import { SITE_URL } from "@/utils/site";
 
@@ -95,32 +94,11 @@ export default function RootLayout({
             <Footer />
           </div>
         </div>
+        {/* Cookieless, so they need no consent. */}
         <Analytics />
-        <ClarityComponent />
         <SpeedInsights />
-        <Script id="tawk-script" strategy="lazyOnload" defer>
-          {`
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            Tawk_API.onLoad = function(){
-              Tawk_API.minimize();
-            };
-            function loadTawk(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/680b9cb34b378d190bfa0fa3/1ipmlo7jl';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-            }
-            // The chat bubble would cover the first-visit intro, so it loads
-            // once the curtain has opened.
-            if (document.documentElement.getAttribute("data-intro")) {
-              window.addEventListener("intro:done", loadTawk, { once: true });
-            } else {
-              loadTawk();
-            }
-          `}
-        </Script>
+        {/* Clarity and the Tawk chat only start after the visitor accepts. */}
+        <ConsentManager />
       </body>
     </html>
   );

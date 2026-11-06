@@ -138,10 +138,19 @@
   color: var(--muted);
 }
 .form {
+  position: relative;
   margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+/* Spam trap: off screen for people, still in the form for bots. */
+.trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .two {
   display: grid;

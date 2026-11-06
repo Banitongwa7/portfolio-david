@@ -1,16 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NextImage from "next/image";
+
+// Formats a canvas can write, with the extension for the download. Anything
+// else (BMP...) is saved as JPEG; PNG stays PNG so transparency survives.
+const OUTPUT_EXTENSION: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/webp": "webp",
+  "image/png": "png",
+};
+const outputTypeFor = (inputType: string) => (inputType in OUTPUT_EXTENSION ? inputType : "image/jpeg");
 
 export default function ImageCompressor() {
   const [originalFile, setOriginalFile] = useState<File | null>(null);
+  const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [compressedUrl, setCompressedUrl] = useState<string | null>(null);
+  const [compressedType, setCompressedType] = useState("image/jpeg");
   const [compressedSize, setCompressedSize] = useState<number | null>(null);
   const [originalSize, setOriginalSize] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [originalFormat, setOriginalFormat] = useState<string>("image/jpeg");
+
+  // Frees the previous preview when a new image is chosen, and the last one
+  // when the tool closes.
+  useEffect(() => {
+    return () => {
+      if (originalUrl) URL.revokeObjectURL(originalUrl);
+    };
+  }, [originalUrl]);
 
   const calculateBase64Size = (base64: string): number => {
     const base64Str = base64.split(",")[1];
@@ -28,12 +46,15 @@ export default function ImageCompressor() {
 
     setError(null);
     setOriginalFile(file);
-    setOriginalFormat(file.type);
+    setOriginalUrl(URL.createObjectURL(file));
     setOriginalSize(Math.round(file.size / 1024)); // KB
     compressImage(file);
   };
 
+  // The output type comes from the file itself, never from state, which
+  // would still hold the previous image's type at this point.
   const compressImage = async (file: File) => {
+    const outputType = outputTypeFor(file.type);
     setLoading(true);
     const reader = new FileReader();
 
@@ -50,8 +71,9 @@ export default function ImageCompressor() {
         const ctx = canvas.getContext("2d");
         if (ctx) {
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          const compressedDataUrl = canvas.toDataURL(originalFormat, 0.7); // fixed compression
+          const compressedDataUrl = canvas.toDataURL(outputType, 0.7); // fixed compression
           setCompressedUrl(compressedDataUrl);
+          setCompressedType(outputType);
           setCompressedSize(calculateBase64Size(compressedDataUrl));
         } else {
           setError("Failed to compress image.");
@@ -75,10 +97,11 @@ export default function ImageCompressor() {
 
   const downloadCompressed = () => {
     if (!compressedUrl || !originalFile) return;
-    const extension = originalFile.name.split(".").pop() || "image";
+    // The extension matches what was actually encoded.
+    const baseName = originalFile.name.replace(/\.[^.]+$/, "") || "image";
     const link = document.createElement("a");
     link.href = compressedUrl;
-    link.download = `compressed.${extension}`;
+    link.download = `${baseName}-compressed.${OUTPUT_EXTENSION[compressedType]}`;
     link.click();
   };
 
@@ -109,14 +132,14 @@ export default function ImageCompressor() {
         )}
 
         <div className="grid gap-6 md:grid-cols-2">
-          {originalFile && (
+          {originalUrl && (
             <div>
               <h3 className="font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Original Image:
               </h3>
               <div className="w-full h-auto border rounded overflow-hidden">
                 <NextImage
-                  src={URL.createObjectURL(originalFile)}
+                  src={originalUrl}
                   alt="Original"
                   width={0}
                   height={0}

@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# PartyKit local dev state (polls created while testing)
+.partykit/
+
+# Documents the variables the app reads; never holds real values
+!.env.example

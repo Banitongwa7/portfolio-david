@@ -4,6 +4,7 @@ import AllLinks from "@/data/AllLinks";
 import AllProjects from "@/data/AllProjects";
 import WordRise from "@/components/motion/WordRise";
 import { SOCIALS } from "@/components/site/socials";
+import ConsentSettingsButton from "@/components/site/ConsentSettingsButton";
 
 // The closing banner. Change this one word to change it on every page.
 const FOOTER_WORD = "LET'S BUILD";
@@ -97,7 +98,10 @@ export default function Footer() {
       </div>
       <div className="wrap legal">
         <p>© {new Date().getFullYear()} David Banitongwa</p>
-        <a href="#top">Back to top</a>
+        <div className="legal-links">
+          <ConsentSettingsButton />
+          <a href="#top">Back to top</a>
+        </div>
       </div>
     </footer>
   );
